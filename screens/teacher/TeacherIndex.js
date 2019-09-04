@@ -66,7 +66,7 @@ class TeacherIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Home") }}>
+                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("BiodataPreview") }}>
                                 <Text style={styles.buttonText}>Update Existing</Text>
                             </Button>
                         </View>

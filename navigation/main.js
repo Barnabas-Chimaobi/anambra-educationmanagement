@@ -8,11 +8,15 @@ import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
 import TeacherBiodata from '../screens/teacher/TeacherBiodata';
 import TeacherAcademic from '../screens/teacher/TeacherAcademic';
+import TeacherBiodataPreview from '../screens/teacher/TeacherBiodataPreview';
+import TeacherAcademicPreview from '../screens/teacher/TeacherAcademicPreview';
 import StudentIndex from '../screens/student/StudentIndex';
 import SchoolIndex from '../screens/school/SchoolIndex';
 
 const TeacherStack = createStackNavigator({
 
+    AcademicPreview: TeacherAcademicPreview,
+    BiodataPreview: TeacherBiodataPreview,
     Academic: TeacherAcademic,
     Biodata:  TeacherBiodata,
     Teacher: TeacherIndex,

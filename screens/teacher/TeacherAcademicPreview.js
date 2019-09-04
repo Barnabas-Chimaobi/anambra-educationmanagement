@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView} from "react-native";
 import {Button} from 'native-base';
 
-class TeacherAcademic extends Component {
+class TeacherAcademicPreview extends Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class TeacherAcademic extends Component {
             <ScrollView contentContainerStyle={styles.container} >
                     <View style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View style={{backgroundColor:'#E6DC82', padding :10}}>
-                            <Text style={styles.headerText}>New Teacher Information</Text>
+                            <Text style={styles.headerText}>Existing Teacher Information</Text>
                         </View>
 
                         <View style={{margin: 15, alignSelf:'flex-start' }}>
@@ -26,105 +26,120 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Highest Qualification</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Bachelor Of Science</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Institutions Attended</Text>
-                                <TextInput style={styles.textInput}/>
+                                <Text style={styles.textInput}>College of Education, Awka</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Mathematics</Text>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>21/09/2001</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Expected Retirement Date</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>21/09/2037</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>16</Text>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Grade Level</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>10</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Rank</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Assistant Headmaster</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Post Held in School</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Assistant Headmaster</Text>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year Posted to School</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>2017</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Posting History</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Model Primary School - 2001</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Type of Staff</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Permanent</Text>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Class of Staff</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>Tutorial</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of Subjects taught</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>7</Text>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of streams taught</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>2</Text>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of trainings attended</Text>
-                                <TextInput style={styles.textInput}/>
+
+                                <Text style={styles.textInput}>6</Text>
                             </View>
 
 
 
                             <View style={{flexDirection:'row'}}>
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Biodata")}}>
+                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("BiodataPreview")}}>
                                             <Text style={styles.buttonText}>Previous</Text>
                                     </Button>
                                 </View>
 
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Teacher")}}>
-                                            <Text style={styles.buttonText}>Next</Text>
+                                            <Text style={styles.buttonText}>Done</Text>
                                     </Button>
                                 </View>
                             </View>
@@ -135,7 +150,7 @@ class TeacherAcademic extends Component {
         );
     }
 }
-export default TeacherAcademic;
+export default TeacherAcademicPreview;
 
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
