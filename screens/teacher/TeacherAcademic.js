@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
 import { Container, Content, Form, Button} from 'native-base';
-
+import { CheckBox } from 'react-native-elements'
 
 class TeacherAcademic extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state ={
+            checked: false,
+            checkedYes: false
+        }
     }
 
     render() {
@@ -20,7 +25,7 @@ class TeacherAcademic extends Component {
             </View>
 
                 <Content>
-                <View style={{width: '80%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
+                <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                     <Text style={styles.subText}>Personal Details</Text>
                 </View>
 
@@ -68,7 +73,10 @@ class TeacherAcademic extends Component {
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>L.G.A</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Picker style={styles.textInput}>
+                                        <Picker.Item label="Nkanu East" value="Nkanu East" />
+                                        <Picker.Item label="Nkanu West" value="Nkanu West" />
+                                    </Picker>
                                 </View>
 
 
@@ -83,7 +91,16 @@ class TeacherAcademic extends Component {
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <CheckBox style={{backgroundColor: 'transparent'}}
+                                    title='Yes'
+                                    checked={this.state.checkedYes}
+                                    onPress={() => this.setState({checked: !this.state.checkedYes})}
+                                    />
+                                    <CheckBox
+                                    title='No'
+                                    checked={this.state.checked}
+                                    onPress={() => this.setState({checked: !this.state.checked})}
+                                    />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -108,7 +125,7 @@ class TeacherAcademic extends Component {
 
                                  
                                 <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Biodata") }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
@@ -135,8 +152,8 @@ const styles = StyleSheet.create({
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { width: '40%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
-    textInput: {width: '60%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
                 borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
                 color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });

@@ -12,25 +12,45 @@ import StudentIndex from '../screens/student/StudentIndex';
 import SchoolIndex from '../screens/school/SchoolIndex';
 
 const TeacherStack = createStackNavigator({
-    Academic: TeacherAcademic,
-    Biodata:  TeacherBiodata,
-    Teacher: TeacherIndex,
-    Start: TeacherStart,
+  Academic: TeacherAcademic,
+  Biodata:  TeacherBiodata,
+  Teacher: TeacherIndex,
+  Start: TeacherStart,
+},
+{
+ 
+  /* The header config from HomeScreen is now here */
+  defaultNavigationOptions: {
+    title: 'MINISTRY OF BASIC EDUCATION',
+    sub: 'Student, Teacher and School Information Base',
+    headerStyle: {
+      backgroundColor: '#098BD3',
+      height: 100
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      alignSelf: 'center',
+      alignContent: 'center'
+    },
+  },
 });
 
-TeacherStack.navigationOptions = {
-  drawerLabel: 'Teacher',
-  drawerIcon: ({ focused }) => (
-    <Ionicons
-      focused={focused}
-      name={
-        Platform.OS === 'ios' ? 'ios-home': 'md-home'
-      }
-      color="#0b6623"
-      size={30}
-    />
-  ),
-};
+// TeacherStack.navigationOptions = {
+  
+//   drawerLabel: 'Teacher',
+//   drawerIcon: ({ focused }) => (
+//     <Ionicons
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios' ? 'ios-home': 'md-home'
+//       }
+//       color="#000"
+//       size={30}
+//     />
+//   ),
+// };
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
