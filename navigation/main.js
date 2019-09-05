@@ -12,7 +12,6 @@ import StudentIndex from '../screens/student/StudentIndex';
 import SchoolIndex from '../screens/school/SchoolIndex';
 
 const TeacherStack = createStackNavigator({
-
     Academic: TeacherAcademic,
     Biodata:  TeacherBiodata,
     Teacher: TeacherIndex,
