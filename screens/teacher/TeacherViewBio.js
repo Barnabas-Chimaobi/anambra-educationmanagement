@@ -5,7 +5,7 @@ import { CheckBox } from 'react-native-elements'
 
 
 
-class TeacherBiodata extends Component {
+class ViewteacherBio extends Component {
 
     constructor(props) {
         super(props);
@@ -52,187 +52,92 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Highest academic qualification</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Highest academic qualification</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Institutions attended, with date</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Institutions attended, with date</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subject area of specialization</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Subject area of specialization</Text>
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subjects taught</Text>
-                            <CheckBox style={{ backgroundColor: 'transparent' }}
-                                title='Mathematics'
-                                checked={this.state.checkedYes}
-                                onPress={() => this.setState({ checked: !this.state.checkedYes })}
-                            />
-                            <CheckBox
-                                title='English'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            /> 
-                            <CheckBox
-                                title='Health Science'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            />
-                            <CheckBox
-                                title='Social Studies'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            />
+                            <Text style={styles.labelText}>Subjects taught</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of first appointment</Text>
-                            <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                placeHolderText="Select date"
-                                textStyle={{ color: "green" }}
-                                placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
-                                disabled={false}
-                                />
-                                {/* <Text>
-                                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                                </Text> */}
+                            <Text style={styles.labelText}>Date of first appointment</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of present appointment</Text>
-                            <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                placeHolderText="Select date"
-                                textStyle={{ color: "green" }}
-                                placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
-                                disabled={false}
-                                />
-                                {/* <Text>
-                                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                                </Text> */}
+                            <Text style={styles.labelText}>Date of present appointment</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Expected date of retirement</Text>
-                            <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                placeHolderText="Select date"
-                                textStyle={{ color: "green" }}
-                                placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
-                                disabled={false}
-                                />
-                                {/* <Text>
-                                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                                </Text> */}
+                            <Text style={styles.labelText}>Expected date of retirement</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Years of experience</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Years of experience</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Grade Level</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label="level 1" value="level 1" />
-                                <Picker.Item label="level 2" value="level 2" />
-                            </Picker>
+                            <Text style={styles.labelText}>Grade Level</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Rank</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label=" 1" value=" 1" />
-                                <Picker.Item label=" 2" value=" 2" />
-                            </Picker>
+                            <Text style={styles.labelText}>Rank</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Post held in school</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label=" 1" value=" 1" />
-                                <Picker.Item label=" 2" value=" 2" />
-                            </Picker>
+                            <Text style={styles.labelText}>Post held in school</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Year posted to school</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label=" 1" value=" 1" />
-                                <Picker.Item label=" 2" value=" 2" />
-                            </Picker>
+                            <Text style={styles.labelText}>Year posted to school</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Posting history with date</Text>
-                            <TextInput placeHolder='Institution Name' style={styles.textInput} />
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label=" 1" value=" 1" />
-                                <Picker.Item label=" 2" value=" 2" />
-                            </Picker>
+                            <Text style={styles.labelText}>Posting history with date</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Type of Staff</Text>
-                            <CheckBox style={{ backgroundColor: 'transparent' }}
-                                title='Permanent'
-                                checked={this.state.checkedYes}
-                                onPress={() => this.setState({ checked: !this.state.checkedYes })}
-                            />
-                            <CheckBox
-                                title='Temporary'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            /> 
+                            <Text style={styles.labelText}>Type of Staff</Text>
                            
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of subjects taught</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Number of subjects taught</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of streams taught</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Number of streams taught</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of trainings attended</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Number of trainings attended</Text>
                         </View>
 
                         <View style={styles.containerBtn}>
@@ -255,19 +160,11 @@ class TeacherBiodata extends Component {
             </Container>
 
 
-<<<<<<< HEAD:screens/teacher/form/TeacherBiodata.js
-                            <View style={styles.buttonView}>
-                               <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Academic")}}>
-                                    <Text style={styles.buttonText}>Next</Text>
-                               </Button>
-                            </View>
-=======
->>>>>>> a0c24da37739f4e4c1ad4b5a998437f180f7a9aa:screens/teacher/TeacherBiodata.js
 
         );
     }
 }
-export default TeacherBiodata;
+export default ViewteacherBio;
 
 const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },

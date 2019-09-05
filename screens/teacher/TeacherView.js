@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "re
 import { Container, Content, Form, Button} from 'native-base';
 import { CheckBox } from 'react-native-elements'
 
-class StudentBiodata extends Component {
+class Viewteacher extends Component {
 
     constructor(props) {
         super(props);
@@ -33,99 +33,78 @@ class StudentBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
-                            <TextInput style={styles.textInput}/>
+                            <Text style={styles.labelText}>First Name</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Last Name</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
-                            <TextInput style={styles.textInput} />
+                            <Text style={styles.labelText}>Other Name</Text>
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label="Male" value="java" />
-                                <Picker.Item label="Female" value="js" />
-                            </Picker>
+                            <Text style={styles.labelText}>Sex</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
-                            <Picker style={styles.textInput}>
-                                <Picker.Item label="2019" value="java" />
-                                <Picker.Item label="2018" value="js" />
-                            </Picker>
+                            <Text style={styles.labelText}>Date of Birth</Text>
                         </View>
 
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>State of Origin</Text>
-                                    <Picker style={styles.textInput}>
-                                        <Picker.Item label="Enugu" value="Enugu" />
-                                        <Picker.Item label="Lagos" value="Lagos" />
-                                    </Picker>
+                                    <Text style={styles.labelText}>State of Origin</Text>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>L.G.A</Text>
-                                    <Picker style={styles.textInput}>
-                                        <Picker.Item label="Nkanu East" value="Nkanu East" />
-                                        <Picker.Item label="Nkanu West" value="Nkanu West" />
-                                    </Picker>
+                                    <Text style={styles.labelText}>L.G.A</Text>
                                 </View>
 
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Hometown</Text>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Residential Address</Text>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
-                                    <CheckBox style={{backgroundColor: 'transparent'}}
-                                    title='Yes'
-                                    checked={this.state.checkedYes}
-                                    onPress={() => this.setState({checked: !this.state.checkedYes})}
-                                    />
-                                    <CheckBox
-                                    title='No'
-                                    checked={this.state.checked}
-                                    onPress={() => this.setState({checked: !this.state.checked})}
-                                    />
+                                    <Text style={styles.labelText}>Do you live within the school ?</Text>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Phone Number</Text>
                                 </View>
 
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Next of Kin</Text>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Next of Kin Phone Number</Text>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Email</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <Text style={styles.labelText}>Email</Text>
                                 </View>
 
                                  
                                 <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Biodata") }}>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("ViewBio") }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
@@ -140,7 +119,7 @@ class StudentBiodata extends Component {
         );
     }
 }
-export default StudentBiodata;
+export default Viewteacher;
 
 const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },

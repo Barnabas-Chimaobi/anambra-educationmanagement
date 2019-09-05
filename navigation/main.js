@@ -6,10 +6,10 @@ import { createDrawerNavigator,DrawerItems,DrawerNavigatorItems  } from 'react-n
 import { createStackNavigator } from 'react-navigation-stack';
 import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
-import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
-import TeacherAcademic from '../screens/teacher/form/TeacherAcademic';
-import TeacherBiodataPreview from '../screens/teacher/preview/TeacherBiodataPreview';
-import TeacherAcademicPreview from '../screens/teacher/preview/TeacherAcademicPreview';
+import TeacherBiodata from '../screens/teacher/TeacherBiodata';
+import TeacherAcademic from '../screens/teacher/TeacherAcademic';
+import Viewteacher from '../screens/teacher/TeacherView';
+import ViewteacherBio from '../screens/teacher/TeacherViewBio';
 import StudentIndex from '../screens/student/StudentIndex';
 import StudentNextOfKin from '../screens/student/form/StudentNextOfKin';
 import StudentStart from '../screens/student/StudentStart';
@@ -25,27 +25,47 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-    Teacher: TeacherIndex,
-    Start: TeacherStart,
-    AcademicPreview: TeacherAcademicPreview,
-    BiodataPreview: TeacherBiodataPreview,
-    Academic: TeacherAcademic,
-    Biodata:  TeacherBiodata,
+  Academic: TeacherAcademic,
+  Biodata:  TeacherBiodata,
+  Teacher: TeacherIndex,
+  Start: TeacherStart,
+  View: Viewteacher,
+  ViewBio: ViewteacherBio
+},
+{
+ 
+  /* The header config from HomeScreen is now here */
+  defaultNavigationOptions: {
+    title: 'MINISTRY OF BASIC EDUCATION',
+    sub: 'Student, Teacher and School Information Base',
+    headerStyle: {
+      backgroundColor: '#098BD3',
+      height: 100
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      alignSelf: 'center',
+      alignContent: 'center'
+    },
+  },
 });
 
-TeacherStack.navigationOptions = {
-  drawerLabel: 'Teacher',
-  drawerIcon: ({ focused }) => (
-    <Ionicons
-      focused={focused}
-      name={
-        Platform.OS === 'ios' ? 'ios-home': 'md-home'
-      }
-      color="#0b6623"
-      size={30}
-    />
-  ),
-};
+// TeacherStack.navigationOptions = {
+  
+//   drawerLabel: 'Teacher',
+//   drawerIcon: ({ focused }) => (
+//     <Ionicons
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios' ? 'ios-home': 'md-home'
+//       }
+//       color="#000"
+//       size={30}
+//     />
+//   ),
+// };
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
