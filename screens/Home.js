@@ -12,7 +12,6 @@ class Home extends Component {
 
     render() {
         return (
-
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}
                             style={styles.container}
                             locations={[-5.7,22.72,53.6,73.16,86.22,97.8]}>

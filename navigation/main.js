@@ -8,6 +8,8 @@ import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
 import TeacherBiodata from '../screens/teacher/TeacherBiodata';
 import TeacherAcademic from '../screens/teacher/TeacherAcademic';
+import Viewteacher from '../screens/teacher/TeacherView';
+import ViewteacherBio from '../screens/teacher/TeacherViewBio';
 import StudentIndex from '../screens/student/StudentIndex';
 import SchoolIndex from '../screens/school/SchoolIndex';
 
@@ -16,6 +18,8 @@ const TeacherStack = createStackNavigator({
   Biodata:  TeacherBiodata,
   Teacher: TeacherIndex,
   Start: TeacherStart,
+  View: Viewteacher,
+  ViewBio: ViewteacherBio
 },
 {
  

@@ -60,19 +60,19 @@ class TeacherIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Academic") }}>
                                 <Text style={styles.buttonText}>Create New</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Home") }}>
+                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
                                 <Text style={styles.buttonText}>Update Existing</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Home") }}>
+                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("View") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
