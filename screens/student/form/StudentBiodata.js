@@ -4,7 +4,7 @@ import { Container, Content, Form, Button} from 'native-base';
 import { CheckBox } from 'react-native-elements';
 
 
-class TeacherAcademic extends Component {
+class StudentBiodata extends Component {
 
     constructor(props) {
         super(props);
@@ -134,7 +134,7 @@ class TeacherAcademic extends Component {
         );
     }
 }
-export default TeacherAcademic;
+export default StudentBiodata;
 
 const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },

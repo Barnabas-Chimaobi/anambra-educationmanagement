@@ -11,7 +11,18 @@ import TeacherAcademic from '../screens/teacher/TeacherAcademic';
 import Viewteacher from '../screens/teacher/TeacherView';
 import ViewteacherBio from '../screens/teacher/TeacherViewBio';
 import StudentIndex from '../screens/student/StudentIndex';
+import StudentNextOfKin from '../screens/student/form/StudentNextOfKin';
+import StudentStart from '../screens/student/StudentStart';
 import SchoolIndex from '../screens/school/SchoolIndex';
+import SchoolStart from '../screens/school/SchoolStart';
+import StudentBiodataPreview from '../screens/student/preview/StudentBiodataPreview';
+import StudentNextOfKinPreview from '../screens/student/preview/StudentNextOfKinPreview';
+import StudentBiodata from '../screens/student/form/StudentBiodata';
+import SchoolProfile from '../screens/school/form/SchoolProfile';
+import SchoolFacility from '../screens/school/form/SchoolFacility';
+import SchoolFacility2 from '../screens/school/form/SchoolFacility2';
+import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
+import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
   Academic: TeacherAcademic,
@@ -58,6 +69,11 @@ const TeacherStack = createStackNavigator({
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
+  Start: StudentStart,
+  NextOfKin: StudentNextOfKin,
+  Biodata: StudentBiodata,
+  BiodataPreview: StudentBiodataPreview,
+  NextOfKinPreview: StudentNextOfKinPreview
 });
 
 StudentStack.navigationOptions = {
@@ -76,6 +92,12 @@ StudentStack.navigationOptions = {
 
 const SchoolStack = createStackNavigator({
   School: SchoolIndex,
+  Start: SchoolStart,
+  Profile: SchoolProfile,
+  Facility: SchoolFacility,
+  Facility2: SchoolFacility2,
+  Facility3: SchoolFacility3,
+  HeadTeacher: SchoolHeadTeacher
 });
 
 SchoolStack.navigationOptions = {
@@ -113,7 +135,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Teacher',
+    initialRouteName: 'School',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
