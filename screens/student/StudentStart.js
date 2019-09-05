@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput} from "react-native";
-import { Button} from 'native-base';
+import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 
-class StudentIndex extends Component {
+class StudentStart extends Component {
 
     constructor(props) {
         super(props);
@@ -27,25 +27,16 @@ class StudentIndex extends Component {
                         <View>
                             <Text style={styles.headerText}>Student Information</Text>
                         </View>
-
-                        <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Biodata") }}>
-                                <Text style={styles.buttonText}>Add New</Text>
-                            </Button>
+                        <View style={{margin:'2%'}}>
+                            <Text>Student Id</Text>
+                            <TextInput style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
-                                <Text style={styles.buttonText}>Update Existing</Text>
+                            <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("BiodataPreview") }}>
+                                <Text style={styles.buttonText}>Proceed</Text>
                             </Button>
                         </View>
-
-                        <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
-                                <Text style={styles.buttonText}>View Data</Text>
-                            </Button>
-                        </View>
-
                     </View>
 
 
@@ -53,7 +44,7 @@ class StudentIndex extends Component {
         );
     }
 }
-export default StudentIndex;
+export default StudentStart;
 
 const styles = StyleSheet.create({
     container: {
@@ -69,15 +60,15 @@ const styles = StyleSheet.create({
         margin: '5%',
     },
     mainText:{padding:3, fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{marginBottom:'15%',padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
-    buttonView:{width:'90%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
-    button:{backgroundColor:'#fff'},
-    buttonText:{fontSize:20, color:'#000',alignSelf:'center'},
+    descriptionText:{padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
+    buttonView:{width:'30%', alignSelf:'center', margin:'3%'},
+    button:{backgroundColor:'#0884d2'},
+    buttonText:{fontSize:30, color:'#fff',alignSelf:'center'},
     inputView: {
         width: '100%',
         alignItems: 'stretch'
     },
-    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
+    headerText:{fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
 
 
 });

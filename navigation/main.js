@@ -6,21 +6,31 @@ import { createDrawerNavigator,DrawerItems,DrawerNavigatorItems  } from 'react-n
 import { createStackNavigator } from 'react-navigation-stack';
 import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
-import TeacherBiodata from '../screens/teacher/TeacherBiodata';
-import TeacherAcademic from '../screens/teacher/TeacherAcademic';
-import TeacherBiodataPreview from '../screens/teacher/TeacherBiodataPreview';
-import TeacherAcademicPreview from '../screens/teacher/TeacherAcademicPreview';
+import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
+import TeacherAcademic from '../screens/teacher/form/TeacherAcademic';
+import TeacherBiodataPreview from '../screens/teacher/preview/TeacherBiodataPreview';
+import TeacherAcademicPreview from '../screens/teacher/preview/TeacherAcademicPreview';
 import StudentIndex from '../screens/student/StudentIndex';
+import StudentNextOfKin from '../screens/student/form/StudentNextOfKin';
+import StudentStart from '../screens/student/StudentStart';
 import SchoolIndex from '../screens/school/SchoolIndex';
+import SchoolStart from '../screens/school/SchoolStart';
+import StudentBiodataPreview from '../screens/student/preview/StudentBiodataPreview';
+import StudentNextOfKinPreview from '../screens/student/preview/StudentNextOfKinPreview';
+import StudentBiodata from '../screens/student/form/StudentBiodata';
+import SchoolProfile from '../screens/school/form/SchoolProfile';
+import SchoolFacility from '../screens/school/form/SchoolFacility';
+import SchoolFacility2 from '../screens/school/form/SchoolFacility2';
+import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
+import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-
+    Teacher: TeacherIndex,
+    Start: TeacherStart,
     AcademicPreview: TeacherAcademicPreview,
     BiodataPreview: TeacherBiodataPreview,
     Academic: TeacherAcademic,
     Biodata:  TeacherBiodata,
-    Teacher: TeacherIndex,
-    Start: TeacherStart,
 });
 
 TeacherStack.navigationOptions = {
@@ -39,6 +49,11 @@ TeacherStack.navigationOptions = {
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
+  Start: StudentStart,
+  NextOfKin: StudentNextOfKin,
+  Biodata: StudentBiodata,
+  BiodataPreview: StudentBiodataPreview,
+  NextOfKinPreview: StudentNextOfKinPreview
 });
 
 StudentStack.navigationOptions = {
@@ -57,6 +72,12 @@ StudentStack.navigationOptions = {
 
 const SchoolStack = createStackNavigator({
   School: SchoolIndex,
+  Start: SchoolStart,
+  Profile: SchoolProfile,
+  Facility: SchoolFacility,
+  Facility2: SchoolFacility2,
+  Facility3: SchoolFacility3,
+  HeadTeacher: SchoolHeadTeacher
 });
 
 SchoolStack.navigationOptions = {
@@ -94,7 +115,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Teacher',
+    initialRouteName: 'School',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

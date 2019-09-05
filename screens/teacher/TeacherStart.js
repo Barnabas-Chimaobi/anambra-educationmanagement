@@ -25,7 +25,7 @@ class TeacherStart extends Component {
                     </View>
                     <View style={{width:'60%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
-                            <Text style={styles.headerText}>Teracher Information</Text>
+                            <Text style={styles.headerText}>Teacher Information</Text>
                         </View>
                         <View style={{margin:'2%'}}>
                             <Text>Teacher Id</Text>
