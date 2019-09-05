@@ -4,7 +4,6 @@ import { Container, Content, Form, Button, DatePicker } from 'native-base';
 import { CheckBox } from 'react-native-elements'
 
 
-
 class TeacherBiodata extends Component {
 
     constructor(props) {
@@ -18,6 +17,10 @@ class TeacherBiodata extends Component {
         }
         this.setDate = this.setDate.bind(this);
     }
+
+    onSelectedItemsChange = selectedItems => {
+        this.setState({ selectedItems });
+      };
 
     setDate(newDate) {
         this.setState({ chosenDate: newDate });
@@ -65,28 +68,10 @@ class TeacherBiodata extends Component {
                             <Text style={styles.labelText}>Subject area of specialization</Text>
                             <TextInput style={styles.textInput} />
                         </View>
+                        
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subjects taught</Text>
-                            <CheckBox style={{ backgroundColor: 'transparent' }}
-                                title='Mathematics'
-                                checked={this.state.checkedYes}
-                                onPress={() => this.setState({ checked: !this.state.checkedYes })}
-                            />
-                            <CheckBox
-                                title='English'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            /> 
-                            <CheckBox
-                                title='Health Science'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            />
-                            <CheckBox
-                                title='Social Studies'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            />
+                           
                         </View>
 
 
@@ -206,17 +191,10 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Type of Staff</Text>
-                            <CheckBox style={{ backgroundColor: 'transparent' }}
-                                title='Permanent'
-                                checked={this.state.checkedYes}
-                                onPress={() => this.setState({ checked: !this.state.checkedYes })}
-                            />
-                            <CheckBox
-                                title='Temporary'
-                                checked={this.state.checked}
-                                onPress={() => this.setState({ checked: !this.state.checked })}
-                            /> 
-                           
+                            <Picker style={styles.textInput}>
+                                <Picker.Item label="Permanent" value="Permanent" />
+                                <Picker.Item label="Temporary" value="Temporary" />
+                            </Picker>
                         </View>
 
 

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Switch } from "react-native";
 import { Container, Content, Form, Button} from 'native-base';
-import { CheckBox } from 'react-native-elements'
+import { CheckBox } from 'react-native-elements';
+
 
 class TeacherAcademic extends Component {
 
@@ -91,16 +92,9 @@ class TeacherAcademic extends Component {
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
-                                    <CheckBox style={{backgroundColor: 'transparent'}}
-                                    title='Yes'
-                                    checked={this.state.checkedYes}
-                                    onPress={() => this.setState({checked: !this.state.checkedYes})}
-                                    />
-                                    <CheckBox
-                                    title='No'
-                                    checked={this.state.checked}
-                                    onPress={() => this.setState({checked: !this.state.checked})}
-                                    />
+                              
+                                        <Switch/>
+                              
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
