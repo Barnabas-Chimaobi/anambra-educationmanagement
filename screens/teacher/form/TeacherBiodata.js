@@ -30,7 +30,7 @@ class TeacherBiodata extends Component {
             Lga: '',
             Hometown: '',
             Residential: '',
-            liveIn: '',
+            liveIn: false,
             NextofKin: '',
             NextofKinPhone: '',
             Email: '',
@@ -41,33 +41,27 @@ class TeacherBiodata extends Component {
 
       updateGender = (gender) => {
         this.setState({ gender: gender })
-        console.warn(this.state.gender);
      }
-
-     StateOrigin
 
      updateStateOrigin = (StateOrigin) => {
         this.setState({ StateOrigin: StateOrigin })
-        console.warn(this.state.StateOrigin);
      }
 
      updateLga = (Lga) => {
         this.setState({ Lga: Lga })
-        console.warn(this.state.Lga);
+        
      }
 
-    setDate(newDate) {
+     setDate = (newDate) =>{
         this.setState({ Dob: newDate });
+        console.warn(this.state.Dob)
     }
 
-    // componentWillMount() {
-    //     Dimensions.addEventListener("change", this.handler);
-    // }
+    toggleliveIn = (value) => {
+        this.setState({liveIn: value})
+        console.warn(this.state.liveIn);
+    }
 
-    // componentWillUnmount() {
-    //     // Important to stop updating state after unmount
-    //     Dimensions.removeEventListener("change", this.handler);
-    //   }
 
       componentDidMount(){
          // sex
@@ -75,7 +69,6 @@ class TeacherBiodata extends Component {
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
         .then((res) => {
             this.setState({Sexes: res.data})
-            // console.warn('sex',this.state)
         })
         .catch((error) => console.warn(error))
 
@@ -84,7 +77,6 @@ class TeacherBiodata extends Component {
         states.States('http://97.74.6.243/anambra/api/States')
         .then((res) => {
             this.setState({States: res.data})
-            // console.warn('states',this.state)
         })
         .catch((error) => console.warn(error))
 
@@ -116,7 +108,7 @@ class TeacherBiodata extends Component {
             Phone: this.state.Phone
         }
     console.warn(Biodata)
-    //   AsyncStorage.setItem("Biodata", {Biodata});
+      AsyncStorage.setItem("Biodata", {Biodata});
     //   const teacher = new Logic()
     //   teacher.TeacherBiodata('http://97.74.6.243/anambra/api/Teachers', Biodata)
     //   .then((res) => {
@@ -194,15 +186,16 @@ class TeacherBiodata extends Component {
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
                                 maximumDate={new Date(2018, 12, 31)}
+                                animationType={"slide"}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
+                                modalTransparent={true}
                                 animationType={"fade"}
                                 androidMode={"default"}
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.Dob}
+                                onDateChange={this.setDate}
                                 disabled={false}
                             />
                         </View>
@@ -232,11 +225,6 @@ class TeacherBiodata extends Component {
                                 </Picker>
                                 </View>
 
-
-                             
-           
-          
-
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
                                     <TextInput onChangeText={text => this.handleChangeText('Hometown',text)} value={this.state.Hometown} style={styles.textInput}/>
@@ -248,7 +236,8 @@ class TeacherBiodata extends Component {
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
-                                    <Switch/>
+                                    <Switch onValueChange = {this.toggleliveIn}
+                                            value = {this.state.liveIn}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
