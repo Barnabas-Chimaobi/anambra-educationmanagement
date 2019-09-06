@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
+import Logic from '../../../logic'
 
 class SchoolHeadTeacher extends Component {
 

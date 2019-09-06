@@ -2,12 +2,60 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
 import { Container, Content, Form, Button, DatePicker} from 'native-base';
+import Logic from '../../../logic';
 
 class SchoolFacility2 extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            InspectionAuthorities: [],
+            Grants: [],
+            BirthCertificates: [],
+            Ownerships: []
+        }
     }
+
+    componentDidMount(){
+        // Ownerships
+        const ownership = new Logic()
+        ownership.Ownerships('http://97.74.6.243/anambra/api/Ownerships')
+        .then((res) => {
+            this.setState({Ownerships: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+        // inspection
+        const inspection = new Logic()
+        inspection.InspectionAuthorities('http://97.74.6.243/anambra/api/InspectionAuthorities')
+        .then((res) => {
+            this.setState({InspectionAuthorities: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+
+        // inspection
+        const grants = new Logic()
+        grants.Grants('http://97.74.6.243/anambra/api/Grants')
+        .then((res) => {
+            this.setState({Grants: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+        // BirthCertificates
+        const certificates = new Logic()
+        certificates.BirthCertificates('http://97.74.6.243/anambra/api/BirthCertificates')
+        .then((res) => {
+            this.setState({BirthCertificates: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+
+      }
 
     render() {
         return (
@@ -64,24 +112,26 @@ class SchoolFacility2 extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which authority conducted the last inspection?</Text>
-                            <Picker 
+                            <Picker selectedValue={this.state.lgas}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                 <Picker.Item label='Federal' value='Federal' />
-                                 <Picker.Item label='State' value='State' />
-                                 <Picker.Item label='L.G.A' value='L.G.A' />
-                               </Picker>
+                                {this.state.InspectionAuthorities.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
+
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Has your school received grants in the last two academic sessions?</Text>
-                            <Picker 
+                            <Picker selectedValue={this.state.lgas}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                                {this.state.Grants.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
                         </View>
 
 
@@ -91,27 +141,27 @@ class SchoolFacility2 extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which tier of Governement owns the school?</Text>
-                            <Picker 
+                            <Picker selectedValue={this.state.lgas}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                 <Picker.Item label='Federal' value='Federal' />
-                                 <Picker.Item label='State' value='State' />
-                                 <Picker.Item label='L.G.A' value='L.G.A' />
-                               </Picker>
+                                {this.state.Ownerships.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>How many children were enrolled with birth certificates by:</Text>
-                            <Picker 
+                           
+                            <Picker selectedValue={this.state.lgas}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                 <Picker.Item label='Npoc' value='Npoc' />
-                                 <Picker.Item label='Hospital' value='Hospital' />
-                                 <Picker.Item label='Courts' value='Courts' />
-                                 <Picker.Item label='Others' value='Others' />
-                                 <Picker.Item label='L.G.A' value='L.G.A' />
-                               </Picker>
+                                {this.state.BirthCertificates.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
+                            
                         </View>
 
 
