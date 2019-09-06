@@ -6,8 +6,8 @@ import { createDrawerNavigator,DrawerItems,DrawerNavigatorItems  } from 'react-n
 import { createStackNavigator } from 'react-navigation-stack';
 import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
-import TeacherBiodata from '../screens/teacher/TeacherBiodata';
-import TeacherAcademic from '../screens/teacher/TeacherAcademic';
+import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
+import TeacherAcademic from '../screens/teacher/form/TeacherAcademic';
 import Viewteacher from '../screens/teacher/TeacherView';
 import ViewteacherBio from '../screens/teacher/TeacherViewBio';
 import StudentIndex from '../screens/student/StudentIndex';
@@ -97,8 +97,27 @@ const SchoolStack = createStackNavigator({
   Facility: SchoolFacility,
   Facility2: SchoolFacility2,
   Facility3: SchoolFacility3,
-  HeadTeacher: SchoolHeadTeacher
-});
+  HeadTeacher: SchoolHeadTeacher,
+},
+  {
+   
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      title: 'MINISTRY OF BASIC EDUCATION',
+      sub: 'Student, Teacher and School Information Base',
+      headerStyle: {
+        backgroundColor: '#098BD3',
+        height: 100
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        alignSelf: 'center',
+        alignContent: 'center'
+      },
+    },
+  });
 
 SchoolStack.navigationOptions = {
   drawerLabel: 'School',
@@ -135,7 +154,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'School',
+    initialRouteName: 'Teacher',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

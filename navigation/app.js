@@ -9,9 +9,9 @@ import StudentIndex  from "../screens/student/StudentIndex";
 import TeacherStart  from "../screens/teacher/TeacherStart";
 
 const  Screens = createSwitchNavigator({
-    Welcome,
-    Login,
-    Home,
+    // Welcome,
+    // Login,
+    // Home,
     Main,
 });
 

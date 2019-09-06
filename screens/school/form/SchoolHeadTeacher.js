@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView} from "react-native";
-import {Button} from 'native-base';
+import { Container, Content, Form, Button } from 'native-base';
 
 class SchoolHeadTeacher extends Component {
 
@@ -11,18 +11,17 @@ class SchoolHeadTeacher extends Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.container}>
-                <View style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                    <View style={{backgroundColor:'#E6DC82', padding :10}}>
+            <Container>
+                <View style={{backgroundColor:'#E6DC82', padding :10}}>
                         <Text style={styles.headerText}>New Student Information</Text>
                     </View>
 
-                    <View style={{margin: 15, alignSelf:'flex-start' }}>
-                        <Text style={styles.headerText}>Principal's Information</Text>
-                        <View  style={{ borderBottomColor: 'black',borderBottomWidth: 1,alignSelf:'stretch'}} />
+                <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+                <View style={{ width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin: 10, marginLeft: 30 }}>
+                        <Text style={styles.subText}>Principal's Information</Text>
                     </View>
 
-                    <View style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
+                    <Form style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Full Name</Text>
@@ -169,9 +168,9 @@ class SchoolHeadTeacher extends Component {
                                 </Button>
                             </View>
                         </View>
-                    </View>
-                </View>
-            </ScrollView>
+                    </Form>
+                </Content>
+            </Container>
         );
     }
 }
@@ -184,7 +183,14 @@ const styles = StyleSheet.create({
     button2:{backgroundColor:'#E6DC82'},
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
-    headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
-    labelText:{fontSize: 15, marginRight:15},
-    textInput:{width:'100%',fontSize: 15, fontWeight:'bold', marginRight:15, borderColor:'#F7F7F7', borderWidth: 1, backgroundColor:'#F7F7F7', color:'#000',justifyContent: 'flex-end', alignItems:'stretch'}
+    
+    headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
+    subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
+
+    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    textInput: {
+        width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+        borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
+        color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+    }
 });
