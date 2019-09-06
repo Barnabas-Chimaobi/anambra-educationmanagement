@@ -68,16 +68,23 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:3, fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{marginBottom:'15%',padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
-    buttonView:{width:'90%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
-    button:{backgroundColor:'#fff'},
-    buttonText:{fontSize:20, color:'#000',alignSelf:'center'},
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+              fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
+                     textTransform:'capitalize', alignSelf:'center'},
+    buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
+    button:{backgroundColor:'#fff', padding: '10'},
+    buttonText:{fontSize:20, fontWeight: '600', color:'#000',alignSelf:'center'},
     inputView: {
         width: '100%',
         alignItems: 'stretch'
     },
-    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
+    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', textAlign: 'center', alignSelf:'center'},
+
+    buttonViewOne:{margin: '2%', width:'30%'},
+    buttonOne:{backgroundColor:'#0884d2', padding: 9, alignItems: 'center', textAlign: 'center'},
+    buttonTextOne:{fontSize:17, color:'#fff', paddingLeft: 20, alignSelf:'center', textAlign: 'center'}
+
 
 
 });

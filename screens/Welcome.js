@@ -24,8 +24,8 @@ class Welcome extends Component {
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
                     </View>
                     <View style={styles.buttonView}>
-                        <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Login") }}>
-                            <Text style={styles.buttonText}>Start</Text>
+                        <Button block small style={styles.button} onPress={() => { this.props.navigation.navigate("Login") }}>
+                            <Text style={styles.buttonText}>Enter</Text>
                         </Button>
                     </View>
 
@@ -48,10 +48,11 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:'1%', fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{padding:'0.5%',fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+              fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
     buttonView:{margin: '2%', width:'30%'},
-    button:{backgroundColor:'#0884d2'},
-    buttonText:{fontSize:30, color:'#fff',alignSelf:'center'}
+    button:{backgroundColor:'#0884d2', padding: 9},
+    buttonText:{fontSize:20, color:'#fff',alignSelf:'center'}
 
 });

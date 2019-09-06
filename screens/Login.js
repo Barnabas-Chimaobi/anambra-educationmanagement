@@ -4,6 +4,8 @@ import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardI
 import { background } from "../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 
+
+
 class Login extends Component {
 
     constructor(props) {
@@ -11,6 +13,7 @@ class Login extends Component {
     }
 
     render() {
+       
         return (
 
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}
@@ -19,28 +22,32 @@ class Login extends Component {
                    <View>
                         <Image source={background.logo} resizeMode="center" style={styles.logo} />
                     </View>
-                    <View>
+                    <View style={{marginBottom: '7%'}}>
                         <Text style={styles.mainText}>Ministry of Basic Education</Text>
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
                     </View>
-                    <View style={{width:'60%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+
+                    <View style={{width:'80%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
                             <Text style={styles.headerText}>Login</Text>
                         </View>
-                        <View style={{margin:'2%'}}>
-                            <Text>Username</Text>
-                            <TextInput style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
-                        </View>
-                        <View style={{margin:'2%'}}>
-                            <Text>Password</Text>
-                            <TextInput style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
+                        <View style={{margin:'3%'}}>
+                            <Text>User Id</Text>
+                            <TextInput style={styles.textInput} />
                         </View>
 
-                        <View style={styles.buttonView}>
-                            <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Home") }}>
-                                <Text style={styles.buttonText}>Login</Text>
-                            </Button>
+                        <View style={{margin:'3%'}}>
+                            <Text>Password</Text>
+                            <TextInput style={styles.textInput} />
                         </View>
+
+                        
+                    </View>
+
+                    <View style={styles.buttonView}>
+                        <Button block small style={styles.button} onPress={() => { this.props.navigation.navigate("Home") }}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </Button>
                     </View>
 
 
@@ -63,15 +70,15 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:3, fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+              fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
+                     textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'30%', alignSelf:'center', margin:'3%'},
     button:{backgroundColor:'#0884d2'},
-    buttonText:{fontSize:30, color:'#fff',alignSelf:'center'},
-    inputView: {
-        width: '100%',
-        alignItems: 'stretch'
-    },
+    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+    inputView: { width: '100%', alignItems: 'stretch'},
+    textInput: {paddingTop: 5, marginTop: 5, backgroundColor:'rgba(255,255,255,.5)', color:'#000'},
     headerText:{fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
 
 

@@ -23,7 +23,7 @@ class SchoolIndex extends Component {
                         <Text style={styles.mainText}>Ministry of Basic Education</Text>
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
                     </View>
-                    <View style={{width:'60%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+                    <View style={{width:'80%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
                             <Text style={styles.headerText}>School Information</Text>
                         </View>
@@ -68,8 +68,10 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:3, fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{marginBottom:'15%',padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+              fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
+                     textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'90%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
     button:{backgroundColor:'#fff'},
     buttonText:{fontSize:20, color:'#000',alignSelf:'center'},
