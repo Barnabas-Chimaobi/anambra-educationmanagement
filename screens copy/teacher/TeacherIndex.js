@@ -1,10 +1,41 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput} from "react-native";
-import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
-import { background } from "../constants/images";
+import { Button} from 'native-base';
+import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 
-class Home extends Component {
+class LogoTitle extends React.Component {
+    render() {
+      return (
+        <Image
+          source={background.logo}
+          style={{ width: 30, height: 30 }}
+        />
+      );
+    }
+  }
+
+class TeacherIndex extends Component {
+
+    static navigationOptions = {
+        title: 'Teachers',
+        headerStyle: {
+          backgroundColor: '#098BD3',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#f4511e"
+            />
+          ),
+    };
+
+
 
     constructor(props) {
         super(props);
@@ -12,6 +43,7 @@ class Home extends Component {
 
     render() {
         return (
+
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}
                             style={styles.container}
                             locations={[-5.7,22.72,53.6,73.16,86.22,97.8]}>
@@ -24,42 +56,35 @@ class Home extends Component {
                     </View>
                     <View style={{width:'80%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
-                            <Text style={styles.headerText}>Select Module</Text>
+                            <Text style={styles.headerText}>Teacher Information</Text>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") }}>
-                                <Text style={styles.buttonText}>Teacher Information</Text>
+                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Academic") }}>
+                                <Text style={styles.buttonText}>Create New</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student") }}>
-                                <Text style={styles.buttonText}>Student Information</Text>
+                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                                <Text style={styles.buttonText}>Update Existing</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School") }}>
-                                <Text style={styles.buttonText}>School Information</Text>
+                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("View") }}>
+                                <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
+
                     </View>
-
-                    <View style={styles.buttonViewOne}>
-                        <Button style={styles.buttonOne}>
-                            <Text style={styles.buttonTextOne}>Logout</Text>
-                        </Button>
-                    </View>
-
-
 
 
             </LinearGradient>
         );
     }
 }
-export default Home;
+export default TeacherIndex;
 
 const styles = StyleSheet.create({
     container: {
@@ -74,9 +99,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto',
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
               fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto',
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
                      textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
     button:{backgroundColor:'#fff', padding: '10'},
@@ -85,9 +110,9 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'stretch'
     },
-    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
+    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', textAlign: 'center', alignSelf:'center'},
 
-    buttonViewOne:{margin: '2%', width:'30%', alignSelf:'center'},
+    buttonViewOne:{margin: '2%', width:'30%'},
     buttonOne:{backgroundColor:'#0884d2', padding: 9, alignItems: 'center', textAlign: 'center'},
     buttonTextOne:{fontSize:17, color:'#fff', paddingLeft: 20, alignSelf:'center', textAlign: 'center'}
 

@@ -9,38 +9,20 @@ class TeacherAcademic extends Component {
         this.state = {
             Ranks: [],
             Grades: [],
-            Types:[],
-            TeacherClasses:[],
-            selectedGradelvl: '',
-            Qualification: '',
-            Institutions: '',
-            SubjectArea: '',
-            SubjectTaught: '',
-            DateOfFirstApt: '',
-            DateOfPresentApt: '',
-            ExpectedDateofRetirement: '',
-            YearsOfExperience: '',
-            GradeLevel: '',
-            Rank: '',
-            PostHeld: '',
-            PostHeldYear: '',
-            PostingHistoryDate: [],
-            TypeOfStaff: '',
-            ClassOfStaff: '',
-            NoOfSubjects: '',
-            NoOfStreams: '',
-            NoOfTraining: '',
+            selectedGradelvl: ''
         }
     }
 
     componentDidMount(){
-
+     
       const gradelevels = new Logic()
       gradelevels.GradeLevels('http://97.74.6.243/anambra/api/GradeLevels')
       .then((res) => {
+
           this.setState({Grades: res.data})
-     })
-    .catch((error) => console.warn(error))
+        //   console.warn('ok',this.state)
+   })
+      .catch((error) => console.warn(error))
 
       const ranks = new Logic()
       ranks.Ranks('http://97.74.6.243/anambra/api/Ranks')
@@ -51,34 +33,13 @@ class TeacherAcademic extends Component {
    })
       .catch((error) => console.warn(error))
 
-      const types = new Logic()
-      types.StaffType('http://97.74.6.243/anambra/api/StaffTypes')
-      .then((res) => {
-
-          this.setState({Types: res.data})
-        //   console.warn('ok',this.state)
-    })
-        .catch((error) => console.warn(error))
-
-        const staffClass = new Logic()
-        staffClass.StaffClass('http://97.74.6.243/anambra/api/StaffClasses')
-        .then((res) => {
-
-            this.setState({TeacherClasses: res.data})
-          //   console.warn('ok',this.state)
-      })
-          .catch((error) => console.warn(error))
-
 
     }
 
-
-
-
     render() {
 
-
-
+        
+      
         return (
 
             <Container>
@@ -88,29 +49,29 @@ class TeacherAcademic extends Component {
                         </View>
 
                     <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-
+                       
 
                         <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                             <Text style={styles.subText}>Academic Details</Text>
                         </View>
 
-                        <Form style={{width:'75%',justifyContent:'center', alignSelf:'center'}}>
+                        <View style={{width:'75%',justifyContent:'center', alignSelf:'center'}}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Highest Qualification</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Qualification',text)} value={this.state.Qualification} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
-                   
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Institutions Attended</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Institutions',text)} value={this.state.Institutions} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('SubjectArea',text)} value={this.state.SubjectArea} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
@@ -150,11 +111,11 @@ class TeacherAcademic extends Component {
                                 disabled={false}
                             />
                             </View>
-                           
-            
+
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Grade Level</Text>
@@ -166,8 +127,10 @@ class TeacherAcademic extends Component {
                                             return <Picker.Item label={v.name} key={key}  value={v.name} />
                                         })}
                                 </Picker>
+
+                       
                             </View>
-            
+
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Rank</Text>
@@ -181,21 +144,20 @@ class TeacherAcademic extends Component {
                                 </Picker>
                             </View>
 
-            
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Post Held in School</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostHeld',text)} value={this.state.PostHeld} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year Posted to School</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostHeldYear',text)} value={this.state.PostHeldYear} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Posting History with date</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostingHistoryDate',text)} value={this.state.PostingHistoryDate} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
@@ -205,7 +167,7 @@ class TeacherAcademic extends Component {
                                     selectedValue={this.state.selectedRanklvl}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {this.state.Types.map( (v, key)=>{
+                                        {this.state.Ranks.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })}
                                 </Picker>
@@ -218,30 +180,30 @@ class TeacherAcademic extends Component {
                                     selectedValue={this.state.selectedRanklvl}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {this.state.TeacherClasses.map( (v, key)=>{
+                                        {this.state.Ranks.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })}
                                 </Picker>
                             </View>
 
-          
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of Subjects taught</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfSubjects',text)} value={this.state.NoOfSubjects}  style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of streams taught</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfStreams',text)} value={this.state.NoOfStreams}  style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of trainings attended</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfTraining',text)} value={this.state.NoOfTraining}  style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
@@ -255,12 +217,12 @@ class TeacherAcademic extends Component {
 
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Teacher")}}>
-                                            <Text style={styles.buttonText}>Save</Text>
+                                            <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
                             </View>
 
-                        </Form>
+                        </View>
                     </Content>
             </Container>
         );
@@ -275,7 +237,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
         marginRight: 10,
     },
-
+    
     button2:{backgroundColor:'#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '73%',
      marginRight: 10,},
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
