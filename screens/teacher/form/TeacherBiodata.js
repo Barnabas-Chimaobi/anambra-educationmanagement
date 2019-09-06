@@ -38,7 +38,7 @@ class TeacherBiodata extends Component {
         // Important to stop updating state after unmount
         Dimensions.removeEventListener("change", this.handler);
       }
-    
+
       componentDidMount(){
          // sex
         const sexes = new Logic()
@@ -68,15 +68,15 @@ class TeacherBiodata extends Component {
         .catch((error) => console.warn(error))
 
       }
-     
-    
-    
+
+
+
 
     render() {
-   
+
         return (
             <Container>
-                  
+
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
                 <Text style={styles.headerText}>New Teacher Information</Text>
@@ -105,18 +105,18 @@ class TeacherBiodata extends Component {
                             <TextInput style={styles.textInput}/>
                         </View>
 
-                        
+
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
-                            
+
 
                                 <Picker
                                     selectedValue={this.state.selectedgender}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {/* {this.state.Sexes.map((v, key)=>{
-                                            return <Picker.Item label={v.gender} key={key} value={v.gender} />
-                                        })} */}
+                                    {this.state.Sexes.map((v, key)=>{
+                                        return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                    })}
                                 </Picker>
                         </View>
 
@@ -148,7 +148,7 @@ class TeacherBiodata extends Component {
                                     onValueChange={()=>{}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })} 
+                                        })}
                             </Picker>
                                 </View>
 
@@ -161,7 +161,7 @@ class TeacherBiodata extends Component {
                                     onValueChange={()=>{}}>
                                         {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })} 
+                                        })}
                                 </Picker>
                                 </View>
 
@@ -200,13 +200,13 @@ class TeacherBiodata extends Component {
                                     <TextInput style={styles.textInput}/>
                                 </View>
 
-                                 
-                                <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Academic") }}>
+
+                                <View style={styles.buttonView}>
+                                   <Button  style={styles.button} onPress={() => { this.props.navigation.navigate("Academic") }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
-                     
+
 
                     </Form>
                 </Content>
@@ -219,9 +219,6 @@ class TeacherBiodata extends Component {
 export default TeacherBiodata;
 
 const styles = StyleSheet.create({
-    // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },
-    // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
-
     containerBtn: {
         marginTop: 10,
         flex: 1,
@@ -237,11 +234,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
          alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
     },
+    buttonView:{width:'50%', alignSelf:'flex-end', margin:'3%'},
     button: {
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-      alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,
+        marginRight: 10,
     },
-    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf:'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

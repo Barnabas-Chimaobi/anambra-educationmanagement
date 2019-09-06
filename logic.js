@@ -54,6 +54,17 @@ EducationLevels = (endpoint) => {
     })
 }
 
+Facilities = (endpoint) => {
+    // axios.defaults.headers.common['Authorization'] = this.auth;
+  return  axios.get(endpoint)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
 GradeLevels = (endpoint) => {
     // axios.defaults.headers.common['Authorization'] = this.auth;
   return  axios.get(endpoint)
@@ -142,6 +153,17 @@ Ranks = (endpoint) => {
     })
 }
 
+Relationships = (endpoint) => {
+    // axios.defaults.headers.common['Authorization'] = this.auth;
+  return  axios.get(endpoint)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
 SchoolMixes = (endpoint) => {
     // axios.defaults.headers.common['Authorization'] = this.auth;
   return  axios.get(endpoint)
@@ -197,6 +219,28 @@ States = (endpoint) => {
     })
 }
 
+StaffType = (endpoint) => {
+    // axios.defaults.headers.common['Authorization'] = this.auth;
+  return  axios.get(endpoint)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
+
+StaffClass = (endpoint) => {
+    // axios.defaults.headers.common['Authorization'] = this.auth;
+  return  axios.get(endpoint)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
 Subjects = (endpoint) => {
     // axios.defaults.headers.common['Authorization'] = this.auth;
   return  axios.get(endpoint)
