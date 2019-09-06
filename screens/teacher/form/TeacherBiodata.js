@@ -44,6 +44,18 @@ class TeacherBiodata extends Component {
         console.warn(this.state.gender);
      }
 
+     StateOrigin
+
+     updateStateOrigin = (StateOrigin) => {
+        this.setState({ StateOrigin: StateOrigin })
+        console.warn(this.state.StateOrigin);
+     }
+
+     updateLga = (Lga) => {
+        this.setState({ Lga: Lga })
+        console.warn(this.state.Lga);
+     }
+
     setDate(newDate) {
         this.setState({ Dob: newDate });
     }
@@ -167,7 +179,7 @@ class TeacherBiodata extends Component {
 
 
                                 <Picker
-                                     selectedValue = {this.state.gender} onValueChange = {this.updateUser}
+                                     selectedValue = {this.state.gender} onValueChange = {this.updateGender}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                     {this.state.Sexes.map((v, key)=>{
                                         return <Picker.Item label={v.gender} key={key} value={v.gender} />
@@ -198,9 +210,9 @@ class TeacherBiodata extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>State of Origin</Text>
-                                    <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    <Picker
+                                    selectedValue = {this.state.StateOrigin} onValueChange = {this.updateStateOrigin}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })}
@@ -210,13 +222,13 @@ class TeacherBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>L.G.A</Text>
-                                    <Picker
-                                    selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
-                                        {this.state.Lgas.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
+
+                                <Picker
+                                     selectedValue = {this.state.Lga} onValueChange = {this.updateLga}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
+                                    {this.state.Lgas.map((v, key)=>{
+                                        return <Picker.Item label={v.name} key={key} value={v.name} />
+                                    })}
                                 </Picker>
                                 </View>
 
