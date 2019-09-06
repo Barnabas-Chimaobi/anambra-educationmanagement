@@ -87,8 +87,35 @@ class TeacherBiodata extends Component {
 
       }
 
+
       TeacherBiodata = () => {
-        AsyncStorage.setItem("recipient", this.state.recipient);
+        const Biodata = {
+            name: ` ${this.state.First_Name} ${this.state.Last_Name} ${this.state.Other_Name}`,
+            Sex: this.state.Sexes,
+            Dob:this.state.Dob,
+            StateOrigin: this.state.StateOrigin,
+            Lga: this.state.Lga,
+            Hometown: this.state.Hometown,
+            Residential: this.state.Residential,
+            liveIn: this.state.liveIn,
+            NextofKin: this.state.NextofKin,
+            NextofKinPhone: this.state.NextofKinPhone,
+            Email: this.state.Email,
+            Phone: this.state.Phone
+        }
+    console.warn(Biodata)
+    //   AsyncStorage.setItem("Biodata", {Biodata});
+    //   const teacher = new Logic()
+    //   teacher.TeacherBiodata('http://97.74.6.243/anambra/api/Teachers', Biodata)
+    //   .then((res) => {
+    //     if (res.status === 200)
+    //     {
+    //         this.props.navigation.navigate("Academic")
+    //     }
+    //   })
+    //   .catch((error) => console.warn(error))
+      
+        
       }
 
     handleChangeText = (inputName,text) => {
@@ -234,7 +261,7 @@ class TeacherBiodata extends Component {
 
 
                                 <View style={styles.buttonView}>
-                                   <Button  style={styles.button} onPress={() => { this.props.navigation.navigate("Academic") }}>
+                                   <Button  style={styles.button} onPress={this.TeacherBiodata}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
