@@ -197,10 +197,9 @@ class StudentBiodata extends Component {
                                     <TextInput style={styles.textInput}/>
                                 </View>
 
-
-                                <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>
-                                        <Text style={styles.buttonText}>Next</Text>
+                                <View style={styles.buttonView}>
+                                    <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("NextOfKin")}}>
+                                            <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
 
@@ -219,9 +218,14 @@ export default StudentBiodata;
 const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },
     // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
-    button: { backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '25%',flex: 1,
-    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
-    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
+    // button: { backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '25%',flex: 1,
+    //     flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
+
+    buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
+    button:{backgroundColor:'#098BD3'},
+    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+
+    // buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

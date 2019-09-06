@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView} from "react-native";
-import {Button} from 'native-base';
+import {Button, Container, Form, Content} from 'native-base';
 
 class StudentNextOfKinPreview extends Component {
 
@@ -10,18 +10,19 @@ class StudentNextOfKinPreview extends Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.container}>
-            <View style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                <View style={{backgroundColor:'#E6DC82', padding :10}}>
-                    <Text style={styles.headerText}>New Student Information</Text>
+            
+            <Container>
+                <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
+                    <Text style={styles.headerText}>Existing Student Information</Text>
                 </View>
 
-                <View style={{margin: 15, alignSelf:'flex-start' }}>
-                    <Text style={styles.headerText}>Guardian & Next of Kin Details</Text>
-                    <View  style={{ borderBottomColor: 'black',borderBottomWidth: 1,alignSelf:'stretch'}} />
-                </View>
+                <Content>
 
-                <View style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
+                    <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
+                            <Text style={styles.subText}>Guardian & Next of Kin Details</Text>
+                    </View>
+                    
+                    <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                         <Text style={styles.labelText}>Next of Kin Name</Text>
@@ -87,7 +88,7 @@ class StudentNextOfKinPreview extends Component {
 
 
 
-                    <View style={{flexDirection:'row'}}>
+                    <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                         <View style={styles.buttonView}>
                             <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("BiodataPreview")}}>
                                     <Text style={styles.buttonText}>Previous</Text>
@@ -96,14 +97,14 @@ class StudentNextOfKinPreview extends Component {
 
                         <View style={styles.buttonView}>
                             <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Student")}}>
-                                    <Text style={styles.buttonText}>Submit</Text>
+                                    <Text style={styles.buttonText2}>Submit</Text>
                             </Button>
                         </View>
                     </View>
 
-                </View>
-            </View>
-    </ScrollView>
+                    </Form>
+                </Content>
+            </Container>
 
          );
     }
@@ -115,9 +116,13 @@ const styles = StyleSheet.create({
     buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
     button:{backgroundColor:'#098BD3'},
     button2:{backgroundColor:'#E6DC82'},
-    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+    buttonText:{fontSize:15, color:'#000',alignSelf:'center', fontWeight:'700'},
+    buttonText2:{fontSize:15, color:'#fff',alignSelf:'center', fontWeight:'700'},
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
-    labelText:{fontSize: 15, marginRight:15},
-    textInput:{width:'100%',fontSize: 15, fontWeight:'bold', marginRight:15, borderColor:'#F7F7F7', borderWidth: 1, backgroundColor:'#F7F7F7', color:'#000',justifyContent: 'flex-end', alignItems:'stretch'}
+    subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+                color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });
