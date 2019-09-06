@@ -34,7 +34,7 @@ class Home extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Main") }}>
+                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("StudentIndex") }}>
                                 <Text style={styles.buttonText}>Student Information</Text>
                             </Button>
                         </View>

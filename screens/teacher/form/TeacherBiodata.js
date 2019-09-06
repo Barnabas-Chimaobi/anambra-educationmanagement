@@ -233,14 +233,11 @@ class TeacherBiodata extends Component {
             </Container>
 
 
-<<<<<<< HEAD:screens/teacher/form/TeacherBiodata.js
-                            <View style={styles.buttonView}>
-                               <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Academic")}}>
-                                    <Text style={styles.buttonText}>Next</Text>
-                               </Button>
-                            </View>
-=======
->>>>>>> a0c24da37739f4e4c1ad4b5a998437f180f7a9aa:screens/teacher/TeacherBiodata.js
+                            // <View style={styles.buttonView}>
+                            //    <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Academic")}}>
+                            //         <Text style={styles.buttonText}>Next</Text>
+                            //    </Button>
+                            // </View>
 
         );
     }

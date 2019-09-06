@@ -6,8 +6,8 @@ import { createDrawerNavigator,DrawerItems,DrawerNavigatorItems  } from 'react-n
 import { createStackNavigator } from 'react-navigation-stack';
 import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
-import TeacherBiodata from '../screens/teacher/TeacherBiodata';
-import TeacherAcademic from '../screens/teacher/TeacherAcademic';
+import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
+import TeacherAcademic from '../screens/teacher/form/TeacherAcademic';
 import Viewteacher from '../screens/teacher/TeacherView';
 import ViewteacherBio from '../screens/teacher/TeacherViewBio';
 import StudentIndex from '../screens/student/StudentIndex';
@@ -74,21 +74,27 @@ const StudentStack = createStackNavigator({
   Biodata: StudentBiodata,
   BiodataPreview: StudentBiodataPreview,
   NextOfKinPreview: StudentNextOfKinPreview
-});
+},
 
-StudentStack.navigationOptions = {
-  drawerLabel: 'Student',
-  drawerIcon: ({ focused }) => (
-    <Ionicons
-      focused={focused}
-      name={
-        Platform.OS === 'ios' ? 'ios-contacts': 'md-contacts'
-      }
-      color="#0b6623"
-      size={30}
-    />
-  ),
-};
+{  
+  /* The header config from HomeScreen is now here */
+  defaultNavigationOptions: {
+    title: 'MINISTRY OF BASIC EDUCATION',
+    sub: 'Student, Teacher and School Information Base',
+    headerStyle: {
+      backgroundColor: '#098BD3',
+      height: 100
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      alignSelf: 'center',
+      alignContent: 'center'
+    },
+  },
+}
+);
 
 const SchoolStack = createStackNavigator({
   School: SchoolIndex,

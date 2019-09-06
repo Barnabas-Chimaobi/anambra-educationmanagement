@@ -118,6 +118,8 @@ const styles = StyleSheet.create({
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
-    labelText:{fontSize: 15, marginRight:15},
-    textInput:{width:'100%',fontSize: 15, fontWeight:'bold', marginRight:15, borderColor:'#F7F7F7', borderWidth: 1, backgroundColor:'#F7F7F7', color:'#000',justifyContent: 'flex-end', alignItems:'stretch'}
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+                color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });

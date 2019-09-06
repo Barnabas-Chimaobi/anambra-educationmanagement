@@ -22,7 +22,7 @@ class StudentBiodata extends Component {
                   
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
-                <Text style={styles.headerText}>New Teacher Information</Text>
+                <Text style={styles.headerText}>New Student Information</Text>
             </View>
 
                 <Content>
@@ -119,7 +119,7 @@ class StudentBiodata extends Component {
 
                                  
                                 <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Biodata") }}>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
