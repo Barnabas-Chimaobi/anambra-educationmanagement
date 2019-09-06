@@ -126,13 +126,13 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
-                            <TextInput onChangeText={this.Last_Name} style={styles.textInput}/>
+                            <TextInput onChangeText={text => this.handleChangeText('Last_Name',text)} value={this.state.Last_Name} style={styles.textInput}/>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
-                            <TextInput onChangeText={this.Other_Name} style={styles.textInput}/>
+                            <TextInput onChangeText={text => this.handleChangeText('Other_Name',text)} value={this.state.Other_Name} style={styles.textInput}/>
                         </View>
 
                         
@@ -204,12 +204,12 @@ class TeacherBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
-                                    <TextInput onChangeText={this.Hometown} style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Hometown',text)} value={this.state.Hometown} style={styles.textInput}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
-                                    <TextInput onChangeText={this.Residential} style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Residential',text)} value={this.state.Residential} style={styles.textInput}/>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
@@ -218,22 +218,22 @@ class TeacherBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
-                                    <TextInput onChangeText={this.Phone} style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Phone',text)} value={this.state.Phone} style={styles.textInput}/>
                                 </View>
 
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin</Text>
-                                    <TextInput onChangeText={this.NextofKin} style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('NextofKin',text)} value={this.state.NextofKin} style={styles.textInput}/>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                    <TextInput onChangeText={this.NextofKinPhone} style={styles.textInput}/>
+                                    <TextInput  onChangeText={text => this.handleChangeText('NextofKinPhone',text)} value={this.state.NextofKinPhone} style={styles.textInput}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Email</Text>
-                                    <TextInput onChangeText={this.Email} style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Email',text)} value={this.state.Email} style={styles.textInput}/>
                                 </View>
 
 

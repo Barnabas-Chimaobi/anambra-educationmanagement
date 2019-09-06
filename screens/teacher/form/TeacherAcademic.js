@@ -11,7 +11,25 @@ class TeacherAcademic extends Component {
             Grades: [],
             Types:[],
             TeacherClasses:[],
-            selectedGradelvl: ''
+            selectedGradelvl: '',
+            Qualification: '',
+            Institutions: '',
+            SubjectArea: '',
+            SubjectTaught: '',
+            DateOfFirstApt: '',
+            DateOfPresentApt: '',
+            ExpectedDateofRetirement: '',
+            YearsOfExperience: '',
+            GradeLevel: '',
+            Rank: '',
+            PostHeld: '',
+            PostHeldYear: '',
+            PostingHistoryDate: [],
+            TypeOfStaff: '',
+            ClassOfStaff: '',
+            NoOfSubjects: '',
+            NoOfStreams: '',
+            NoOfTraining: '',
         }
     }
 
@@ -80,19 +98,19 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Highest Qualification</Text>
-                                <TextInput onChangeText={(email) => this.setState({email})} style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Qualification',text)} value={this.state.Qualification} style={styles.textInput}/>
                             </View>
 
-
+                   
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Institutions Attended</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Institutions',text)} value={this.state.Institutions} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('SubjectArea',text)} value={this.state.SubjectArea} style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
@@ -132,11 +150,11 @@ class TeacherAcademic extends Component {
                                 disabled={false}
                             />
                             </View>
-
-
+                           
+            
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Grade Level</Text>
@@ -148,10 +166,8 @@ class TeacherAcademic extends Component {
                                             return <Picker.Item label={v.name} key={key}  value={v.name} />
                                         })}
                                 </Picker>
-
-
                             </View>
-
+            
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Rank</Text>
@@ -165,20 +181,21 @@ class TeacherAcademic extends Component {
                                 </Picker>
                             </View>
 
+            
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Post Held in School</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('PostHeld',text)} value={this.state.PostHeld} style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year Posted to School</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('PostHeldYear',text)} value={this.state.PostHeldYear} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Posting History with date</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('PostingHistoryDate',text)} value={this.state.PostingHistoryDate} style={styles.textInput}/>
                             </View>
 
 
@@ -207,24 +224,24 @@ class TeacherAcademic extends Component {
                                 </Picker>
                             </View>
 
-
+          
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of Subjects taught</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NoOfSubjects',text)} value={this.state.NoOfSubjects}  style={styles.textInput}/>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of streams taught</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NoOfStreams',text)} value={this.state.NoOfStreams}  style={styles.textInput}/>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of trainings attended</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NoOfTraining',text)} value={this.state.NoOfTraining}  style={styles.textInput}/>
                             </View>
 
 

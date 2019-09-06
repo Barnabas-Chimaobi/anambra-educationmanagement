@@ -26,7 +26,6 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-
   Teacher: TeacherIndex,
   Start: TeacherStart,
   Biodata:  TeacherBiodata,
