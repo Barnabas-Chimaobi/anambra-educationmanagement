@@ -1,28 +1,72 @@
 
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput,ScrollView} from "react-native";
-import {Button} from 'native-base';
+import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
+import { Container, Content, Form, Button, DatePicker } from 'native-base';
+import Logic from '../../../logic'
 
 class SchoolHeadTeacher extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            selectedValue: '',
+            chosenDate: new Date(),
+            checked: false,
+            checkedYes: false,
+            Sexes: [],
+            States: [],
+            Lgas: []
+        }
+        this.setDate = this.setDate.bind(this);
     }
+
+    setDate(newDate) {
+        this.setState({ chosenDate: newDate });
+    }
+
+    componentDidMount(){
+        // sex
+       const sexes = new Logic()
+       sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
+       .then((res) => {
+           this.setState({Sexes: res.data})
+           console.warn('sex',this.state)
+       })
+       .catch((error) => console.warn(error))
+
+       // states
+       const states = new Logic()
+       states.States('http://97.74.6.243/anambra/api/States')
+       .then((res) => {
+           this.setState({States: res.data})
+           // console.warn('states',this.state)
+       })
+       .catch((error) => console.warn(error))
+
+       // lgas
+       const lgas = new Logic()
+       lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+       .then((res) => {
+           this.setState({Lgas: res.data})
+           // console.warn('lgas',this.state)
+       })
+       .catch((error) => console.warn(error))
+
+     }
 
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.container}>
-                <View style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                    <View style={{backgroundColor:'#E6DC82', padding :10}}>
+            <Container>
+                <View style={{backgroundColor:'#E6DC82', padding :10}}>
                         <Text style={styles.headerText}>New Student Information</Text>
                     </View>
 
-                    <View style={{margin: 15, alignSelf:'flex-start' }}>
-                        <Text style={styles.headerText}>Principal's Information</Text>
-                        <View  style={{ borderBottomColor: 'black',borderBottomWidth: 1,alignSelf:'stretch'}} />
+                <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+                <View style={{ width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin: 10, marginLeft: 30 }}>
+                        <Text style={styles.subText}>Principal's Information</Text>
                     </View>
 
-                    <View style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
+                    <Form style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Full Name</Text>
@@ -38,11 +82,30 @@ class SchoolHeadTeacher extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
-                            <TextInput style={styles.textInput}/>
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Male' value='Male' />
+                                 <Picker.Item label='Female' value='Female' />
+                               </Picker>
                         </View>
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
-                            <TextInput style={styles.textInput}/>
+                            <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                         </View>
 
 
@@ -54,11 +117,23 @@ class SchoolHeadTeacher extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>State of Origin</Text>
-                            <TextInput style={styles.textInput}/>
+                            <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                {this.state.States.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
                         </View>
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>L.G.A</Text>
-                            <TextInput style={styles.textInput}/>
+                            <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                {this.state.Lgas.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
                         </View>
 
 
@@ -138,12 +213,40 @@ class SchoolHeadTeacher extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Date of Present Appointment</Text>
-                            <TextInput style={styles.textInput}/>
+                            <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Date of Retirement</Text>
-                            <TextInput style={styles.textInput}/>
+                            <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                         </View>
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Number of Subjects Taught</Text>
@@ -169,9 +272,9 @@ class SchoolHeadTeacher extends Component {
                                 </Button>
                             </View>
                         </View>
-                    </View>
-                </View>
-            </ScrollView>
+                    </Form>
+                </Content>
+            </Container>
         );
     }
 }
@@ -184,7 +287,14 @@ const styles = StyleSheet.create({
     button2:{backgroundColor:'#E6DC82'},
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
-    headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
-    labelText:{fontSize: 15, marginRight:15},
-    textInput:{width:'100%',fontSize: 15, fontWeight:'bold', marginRight:15, borderColor:'#F7F7F7', borderWidth: 1, backgroundColor:'#F7F7F7', color:'#000',justifyContent: 'flex-end', alignItems:'stretch'}
+    
+    headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
+    subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
+
+    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    textInput: {
+        width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+        borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
+        color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+    }
 });

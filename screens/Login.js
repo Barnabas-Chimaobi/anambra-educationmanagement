@@ -4,6 +4,8 @@ import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardI
 import { background } from "../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 
+
+
 class Login extends Component {
 
     constructor(props) {
@@ -11,6 +13,7 @@ class Login extends Component {
     }
 
     render() {
+       
         return (
 
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}

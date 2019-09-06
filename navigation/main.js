@@ -25,6 +25,7 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
+  
   Academic: TeacherAcademic,
   Biodata:  TeacherBiodata,
   Teacher: TeacherIndex,
@@ -103,8 +104,27 @@ const SchoolStack = createStackNavigator({
   Facility: SchoolFacility,
   Facility2: SchoolFacility2,
   Facility3: SchoolFacility3,
-  HeadTeacher: SchoolHeadTeacher
-});
+  HeadTeacher: SchoolHeadTeacher,
+},
+  {
+   
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      title: 'MINISTRY OF BASIC EDUCATION',
+      sub: 'Student, Teacher and School Information Base',
+      headerStyle: {
+        backgroundColor: '#098BD3',
+        height: 100
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        alignSelf: 'center',
+        alignContent: 'center'
+      },
+    },
+  });
 
 SchoolStack.navigationOptions = {
   drawerLabel: 'School',
