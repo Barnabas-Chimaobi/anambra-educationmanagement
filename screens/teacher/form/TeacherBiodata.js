@@ -39,12 +39,13 @@ class TeacherBiodata extends Component {
         this.setDate = this.setDate.bind(this);
     }
 
-    onSelectedItemsChange = selectedItems => {
-        this.setState({ selectedItems });
-      };
+      updateGender = (gender) => {
+        this.setState({ gender: gender })
+        console.warn(this.state.gender);
+     }
 
     setDate(newDate) {
-        this.setState({ chosenDate: newDate });
+        this.setState({ Dob: newDate });
     }
 
     // componentWillMount() {
@@ -90,15 +91,11 @@ class TeacherBiodata extends Component {
         AsyncStorage.setItem("recipient", this.state.recipient);
       }
 
-
-
     handleChangeText = (inputName,text) => {
         this.setState({ [inputName]:text })
         console.warn([inputName])
         console.warn(text)
         }
-
-
 
     render() {
 
@@ -143,9 +140,8 @@ class TeacherBiodata extends Component {
 
 
                                 <Picker
-                                    selectedValue={this.state.selectedgender}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                     selectedValue = {this.state.gender} onValueChange = {this.updateUser}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                     {this.state.Sexes.map((v, key)=>{
                                         return <Picker.Item label={v.gender} key={key} value={v.gender} />
                                     })}
@@ -167,7 +163,7 @@ class TeacherBiodata extends Component {
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
+                                onDateChange={this.Dob}
                                 disabled={false}
                             />
                         </View>
