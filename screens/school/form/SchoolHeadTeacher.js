@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
-import { Container, Content, Form, Button } from 'native-base';
+import { Container, Content, Form, Button, DatePicker } from 'native-base';
 
 class SchoolHeadTeacher extends Component {
 
@@ -22,7 +22,7 @@ class SchoolHeadTeacher extends Component {
     setDate(newDate) {
         this.setState({ chosenDate: newDate });
     }
-    
+
     componentDidMount(){
         // sex
        const sexes = new Logic()
