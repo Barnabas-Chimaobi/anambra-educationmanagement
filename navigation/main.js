@@ -154,7 +154,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Student',
+    initialRouteName: 'Teacher',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

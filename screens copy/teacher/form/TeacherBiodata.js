@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Dimension
 import { Container, Content, Form, Button, DatePicker, Switch} from 'native-base';
 import { CheckBox } from 'react-native-elements'
 import Logic from '../../../logic'
-import { AsyncStorage} from 'react-native'
 
 class TeacherBiodata extends Component {
 
@@ -12,29 +11,13 @@ class TeacherBiodata extends Component {
         state = Dimensions.get("window");
 
         this.state = {
-            age:'',
             selectedValue: '',
             chosenDate: new Date(),
             checked: false,
             checkedYes: false,
-            input: '',
             Sexes: [],
             States: [],
-            Lgas: [],
-            First_Name: '',
-            Last_Name: '',
-            Other_Name: '',
-            Sex: '',
-            Dob: '',
-            StateOrigin: '',
-            Lga: '',
-            Hometown: '',
-            Residential: '',
-            liveIn: '',
-            NextofKin: '',
-            NextofKinPhone: '',
-            Email: '',
-            Phone: ''
+            Lgas: []
         }
         this.setDate = this.setDate.bind(this);
     }
@@ -47,22 +30,22 @@ class TeacherBiodata extends Component {
         this.setState({ chosenDate: newDate });
     }
 
-    // componentWillMount() {
-    //     Dimensions.addEventListener("change", this.handler);
-    // }
+    componentWillMount() {
+        Dimensions.addEventListener("change", this.handler);
+    }
 
-    // componentWillUnmount() {
-    //     // Important to stop updating state after unmount
-    //     Dimensions.removeEventListener("change", this.handler);
-    //   }
-
+    componentWillUnmount() {
+        // Important to stop updating state after unmount
+        Dimensions.removeEventListener("change", this.handler);
+      }
+    
       componentDidMount(){
          // sex
         const sexes = new Logic()
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
         .then((res) => {
             this.setState({Sexes: res.data})
-            // console.warn('sex',this.state)
+            console.warn('sex',this.state)
         })
         .catch((error) => console.warn(error))
 
@@ -85,26 +68,15 @@ class TeacherBiodata extends Component {
         .catch((error) => console.warn(error))
 
       }
-
-      TeacherBiodata = () => {
-        AsyncStorage.setItem("recipient", this.state.recipient);
-      }
-
-
-
-    handleChangeText = (inputName,text) => {
-        this.setState({ [inputName]:text })
-        console.warn([inputName])
-        console.warn(text)
-        }
-
-
+     
+    
+    
 
     render() {
-
+   
         return (
             <Container>
-
+                  
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
                 <Text style={styles.headerText}>New Teacher Information</Text>
@@ -116,39 +88,35 @@ class TeacherBiodata extends Component {
                 </View>
 
                     <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
-                 
+
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('First_Name',text)} value={this.state.First_Name} style={styles.textInput}/>
+                            <TextInput style={styles.textInput}/>
                         </View>
-
-           
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
-                            <TextInput onChangeText={this.Last_Name} style={styles.textInput}/>
+                            <TextInput style={styles.textInput}/>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
-                            <TextInput onChangeText={this.Other_Name} style={styles.textInput}/>
+                            <TextInput style={styles.textInput}/>
                         </View>
 
                         
-
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
-
+                            
 
                                 <Picker
                                     selectedValue={this.state.selectedgender}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                    {this.state.Sexes.map((v, key)=>{
-                                        return <Picker.Item label={v.gender} key={key} value={v.gender} />
-                                    })}
+                                        {/* {this.state.Sexes.map((v, key)=>{
+                                            return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                        })} */}
                                 </Picker>
                         </View>
 
@@ -180,7 +148,7 @@ class TeacherBiodata extends Component {
                                     onValueChange={()=>{}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
+                                        })} 
                             </Picker>
                                 </View>
 
@@ -193,23 +161,19 @@ class TeacherBiodata extends Component {
                                     onValueChange={()=>{}}>
                                         {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
+                                        })} 
                                 </Picker>
                                 </View>
 
 
-                             
-           
-          
-
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
-                                    <TextInput onChangeText={this.Hometown} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
-                                    <TextInput onChangeText={this.Residential} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
@@ -218,31 +182,31 @@ class TeacherBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
-                                    <TextInput onChangeText={this.Phone} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
 
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin</Text>
-                                    <TextInput onChangeText={this.NextofKin} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                    <TextInput onChangeText={this.NextofKinPhone} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Email</Text>
-                                    <TextInput onChangeText={this.Email} style={styles.textInput}/>
+                                    <TextInput style={styles.textInput}/>
                                 </View>
 
-
-                                <View style={styles.buttonView}>
-                                   <Button  style={styles.button} onPress={() => { this.props.navigation.navigate("Academic") }}>
+                                 
+                                <View style={{paddingTop: 5,margin:10}}>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Academic") }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
-
+                     
 
                     </Form>
                 </Content>
@@ -255,6 +219,9 @@ class TeacherBiodata extends Component {
 export default TeacherBiodata;
 
 const styles = StyleSheet.create({
+    // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },
+    // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+
     containerBtn: {
         marginTop: 10,
         flex: 1,
@@ -270,12 +237,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
          alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
     },
-    buttonView:{width:'50%', alignSelf:'flex-end', margin:'3%'},
     button: {
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-        marginRight: 10,
+      alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,
     },
-    buttonText: { fontSize: 15, color: '#fff', alignSelf:'center' },
+    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

@@ -24,16 +24,6 @@ class SchoolProfile extends Component {
         .catch((error) => console.warn(error))
 
       }
-
-      SchoolProfile = () => {
-        const schoolprofile = new Logic()
-        schoolprofile.Lgas('http://97.74.6.243/anambra/api/Lgas')
-        .then((res) => {
-            this.setState({Lgas: res.data})
-            // console.warn('lgas',this.state)
-        })
-        .catch((error) => console.warn(error))
-      }
     
     
 
@@ -51,7 +41,7 @@ class SchoolProfile extends Component {
                     </View>
 
                         
-                    <Form onSubmit={this.SchoolProfile()} style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
+                    <Form onSubmit={} style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School Name</Text>
