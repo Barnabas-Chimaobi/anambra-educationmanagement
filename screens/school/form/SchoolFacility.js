@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
 import { Container, Content, Form, Button} from 'native-base';
 
 class SchoolFacility extends Component {
@@ -31,7 +31,12 @@ class SchoolFacility extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Are facilities shared with other schools?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
 
@@ -43,7 +48,12 @@ class SchoolFacility extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is there multi-grade teaching?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Distance from catchment communities</Text>
@@ -63,7 +73,13 @@ class SchoolFacility extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is the school mixed or single sex?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Mixed' value='Mixed' />
+                                 <Picker.Item label='Girls only' value='Girls only' />
+                                 <Picker.Item label='Boys only' value='Boys only' />
+                               </Picker>
                         </View>
 
 
@@ -85,7 +101,12 @@ class SchoolFacility extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Are there boarding facilities?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -95,18 +116,36 @@ class SchoolFacility extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of perimeter fencing</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes, in good condition' value='Yes, in good condition' />
+                                 <Picker.Item label='Yes, needs minor repair' value='Yes, needs minor repair' />
+                                 <Picker.Item label='Yes, needs major repair' value='Yes, needs major repair' />
+                                 <Picker.Item label='No fence or wall' value='No fence or wall' />
+                               </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of security personnel</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Form of security</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Government employed' value='Government employed' />
+                                 <Picker.Item label='PTA employed' value='PTA employed' />
+                                 <Picker.Item label='Philantropist' value='Philantropist' />
+                               </Picker>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -118,17 +157,32 @@ class SchoolFacility extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Does the school have land encroachment?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Does the school have School Based Management Committee (SBMC)?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Did the school prepare a School Improvement Plan (SIP) last year?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
 

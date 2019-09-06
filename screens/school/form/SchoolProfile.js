@@ -1,12 +1,31 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput,ScrollView} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
 import { Container, Content, Form, Button} from 'native-base';
+import Logic from '../../../logic'
 
 class SchoolProfile extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state ={
+            Lgas: []
+        }
     }
+
+    componentDidMount(){
+        // lgas
+        const lgas = new Logic()
+        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        .then((res) => {
+            this.setState({Lgas: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+      }
+    
+    
 
     render() {
         return (
@@ -53,7 +72,13 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>L.G.A</Text>
-                                <TextInput style={styles.textInput}/>
+                                <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                {this.state.Lgas.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
+                            </Picker>
                             </View>
 
 
@@ -75,7 +100,12 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Location</Text>
-                                <TextInput style={styles.textInput}/>
+                                <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Urban' value='Urban' />
+                                 <Picker.Item label='Rural' value='Rural' />
+                            </Picker>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -85,12 +115,22 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Type of School</Text>
-                                <TextInput style={styles.textInput}/>
+                                <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Regular' value='Regular' />
+                                 <Picker.Item label='Islamiya Integrated' value='Islamiya Integrated' />
+                               </Picker>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Does School Operate Shift</Text>
-                                <TextInput style={styles.textInput}/>
+                                <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                             </View>
 
 
@@ -121,7 +161,7 @@ const styles = StyleSheet.create({
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    labelText: { width: '45%', height: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
     textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
                 borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
                 color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}

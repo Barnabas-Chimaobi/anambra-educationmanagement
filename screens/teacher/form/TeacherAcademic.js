@@ -25,7 +25,7 @@ class TeacherAcademic extends Component {
       .catch((error) => console.warn(error))
 
       const ranks = new Logic()
-      ranks.GradeLevels('http://97.74.6.243/anambra/api/Ranks')
+      ranks.Ranks('http://97.74.6.243/anambra/api/Ranks')
       .then((res) => {
 
           this.setState({Ranks: res.data})
@@ -75,13 +75,41 @@ class TeacherAcademic extends Component {
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
-                                <TextInput style={styles.textInput}/>
+                                <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Expected Retirement Date</Text>
-                                <TextInput style={styles.textInput}/>
+                                <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                             </View>
 
 

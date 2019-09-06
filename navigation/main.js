@@ -25,6 +25,7 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
+  
   Academic: TeacherAcademic,
   Biodata:  TeacherBiodata,
   Teacher: TeacherIndex,
@@ -154,7 +155,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Teacher',
+    initialRouteName: 'School',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

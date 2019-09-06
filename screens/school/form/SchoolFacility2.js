@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView } from "react-native";
-import { Container, Content, Form, Button} from 'native-base';
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
+import { Container, Content, Form, Button, DatePicker} from 'native-base';
 
 class SchoolFacility2 extends Component {
 
@@ -29,13 +29,32 @@ class SchoolFacility2 extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is there a Parent Teacher Association (PTA)?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of last inspection visit</Text>
-                            <TextInput style={styles.textInput} />
+                            <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
                         </View>
 
 
@@ -45,13 +64,24 @@ class SchoolFacility2 extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which authority conducted the last inspection?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Federal' value='Federal' />
+                                 <Picker.Item label='State' value='State' />
+                                 <Picker.Item label='L.G.A' value='L.G.A' />
+                               </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Has your school received grants in the last two academic sessions?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
 
@@ -61,13 +91,27 @@ class SchoolFacility2 extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which tier of Governement owns the school?</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Federal' value='Federal' />
+                                 <Picker.Item label='State' value='State' />
+                                 <Picker.Item label='L.G.A' value='L.G.A' />
+                               </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>How many children were enrolled with birth certificates by:</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Npoc' value='Npoc' />
+                                 <Picker.Item label='Hospital' value='Hospital' />
+                                 <Picker.Item label='Courts' value='Courts' />
+                                 <Picker.Item label='Others' value='Others' />
+                                 <Picker.Item label='L.G.A' value='L.G.A' />
+                               </Picker>
                         </View>
 
 
@@ -123,7 +167,15 @@ class SchoolFacility2 extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Source of safe drinking water</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Pipe-borne water' value='Pipe-borne water' />
+                                 <Picker.Item label='Borehole' value='Borehole' />
+                                 <Picker.Item label='Well' value='Well' />
+                                 <Picker.Item label='Others' value='Others' />
+                                 <Picker.Item label='No source of safe water' value='No source of safe water' />
+                               </Picker>
                         </View>
 
                         <View style={{ flexDirection: 'row' }}>
@@ -150,7 +202,7 @@ export default SchoolFacility2;
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
-    buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+    buttonView: { width: '60%', alignSelf: 'flex-end', margin: '3%' },
     button: { backgroundColor: '#098BD3' },
     button2: { backgroundColor: '#E6DC82' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },

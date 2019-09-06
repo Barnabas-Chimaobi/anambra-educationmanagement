@@ -45,27 +45,27 @@ class TeacherBiodata extends Component {
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
         .then((res) => {
             this.setState({Sexes: res.data})
-            // console.warn('sex',this.state)
+            console.warn('sex',this.state)
         })
         .catch((error) => console.warn(error))
 
-        // // states
-        // const states = new Logic()
-        // states.States('http://97.74.6.243/anambra/api/States')
-        // .then((res) => {
-        //     this.setState({States: res.data})
-        //     // console.warn('states',this.state)
-        // })
-        // .catch((error) => console.warn(error))
+        // states
+        const states = new Logic()
+        states.States('http://97.74.6.243/anambra/api/States')
+        .then((res) => {
+            this.setState({States: res.data})
+            // console.warn('states',this.state)
+        })
+        .catch((error) => console.warn(error))
 
-        // // lgas
-        // const lgas = new Logic()
-        // lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
-        // .then((res) => {
-        //     this.setState({Lgas: res.data})
-        //     // console.warn('lgas',this.state)
-        // })
-        // .catch((error) => console.warn(error))
+        // lgas
+        const lgas = new Logic()
+        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        .then((res) => {
+            this.setState({Lgas: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
 
       }
      
@@ -111,12 +111,12 @@ class TeacherBiodata extends Component {
                             
 
                                 <Picker
-                                    selectedValue={this.state.selectedRanklvl}
+                                    selectedValue={this.state.selectedgender}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {this.state.Sexes.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
+                                        {/* {this.state.Sexes.map((v, key)=>{
+                                            return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                        })} */}
                                 </Picker>
                         </View>
 
@@ -143,9 +143,12 @@ class TeacherBiodata extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>State of Origin</Text>
-                                    <Picker>
-                                <Picker.Item label="Enugu" value="Enugu" />
-                                <Picker.Item label="Lagos" value="Lagos" />
+                                    <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                {this.state.States.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })} 
                             </Picker>
                                 </View>
 
@@ -156,9 +159,9 @@ class TeacherBiodata extends Component {
                                     selectedValue={this.state.lgas}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {/* {this.state.Lgas.map( (v, key)=>{
+                                        {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })} */}
+                                        })} 
                                 </Picker>
                                 </View>
 

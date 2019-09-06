@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView } from "react-native";
-import { Container, Content, Form, Button } from 'native-base';
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "react-native";
+import { Container, Content, Form, Button, DatePicker } from 'native-base';
 
 class SchoolFacility3 extends Component {
 
@@ -41,17 +41,35 @@ class SchoolFacility3 extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Power Source</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='PHCN' value='PHCN' />
+                                 <Picker.Item label='Solar' value='Solar' />
+                                 <Picker.Item label='Generator' value='Generator' />
+                                 <Picker.Item label='None' value='None' />
+                               </Picker>
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Health Facility</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Health Clinic' value='Health Clinic' />
+                                 <Picker.Item label='First Aid Kit' value='First Aid Kit' />
+                                 <Picker.Item label='None' value='None' />
+                               </Picker>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sports Facilities</Text>
-                            <TextInput style={styles.textInput} />
+                            <Picker 
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                 <Picker.Item label='Yes' value='Yes' />
+                                 <Picker.Item label='No' value='No' />
+                               </Picker>
                         </View>
 
 
@@ -102,30 +120,34 @@ available in the school provided by Government</Text>
                                 </View>
                             </View>
                         </View>
-</Form>
+                    </Form>
 
                 </Content>
             </Container>
 
-                );
-            }
-        }
-        export default SchoolFacility3;
-        
+        );
+    }
+}
+export default SchoolFacility3;
+
 const styles = StyleSheet.create({
-                    container: {flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
-    buttonView: {width: '30%', alignSelf: 'flex-end', margin: '3%' },
-    button: {backgroundColor: '#098BD3' },
-    button2: {backgroundColor: '#E6DC82' },
-    buttonText: {fontSize: 15, color: '#fff', alignSelf: 'center' },
-    inputView: {width: '100%', alignItems: 'stretch' },
-    headerText: {fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
-    subText: {fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
-            
-    labelText: {maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
+    buttonView: { width: '60%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3',color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',flex: 1,
+    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,},
+    
+    button2: { backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',flex: 1,
+    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
+    
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    inputView: { width: '100%', alignItems: 'stretch' },
+    headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
+    subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
+
+    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     textInput: {
-                    width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
-                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
-                color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
-            }
+        width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+        borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
+        color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+    }
 });
