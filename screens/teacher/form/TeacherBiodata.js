@@ -90,25 +90,10 @@ class TeacherBiodata extends Component {
 
     }
 
+   
 
-    TeacherBiodata = () => {
-       
-    
 
-console.warn(Biodata)
-AsyncStorage.setItem("Biodata", { Biodata });
-    //   const teacher = new Logic()
-    //   teacher.TeacherBiodata('http://97.74.6.243/anambra/api/Teachers', Biodata)
-    //   .then((res) => {
-    //     if (res.status === 200)
-    //     {
-    //         this.props.navigation.navigate("Academic")
-    //     }
-    //   })
-    //   .catch((error) => console.warn(error))
-      
-        
-}
+   
 
 handleChangeText = (inputName, text) => {
     this.setState({ [inputName]: text })
@@ -255,7 +240,21 @@ render() {
                         }
                         onPress = {
                                 () => {
-                                    this.props.navigation.navigate("Academic",{...this.state})
+                                    this.props.navigation.navigate("Academic",{bioData:{
+                                              name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
+                                              dateOfBirth: this.state.Dob,
+                                              sex: this.state.Sex,
+                                              StateOrigin: this.state.StateOrigin,
+                                              Lga: this.state.Lga,
+                                              Hometown: this.state.Hometown,
+                                              Residential: this.state.Residential,
+                                              liveIn: this.state.liveIn,
+                                              phone: this.state.Phone,
+                                              NextofKin: this.state.NextofKin,
+                                              NextofKinPhone: this.state.NextofKinPhone,
+                                              Email: this.state.Email
+
+                                    }})
                                 }}>
                             <Text style={styles.buttonText}>Next</Text>
                         </Button>
@@ -298,7 +297,7 @@ const styles = StyleSheet.create({
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelText: { width: '45%', height: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
