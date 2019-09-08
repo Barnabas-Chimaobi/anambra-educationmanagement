@@ -68,10 +68,12 @@ class TeacherAcademic extends Component {
           //   console.warn('ok',this.state)
       })
           .catch((error) => console.warn(error))
-          const bioData = this.props.navigation.getParam('bioData')
 
-          console.warn('from the data',bioData)
+
     }
+
+
+
 
     render() {
 

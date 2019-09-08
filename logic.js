@@ -264,6 +264,19 @@ Vulnerabilities = (endpoint) => {
 }
 
 
+// teacher endpoint
+
+TeacherBiodata = (endpoint, data) => {
+    return  axios.post(endpoint, data)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
+
 
 }
 
