@@ -12,7 +12,25 @@ class SchoolFacility2 extends Component {
             InspectionAuthorities: [],
             Grants: [],
             BirthCertificates: [],
-            Ownerships: []
+            Ownerships: [],
+            Pta: '',
+            LastInspection: '',
+            InspectionAuthorities: '',
+            Grants: '',
+            LastGrant: '',
+            GrantType: '',
+            SchoolOwned: '',
+            ChildrenBirthCert: '',
+            NoOfChildrenClass: '',
+            AgeDistribution: '',
+            JSCE_SSCe: '',
+            ChildrenSpecialNeeds: '',
+            NonTeachingStaffs: '',
+            StaffsAtSchool: '',
+            NoOfClassrooms: '',
+            NoOfClassesHeldOutside: '',
+            WhiteBoards: '',
+            SafeDrinking: ''
         }
     }
 

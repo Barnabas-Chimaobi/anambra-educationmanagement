@@ -88,8 +88,13 @@ class StudentNextOfKin extends Component {
              this.setState({Relationships: res.data})
          })
          .catch((error) => console.warn(error))
+
+
+          const StudentBiodata = this.props.navigation.getParam('StudentBiodata')
+
+          console.warn('from the data', StudentBiodata)
     }
-    
+
 handleChangeText = (inputName, text) => {
     this.setState({
         [inputName]: text
@@ -138,29 +143,29 @@ handleChangeText = (inputName, text) => {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Names of Parents/ Guardians</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Guardian Name', text)} value={this.state.NamesOfGuardians}  style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NamesOfGuardians', text)} value={this.state.NamesOfGuardians}  style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>State of Origin</Text>
-                                <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
-                                {this.state.States.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
-                                </Picker>
+                                 <Picker
+                            selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
+                            style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
+                            {this.state.States.map((v, key) => {
+                                return <Picker.Item label={v.name} key={key} value={v.name} />
+                            })}
+                        </Picker>
                             </View>
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>L.G.A</Text>
-                                <Picker
-                                    selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
-                                        {this.state.Lgas.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })}
-                                </Picker>
+                                 <Picker
+                            selectedValue={this.state.Lga} onValueChange={this.updateLga}
+                            style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
+                            {this.state.Lgas.map((v, key) => {
+                                return <Picker.Item label={v.name} key={key} value={v.name} />
+                            })}
+                        </Picker>
                             </View>
 
 
