@@ -37,6 +37,7 @@ class StudentBiodata extends Component {
             
         }
         this.setDate = this.setDate.bind(this);
+
     }
 
     updateGender = (Sex) => {
@@ -263,6 +264,10 @@ handleChangeText = (inputName, text) => {
                                     }
                                     }>
                                             <Text style={styles.buttonText}>Next</Text>
+
+                                <View style={{paddingTop: 5,margin:10}}>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>
+                                        <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
 

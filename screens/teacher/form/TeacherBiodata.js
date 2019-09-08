@@ -61,9 +61,13 @@ class TeacherBiodata extends Component {
         this.setState({ liveIn: value })
     }
 
+    componentWillUnmount() {
+        // Important to stop updating state after unmount
+        Dimensions.removeEventListener("change", this.handler);
+      }
 
-    componentDidMount() {
-        // sex
+      componentDidMount(){
+         // sex
         const sexes = new Logic()
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
             .then((res) => {
@@ -82,6 +86,7 @@ class TeacherBiodata extends Component {
         // lgas
         const lgas = new Logic()
         lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+
             .then((res) => {
                 this.setState({ Lgas: res.data })
                 // console.warn('lgas',this.state)
@@ -93,7 +98,22 @@ class TeacherBiodata extends Component {
    
 
 
-   
+
+        .then((res) => {
+            this.setState({Lgas: res.data})
+            // console.warn('lgas',this.state)
+        })
+        .catch((error) => console.warn(error))
+
+      }
+
+
+
+
+    render() {
+
+        return (
+            <Container>
 
 handleChangeText = (inputName, text) => {
     this.setState({ [inputName]: text })
@@ -269,6 +289,134 @@ render() {
 
     );
 }
+                    <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>First Name</Text>
+                            <TextInput style={styles.textInput}/>
+                        </View>
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Last Name</Text>
+                            <TextInput style={styles.textInput}/>
+                        </View>
+
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Other Name</Text>
+                            <TextInput style={styles.textInput}/>
+                        </View>
+
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Sex</Text>
+
+
+                                <Picker
+                                    selectedValue={this.state.selectedgender}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                    {this.state.Sexes.map((v, key)=>{
+                                        return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                    })}
+                                </Picker>
+                        </View>
+
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Date of Birth</Text>
+                            <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date(2018, 12, 31)}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setDate}
+                                disabled={false}
+                            />
+                        </View>
+
+
+                        <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>State of Origin</Text>
+                                    <Picker selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                {this.state.States.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })}
+                            </Picker>
+                                </View>
+
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>L.G.A</Text>
+                                    <Picker
+                                    selectedValue={this.state.lgas}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                        {this.state.Lgas.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                        })}
+                                </Picker>
+                                </View>
+
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Hometown</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Residential Address</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Do you live within the school ?</Text>
+                                    <Switch/>
+                                </View>
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Phone Number</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Next of Kin</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Next of Kin Phone Number</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Email</Text>
+                                    <TextInput style={styles.textInput}/>
+                                </View>
+
+
+                                <View style={styles.buttonView}>
+                                   <Button  style={styles.button} onPress={() => { this.props.navigation.navigate("Academic") }}>
+                                        <Text style={styles.buttonText}>Next</Text>
+                                    </Button>
+                                </View>
+
+
+                    </Form>
+                </Content>
+            </Container>
+
+
+        );
+    }
 }
 export default TeacherBiodata;
 
@@ -288,12 +436,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
         alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
     },
-    buttonView: { width: '50%', alignSelf: 'flex-end', margin: '3%' },
+
+    buttonView:{width:'50%', alignSelf:'flex-end', margin:'3%'},
+
     button: {
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
         marginRight: 10,
     },
-    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+
+    buttonText: { fontSize: 15, color: '#fff', alignSelf:'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
