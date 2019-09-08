@@ -7,27 +7,6 @@ class SchoolFacility extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            FacilitiesShared: '',
-            HowManyFacilities: '',
-            MultiGrade: '',
-            CatchmentDistance: '',
-            LgasHeadquarters: '',
-            NoOfStudentsOver1km: '',
-            SchoolMixed: '',
-            SchoolPopulation: '',
-            MalePopulation: '',
-            FemalePopulation: '',
-            BoardingFacility: '',
-            HowManyBoardStudents: '',
-            PerimeterFencing: '',
-            SecurityPersonnel: '',
-            FormSecurity: '',
-            NoOfSecurityPersonnel: '',
-            LandEncroachment: '',
-            Sbmc: '',
-            Sip: ''
-        }
     }
 
     render() {

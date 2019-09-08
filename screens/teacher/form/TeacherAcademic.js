@@ -32,19 +32,7 @@ class TeacherAcademic extends Component {
             NoOfTraining: '',
         }
     }
- RetirementDate = (retireDate) => {
-     this.setState({
-         Dob: retireDate
-     });
-     console.warn(this.state.Dob)
- }
 
- AppointmentDate = (newDate) => {
-     this.setState({
-         Appointment: appointDate
-     });
-     console.warn(this.state.Appointment)
- }
     componentDidMount(){
 
       const gradelevels = new Logic()
@@ -136,7 +124,7 @@ class TeacherAcademic extends Component {
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.AppointmentDate}
+                                onDateChange={this.setDate}
                                 disabled={false}
                             />
                             </View>
@@ -156,7 +144,7 @@ class TeacherAcademic extends Component {
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.RetirementDate}
+                                onDateChange={this.setDate}
                                 disabled={false}
                             />
                             </View>
