@@ -122,6 +122,7 @@ render() {
                         <Text style={styles.labelText}>First Name</Text>
                         <TextInput onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput} />
                     </View>
+                   
 
 
 

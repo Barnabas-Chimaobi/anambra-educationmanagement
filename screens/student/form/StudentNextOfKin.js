@@ -8,7 +8,7 @@ class StudentNextOfKin extends Component {
 
     constructor(props) {
         super(props);
-        state = Dimensions.get("window");
+   
 
         this.state = {
             selectedValue: '',
@@ -18,7 +18,20 @@ class StudentNextOfKin extends Component {
             Sexes: [],
             States: [],
             Lgas: [],
-            Relationships: []
+            Relationships: [],
+            NextOfKin: '',
+            NextOfKinPhone: '',
+            NextOfKinEmail: '',
+            NextOfKinAddress: '',
+            NamesOfGuardians: '',
+            StateOfOrigin: '',
+            Lga: '',
+            RelationshipStudent: '',
+            Phone: '',
+            Residential: '',
+            Email: '',
+            ANSSID: '',
+            Occupation: ''
         }
         this.setDate = this.setDate.bind(this);
     }
@@ -76,7 +89,14 @@ class StudentNextOfKin extends Component {
          })
          .catch((error) => console.warn(error))
     }
-
+    
+handleChangeText = (inputName, text) => {
+    this.setState({
+        [inputName]: text
+    })
+    console.warn([inputName])
+    console.warn(text)
+}
 
 
     render() {
@@ -97,23 +117,28 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Name</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfKin', text)} value={this.state.NextOfKin} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfKinPhone', text)} value={this.state.NextOfKinPhone}  style={styles.textInput}/>
                             </View>
 
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Next of Kin Email</Text>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfKinEmail', text)} value={this.state.NextOfKinEmail}  style={styles.textInput}/>
+                            </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Residential Address</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfKinAddress', text)} value={this.state.NextOfKinAddress}  style={styles.textInput}/>
                             </View>
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Names of Parents/ Guardians</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Guardian Name', text)} value={this.state.NamesOfGuardians}  style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -154,27 +179,27 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Residential Address</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential}  style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Phone Number</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone}  style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email}  style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('ANSSID', text)} value={this.state.ANSSID}  style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Occupation</Text>
-                                <TextInput style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('Occupation', text)} value={this.state.Occupation}  style={styles.textInput}/>
                             </View>
 
 
