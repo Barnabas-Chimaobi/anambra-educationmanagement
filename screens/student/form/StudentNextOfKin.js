@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Dimensions,Alert } from "react-native";
 import { Container, Content, Form, Button,DatePicker,Switch} from 'native-base';
 import { CheckBox } from 'react-native-elements';
 import Logic from '../../../logic'
+
 
 class StudentNextOfKin extends Component {
 
@@ -82,18 +84,18 @@ class StudentNextOfKin extends Component {
     render() {
         return (
 
-            <ScrollView contentContainerStyle={styles.container}>
-                    <View style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                        <View style={{backgroundColor:'#E6DC82', padding :10}}>
-                            <Text style={styles.headerText}>New Student Information</Text>
-                        </View>
+            <Container>
 
-                        <View style={{margin: 15, alignSelf:'flex-start' }}>
-                            <Text style={styles.headerText}>Guardian & Next of Kin Details</Text>
-                            <View  style={{ borderBottomColor: 'black',borderBottomWidth: 1,alignSelf:'stretch'}} />
-                        </View>
+            <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
+                <Text style={styles.headerText}>New Student Information</Text>
+            </View>
 
-                        <View style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
+            <Content>
+            <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
+                    <Text style={styles.subText}>Guardian & Next of Kin Details</Text>
+            </View>
+            
+            <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Name</Text>
@@ -178,8 +180,7 @@ class StudentNextOfKin extends Component {
                             </View>
 
 
-
-                            <View style={{flexDirection:'row'}}>
+                            <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Biodata")}}>
                                             <Text style={styles.buttonText}>Previous</Text>
@@ -193,9 +194,9 @@ class StudentNextOfKin extends Component {
                                 </View>
                             </View>
 
-                        </View>
-                    </View>
-            </ScrollView>
+                    </Form>
+            </Content>
+            </Container>
         );
     }
 }
@@ -209,6 +210,7 @@ const styles = StyleSheet.create({
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
+    subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
     textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
                 borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
