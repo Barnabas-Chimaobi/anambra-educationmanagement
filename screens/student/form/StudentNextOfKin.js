@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Dimension
 import { Container, Content, Form, Button,DatePicker,Switch} from 'native-base';
 import { CheckBox } from 'react-native-elements';
 import Logic from '../../../logic'
-
 class StudentNextOfKin extends Component {
 
     constructor(props) {

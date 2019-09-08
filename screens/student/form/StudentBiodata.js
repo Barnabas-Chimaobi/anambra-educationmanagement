@@ -22,6 +22,7 @@ class StudentBiodata extends Component {
             Lgas: []
         }
         this.setDate = this.setDate.bind(this);
+
     }
 
     onSelectedItemsChange = selectedItems => {
@@ -200,6 +201,10 @@ class StudentBiodata extends Component {
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("NextOfKin")}}>
                                             <Text style={styles.buttonText}>Next</Text>
+
+                                <View style={{paddingTop: 5,margin:10}}>
+                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>
+                                        <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
 

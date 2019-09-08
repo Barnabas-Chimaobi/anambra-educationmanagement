@@ -71,11 +71,7 @@ class TeacherAcademic extends Component {
           const bioData = this.props.navigation.getParam('bioData')
 
           console.warn('from the data',bioData)
-
     }
-
-
-
 
     render() {
 
