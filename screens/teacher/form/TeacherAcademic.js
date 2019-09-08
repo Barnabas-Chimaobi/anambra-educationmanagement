@@ -9,20 +9,20 @@ class TeacherAcademic extends Component {
         this.state = {
             Ranks: [],
             Grades: [],
+            Types:[],
+            TeacherClasses:[],
             selectedGradelvl: ''
         }
     }
 
     componentDidMount(){
-     
+
       const gradelevels = new Logic()
       gradelevels.GradeLevels('http://97.74.6.243/anambra/api/GradeLevels')
       .then((res) => {
-
           this.setState({Grades: res.data})
-        //   console.warn('ok',this.state)
-   })
-      .catch((error) => console.warn(error))
+     })
+    .catch((error) => console.warn(error))
 
       const ranks = new Logic()
       ranks.Ranks('http://97.74.6.243/anambra/api/Ranks')
@@ -33,13 +33,33 @@ class TeacherAcademic extends Component {
    })
       .catch((error) => console.warn(error))
 
+      const types = new Logic()
+      types.StaffType('http://97.74.6.243/anambra/api/StaffTypes')
+      .then((res) => {
+
+          this.setState({Types: res.data})
+        //   console.warn('ok',this.state)
+    })
+        .catch((error) => console.warn(error))
+
+        const staffClass = new Logic()
+        staffClass.StaffClass('http://97.74.6.243/anambra/api/StaffClasses')
+        .then((res) => {
+
+            this.setState({TeacherClasses: res.data})
+          //   console.warn('ok',this.state)
+      })
+          .catch((error) => console.warn(error))
+
 
     }
 
+
+
     render() {
 
-        
-      
+
+
         return (
 
             <Container>
@@ -49,7 +69,7 @@ class TeacherAcademic extends Component {
                         </View>
 
                     <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                       
+
 
                         <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                             <Text style={styles.subText}>Academic Details</Text>
@@ -128,7 +148,7 @@ class TeacherAcademic extends Component {
                                         })}
                                 </Picker>
 
-                       
+
                             </View>
 
 
@@ -167,7 +187,7 @@ class TeacherAcademic extends Component {
                                     selectedValue={this.state.selectedRanklvl}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {this.state.Ranks.map( (v, key)=>{
+                                        {this.state.Types.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })}
                                 </Picker>
@@ -180,7 +200,7 @@ class TeacherAcademic extends Component {
                                     selectedValue={this.state.selectedRanklvl}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
-                                        {this.state.Ranks.map( (v, key)=>{
+                                        {this.state.TeacherClasses.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })}
                                 </Picker>
@@ -217,7 +237,7 @@ class TeacherAcademic extends Component {
 
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Teacher")}}>
-                                            <Text style={styles.buttonText}>Next</Text>
+                                            <Text style={styles.buttonText}>Save</Text>
                                     </Button>
                                 </View>
                             </View>
@@ -237,7 +257,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
         marginRight: 10,
     },
-    
+
     button2:{backgroundColor:'#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '73%',
      marginRight: 10,},
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},

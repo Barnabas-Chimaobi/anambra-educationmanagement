@@ -28,19 +28,19 @@ class Home extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Main") }}>
+                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") }}>
                                 <Text style={styles.buttonText}>Teacher Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("StudentIndex") }}>
+                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student") }}>
                                 <Text style={styles.buttonText}>Student Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Main") }}>
+                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School") }}>
                                 <Text style={styles.buttonText}>School Information</Text>
                             </Button>
                         </View>
@@ -52,7 +52,7 @@ class Home extends Component {
                         </Button>
                     </View>
 
-                    
+
 
 
             </LinearGradient>
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto',
               fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto',
                      textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
     button:{backgroundColor:'#fff', padding: '10'},
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
 
-    buttonViewOne:{margin: '2%', width:'30%'},
+    buttonViewOne:{margin: '2%', width:'30%', alignSelf:'center'},
     buttonOne:{backgroundColor:'#0884d2', padding: 9, alignItems: 'center', textAlign: 'center'},
     buttonTextOne:{fontSize:17, color:'#fff', paddingLeft: 20, alignSelf:'center', textAlign: 'center'}
 

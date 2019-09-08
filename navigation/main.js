@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import SafeAreaView from 'react-native-safe-area-view';
 import { createDrawerNavigator,DrawerItems,DrawerNavigatorItems  } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
+import Home  from "../screens/Home";
 import TeacherIndex from '../screens/teacher/TeacherIndex';
 import TeacherStart from '../screens/teacher/TeacherStart';
 import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
@@ -25,16 +26,16 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-  
-  Academic: TeacherAcademic,
-  Biodata:  TeacherBiodata,
+
   Teacher: TeacherIndex,
   Start: TeacherStart,
+  Biodata:  TeacherBiodata,
+  Academic: TeacherAcademic,
   View: Viewteacher,
-  ViewBio: ViewteacherBio
+  ViewBio: ViewteacherBio,
 },
 {
- 
+
   /* The header config from HomeScreen is now here */
   defaultNavigationOptions: {
     title: 'MINISTRY OF BASIC EDUCATION',
@@ -53,31 +54,18 @@ const TeacherStack = createStackNavigator({
   },
 });
 
-// TeacherStack.navigationOptions = {
-  
-//   drawerLabel: 'Teacher',
-//   drawerIcon: ({ focused }) => (
-//     <Ionicons
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios' ? 'ios-home': 'md-home'
-//       }
-//       color="#000"
-//       size={30}
-//     />
-//   ),
-// };
+
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
   Start: StudentStart,
-  NextOfKin: StudentNextOfKin,
   Biodata: StudentBiodata,
+  NextOfKin: StudentNextOfKin,
   BiodataPreview: StudentBiodataPreview,
   NextOfKinPreview: StudentNextOfKinPreview
 },
 
-{  
+{
   /* The header config from HomeScreen is now here */
   defaultNavigationOptions: {
     title: 'MINISTRY OF BASIC EDUCATION',
@@ -107,7 +95,7 @@ const SchoolStack = createStackNavigator({
   HeadTeacher: SchoolHeadTeacher,
 },
   {
-   
+
     /* The header config from HomeScreen is now here */
     defaultNavigationOptions: {
       title: 'MINISTRY OF BASIC EDUCATION',
@@ -138,6 +126,10 @@ SchoolStack.navigationOptions = {
   ),
 };
 
+const HomeStack = createStackNavigator({
+  Home: Home
+})
+
 const CustomDrawerContentComponent = props => (
     <ScrollView>
       <SafeAreaView
@@ -156,12 +148,13 @@ const styles = StyleSheet.create({
 });
 
 export default createDrawerNavigator({
+  Home: HomeStack,
   Teacher: TeacherStack,
   Student: StudentStack,
   School: SchoolStack,
   },
   {
-    initialRouteName: 'School',
+    initialRouteName: 'Student',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
