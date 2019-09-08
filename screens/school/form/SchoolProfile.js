@@ -9,20 +9,7 @@ class SchoolProfile extends Component {
         super(props);
 
         this.state ={
-            Lgas: [],
-            SchoolName: '',
-            CoordinatesEle: '',
-            ContactAddress: '',
-            Village: '',
-            Ward: '',
-            Lga: '',
-            Email: '',
-            SchoolPhone: '',
-            YearEst:'',
-            LocationUR: '',
-            LevelsOfEducation: '',
-            TypeOfSchool: '',
-            SchoolOperate: ''
+            Lgas: []
         }
     }
 
@@ -68,29 +55,29 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School Name</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('SchoolName', text)} value={this.state.SchoolName} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Cordinates</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Coordinates', text)} value={this.state.CoordinatesEle} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Contact Address</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Contact', text)} value={this.state.ContactAddress} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Village/Town</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Village', text)} value={this.state.Village} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Ward</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Ward', text)} value={this.state.Ward} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -107,18 +94,18 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email Address</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School Phone Number</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('SchoolPhone', text)} value={this.state.SchoolPhone} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year of Estatblishment</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('YearEst', text)} value={this.state.YearEst} style={styles.textInput}/>
+                                <TextInput style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>

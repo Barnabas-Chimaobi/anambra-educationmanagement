@@ -15,31 +15,7 @@ class SchoolHeadTeacher extends Component {
             checkedYes: false,
             Sexes: [],
             States: [],
-            Lgas: [],
-            Full_Name: '',
-            CurrentSchool: '',
-            Sex: '',
-            Dob: '',
-            Phone: '',
-            StateOfOrigin: '',
-            Lga: '',
-            Hometown: '',
-            Email: '',
-            Residential: '',
-            Academic: '',
-            YearPosted: '',
-            PostingHistory: '',
-            AreaOfSpec: '',
-            LengthOfStay: '',
-            NoOfYearsPosition: '',
-            GradeLevel: '',
-            Rank: '',
-            PostHeld: '',
-            YearOfFirstApoint: '',
-            DateOfPresentAppoint: '',
-            DateOfRetirement: '',
-            NoOfSubjectsTaught: '',
-            NoOfTrainingsAttended: ''
+            Lgas: []
         }
         this.setDate = this.setDate.bind(this);
     }
