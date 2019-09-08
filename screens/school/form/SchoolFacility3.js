@@ -7,6 +7,16 @@ class SchoolFacility3 extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            ToiletType: '',
+            PowerSource: '',
+            HealthFacility: '',
+            SportsFacility: '',
+            Seating: '',
+            NoOfTextBooksByGovt: '',
+            NoOfSubjectTeachersByGovt: '',
+            NoOfStudentsBySubjects: ''
+        }
     }
 
     render() {
