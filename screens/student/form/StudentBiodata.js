@@ -76,19 +76,18 @@ class StudentBiodata extends Component {
     render() {
         return (
 
-            <Container>
-
+        <Container>
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
                 <Text style={styles.headerText}>New Student Information</Text>
             </View>
 
-                <Content>
+            <Content>
                 <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                     <Text style={styles.subText}>Personal Details</Text>
                 </View>
 
-                    <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
+                <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
@@ -183,7 +182,6 @@ class StudentBiodata extends Component {
                                     <TextInput style={styles.textInput}/>
                                 </View>
 
-
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Next of Kin</Text>
                                     <TextInput style={styles.textInput}/>
@@ -197,10 +195,6 @@ class StudentBiodata extends Component {
                                     <Text style={styles.labelText}>Email</Text>
                                     <TextInput style={styles.textInput}/>
                                 </View>
-
-                                <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("NextOfKin")}}>
-                                            <Text style={styles.buttonText}>Next</Text>
 
                                 <View style={{paddingTop: 5,margin:10}}>
                                    <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>

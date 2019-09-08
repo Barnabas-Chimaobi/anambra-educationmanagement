@@ -12,29 +12,34 @@ class TeacherAcademic extends Component {
             Types:[],
             TeacherClasses:[],
             selectedGradelvl: '',
-            Qualification: '',
-            Institutions: '',
-            SubjectArea: '',
-            SubjectTaught: '',
+            Qualification: 'BSC Education',
+            Institutions: 'UNN',
+            SubjectArea: 'English',
+            SubjectTaught: 'English',
             DateOfFirstApt: '',
             DateOfPresentApt: '',
             ExpectedDateofRetirement: '',
-            YearsOfExperience: '',
-            GradeLevel: '',
-            Rank: '',
-            PostHeld: '',
-            PostHeldYear: '',
+            YearsOfExperience: '4',
+            GradeLevel: 'GL04',
+            Rank: 'Teacher',
+            PostHeld: 'Head Teacher',
+            PostHeldYear: 'Head Teacher',
             PostingHistoryDate: [],
-            TypeOfStaff: '',
-            ClassOfStaff: '',
-            NoOfSubjects: '',
-            NoOfStreams: '',
-            NoOfTraining: '',
+            TypeOfStaff: 'Permanent',
+            ClassOfStaff: 'Permanent',
+            NoOfSubjects: '2',
+            NoOfStreams: '2',
+            NoOfTraining: '2',
+            biodata: {}
         }
     }
 
     componentDidMount(){
 
+      const biodata = this.props.navigation.getParam('bioData', '');
+      if (biodata){
+          this.setState({biodata: biodata});
+      }
       const gradelevels = new Logic()
       gradelevels.GradeLevels('http://97.74.6.243/anambra/api/GradeLevels')
       .then((res) => {
@@ -45,10 +50,8 @@ class TeacherAcademic extends Component {
       const ranks = new Logic()
       ranks.Ranks('http://97.74.6.243/anambra/api/Ranks')
       .then((res) => {
-
           this.setState({Ranks: res.data})
-        //   console.warn('ok',this.state)
-   })
+        })
       .catch((error) => console.warn(error))
 
       const types = new Logic()
@@ -56,8 +59,7 @@ class TeacherAcademic extends Component {
       .then((res) => {
 
           this.setState({Types: res.data})
-        //   console.warn('ok',this.state)
-    })
+     })
         .catch((error) => console.warn(error))
 
         const staffClass = new Logic()
@@ -65,12 +67,77 @@ class TeacherAcademic extends Component {
         .then((res) => {
 
             this.setState({TeacherClasses: res.data})
-          //   console.warn('ok',this.state)
       })
           .catch((error) => console.warn(error))
-          const bioData = this.props.navigation.getParam('bioData')
+    }
 
-          console.warn('from the data',bioData)
+    submitForm = () => {
+        console.log("Submitting Form");
+        const saveTeacher = new Logic()
+        const formData = {
+            "person": {
+              "name": this.state.biodata.name,
+              "dateOfBirth":"2016-09-08", // this.state.biodata.dateOfBirth,
+              "stateId" : 1,
+              "lgaId": 1,
+              "sexId": 1,
+              "hometown": this.state.biodata.Hometown, //this.state.biodata.Hometown,
+              "address": this.state.biodata.Residential,
+              "phone": this.state.biodata.phone,
+              "email": this.state.biodata.Email,
+              "nextOfKin": {
+                "name": this.state.biodata.NextofKin,
+                "phone": this.state.biodata.NextofKinPhone,
+                "email": this.state.biodata.Email,
+                "address": this.state.biodata.Residential,
+              },
+            },
+            "teacherRecord": {
+              "AcademicSessionId": 1,
+              "schoolId": 1,
+              "onPremises": this.state.biodata.liveIn,
+              "qualifications": [
+                {
+                  "courseName": 'BSC Education', //this.state.biodata.Qualification
+                  "startDate": "2016-09-08", //this.state.biodata.Residential
+                  "endDate": "2016-09-08", //this.state.biodata.Residential
+                  "grade": "Second Class", //this.state.biodata.Residential
+                }
+              ],
+              "specialization": 'Teaching', //this.state.biodata.SubjectArea
+              "firstAppointment": "2016-09-08", //this.state.biodata.Residential
+              "currentAppointment": "2016-09-08", //this.state.biodata.Residential
+              "retirement": "2016-09-08", //this.state.biodata.Residential
+              "yearsOfExperience": 4, //this.state.biodata.YearsOfExperience
+              "trainingsAttended": 3, //this.state.biodata.NoOfTraining
+              "streamsTaught": 2, //this.state.biodata.NoOfStreams
+              "gradeLevelId": 1,
+              "rankId": 1,
+              "postHeld": 'Head Teacher', //this.state.biodata.PostHeld
+              "datePosted": "2019-09-08", //this.state.biodata.Residential
+              "postingHistories": [
+                {
+
+                  "schoolId": 1,
+                  "startDate": "2019-09-08", //this.state.biodata.Residential
+                  "endDate": "2019-09-08", //this.state.biodata.Residential
+                  "comments": "No Comments", //this.state.biodata.Residential
+                }
+                ],
+                "staffTypeId": 1,
+                "teacherSubjects":[
+                    {"subjectId": 1},
+                ],
+            },
+          };
+
+        console.log("Form Data",formData);
+        saveTeacher.TeacherBiodata("http://97.74.6.243/anambra/api/Teachers",formData)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((error) => console.warn(error));
+
     }
 
     render() {
@@ -99,7 +166,7 @@ class TeacherAcademic extends Component {
                                 <TextInput onChangeText={text => this.handleChangeText('Qualification',text)} value={this.state.Qualification} style={styles.textInput}/>
                             </View>
 
-                   
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Institutions Attended</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('Institutions',text)} value={this.state.Institutions} style={styles.textInput}/>
@@ -148,8 +215,8 @@ class TeacherAcademic extends Component {
                                 disabled={false}
                             />
                             </View>
-                           
-            
+
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
@@ -165,7 +232,7 @@ class TeacherAcademic extends Component {
                                         })}
                                 </Picker>
                             </View>
-            
+
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Rank</Text>
@@ -179,7 +246,7 @@ class TeacherAcademic extends Component {
                                 </Picker>
                             </View>
 
-            
+
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Post Held in School</Text>
@@ -222,7 +289,7 @@ class TeacherAcademic extends Component {
                                 </Picker>
                             </View>
 
-          
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of Subjects taught</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('NoOfSubjects',text)} value={this.state.NoOfSubjects}  style={styles.textInput}/>
@@ -252,7 +319,7 @@ class TeacherAcademic extends Component {
                                 </View>
 
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Teacher")}}>
+                                    <Button block style={styles.button} onPress={()=>{ this.submitForm() }}>
                                             <Text style={styles.buttonText}>Save</Text>
                                     </Button>
                                 </View>
