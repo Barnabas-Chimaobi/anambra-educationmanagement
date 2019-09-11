@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
-import Logic from '../../../logic'
+import Logic from '../../../logic';
+import MultiSelect from 'react-native-multiple-select';
+
 class TeacherAcademic extends Component {
 
     constructor(props) {
@@ -10,29 +12,62 @@ class TeacherAcademic extends Component {
             Ranks: [],
             Grades: [],
             Types:[],
+            Schools:[],
+            Subjects:[],
             TeacherClasses:[],
             selectedGradelvl: '',
-            Qualification: 'BSC Education',
-            Institutions: 'UNN',
-            SubjectArea: 'English',
-            SubjectTaught: 'English',
+            Qualification: '',
+            Institutions: '',
+            SubjectArea: '',
+            SubjectTaught: '',
             DateOfFirstApt: '',
             DateOfPresentApt: '',
             ExpectedDateofRetirement: '',
-            YearsOfExperience: '4',
-            GradeLevel: 'GL04',
-            Rank: 'Teacher',
-            PostHeld: 'Head Teacher',
-            PostHeldYear: 'Head Teacher',
+            YearsOfExperience: '',
+            GradeLevel: '',
+            Rank: '',
+            PostHeld: '',
+            PostHeldYear: '',
             PostingHistoryDate: [],
-            TypeOfStaff: 'Permanent',
-            ClassOfStaff: 'Permanent',
-            NoOfSubjects: '2',
-            NoOfStreams: '2',
-            NoOfTraining: '2',
+            TypeOfStaff: '',
+            ClassOfStaff: '',
+            NoOfSubjects: '',
+            NoOfStreams: '',
+            NoOfTraining: '',
+            schoolId: '',
+            SubjectsTaught:[],
             biodata: {}
         }
     }
+
+    items = [{
+        id: '92iijs7yta',
+        name: 'Ondo',
+      }, {
+        id: 'a0s0a8ssbsd',
+        name: 'Ogun',
+      }, {
+        id: '16hbajsabsd',
+        name: 'Calabar',
+      }, {
+        id: 'nahs75a5sg',
+        name: 'Lagos',
+      }, {
+        id: '667atsas',
+        name: 'Maiduguri',
+      }, {
+        id: 'hsyasajs',
+        name: 'Anambra',
+      }, {
+        id: 'djsjudksjd',
+        name: 'Benue',
+      }, {
+        id: 'sdhyaysdj',
+        name: 'Kaduna',
+      }, {
+        id: 'suudydjsjd',
+        name: 'Abuja',
+      }];
 
     componentDidMount(){
 
@@ -69,18 +104,35 @@ class TeacherAcademic extends Component {
             this.setState({TeacherClasses: res.data})
       })
           .catch((error) => console.warn(error))
+
+          const school = new Logic()
+          school.StaffClass('http://97.74.6.243/anambra/api/Schools')
+          .then((res) => {
+
+              this.setState({Schools: res.data})
+        })
+            .catch((error) => console.warn(error))
+
+
+            const subject = new Logic()
+            subject.StaffClass('http://97.74.6.243/anambra/api/Subjects')
+            .then((res) => {
+
+                this.setState({Subjects: res.data})
+          })
+              .catch((error) => console.warn(error))
+
     }
 
     submitForm = () => {
-        console.log("Submitting Form");
         const saveTeacher = new Logic()
         const formData = {
             "person": {
               "name": this.state.biodata.name,
-              "dateOfBirth":"2016-09-08", // this.state.biodata.dateOfBirth,
-              "stateId" : 1,
-              "lgaId": 1,
-              "sexId": 1,
+              "dateOfBirth": this.state.biodata.dateOfBirth,
+              "stateId" :this.state.biodata.StateOrigin,
+              "lgaId":this.state.biodata.Lga,
+              "sexId":this.state.biodata.sex,
               "hometown": this.state.biodata.Hometown, //this.state.biodata.Hometown,
               "address": this.state.biodata.Residential,
               "phone": this.state.biodata.phone,
@@ -94,37 +146,38 @@ class TeacherAcademic extends Component {
             },
             "teacherRecord": {
               "AcademicSessionId": 1,
-              "schoolId": 1,
+              "schoolId": this.state.schoolId,
               "onPremises": this.state.biodata.liveIn,
               "qualifications": [
                 {
-                  "courseName": 'BSC Education', //this.state.biodata.Qualification
+                  "courseName": this.state.Qualification,
                   "startDate": "2016-09-08", //this.state.biodata.Residential
                   "endDate": "2016-09-08", //this.state.biodata.Residential
                   "grade": "Second Class", //this.state.biodata.Residential
                 }
               ],
-              "specialization": 'Teaching', //this.state.biodata.SubjectArea
-              "firstAppointment": "2016-09-08", //this.state.biodata.Residential
-              "currentAppointment": "2016-09-08", //this.state.biodata.Residential
-              "retirement": "2016-09-08", //this.state.biodata.Residential
-              "yearsOfExperience": 4, //this.state.biodata.YearsOfExperience
-              "trainingsAttended": 3, //this.state.biodata.NoOfTraining
-              "streamsTaught": 2, //this.state.biodata.NoOfStreams
-              "gradeLevelId": 1,
-              "rankId": 1,
-              "postHeld": 'Head Teacher', //this.state.biodata.PostHeld
-              "datePosted": "2019-09-08", //this.state.biodata.Residential
+              "specialization": this.state.SubjectArea,
+              "firstAppointment": this.state.DateOfFirstApt,
+              "currentAppointment": this.state.DateOfPresentApt,
+              "retirement": this.state.ExpectedDateofRetirement,
+              "yearsOfExperience": this.state.YearsOfExperience,
+              "trainingsAttended": this.state.NoOfTraining,
+              "streamsTaught": this.state.NoOfStreams,
+              "gradeLevelId": this.state.selectedGradelvl,
+              "rankId": this.state.Rank,
+              "postHeld": this.state.PostHeld,
+              "datePosted": this.state.PostHeldYear,
               "postingHistories": [
                 {
 
-                  "schoolId": 1,
-                  "startDate": "2019-09-08", //this.state.biodata.Residential
-                  "endDate": "2019-09-08", //this.state.biodata.Residential
-                  "comments": "No Comments", //this.state.biodata.Residential
+                  "schoolId": this.state.schoolId,
+                  "startDate": this.state.PostHeldYear,
+                  "endDate": this.state.PostHeldYear,
+                  "comments": "-",
                 }
                 ],
-                "staffTypeId": 1,
+                "staffTypeId": this.state.TypeOfStaff,
+                "StaffClassId": this.state.ClassOfStaff,
                 "teacherSubjects":[
                     {"subjectId": 1},
                 ],
@@ -135,11 +188,36 @@ class TeacherAcademic extends Component {
         saveTeacher.TeacherBiodata("http://97.74.6.243/anambra/api/Teachers",formData)
         .then((res) => {
             console.log(res);
+            if (res.status == 201){
+
+                this.props.navigation.navigate("Home");
+            }
         })
         .catch((error) => console.warn(error));
 
     }
 
+
+    setAppoitmentDate = (newDate) => {
+        this.setState({ DateOfFirstApt: newDate.toString().substr(4, 12) });
+    }
+
+    setRetirementDate = (newDate) => {
+        this.setState({ ExpectedDateofRetirement: newDate.toString().substr(4, 12) });
+    }
+
+    setPresentAppointmentDate = (newDate) => {
+        this.setState({ DateOfPresentApt: newDate.toString().substr(4, 12) });
+    }
+
+    handleMultiSelectChange = selectedItems => {
+        this.setState({ SubjectsTaught: selectedItems});
+        console.log(selectedItems);
+      };
+
+    handleChangeText = (inputName, text) => {
+        this.setState({ [inputName]: text });
+    }
     render() {
 
 
@@ -148,9 +226,9 @@ class TeacherAcademic extends Component {
 
             <Container>
 
-                        <View style={{backgroundColor:'#E6DC82', padding :10}}>
-                            <Text style={styles.headerText}>New Teacher Information</Text>
-                        </View>
+                    <View style={{backgroundColor:'#E6DC82', padding :10}}>
+                        <Text style={styles.headerText}>New Teacher Information</Text>
+                    </View>
 
                     <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
 
@@ -182,7 +260,7 @@ class TeacherAcademic extends Component {
                                 <DatePicker
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
+                                maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
                                 modalTransparent={false}
@@ -191,18 +269,36 @@ class TeacherAcademic extends Component {
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
+                                onDateChange={this.setAppoitmentDate}
                                 disabled={false}
                             />
                             </View>
 
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Date of Present Appointment</Text>
+                                <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date()}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setPresentAppointmentDate}
+                                disabled={false}
+                            />
+                            </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Expected Retirement Date</Text>
                                 <DatePicker
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
+                                maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
                                 modalTransparent={false}
@@ -211,7 +307,7 @@ class TeacherAcademic extends Component {
                                 placeHolderText="Select date"
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
-                                onDateChange={this.setDate}
+                                onDateChange={this.setRetirementDate}
                                 disabled={false}
                             />
                             </View>
@@ -221,6 +317,19 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Years of Experience</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
                             </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>School</Text>
+                                <Picker
+                                    selectedValue={this.state.schoolId}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    onValueChange={()=>{}}>
+                                        {this.state.Schools.map( (v,key)=>{
+                                            return <Picker.Item label={v.name} key={key}  value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Grade Level</Text>
                                 <Picker
@@ -228,7 +337,7 @@ class TeacherAcademic extends Component {
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Grades.map( (v,key)=>{
-                                            return <Picker.Item label={v.name} key={key}  value={v.name} />
+                                            return <Picker.Item label={v.name} key={key}  value={v.id} />
                                         })}
                                 </Picker>
                             </View>
@@ -241,7 +350,7 @@ class TeacherAcademic extends Component {
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Ranks.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                             </View>
@@ -267,11 +376,11 @@ class TeacherAcademic extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Type of Staff</Text>
                                 <Picker
-                                    selectedValue={this.state.selectedRanklvl}
+                                    selectedValue={this.state.TypeOfStaff}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Types.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                             </View>
@@ -280,13 +389,26 @@ class TeacherAcademic extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Class of Staff</Text>
                                 <Picker
-                                    selectedValue={this.state.selectedRanklvl}
+                                    selectedValue={this.state.ClassOfStaff}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.TeacherClasses.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
+                            </View>
+
+
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Subjects taught</Text>
+                                <MultiSelect
+                                    items={this.items}
+                                    uniqueKey="id"
+                                    onSelectedItemsChange={this.handleMultiSelectChange}
+                                    selectedItems={this.state.SubjectsTaught}
+                                    selectText="Pick Subjects"
+                                    />
                             </View>
 
 
@@ -310,10 +432,9 @@ class TeacherAcademic extends Component {
                             </View>
 
 
-
                             <View style={{flexDirection:'row'}}>
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Biodata")}}>
+                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.goBack()}}>
                                             <Text style={styles.buttonText}>Previous</Text>
                                     </Button>
                                 </View>

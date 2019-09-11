@@ -26,9 +26,9 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-  Teacher: TeacherIndex,
-  Start: TeacherStart,
-  Biodata:  TeacherBiodata,
+  // Teacher: TeacherIndex,
+  // Start: TeacherStart,
+  // Biodata:  TeacherBiodata,
   Academic: TeacherAcademic,
   View: Viewteacher,
   ViewBio: ViewteacherBio,
@@ -113,17 +113,6 @@ const SchoolStack = createStackNavigator({
     },
   });
 
-SchoolStack.navigationOptions = {
-  drawerLabel: 'School',
-  drawerIcon: ({ focused }) => (
-    <Ionicons
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-mail' : 'md-mail'}
-      color="#0b6623"
-      size={30}
-    />
-  ),
-};
 
 const HomeStack = createStackNavigator({
   Home: Home

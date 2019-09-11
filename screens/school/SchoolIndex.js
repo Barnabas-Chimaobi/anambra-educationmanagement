@@ -6,6 +6,24 @@ import { LinearGradient } from "expo-linear-gradient";
 
 class SchoolIndex extends Component {
 
+    static navigationOptions = {
+        title: 'Schools',
+        headerStyle: {
+          backgroundColor: '#098BD3',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#f4511e"
+            />
+          ),
+    };
+
     constructor(props) {
         super(props);
     }
@@ -68,9 +86,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         margin: '5%',
     },
-    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto', 
+    mainText:{padding:'1%', fontSize:19, textAlign: 'center', fontFamily: 'Roboto',
               fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
-    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto', 
+    descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto',
                      textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'90%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
     button:{backgroundColor:'#fff'},

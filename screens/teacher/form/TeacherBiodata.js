@@ -21,30 +21,45 @@ class TeacherBiodata extends Component {
             Sexes: [],
             States: [],
             Lgas: [],
-            First_Name: 'Jamie',
-            Last_Name: 'Lannister',
-            Other_Name: 'O',
-            Sex: 'Female',
-            Dob: '2/5/2001',
-            StateOrigin: 'Abia State',
-            Lga: 'Aba North',
-            Hometown: 'Nzam',
-            Residential: 'GRA Enugu',
+            First_Name: '',
+            Last_Name: '',
+            Other_Name: '',
+            SexId: '',
+            Dob: '',
+            StateOrigin: '',
+            Lga: '',
+            Hometown: '',
+            Residential: '',
             liveIn: false,
-            NextofKin: 'Cecil Lannister',
-            NextofKinPhone: '08065478956',
-            Email: 'jamie@lannister.com',
-            Phone: '080654789875'
+            NextofKin: '',
+            NextofKinPhone: '',
+            NextofKinAddress: '',
+            Email: '',
+            Phone: ''
         }
         this.setDate = this.setDate.bind(this);
     }
 
     updateGender = (Sex) => {
-        this.setState({ Sex: Sex })
+        this.setState({ SexId: Sex })
     }
 
     updateStateOrigin = (StateOrigin) => {
-        this.setState({ StateOrigin: StateOrigin })
+        //Call Method to load LGA for the selected state
+        this.getLgaForState(StateOrigin);
+    }
+
+    getLgaForState = (stateId) => {
+        console.log("StateId Passed",stateId)
+        const lgas = new Logic()
+        lgas.Lgas(`http://97.74.6.243/anambra/state/${stateId}`)
+
+            .then((res) => {
+                this.setState({ Lgas: res.data,StateOrigin: stateId })
+                console.warn('lgas',res.data)
+            })
+            .catch((error) => console.warn(error))
+
     }
 
     updateLga = (Lga) => {
@@ -52,7 +67,7 @@ class TeacherBiodata extends Component {
     }
 
     setDate = (newDate) => {
-        this.setState({ Dob: newDate });
+        this.setState({ Dob: newDate.toString().substr(4, 12) });
     }
 
     toggleliveIn = (value) => {
@@ -83,7 +98,7 @@ class TeacherBiodata extends Component {
 
         // lgas
         const lgas = new Logic()
-        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        lgas.Lgas('http://97.74.6.243/anambra/state/1')
 
             .then((res) => {
                 this.setState({ Lgas: res.data })
@@ -95,6 +110,83 @@ class TeacherBiodata extends Component {
 
     handleChangeText = (inputName, text) => {
         this.setState({ [inputName]: text });
+    }
+
+    checkInputFields = () => {
+
+        if (!this.state.First_Name && !this.state.Last_Name){
+            alert("First and Last Names are compulsory!");
+            return;
+        }
+
+        if (!this.state.Dob){
+            alert("Date of Birth is compulsory!");
+            return;
+        }
+
+        if (!this.state.StateOrigin && !this.state.Lga){
+            alert("State of Origin & local government are compulsory!");
+            return;
+        }
+
+        if (!this.state.SexId){
+            alert("sex is compulsory!");
+            return;
+        }
+
+        if (!this.state.Hometown){
+            alert("Hometown is compulsory!");
+            return;
+        }
+
+        if (!this.state.Residential){
+            alert("Residential Address is compulsory!");
+            return;
+        }
+
+        if (!this.state.Phone){
+            alert("Phone number is compulsory!");
+            return;
+        }
+
+        if (!this.state.NextofKin){
+            alert("Next of Kin is compulsory!");
+            return;
+        }
+
+        if (!this.state.NextofKinPhone){
+            alert("Next of Kin Phone Number is compulsory!");
+            return;
+        }
+
+
+        if (!this.state.NextofKinAddress){
+            alert("Next of Kin Adress is compulsory!");
+            return;
+        }
+
+
+        if (!this.state.Email){
+            alert("Email is compulsory!");
+            return;
+        }
+
+        const bioData = {
+            name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
+            dateOfBirth: this.state.Dob,
+            sex: this.state.SexId,
+            StateOrigin: this.state.StateOrigin,
+            Lga: this.state.Lga,
+            Hometown: this.state.Hometown,
+            Residential: this.state.Residential,
+            liveIn: this.state.liveIn,
+            phone: this.state.Phone,
+            NextofKin: this.state.NextofKin,
+            NextofKinPhone: this.state.NextofKinPhone,
+            NextofKinAddress: this.state.NextofKinAddress,
+            Email: this.state.Email
+        };
+        this.props.navigation.navigate("Academic", {bioData});
     }
 
     render() {
@@ -117,13 +209,10 @@ class TeacherBiodata extends Component {
                             <TextInput onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput} />
                         </View>
 
-
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Last_Name', text)} value={this.state.Last_Name} style={styles.textInput} />
                         </View>
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
@@ -132,24 +221,21 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
-
-
                             <Picker
-                                selectedValue={this.state.Sex} onValueChange={this.updateGender}
+                                selectedValue={this.state.SexId} onValueChange={this.updateGender}
                                 style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
                                 {this.state.Sexes.map((v, key) => {
-                                    return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                    return <Picker.Item label={v.gender} key={key} value={v.id} />
                                 })}
                             </Picker>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
                             <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
+                                defaultDate={new Date(1960, 1, 1)}
+                                minimumDate={new Date(1950, 1, 1)}
+                                maximumDate={new Date()}
                                 animationType={"slide"}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
@@ -164,18 +250,16 @@ class TeacherBiodata extends Component {
                             />
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>State of Origin</Text>
                             <Picker
                                 selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
                                 style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
                                 {this.state.States.map((v, key) => {
-                                    return <Picker.Item label={v.name} key={key} value={v.name} />
+                                    return <Picker.Item label={v.name} key={key} value={v.id} />
                                 })}
                             </Picker>
                         </View>
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>L.G.A</Text>
@@ -184,7 +268,7 @@ class TeacherBiodata extends Component {
                                 selectedValue={this.state.Lga} onValueChange={this.updateLga}
                                 style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
                                 {this.state.Lgas.map((v, key) => {
-                                    return <Picker.Item label={v.name} key={key} value={v.name} />
+                                    return <Picker.Item label={v.name} key={key} value={v.id} />
                                 })}
                             </Picker>
                         </View>
@@ -220,6 +304,11 @@ class TeacherBiodata extends Component {
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Next of Kin Address</Text>
+                            <TextInput onChangeText={text => this.handleChangeText('NextofKinAddress', text)} value={this.state.NextofKinAddress} style={styles.textInput} />
+                        </View>
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Email</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
                         </View>
@@ -231,23 +320,7 @@ class TeacherBiodata extends Component {
                             }
                                 onPress={
                                     () => {
-                                        this.props.navigation.navigate("Academic", {
-                                            bioData: {
-                                                name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
-                                                dateOfBirth: this.state.Dob,
-                                                sex: this.state.Sex,
-                                                StateOrigin: this.state.StateOrigin,
-                                                Lga: this.state.Lga,
-                                                Hometown: this.state.Hometown,
-                                                Residential: this.state.Residential,
-                                                liveIn: this.state.liveIn,
-                                                phone: this.state.Phone,
-                                                NextofKin: this.state.NextofKin,
-                                                NextofKinPhone: this.state.NextofKinPhone,
-                                                Email: this.state.Email
-
-                                            }
-                                        })
+                                        this.checkInputFields()
                                     }}>
                                 <Text style={styles.buttonText}>Next</Text>
                             </Button>

@@ -1,0 +1,52 @@
+{
+  "person": {
+    "name": "William Tanner",
+    "dateOfBirth": "2016-09-08",
+    "stateId": 1,
+    "lgaId": 1,
+    "sexId": 1,
+    "hometown": "Inglewood",
+    "address": "Compton",
+    "phone": "+2347031568998",
+    "email": "me@tanner.com",
+    "nextOfKin": {
+      "name": "Kyle Xy",
+      "phone": "565868638",
+      "email": "dad@tanner.com",
+      "address": "Compton"
+    }
+  },
+  "teacherRecord": {
+    "AcademicSessionId": 1,
+    "schoolId": 1,
+    "onPremises": true,
+    "qualifications": [{
+      "courseName": "BSC Education",
+      "startDate": "2016-09-08",
+      "endDate": "2016-09-08",
+      "grade": "Second Class"
+    }],
+    "specialization": "Teaching",
+    "firstAppointment": "2016-09-08",
+    "currentAppointment": "2016-09-08",
+    "retirement": "2016-09-08",
+    "yearsOfExperience": 4,
+    "trainingsAttended": 3,
+    "streamsTaught": 2,
+    "gradeLevelId": 1,
+    "rankId": 1,
+    "postHeld": "Head Teacher",
+    "datePosted": "2019-09-08",
+    "postingHistories": [{
+
+      "schoolId": 1,
+      "startDate": "2019-09-08",
+      "endDate": "2019-09-08",
+      "comments": "No Comments"
+    }],
+    "staffTypeId": 1,
+    "teacherSubjects": [{
+      "subjectId": 1
+    }]
+  }
+}

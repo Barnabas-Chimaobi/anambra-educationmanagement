@@ -1,0 +1,40 @@
+{
+    "person": {
+        "name": "Somadina Eche",
+        "dateOfBirth": "1998-09-08",
+        "stateId": 1,
+        "lgaId": 1,
+        "sexId": 1,
+        "hometown": "Manchester",
+        "address": "556 Holloway Road London",
+        "phone": "+447031568998",
+        "email": "me@eche.com",
+        "nextOfKin": {
+            "name": "Josh Eche",
+            "phone": "565868638",
+            "email": "dad@eche.com",
+            "address": "Manchester"
+        }
+    },
+    "studentRecords": [{
+        "academicSessionId": 1,
+        "studentClassId": 1,
+        "streamId": 1,
+        "isBoarding": true,
+        "distanceFromSchool": 0,
+        "schoolId": 1
+    }],
+    "previousEducations": [{
+        "schoolId": 1,
+        "reasonForLeaving": "string",
+        "startDate": "2019-09-09",
+        "endDate": "2019-09-09",
+        "studentClassId": 1
+    }],
+    "studentSpecialNeeds": [{
+        "specialNeedId": 1
+    }],
+    "studentVulnerabilities": [{
+        "vulnerabilityId": 1
+    }]
+}

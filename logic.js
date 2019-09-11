@@ -278,6 +278,17 @@ TeacherBiodata = (endpoint, data) => {
 
 
 
+StudentBiodata = (endpoint, data) => {
+    return  axios.post(endpoint, data)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
+
 }
 
 export default Logic

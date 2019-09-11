@@ -13,13 +13,30 @@ class StudentBiodata extends Component {
         state = Dimensions.get("window");
 
         this.state = {
+
+            age: '',
             selectedValue: '',
             chosenDate: new Date(),
             checked: false,
             checkedYes: false,
+            input: '',
             Sexes: [],
             States: [],
-            Lgas: []
+            Lgas: [],
+            First_Name: 'Jamie',
+            Last_Name: 'Lannister',
+            Other_Name: 'O',
+            Sex: 'Female',
+            Dob: '2/5/2001',
+            StateOrigin: 'Abia State',
+            Lga: 'Aba North',
+            Hometown: 'Nzam',
+            Residential: 'GRA Enugu',
+            liveIn: false,
+            NextofKin: 'Cecil Lannister',
+            NextofKinPhone: '08065478956',
+            Email: 'jamie@lannister.com',
+            Phone: '080654789875'
         }
         this.setDate = this.setDate.bind(this);
 
@@ -28,6 +45,24 @@ class StudentBiodata extends Component {
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       };
+
+      updateGender = (Sex) => {
+        this.setState({ Sex: Sex })
+    }
+
+    updateStateOrigin = (StateOrigin) => {
+        this.setState({ StateOrigin: StateOrigin })
+    }
+
+    updateLga = (Lga) => {
+        this.setState({ Lga: Lga })
+    }
+
+
+    toggleliveIn = (value) => {
+        this.setState({ liveIn: value })
+    }
+
 
     setDate(newDate) {
         this.setState({ chosenDate: newDate });
@@ -73,6 +108,11 @@ class StudentBiodata extends Component {
       }
 
 
+    handleChangeText = (inputName, text) => {
+        this.setState({ [inputName]: text });
+    }
+
+
     render() {
         return (
 
@@ -91,24 +131,24 @@ class StudentBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
-                            <TextInput style={styles.textInput}/>
+                            <TextInput  onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput}/>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
-                            <TextInput style={styles.textInput} />
-                        </View>
+                            <TextInput onChangeText={text => this.handleChangeText('Last_Name', text)} value={this.state.Last_Name} style={styles.textInput} />
+                     </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
-                            <TextInput style={styles.textInput} />
-                        </View>
+                            <TextInput onChangeText={text => this.handleChangeText('Other_Name', text)} value={this.state.Other_Name} style={styles.textInput} />
+                     </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
                             <Picker
-                                    selectedValue={this.state.Sexes}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                   selectedValue={this.state.Sex} onValueChange={this.updateGender}
+                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Sexes.map((v, key)=>{
                                             return <Picker.Item label={v.gender} key={key} value={v.gender} />
@@ -140,8 +180,9 @@ class StudentBiodata extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>State of Origin</Text>
-                                    <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    <Picker
+                                     selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
+                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -151,7 +192,7 @@ class StudentBiodata extends Component {
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>L.G.A</Text>
                                     <Picker
-                                    selectedValue={this.state.lgas}
+                                    selectedValue={this.state.Lga} onValueChange={this.updateLga}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Lgas.map( (v, key)=>{
@@ -163,41 +204,63 @@ class StudentBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Hometown', text)} value={this.state.Hometown} style={styles.textInput} />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
-                                    <TextInput style={styles.textInput}/>
+                                    <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential} style={styles.textInput} />
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
-
-                                        <Switch/>
+                                    <Switch onValueChange={this.toggleliveIn}
+                                value={this.state.liveIn} />
 
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
-                                    <TextInput style={styles.textInput}/>
-                                </View>
+                                    <TextInput onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
+                       </View>
 
-                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                    <Text style={styles.labelText}>Next of Kin</Text>
-                                    <TextInput style={styles.textInput}/>
-                                </View>
-                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                    <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                    <TextInput style={styles.textInput}/>
-                                </View>
 
-                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                    <Text style={styles.labelText}>Email</Text>
-                                    <TextInput style={styles.textInput}/>
-                                </View>
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Next of Kin</Text>
+                            <TextInput onChangeText={text => this.handleChangeText('NextofKin', text)} value={this.state.NextofKin} style={styles.textInput} />
+                        </View>
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Next of Kin Phone Number</Text>
+                            <TextInput onChangeText={text => this.handleChangeText('NextofKinPhone', text)} value={this.state.NextofKinPhone} style={styles.textInput} />
+                        </View>
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Email</Text>
+                            <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
+                        </View>
+
 
                                 <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("NextOfKin") }}>
+                                   <Button style={styles.button} small primary
+                                     onPress={
+                                        () => {
+                                            this.props.navigation.navigate("NextOfKin", {
+                                                bioData: {
+                                                    name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
+                                                    dateOfBirth: this.state.Dob,
+                                                    sex: this.state.Sex,
+                                                    StateOrigin: this.state.StateOrigin,
+                                                    Lga: this.state.Lga,
+                                                    Hometown: this.state.Hometown,
+                                                    Residential: this.state.Residential,
+                                                    liveIn: this.state.liveIn,
+                                                    phone: this.state.Phone,
+                                                    NextofKin: this.state.NextofKin,
+                                                    NextofKinPhone: this.state.NextofKinPhone,
+                                                    Email: this.state.Email
+
+                                                }
+                                            })
+                                        }}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>

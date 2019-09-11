@@ -17,7 +17,20 @@ class StudentNextOfKin extends Component {
             Sexes: [],
             States: [],
             Lgas: [],
-            Relationships: []
+            Relationships: [],
+            NextOfkinName: 'Emeka',
+            NextOfkinPhone: '08065487989',
+            NextOfkinAddress: 'Ifite Awka',
+            GuardianName: 'Emeka',
+            GuardianState: 'Abia State',
+            GuardianLga: 'Aba North',
+            GuardianRelationship: 'Father',
+            GuardianAddress: 'Awka',
+            GuardianPhone: '08065796468',
+            GuardianEmail: 'none@gmail.com',
+            GuardianANSSID: 'AN2238293',
+            GuardianOccupation: 'Farmer',
+            biodata: {}
         }
         this.setDate = this.setDate.bind(this);
     }
@@ -40,6 +53,12 @@ class StudentNextOfKin extends Component {
       };
 
       componentDidMount(){
+
+        const biodata = this.props.navigation.getParam('bioData', '');
+        if (biodata){
+            console.log("Biodata",biodata)
+            this.setState({biodata: biodata});
+        }
          // sex
         const sexes = new Logic()
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
@@ -77,6 +96,87 @@ class StudentNextOfKin extends Component {
     }
 
 
+    updateStateOrigin = (GuardianState) => {
+        this.setState({ GuardianState: GuardianState })
+    }
+
+    updateLga = (GuardianLga) => {
+        this.setState({ GuardianLga: GuardianLga })
+    }
+
+    updateRelationship = (GuardianRelationship) => {
+        this.setState({ GuardianRelationship: GuardianRelationship })
+    }
+
+    handleChangeText = (inputName, text) => {
+        this.setState({ [inputName]: text });
+    }
+
+
+    submitForm = () => {
+        console.log("Submitting Form");
+        const saveStudent = new Logic()
+        const formData = {
+            "person": {
+              "name": this.state.biodata.name,
+              "dateOfBirth": "2019-09-09",
+              "stateId": 1,
+              "lgaId": 1,
+              "sexId": 1,
+              "hometown": this.state.biodata.Hometown, //this.state.biodata.Hometown,
+              "address": this.state.biodata.Residential,
+              "phone": this.state.biodata.phone,
+              "email": this.state.biodata.Email,
+              "nextOfKin": {
+                "name": this.state.biodata.NextofKin,
+                "phone": this.state.biodata.NextofKinPhone,
+                "email": this.state.biodata.Email,
+                "address": this.state.biodata.Residential,
+              },
+            },
+            "studentRecords": [
+              {
+                "academicSessionId": 1,
+                "studentClassId": 1,
+                "streamId": 1,
+                "isBoarding": true,
+                "distanceFromSchool": 0,
+                "schoolId": 1,
+              }
+            ],
+            "previousEducations": [
+              {
+                "schoolId": 1,
+                "reasonForLeaving": "string",
+                "startDate": "2019-09-09T17:27:12.873Z",
+                "endDate": "2019-09-09T17:27:12.873Z",
+                "studentClassId": 1,
+              }
+            ],
+            "studentSpecialNeeds": [
+              {
+                "specialNeedId": 1,
+              }
+            ],
+            "studentVulnerabilities": [
+              {
+                "vulnerabilityId": 1,
+              }
+            ],
+          };
+
+        console.log("Form Data",formData);
+        saveStudent.StudentBiodata("http://97.74.6.243/anambra/api/Students",formData)
+        .then((res) => {
+            console.log(res);
+            if (res.status == 201){
+
+                this.props.navigation.navigate("Home");
+            }
+        })
+        .catch((error) => console.warn(error));
+
+    }
 
     render() {
         return (
@@ -91,34 +191,35 @@ class StudentNextOfKin extends Component {
             <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                     <Text style={styles.subText}>Guardian & Next of Kin Details</Text>
             </View>
-            
+
             <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Name</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinName', text)} value={this.state.NextOfkinName} style={styles.textInput} />
+                          </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinPhone', text)} value={this.state.NextOfkinPhone} style={styles.textInput} />
+                           </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Next of Kin Residential Address</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinAddress', text)} value={this.state.NextOfkinAddress} style={styles.textInput} />
+                         </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Names of Parents/ Guardians</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianName', text)} value={this.state.GuardianName} style={styles.textInput} />
+                        </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>State of Origin</Text>
-                                <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                <Picker
+                                  selectedValue={this.state.GuardianState} onValueChange={this.updateStateOrigin}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -128,8 +229,8 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>L.G.A</Text>
                                 <Picker
-                                    selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                      selectedValue={this.state.GuardianLga} onValueChange={this.updateLga}
+                                      style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -141,8 +242,8 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Realtionship with Pupil</Text>
                                 <Picker
-                                    selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                     selectedValue={this.state.GuardianRelationship} onValueChange={this.updateRelationship}
+                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     onValueChange={()=>{}}>
                                         {this.state.Relationships.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -153,28 +254,28 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Residential Address</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianAddress', text)} value={this.state.GuardianAddress} style={styles.textInput} />
+                        </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Phone Number</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianPhone', text)} value={this.state.GuardianPhone} style={styles.textInput} />
+                     </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianEmail', text)} value={this.state.GuardianEmail} style={styles.textInput} />
+                   </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianANSSID', text)} value={this.state.GuardianANSSID} style={styles.textInput} />
+                    </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Occupation</Text>
-                                <TextInput style={styles.textInput}/>
-                            </View>
+                                <TextInput onChangeText={text => this.handleChangeText('GuardianOccupation', text)} value={this.state.GuardianOccupation} style={styles.textInput} />
+                     </View>
 
 
                             <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
@@ -185,7 +286,7 @@ class StudentNextOfKin extends Component {
                                 </View>
 
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Student")}}>
+                                    <Button block style={styles.button} onPress={()=>{ this.submitForm() }}>
                                             <Text style={styles.buttonText}>Submit</Text>
                                     </Button>
                                 </View>
