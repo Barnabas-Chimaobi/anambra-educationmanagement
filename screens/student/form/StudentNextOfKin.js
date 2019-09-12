@@ -496,15 +496,17 @@ export default StudentNextOfKin;
 
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
-    buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
-    button:{backgroundColor:'#098BD3'},
-    button2:{backgroundColor:'#E6DC82'},
+    
+    // buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
+    // button:{backgroundColor:'#098BD3'},
+    // button2:{backgroundColor:'#E6DC82'},
+    // buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+    
     Asterix:{
         color:'red',
         fontSize:15,
         fontWeight: 'bold'
     },
-    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
