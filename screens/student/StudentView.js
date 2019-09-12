@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker } from "re
 import { Container, Content, Form, Button} from 'native-base';
 import Logic from '../../logic';
 
-class Viewteacher extends Component {
+class StudentView extends Component {
 
     constructor(props) {
         super(props);
@@ -12,118 +12,139 @@ class Viewteacher extends Component {
             checked: false,
             checkedYes: false,
             data: {
-                "id": 1,
+                "personId": 2,
                 "person": {
-                  "address": "",
-                  "dateOfBirth": "",
-                  "email": "",
-                  "hometown": "",
-                  "id": 1,
-                  "lga": {
-                    "active": true,
+                  "name": "Somadina Eche",
+                  "dateOfBirth": "1998-09-08T00:00:00",
+                  "stateId": 1,
+                  "state": {
                     "id": 1,
-                    "name": "",
-                    "state": {
-                      "active": true,
-                      "id": 1,
-                      "name": "",
-                    },
+                    "name": "Abia State",
+                    "active": true
                   },
                   "lgaId": 1,
-                  "name": "",
-                  "nextOfKin": {
-                    "address": "",
-                    "email": "",
+                  "lga": {
                     "id": 1,
-                    "name": "",
-                    "personId": 1,
-                    "phone": "",
-                  },
-                  "phone": "",
-                  "sex": {
-                    "active": false,
-                    "gender": "",
-                    "id": 1,
+                    "state": {
+                      "id": 1,
+                      "name": "Abia State",
+                      "active": true
+                    },
+                    "name": "Aba North",
+                    "active": true
                   },
                   "sexId": 1,
-                  "state": {
-                    "active": true,
-                    "id": 1,
-                    "name": "",
+                  "sex": {
+                    "gender": "Female",
+                    "active": false,
+                    "id": 1
                   },
-                  "stateId": 1,
+                  "hometown": "Manchester",
+                  "address": "556 Holloway Road London",
+                  "phone": "447031568998",
+                  "email": "me@eche.com",
+                  "nextOfKin": {
+                    "name": "Josh Eche",
+                    "phone": "565868638",
+                    "email": "dad@eche.com",
+                    "address": "Manchester",
+                    "personId": 2,
+                    "id": 2
+                  },
+                  "id": 2
                 },
-                "personId": 1,
-                "teacherRecord": {
-                  "academicSession": {
-                    "active": true,
-                    "id": 1,
-                    "name": "",
-                  },
-                  "academicSessionId": 1,
-                  "currentAppointment": "2018-05-16T23:00:00",
-                  "datePosted": "2018-05-30T23:00:00",
-                  "firstAppointment": "2018-05-03T23:00:00",
-                  "gradeLevel": {
-                    "active": false,
-                    "id": 9,
-                    "name": "GL12",
-                  },
-                  "gradeLevelId": 9,
-                  "id": 1,
-                  "onPremises": false,
-                  "postHeld": "N",
-                  "postingHistories": [
-                   {
-                      "comments": "-",
-                      "endDate": "2018-05-30T23:00:00",
-                      "id": 1,
-                      "schoolId": 1,
-                      "startDate": "2018-05-30T23:00:00",
-                      "teacherRecordId": 1,
+                "studentRecords": [
+                  {
+                    "academicSessionId": 1,
+                    "academicSession": null,
+                    "studentId": 1,
+                    "studentClassId": 1,
+                    "class": {
+                      "name": "Primary 1",
+                      "active": false,
+                      "id": 1
                     },
-                  ],
-                  "qualifications": [
-                   {
-                      "courseName": "Msc",
-                      "endDate": "2016-09-08T00:00:00",
-                      "grade": "-",
-                      "id": 1,
-                      "startDate": "2016-09-08T00:00:00",
-                      "teacherRecordId": 1,
+                    "streamId": 1,
+                    "stream": {
+                      "name": "Stream 1",
+                      "active": true,
+                      "id": 1
                     },
-                  ],
-                  "rank": {
-                    "active": false,
-                    "id": 1,
-                    "name": "",
-                  },
-                  "rankId": 1,
-                  "retirement": "2067-05-03T23:00:00",
-
-                  "schoolId": 1,
-                  "specialization": "",
-                  "staffClass": null,
-                  "staffClassId": 2,
-                  "staffType": null,
-                  "staffTypeId": 2,
-                  "streamsTaught": 1,
-                  "teacherSubjects": [
-                   {
-                      "id": 1,
-                      "subject": {
-                        "active": true,
-                        "id": 14,
-                        "name": "",
+                    "isBoarding": true,
+                    "distanceFromSchool": 0,
+                    "schoolId": 1,
+                    "id": 1
+                  }
+                ],
+                "previousEducations": [
+                  {
+                    "studentId": 1,
+                    "schoolId": 1,
+                    "school": {
+                      "name": "Test School",
+                      "coordinatesId": 1,
+                      "coordinates": null,
+                      "address": "Awka",
+                      "town": "Awka",
+                      "ward": "Awka North",
+                      "lgaId": 1,
+                      "lga": {
+                        "id": 1,
+                        "state": {
+                          "id": 1,
+                          "name": "Abia State",
+                          "active": true
+                        },
+                        "name": "Aba North",
+                        "active": true
                       },
-                      "subjectId": 14,
-                      "teacherRecordId": 1,
+                      "email": "test@school.com",
+                      "phone": "080",
+                      "dateEstablished": "2019-09-11T11:02:53.6516594",
+                      "locationId": 1,
+                      "location": null,
+                      "recordId": null,
+                      "record": null,
+                      "active": true,
+                      "id": 1
                     },
-                  ],
-                  "trainingsAttended": 0,
-                  "yearsOfExperience": 2,
-                },
-                "teacherRecordId": 1,
+                    "reasonForLeaving": "string",
+                    "startDate": "2019-09-09T00:00:00",
+                    "endDate": "2019-09-09T00:00:00",
+                    "studentClassId": 1,
+                    "studentClass": {
+                      "name": "Primary 1",
+                      "active": false,
+                      "id": 1
+                    },
+                    "id": 1
+                  }
+                ],
+                "studentSpecialNeeds": [
+                  {
+                    "studentId": 1,
+                    "specialNeedId": 1,
+                    "specialNeed": {
+                      "name": "Albinism",
+                      "active": true,
+                      "id": 1
+                    },
+                    "id": 1
+                  }
+                ],
+                "studentVulnerabilities": [
+                  {
+                    "studentId": 1,
+                    "vulnerabilityId": 1,
+                    "vulnerability": {
+                      "name": "Lost Both Parents",
+                      "active": true,
+                      "id": 1
+                    },
+                    "id": 1
+                  }
+                ],
+                "id": 1
               }
         }
         this.data = {};
@@ -140,7 +161,7 @@ class Viewteacher extends Component {
 
     lookupNumber = (number) =>{
 
-        const url = `http://97.74.6.243/anambra/api/Teachers/number/${number}`;
+        const url = `http://97.74.6.243/anambra/api/Students/number/${number}`;
 
         console.log("url", url)
         const data = new Logic()
@@ -172,7 +193,7 @@ class Viewteacher extends Component {
 
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
-                <Text style={styles.headerText}>Existing Teacher Information</Text>
+                <Text style={styles.headerText}>Existing Student Information</Text>
             </View>
 
                 <Content>
@@ -261,7 +282,7 @@ class Viewteacher extends Component {
         );
     }
 }
-export default Viewteacher;
+export default StudentView;
 
 const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },

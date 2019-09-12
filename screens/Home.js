@@ -48,7 +48,7 @@ class Home extends Component {
 
                     <View style={styles.buttonViewOne}>
                         <Button style={styles.buttonOne}>
-                            <Text style={styles.buttonTextOne}>Logout</Text>
+                            <Text style={styles.buttonTextOne} onPress={() => { this.props.navigation.navigate("Welcome") }}>Logout</Text>
                         </Button>
                     </View>
 

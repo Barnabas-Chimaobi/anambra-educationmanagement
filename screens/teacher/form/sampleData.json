@@ -7,7 +7,7 @@
     "sexId": 1,
     "hometown": "Inglewood",
     "address": "Compton",
-    "phone": "+2347031568998",
+    "phone": "2347031568998",
     "email": "me@tanner.com",
     "nextOfKin": {
       "name": "Kyle Xy",
@@ -45,6 +45,7 @@
       "comments": "No Comments"
     }],
     "staffTypeId": 1,
+    "StaffClassId": 1,
     "teacherSubjects": [{
       "subjectId": 1
     }]

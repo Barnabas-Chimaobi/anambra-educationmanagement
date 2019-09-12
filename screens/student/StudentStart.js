@@ -3,11 +3,34 @@ import {View,Text,StyleSheet, Image,TextInput} from "react-native";
 import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
+import Logic from '../../logic';
 
 class StudentStart extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            number: '',
+            data: {}
+        }
+    }
+
+    lookupNumber = () =>{
+
+        const url = `http://97.74.6.243/anambra/api/Students/number/${this.state.number}`;
+
+        console.log("url", url)
+        const data = new Logic()
+        data.TeacherGetBiodata(url)
+        .then((res) => {
+            if (res.status == 200 && res.data){
+                this.props.navigation.navigate("View",{data:this.state.number})
+            }
+
+       })
+      .catch((error) => console.warn(error))
+
+
     }
 
     render() {
@@ -28,12 +51,12 @@ class StudentStart extends Component {
                             <Text style={styles.headerText}>Student Information</Text>
                         </View>
                         <View style={{margin:'2%'}}>
-                            <Text>Student Id</Text>
-                            <TextInput style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
+                            <Text>Student Phone Number</Text>
+                            <TextInput  keyboardType="number-pad" onChangeText={text => this.setState({number: text})} value={this.state.number} style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("BiodataPreview") }}>
+                            <Button block style={styles.button} onPress={() => {this.lookupNumber()  }}>
                                 <Text style={styles.buttonText}>Proceed</Text>
                             </Button>
                         </View>

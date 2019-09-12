@@ -9,7 +9,7 @@ class TeacherBiodata extends Component {
 
     constructor(props) {
         super(props);
-        state = Dimensions.get("window");
+        // state = Dimensions.get("window");
 
         this.state = {
             age: '',
@@ -67,7 +67,8 @@ class TeacherBiodata extends Component {
     }
 
     setDate = (newDate) => {
-        this.setState({ Dob: newDate.toString().substr(4, 12) });
+        this.setState({ Dob: newDate.toISOString() });
+        console.log("Date:",newDate.toISOString())
     }
 
     toggleliveIn = (value) => {
@@ -167,8 +168,7 @@ class TeacherBiodata extends Component {
 
 
         if (!this.state.Email){
-            alert("Email is compulsory!");
-            return;
+            this.setState({Email: "-"})
         }
 
         const bioData = {
@@ -206,11 +206,13 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Last_Name', text)} value={this.state.Last_Name} style={styles.textInput} />
                         </View>
 
@@ -221,6 +223,7 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <Picker
                                 selectedValue={this.state.SexId} onValueChange={this.updateGender}
                                 style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
@@ -232,6 +235,7 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <DatePicker
                                 defaultDate={new Date(1960, 1, 1)}
                                 minimumDate={new Date(1950, 1, 1)}
@@ -252,6 +256,7 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>State of Origin</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <Picker
                                 selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
                                 style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
@@ -263,6 +268,7 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>L.G.A</Text>
+                            <Text style={styles.Asterix}>*</Text>
 
                             <Picker
                                 selectedValue={this.state.Lga} onValueChange={this.updateLga}
@@ -275,11 +281,13 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Hometown</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Hometown', text)} value={this.state.Hometown} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Residential Address</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential} style={styles.textInput} />
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -290,27 +298,31 @@ class TeacherBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Phone Number</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
+                            <Text style={styles.Asterix}>*</Text>
+                            <TextInput  keyboardType="number-pad" onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('NextofKin', text)} value={this.state.NextofKin} style={styles.textInput} />
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('NextofKinPhone', text)} value={this.state.NextofKinPhone} style={styles.textInput} />
+                            <Text style={styles.Asterix}>*</Text>
+                            <TextInput  keyboardType="number-pad" onChangeText={text => this.handleChangeText('NextofKinPhone', text)} value={this.state.NextofKinPhone} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin Address</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('NextofKinAddress', text)} value={this.state.NextofKinAddress} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Email</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
+                            <TextInput  onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
                         </View>
 
 
@@ -348,7 +360,11 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
     },
-
+    Asterix:{
+        color:'red',
+        fontSize:15,
+        fontWeight: 'bold'
+    },
     buttonOne: {
         backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
         alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,

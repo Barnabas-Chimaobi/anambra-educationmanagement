@@ -14,22 +14,34 @@ class StudentNextOfKin extends Component {
             chosenDate: new Date(),
             checked: false,
             checkedYes: false,
+            isBoarding:false,
             Sexes: [],
             States: [],
             Lgas: [],
+            Classes: [],
+            Streams:[],
+            Schools:[],
+            SpecialNeeds:[],
             Relationships: [],
-            NextOfkinName: 'Emeka',
-            NextOfkinPhone: '08065487989',
-            NextOfkinAddress: 'Ifite Awka',
-            GuardianName: 'Emeka',
-            GuardianState: 'Abia State',
-            GuardianLga: 'Aba North',
-            GuardianRelationship: 'Father',
-            GuardianAddress: 'Awka',
-            GuardianPhone: '08065796468',
-            GuardianEmail: 'none@gmail.com',
-            GuardianANSSID: 'AN2238293',
-            GuardianOccupation: 'Farmer',
+            Vulnerabilities: [],
+            NextOfkinName: '',
+            NextOfkinPhone: '',
+            NextOfkinAddress: '',
+            GuardianName: '',
+            GuardianState: '',
+            GuardianLga: '',
+            GuardianRelationship: '',
+            GuardianAddress: '',
+            GuardianPhone: '',
+            GuardianEmail: '',
+            GuardianANSSID: '',
+            GuardianOccupation: '',
+            StudentClass:'',
+            Stream:'',
+            SpecialNeed:'',
+            Vulnerability:'',
+            DistanceFromSchool: 0,
+            SchoolId: '',
             biodata: {}
         }
         this.setDate = this.setDate.bind(this);
@@ -40,7 +52,7 @@ class StudentNextOfKin extends Component {
       };
 
     setDate(newDate) {
-        this.setState({ chosenDate: newDate });
+        this.setState({ chosenDate: newDate.toISOString() });
     };
 
     componentWillMount() {
@@ -52,7 +64,7 @@ class StudentNextOfKin extends Component {
         Dimensions.removeEventListener("change", this.handler);
       };
 
-      componentDidMount(){
+    componentDidMount(){
 
         const biodata = this.props.navigation.getParam('bioData', '');
         if (biodata){
@@ -79,7 +91,7 @@ class StudentNextOfKin extends Component {
 
         // lgas
         const lgas = new Logic()
-        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        lgas.Lgas('http://97.74.6.243/anambra/state/1')
         .then((res) => {
             this.setState({Lgas: res.data})
             // console.warn('lgas',this.state)
@@ -93,11 +105,62 @@ class StudentNextOfKin extends Component {
              this.setState({Relationships: res.data})
          })
          .catch((error) => console.warn(error))
+
+         const studentClass = new Logic()
+         studentClass.Relationships('http://97.74.6.243/anambra/api/StudentClasses')
+         .then((res) => {
+             this.setState({Classes: res.data})
+         })
+         .catch((error) => console.warn(error))
+
+
+         const studentStreams = new Logic()
+         studentStreams.Relationships('http://97.74.6.243/anambra/api/Streams')
+         .then((res) => {
+             this.setState({Streams: res.data})
+         })
+         .catch((error) => console.warn(error))
+
+
+         const SpecialNeed = new Logic()
+         SpecialNeed.Relationships('http://97.74.6.243/anambra/api/SpecialNeeds')
+         .then((res) => {
+             this.setState({SpecialNeeds: res.data})
+         })
+         .catch((error) => console.warn(error))
+
+         const Vulnerabilities = new Logic()
+         Vulnerabilities.Relationships('http://97.74.6.243/anambra/api/Vulnerabilities')
+         .then((res) => {
+             this.setState({Vulnerabilities: res.data})
+         })
+         .catch((error) => console.warn(error))
+
+         const school = new Logic()
+         school.Relationships('http://97.74.6.243/anambra/api/Schools')
+         .then((res) => {
+             this.setState({Schools: res.data})
+         })
+         .catch((error) => console.warn(error))
+
+
     }
 
 
-    updateStateOrigin = (GuardianState) => {
-        this.setState({ GuardianState: GuardianState })
+    updateStateOrigin = (StateOrigin) => {
+        //Call Method to load LGA for the selected state
+        this.getLgaForState(StateOrigin);
+    }
+
+    getLgaForState = (stateId) => {
+        const lgas = new Logic()
+        lgas.Lgas(`http://97.74.6.243/anambra/state/${stateId}`)
+
+            .then((res) => {
+                this.setState({ Lgas: res.data,GuardianState: stateId })
+            })
+            .catch((error) => console.warn(error))
+
     }
 
     updateLga = (GuardianLga) => {
@@ -114,53 +177,113 @@ class StudentNextOfKin extends Component {
 
 
     submitForm = () => {
-        console.log("Submitting Form");
+
+        if (!this.state.GuardianName){
+            alert("Guardian Name is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianState){
+            alert("Guardian State of Origin is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianLga){
+            alert("Guardian Lga is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianRelationship){
+            alert("Guardian Relationship with pupil is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianAddress){
+            alert("Guardian Address is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianPhone){
+            alert("Guardian Phone Number is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianEmail){
+            this.setState({GuardianEmail:'-'});
+            return;
+        }
+
+        if (!this.state.GuardianANSSID){
+            alert("Guardian ANSSID is compulsory!");
+            return;
+        }
+
+        if (!this.state.GuardianOccupation){
+            alert("Guardian Occupation is compulsory!");
+            return;
+        }
+
+        if (!this.state.StudentClass){
+            alert("Student Class is compulsory!");
+            return;
+        }
+
+        if (!this.state.Stream){
+            alert("Student Stream is compulsory!");
+            return;
+        }
+
+        if (!this.state.DistanceFromSchool){
+            alert("Distance From School is compulsory!");
+            return;
+        }
+
         const saveStudent = new Logic()
         const formData = {
             "person": {
-              "name": this.state.biodata.name,
-              "dateOfBirth": "2019-09-09",
-              "stateId": 1,
-              "lgaId": 1,
-              "sexId": 1,
-              "hometown": this.state.biodata.Hometown, //this.state.biodata.Hometown,
-              "address": this.state.biodata.Residential,
-              "phone": this.state.biodata.phone,
-              "email": this.state.biodata.Email,
-              "nextOfKin": {
-                "name": this.state.biodata.NextofKin,
-                "phone": this.state.biodata.NextofKinPhone,
-                "email": this.state.biodata.Email,
+                "name": this.state.biodata.name,
+                "dateOfBirth": this.state.biodata.dateOfBirth,
+                "stateId" :this.state.biodata.StateOrigin,
+                "lgaId":this.state.biodata.Lga,
+                "sexId":this.state.biodata.sex,
+                "hometown": this.state.biodata.Hometown,
                 "address": this.state.biodata.Residential,
-              },
+                "phone": this.state.biodata.phone,
+                "email": this.state.biodata.Email,
+                "nextOfKin": {
+                  "name": this.state.biodata.NextofKin,
+                  "phone": this.state.biodata.NextofKinPhone,
+                  "email": this.state.biodata.Email,
+                  "address": this.state.biodata.Residential,
+                },
             },
             "studentRecords": [
               {
                 "academicSessionId": 1,
-                "studentClassId": 1,
-                "streamId": 1,
-                "isBoarding": true,
-                "distanceFromSchool": 0,
-                "schoolId": 1,
+                "studentClassId": this.state.StudentClass,
+                "streamId": this.state.Stream,
+                "isBoarding": this.state.isBoarding,
+                "distanceFromSchool": this.state.DistanceFromSchool,
+                "schoolId": this.state.SchoolId,
               }
             ],
             "previousEducations": [
               {
-                "schoolId": 1,
-                "reasonForLeaving": "string",
-                "startDate": "2019-09-09T17:27:12.873Z",
-                "endDate": "2019-09-09T17:27:12.873Z",
+                "schoolId":this.state.SchoolId,
+                "reasonForLeaving": "-",
+                "startDate": "2019-09-09",
+                "endDate": "2019-09-09",
                 "studentClassId": 1,
               }
             ],
             "studentSpecialNeeds": [
               {
-                "specialNeedId": 1,
+                "specialNeedId": this.state.SpecialNeed,
               }
             ],
             "studentVulnerabilities": [
               {
-                "vulnerabilityId": 1,
+                "vulnerabilityId": this.state.Vulnerability,
               }
             ],
           };
@@ -170,9 +293,10 @@ class StudentNextOfKin extends Component {
         .then((res) => {
             console.log(res);
             if (res.status == 201){
+                alert("Record saved!");
 
-                this.props.navigation.navigate("Home");
             }
+            this.props.navigation.navigate("Home");
         })
         .catch((error) => console.warn(error));
 
@@ -189,51 +313,38 @@ class StudentNextOfKin extends Component {
 
             <Content>
             <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
-                    <Text style={styles.subText}>Guardian & Next of Kin Details</Text>
+                    <Text style={styles.subText}>Student Other Details</Text>
             </View>
 
             <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Next of Kin Name</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinName', text)} value={this.state.NextOfkinName} style={styles.textInput} />
-                          </View>
-
-
-                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Next of Kin Phone Number</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinPhone', text)} value={this.state.NextOfkinPhone} style={styles.textInput} />
-                           </View>
-
-
-                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Next of Kin Residential Address</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NextOfkinAddress', text)} value={this.state.NextOfkinAddress} style={styles.textInput} />
-                         </View>
-                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Names of Parents/ Guardians</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianName', text)} value={this.state.GuardianName} style={styles.textInput} />
                         </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>State of Origin</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
                                   selectedValue={this.state.GuardianState} onValueChange={this.updateStateOrigin}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    >
                                 {this.state.States.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>L.G.A</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
                                       selectedValue={this.state.GuardianLga} onValueChange={this.updateLga}
                                       style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    >
                                         {this.state.Lgas.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                             </View>
@@ -241,12 +352,13 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Realtionship with Pupil</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
                                      selectedValue={this.state.GuardianRelationship} onValueChange={this.updateRelationship}
                                      style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    >
                                         {this.state.Relationships.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                             </View>
@@ -254,12 +366,14 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Residential Address</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianAddress', text)} value={this.state.GuardianAddress} style={styles.textInput} />
                         </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Phone Number</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianPhone', text)} value={this.state.GuardianPhone} style={styles.textInput} />
                      </View>
 
@@ -270,12 +384,92 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianANSSID', text)} value={this.state.GuardianANSSID} style={styles.textInput} />
                     </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Occupation</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianOccupation', text)} value={this.state.GuardianOccupation} style={styles.textInput} />
                      </View>
+
+                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Class</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                  selectedValue={this.state.StudentClass} onValueChange={(Studentclass) =>{this.setState({StudentClass:Studentclass})}}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    >
+                                {this.state.Classes.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Stream</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                  selectedValue={this.state.Stream} onValueChange={(StudentStream) =>{this.setState({Stream:StudentStream})}}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                   >
+                                {this.state.Streams.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Is Boarding student ?</Text>
+                                    <Switch onValueChange={(boarding) => {this.setState({isBoarding:boarding})}}
+                                value={this.state.isBoarding} />
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Special Need</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                  selectedValue={this.state.SpecialNeed} onValueChange={(SpecialNeed) =>{this.setState({SpecialNeed:SpecialNeed})}}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    >
+                                {this.state.SpecialNeeds.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Vulnerability</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                  selectedValue={this.state.Vulnerability} onValueChange={(StudentStream) =>{this.setState({Vulnerability:StudentStream})}}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    >
+                                {this.state.Vulnerabilities.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>School</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                  selectedValue={this.state.SchoolId} onValueChange={(School) =>{this.setState({SchoolId:School})}}
+                                  style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    >
+                                {this.state.Schools.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
+                            </View>
+
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Distance From School</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('DistanceFromSchool', text)} value={this.state.DistanceFromSchool} style={styles.textInput} />
+                            </View>
 
 
                             <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
@@ -305,6 +499,11 @@ const styles = StyleSheet.create({
     buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
     button:{backgroundColor:'#098BD3'},
     button2:{backgroundColor:'#E6DC82'},
+    Asterix:{
+        color:'red',
+        fontSize:15,
+        fontWeight: 'bold'
+    },
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText:{fontSize:18, fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', alignSelf:'center'},

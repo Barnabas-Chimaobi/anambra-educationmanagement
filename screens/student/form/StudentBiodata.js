@@ -23,20 +23,21 @@ class StudentBiodata extends Component {
             Sexes: [],
             States: [],
             Lgas: [],
-            First_Name: 'Jamie',
-            Last_Name: 'Lannister',
-            Other_Name: 'O',
-            Sex: 'Female',
-            Dob: '2/5/2001',
-            StateOrigin: 'Abia State',
-            Lga: 'Aba North',
-            Hometown: 'Nzam',
-            Residential: 'GRA Enugu',
+            First_Name: '',
+            Last_Name: '',
+            Other_Name: '',
+            Sex: '',
+            Dob: '',
+            StateOrigin: '',
+            Lga: '',
+            Hometown: '',
+            Residential: '',
             liveIn: false,
-            NextofKin: 'Cecil Lannister',
-            NextofKinPhone: '08065478956',
-            Email: 'jamie@lannister.com',
-            Phone: '080654789875'
+            NextofKin: '',
+            NextofKinPhone: '',
+            NextofKinAddress: '',
+            Email: '',
+            Phone: ''
         }
         this.setDate = this.setDate.bind(this);
 
@@ -50,8 +51,21 @@ class StudentBiodata extends Component {
         this.setState({ Sex: Sex })
     }
 
+
     updateStateOrigin = (StateOrigin) => {
-        this.setState({ StateOrigin: StateOrigin })
+        //Call Method to load LGA for the selected state
+        this.getLgaForState(StateOrigin);
+    }
+
+    getLgaForState = (stateId) => {
+        const lgas = new Logic()
+        lgas.Lgas(`http://97.74.6.243/anambra/state/${stateId}`)
+
+            .then((res) => {
+                this.setState({ Lgas: res.data,StateOrigin: stateId })
+            })
+            .catch((error) => console.warn(error))
+
     }
 
     updateLga = (Lga) => {
@@ -65,7 +79,7 @@ class StudentBiodata extends Component {
 
 
     setDate(newDate) {
-        this.setState({ chosenDate: newDate });
+        this.setState({ Dob: newDate });
     }
 
     componentWillMount() {
@@ -98,7 +112,7 @@ class StudentBiodata extends Component {
 
         // lgas
         const lgas = new Logic()
-        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        lgas.Lgas('http://97.74.6.243/anambra/state/1')
         .then((res) => {
             this.setState({Lgas: res.data})
             // console.warn('lgas',this.state)
@@ -110,6 +124,84 @@ class StudentBiodata extends Component {
 
     handleChangeText = (inputName, text) => {
         this.setState({ [inputName]: text });
+    }
+
+    checkInputFields = () => {
+
+        if (!this.state.First_Name && !this.state.Last_Name){
+            alert("First and Last Names are compulsory!");
+            return;
+        }
+
+        if (!this.state.Dob){
+            alert("Date of Birth is compulsory!");
+            return;
+        }
+
+        if (!this.state.StateOrigin && !this.state.Lga){
+            alert("State of Origin & local government are compulsory!");
+            return;
+        }
+
+        if (!this.state.Sex){
+            alert("sex is compulsory!");
+            return;
+        }
+
+        if (!this.state.Hometown){
+            alert("Hometown is compulsory!");
+            return;
+        }
+
+        if (!this.state.Residential){
+            alert("Residential Address is compulsory!");
+            return;
+        }
+
+        if (!this.state.Phone){
+            alert("Phone number is compulsory!");
+            return;
+        }
+
+        if (!this.state.NextofKin){
+            alert("Next of Kin is compulsory!");
+            return;
+        }
+
+        if (!this.state.NextofKinPhone){
+            alert("Next of Kin Phone Number is compulsory!");
+            return;
+        }
+
+
+        if (!this.state.NextofKinAddress){
+            alert("Next of Kin Adress is compulsory!");
+            return;
+        }
+
+
+        if (!this.state.Email){
+            this.setState({Email: "-"})
+            return;
+        }
+
+        const bioData = {
+            name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
+            dateOfBirth: this.state.Dob,
+            sex: this.state.Sex,
+            StateOrigin: this.state.StateOrigin,
+            Lga: this.state.Lga,
+            Hometown: this.state.Hometown,
+            Residential: this.state.Residential,
+            liveIn: this.state.liveIn,
+            phone: this.state.Phone,
+            NextofKin: this.state.NextofKin,
+            NextofKinPhone: this.state.NextofKinPhone,
+            NextofKinAddress: this.state.NextofKinAddress,
+            Email: this.state.Email
+        };
+
+        this.props.navigation.navigate("NextOfKin", {bioData});
     }
 
 
@@ -131,11 +223,13 @@ class StudentBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput  onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput}/>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('Last_Name', text)} value={this.state.Last_Name} style={styles.textInput} />
                      </View>
 
@@ -146,12 +240,12 @@ class StudentBiodata extends Component {
                      </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <Picker
                                    selectedValue={this.state.Sex} onValueChange={this.updateGender}
-                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Sexes.map((v, key)=>{
-                                            return <Picker.Item label={v.gender} key={key} value={v.gender} />
+                                            return <Picker.Item label={v.gender} key={key} value={v.id} />
                                         })}
                                 </Picker>
                         </View>
@@ -159,11 +253,12 @@ class StudentBiodata extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
+                            <Text style={styles.Asterix}>*</Text>
 
                             <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date(2018, 12, 31)}
+                                defaultDate={new Date(2005, 4, 4)}
+                                minimumDate={new Date(1990, 1, 1)}
+                                maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
                                 modalTransparent={false}
@@ -180,23 +275,23 @@ class StudentBiodata extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>State of Origin</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                     <Picker
                                      selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
-                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                 {this.state.States.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                             </Picker>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>L.G.A</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                     <Picker
                                     selectedValue={this.state.Lga} onValueChange={this.updateLga}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Lgas.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
                                 </Picker>
                                 </View>
@@ -204,11 +299,13 @@ class StudentBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                     <TextInput onChangeText={text => this.handleChangeText('Hometown', text)} value={this.state.Hometown} style={styles.textInput} />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                     <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential} style={styles.textInput} />
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -220,16 +317,26 @@ class StudentBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                     <TextInput onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
                        </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('NextofKin', text)} value={this.state.NextofKin} style={styles.textInput} />
                         </View>
+
+                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                            <Text style={styles.labelText}>Next of Kin Address</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                            <TextInput onChangeText={text => this.handleChangeText('NextofKinAddress', text)} value={this.state.NextofKinAddress} style={styles.textInput} />
+                        </View>
+
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin Phone Number</Text>
+                            <Text style={styles.Asterix}>*</Text>
                             <TextInput onChangeText={text => this.handleChangeText('NextofKinPhone', text)} value={this.state.NextofKinPhone} style={styles.textInput} />
                         </View>
 
@@ -242,25 +349,7 @@ class StudentBiodata extends Component {
                                 <View style={{paddingTop: 5,margin:10}}>
                                    <Button style={styles.button} small primary
                                      onPress={
-                                        () => {
-                                            this.props.navigation.navigate("NextOfKin", {
-                                                bioData: {
-                                                    name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
-                                                    dateOfBirth: this.state.Dob,
-                                                    sex: this.state.Sex,
-                                                    StateOrigin: this.state.StateOrigin,
-                                                    Lga: this.state.Lga,
-                                                    Hometown: this.state.Hometown,
-                                                    Residential: this.state.Residential,
-                                                    liveIn: this.state.liveIn,
-                                                    phone: this.state.Phone,
-                                                    NextofKin: this.state.NextofKin,
-                                                    NextofKinPhone: this.state.NextofKinPhone,
-                                                    Email: this.state.Email
-
-                                                }
-                                            })
-                                        }}>
+                                        () => { this.checkInputFields()}}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>
@@ -287,6 +376,11 @@ const styles = StyleSheet.create({
     button:{backgroundColor:'#098BD3'},
     buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
 
+    Asterix:{
+        color:'red',
+        fontSize:15,
+        fontWeight: 'bold'
+    },
     // buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },

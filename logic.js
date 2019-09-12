@@ -276,6 +276,16 @@ TeacherBiodata = (endpoint, data) => {
     })
 }
 
+TeacherGetBiodata = (endpoint, data) => {
+    return  axios.get(endpoint, data)
+    .then( (res) => {
+        return res
+    })
+    .catch( (error) => {
+        throw new Error(error)
+    })
+}
+
 
 
 StudentBiodata = (endpoint, data) => {

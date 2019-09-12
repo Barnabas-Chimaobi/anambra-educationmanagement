@@ -39,7 +39,6 @@ class TeacherAcademicPreview extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
-
                                 <Text style={styles.textInput}>Mathematics</Text>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker, Alert} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
 import Logic from '../../../logic';
-import MultiSelect from 'react-native-multiple-select';
+import MultiSelect from "../../../Components/MultiSelect";
 
 class TeacherAcademic extends Component {
 
@@ -15,7 +15,6 @@ class TeacherAcademic extends Component {
             Schools:[],
             Subjects:[],
             TeacherClasses:[],
-            selectedGradelvl: '',
             Qualification: '',
             Institutions: '',
             SubjectArea: '',
@@ -40,34 +39,6 @@ class TeacherAcademic extends Component {
         }
     }
 
-    items = [{
-        id: '92iijs7yta',
-        name: 'Ondo',
-      }, {
-        id: 'a0s0a8ssbsd',
-        name: 'Ogun',
-      }, {
-        id: '16hbajsabsd',
-        name: 'Calabar',
-      }, {
-        id: 'nahs75a5sg',
-        name: 'Lagos',
-      }, {
-        id: '667atsas',
-        name: 'Maiduguri',
-      }, {
-        id: 'hsyasajs',
-        name: 'Anambra',
-      }, {
-        id: 'djsjudksjd',
-        name: 'Benue',
-      }, {
-        id: 'sdhyaysdj',
-        name: 'Kaduna',
-      }, {
-        id: 'suudydjsjd',
-        name: 'Abuja',
-      }];
 
     componentDidMount(){
 
@@ -153,7 +124,7 @@ class TeacherAcademic extends Component {
                   "courseName": this.state.Qualification,
                   "startDate": "2016-09-08", //this.state.biodata.Residential
                   "endDate": "2016-09-08", //this.state.biodata.Residential
-                  "grade": "Second Class", //this.state.biodata.Residential
+                  "grade": "-", //this.state.biodata.Residential
                 }
               ],
               "specialization": this.state.SubjectArea,
@@ -163,7 +134,7 @@ class TeacherAcademic extends Component {
               "yearsOfExperience": this.state.YearsOfExperience,
               "trainingsAttended": this.state.NoOfTraining,
               "streamsTaught": this.state.NoOfStreams,
-              "gradeLevelId": this.state.selectedGradelvl,
+              "gradeLevelId": this.state.GradeLevel,
               "rankId": this.state.Rank,
               "postHeld": this.state.PostHeld,
               "datePosted": this.state.PostHeldYear,
@@ -179,7 +150,7 @@ class TeacherAcademic extends Component {
                 "staffTypeId": this.state.TypeOfStaff,
                 "StaffClassId": this.state.ClassOfStaff,
                 "teacherSubjects":[
-                    {"subjectId": 1},
+                    {"subjectId": this.state.SubjectTaught},
                 ],
             },
           };
@@ -189,31 +160,31 @@ class TeacherAcademic extends Component {
         .then((res) => {
             console.log(res);
             if (res.status == 201){
-
-                this.props.navigation.navigate("Home");
+                alert("Record saved!");
             }
+            this.props.navigation.navigate("Home");
         })
         .catch((error) => console.warn(error));
 
     }
 
 
+
     setAppoitmentDate = (newDate) => {
-        this.setState({ DateOfFirstApt: newDate.toString().substr(4, 12) });
+        this.setState({ DateOfFirstApt: newDate.toISOString() });
     }
 
     setRetirementDate = (newDate) => {
-        this.setState({ ExpectedDateofRetirement: newDate.toString().substr(4, 12) });
+        this.setState({ ExpectedDateofRetirement: newDate.toISOString() });
     }
 
     setPresentAppointmentDate = (newDate) => {
-        this.setState({ DateOfPresentApt: newDate.toString().substr(4, 12) });
+        this.setState({ DateOfPresentApt: newDate.toISOString() });
     }
 
-    handleMultiSelectChange = selectedItems => {
-        this.setState({ SubjectsTaught: selectedItems});
-        console.log(selectedItems);
-      };
+    setPostedDate = (newDate) => {
+        this.setState({ PostHeldYear: newDate.toISOString() });
+    }
 
     handleChangeText = (inputName, text) => {
         this.setState({ [inputName]: text });
@@ -241,22 +212,26 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Highest Qualification</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('Qualification',text)} value={this.state.Qualification} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Institutions Attended</Text>
+                                <Text style={styles.labelText}>Institution Attended</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('Institutions',text)} value={this.state.Institutions} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('SubjectArea',text)} value={this.state.SubjectArea} style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
@@ -276,6 +251,7 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of Present Appointment</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
@@ -295,10 +271,11 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Expected Retirement Date</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
                                 defaultDate={new Date(2018, 4, 4)}
                                 minimumDate={new Date(2018, 1, 1)}
-                                maximumDate={new Date()}
+                                maximumDate={new Date(2100, 1, 1)}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
                                 modalTransparent={false}
@@ -315,15 +292,16 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
+                            <Text style={styles.Asterix}>*</Text>
+                                <TextInput  keyboardType="number-pad" onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.schoolId}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    selectedValue={this.state.schoolId} onValueChange={(schoolId) => {this.setState({ schoolId: schoolId })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Schools.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
                                         })}
@@ -332,10 +310,10 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Grade Level</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.selectedGradelvl}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    selectedValue={this.state.GradeLevel} onValueChange={(level) => {this.setState({ GradeLevel: level })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Grades.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
                                         })}
@@ -345,10 +323,10 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Rank</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.selectedRanklvl}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    selectedValue={this.state.Rank} onValueChange={(Rank) => {this.setState({ Rank: Rank })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Ranks.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
@@ -363,7 +341,22 @@ class TeacherAcademic extends Component {
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year Posted to School</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostHeldYear',text)} value={this.state.PostHeldYear} style={styles.textInput}/>
+                            <Text style={styles.Asterix}>*</Text>
+                                <DatePicker
+                                defaultDate={new Date(2018, 4, 4)}
+                                minimumDate={new Date(2018, 1, 1)}
+                                maximumDate={new Date()}
+                                locale={"en"}
+                                timeZoneOffsetInMinutes={undefined}
+                                modalTransparent={false}
+                                animationType={"fade"}
+                                androidMode={"default"}
+                                placeHolderText="Select date"
+                                textStyle={{ color: "green" }}
+                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                onDateChange={this.setPostedDate}
+                                disabled={false}
+                                />
                             </View>
 
 
@@ -375,10 +368,10 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Type of Staff</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.TypeOfStaff}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    selectedValue={this.state.TypeOfStaff} onValueChange={(TypeOfStaff) => {this.setState({ TypeOfStaff: TypeOfStaff })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Types.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
@@ -388,10 +381,10 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Class of Staff</Text>
+                            <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.ClassOfStaff}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
-                                    onValueChange={()=>{}}>
+                                    selectedValue={this.state.ClassOfStaff} onValueChange={(ClassOfStaff) => {this.setState({ ClassOfStaff: ClassOfStaff })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.TeacherClasses.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
                                         })}
@@ -401,34 +394,37 @@ class TeacherAcademic extends Component {
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Subjects taught</Text>
-                                <MultiSelect
-                                    items={this.items}
-                                    uniqueKey="id"
-                                    onSelectedItemsChange={this.handleMultiSelectChange}
-                                    selectedItems={this.state.SubjectsTaught}
-                                    selectText="Pick Subjects"
-                                    />
+                                <Text style={styles.labelText}>Subject taught</Text>
+                            <Text style={styles.Asterix}>*</Text>
+                                <Picker
+                                    selectedValue={this.state.SubjectTaught} onValueChange={(SubjectTaught) => {this.setState({ SubjectTaught: SubjectTaught })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
+                                        {this.state.Subjects.map( (v, key)=>{
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
+                                </Picker>
                             </View>
 
 
-                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                            {/* <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of Subjects taught</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('NoOfSubjects',text)} value={this.state.NoOfSubjects}  style={styles.textInput}/>
-                            </View>
+                            </View> */}
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of streams taught</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfStreams',text)} value={this.state.NoOfStreams}  style={styles.textInput}/>
+                            <Text style={styles.Asterix}>*</Text>
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('NoOfStreams',text)} value={this.state.NoOfStreams}  style={styles.textInput}/>
                             </View>
 
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of trainings attended</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfTraining',text)} value={this.state.NoOfTraining}  style={styles.textInput}/>
+                            <Text style={styles.Asterix}>*</Text>
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('NoOfTraining',text)} value={this.state.NoOfTraining}  style={styles.textInput}/>
                             </View>
 
 
@@ -460,6 +456,11 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
         marginRight: 10,
+    },
+    Asterix:{
+        color:'red',
+        fontSize:15,
+        fontWeight: 'bold'
     },
 
     button2:{backgroundColor:'#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '73%',

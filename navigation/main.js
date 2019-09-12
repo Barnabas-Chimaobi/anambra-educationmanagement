@@ -11,9 +11,14 @@ import TeacherBiodata from '../screens/teacher/form/TeacherBiodata';
 import TeacherAcademic from '../screens/teacher/form/TeacherAcademic';
 import Viewteacher from '../screens/teacher/TeacherView';
 import ViewteacherBio from '../screens/teacher/TeacherViewBio';
+import TeacherStartPreview from '../screens/teacher/preview/TeacherStartPreview';
+
 import StudentIndex from '../screens/student/StudentIndex';
 import StudentNextOfKin from '../screens/student/form/StudentNextOfKin';
 import StudentStart from '../screens/student/StudentStart';
+import StudentView from '../screens/student/StudentView';
+import StudentBio from '../screens/student/StudentBio';
+
 import SchoolIndex from '../screens/school/SchoolIndex';
 import SchoolStart from '../screens/school/SchoolStart';
 import StudentBiodataPreview from '../screens/student/preview/StudentBiodataPreview';
@@ -26,9 +31,10 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-  // Teacher: TeacherIndex,
-  // Start: TeacherStart,
-  // Biodata:  TeacherBiodata,
+  Teacher: TeacherIndex,
+  Start: TeacherStart,
+  StartPreview: TeacherStartPreview,
+  Biodata:  TeacherBiodata,
   Academic: TeacherAcademic,
   View: Viewteacher,
   ViewBio: ViewteacherBio,
@@ -61,7 +67,9 @@ const StudentStack = createStackNavigator({
   Biodata: StudentBiodata,
   NextOfKin: StudentNextOfKin,
   BiodataPreview: StudentBiodataPreview,
-  NextOfKinPreview: StudentNextOfKinPreview
+  NextOfKinPreview: StudentNextOfKinPreview,
+  View: StudentView,
+  ViewBio: StudentBio,
 },
 
 {
@@ -142,7 +150,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Teacher',
+    initialRouteName: 'Student',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

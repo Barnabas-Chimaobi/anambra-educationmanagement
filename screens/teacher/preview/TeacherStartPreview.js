@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import {View,Text,StyleSheet, Image,TextInput} from "react-native";
 import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
-import { background } from "../../constants/images";
+import { background } from "../../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
-import Logic from '../../logic';
+import Logic from '../../../logic';
 
-class TeacherStart extends Component {
+class TeacherStartPreview extends Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +24,9 @@ class TeacherStart extends Component {
         data.TeacherGetBiodata(url)
         .then((res) => {
             if (res.status == 200 && res.data){
-                this.props.navigation.navigate("View",{data:this.state.number})
+                this.setState({data: res.data})
+                this.props.navigation.navigate("View",{data:this.state.data})
+                console.log(res.data);
             }
 
        })
@@ -68,7 +70,7 @@ class TeacherStart extends Component {
         );
     }
 }
-export default TeacherStart;
+export default TeacherStartPreview;
 
 const styles = StyleSheet.create({
     container: {
