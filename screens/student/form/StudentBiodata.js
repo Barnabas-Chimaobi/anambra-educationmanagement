@@ -345,15 +345,13 @@ class StudentBiodata extends Component {
                             <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
                         </View>
 
-
-                                <View style={{paddingTop: 5,margin:10}}>
-                                   <Button style={styles.button} small primary
-                                     onPress={
-                                        () => { this.checkInputFields()}}>
-                                        <Text style={styles.buttonText}>Next</Text>
-                                    </Button>
-                                </View>
-
+                        <View style={styles.buttonView}>
+                            <Button style={styles.button} small primary
+                                onPress={
+                                () => { this.checkInputFields()}}>
+                                <Text style={styles.buttonText}>Next</Text>
+                            </Button>
+                        </View>
 
                     </Form>
                 </Content>
@@ -372,9 +370,15 @@ const styles = StyleSheet.create({
     // button: { backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '25%',flex: 1,
     //     flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
 
-    buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
-    button:{backgroundColor:'#098BD3'},
-    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+    // buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
+    // button:{backgroundColor:'#098BD3'},
+    // buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
 
     Asterix:{
         color:'red',

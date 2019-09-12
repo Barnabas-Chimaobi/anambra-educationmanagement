@@ -497,6 +497,12 @@ export default StudentNextOfKin;
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
     
+    buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' },
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    
     // buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
     // button:{backgroundColor:'#098BD3'},
     // button2:{backgroundColor:'#E6DC82'},
