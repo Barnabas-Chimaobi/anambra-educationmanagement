@@ -39,9 +39,11 @@ class StudentStart extends Component {
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}
                             style={styles.container}
                             locations={[-5.7,22.72,53.6,73.16,86.22,97.8]}>
-                   <View>
+
+                    <View>
                         <Image source={background.logo} resizeMode="center" style={styles.logo} />
                     </View>
+
                     <View>
                         <Text style={styles.mainText}>Ministry of Basic Education</Text>
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
@@ -52,7 +54,9 @@ class StudentStart extends Component {
                         </View>
                         <View style={{margin:'2%'}}>
                             <Text>Student Phone Number</Text>
-                            <TextInput  keyboardType="number-pad" onChangeText={text => this.setState({number: text})} value={this.state.number} style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
+                            <TextInput  keyboardType="number-pad" 
+                                onChangeText={text => this.setState({number: text})} value={this.state.number} 
+                                style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
                         </View>
 
                         <View style={styles.buttonView}>
@@ -61,7 +65,6 @@ class StudentStart extends Component {
                             </Button>
                         </View>
                     </View>
-
 
             </LinearGradient>
         );

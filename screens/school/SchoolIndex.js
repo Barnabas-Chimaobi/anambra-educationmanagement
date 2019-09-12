@@ -41,25 +41,25 @@ class SchoolIndex extends Component {
                         <Text style={styles.mainText}>Ministry of Basic Education</Text>
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
                     </View>
-                    <View style={{width:'80%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+                    <View style={{width:'60%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
                             <Text style={styles.headerText}>School Information</Text>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Profile") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Profile") }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
                                 <Text style={styles.buttonText}>Update Existing</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>

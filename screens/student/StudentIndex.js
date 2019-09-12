@@ -47,7 +47,7 @@ class StudentIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Biodata") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Biodata") }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
@@ -59,10 +59,11 @@ class StudentIndex extends Component {
                         </View> */}
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("Start") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
+                        
 
                     </View>
 
@@ -91,13 +92,13 @@ const styles = StyleSheet.create({
     descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto',
                      textTransform:'capitalize', alignSelf:'center'},
     buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
-    button:{backgroundColor:'#fff', padding: '10'},
-    buttonText:{fontSize:20, fontWeight: '600', color:'#000',alignSelf:'center'},
+    button:{backgroundColor:'#fff', padding: '50'},
+    buttonText:{fontSize:20, color:'#000', alignSelf:'center'},
     inputView: {
         width: '100%',
         alignItems: 'stretch'
     },
-    headerText:{marginBottom:'5%',fontSize:20, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', textAlign: 'center', alignSelf:'center'},
+    headerText:{marginBottom:'5%',fontSize:25, lineHeight:29,fontFamily: 'Roboto', fontWeight:'bold',textTransform:'capitalize', textAlign: 'center', alignSelf:'center'},
 
     buttonViewOne:{margin: '2%', width:'30%'},
     buttonOne:{backgroundColor:'#0884d2', padding: 9, alignItems: 'center', textAlign: 'center'},

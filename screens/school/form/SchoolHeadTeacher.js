@@ -256,13 +256,13 @@ class SchoolHeadTeacher extends Component {
 
                         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Profile")}}>
-                                        <Text style={styles.buttonText}>Previous</Text>
+                                <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Facility3")}}>
+                                        <Text style={styles.button2Text}>Previous</Text>
                                 </Button>
                             </View>
 
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("Facility2")}}>
+                                <Button block style={styles.button} onPress={()=>{this.props.navigation.navigate("School")}}>
                                         <Text style={styles.buttonText}>Submit</Text>
                                 </Button>
                             </View>
