@@ -104,7 +104,7 @@ class SchoolProfile extends Component {
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Year of Estatblishment</Text>
+                                <Text style={styles.labelText}>Year of Establishment</Text>
                                 <TextInput style={styles.textInput}/>
                             </View>
 
@@ -144,7 +144,7 @@ class SchoolProfile extends Component {
                             </View>
 
 
-                            <View style={{paddingTop: 5,margin:10}}>
+                            <View style={styles.buttonView}>
                                <Button block style={styles.button} small primary  onPress={()=>{this.props.navigation.navigate("Facility")}}>
                                     <Text style={styles.buttonText}>Next</Text>
                                </Button>
@@ -161,10 +161,16 @@ export default SchoolProfile;
 
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
-    buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
-    button: { backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '25%',flex: 1,
-    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
-    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
+    // buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
+    // button: { backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '25%',flex: 1,
+    // flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
+    // buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
 
     inputView: { width: '100%',alignItems: 'stretch'},
 

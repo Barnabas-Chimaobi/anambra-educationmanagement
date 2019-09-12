@@ -428,10 +428,10 @@ class TeacherAcademic extends Component {
                             </View>
 
 
-                            <View style={{flexDirection:'row'}}>
+                            <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button2} onPress={()=>{this.props.navigation.goBack()}}>
-                                            <Text style={styles.buttonText}>Previous</Text>
+                                            <Text style={styles.button2Text}>Previous</Text>
                                     </Button>
                                 </View>
 
@@ -452,20 +452,28 @@ export default TeacherAcademic;
 
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
-    buttonView:{width:'50%', alignSelf:'flex-end', margin:'3%'},
-    button: {
-        backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-        marginRight: 10,
-    },
+    // buttonView:{width:'50%', alignSelf:'flex-end', margin:'3%'},
+    // button: {
+    //     backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
+    //     marginRight: 10,
+    // },
+    // button2:{backgroundColor:'#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '73%',
+    //  marginRight: 10,},
+    // buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
     Asterix:{
         color:'red',
         fontSize:15,
         fontWeight: 'bold'
     },
 
-    button2:{backgroundColor:'#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '73%',
-     marginRight: 10,},
-    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
+
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

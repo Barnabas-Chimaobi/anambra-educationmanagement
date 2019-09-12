@@ -84,9 +84,14 @@ const styles = StyleSheet.create({
     },
     mainText:{padding:3, fontSize:30,lineHeight:36,fontFamily: 'Roboto', fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
     descriptionText:{padding:3,fontSize:24, lineHeight:29,fontFamily: 'Roboto', textTransform:'capitalize', alignSelf:'center'},
-    buttonView:{width:'30%', alignSelf:'center', margin:'3%'},
-    button:{backgroundColor:'#0884d2'},
-    buttonText:{fontSize:30, color:'#fff',alignSelf:'center'},
+
+    buttonView: { width: '20%', alignSelf: 'center', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    
+    // buttonView:{width:'30%', alignSelf:'center', margin:'3%'},
+    // button:{backgroundColor:'#0884d2'},
+    // buttonText:{fontSize:30, color:'#fff',alignSelf:'center'},
     inputView: {
         width: '100%',
         alignItems: 'stretch'

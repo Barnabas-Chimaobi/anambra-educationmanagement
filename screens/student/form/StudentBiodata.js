@@ -346,7 +346,7 @@ class StudentBiodata extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button style={styles.button} small primary
+                            <Button block style={styles.button}
                                 onPress={
                                 () => { this.checkInputFields()}}>
                                 <Text style={styles.buttonText}>Next</Text>

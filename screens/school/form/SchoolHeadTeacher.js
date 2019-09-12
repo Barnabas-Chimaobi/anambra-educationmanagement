@@ -58,37 +58,37 @@ class SchoolHeadTeacher extends Component {
         return (
             <Container>
                 <View style={{backgroundColor:'#E6DC82', padding :10}}>
-                        <Text style={styles.headerText}>New Student Information</Text>
+                        <Text style={styles.headerText}>New School Information</Text>
                     </View>
 
                 <Content style={{width:'100%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
-                <View style={{ width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin: 10, marginLeft: 30 }}>
+
+                    <View style={{ width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin: 10, marginLeft: 30 }}>
                         <Text style={styles.subText}>Principal's Information</Text>
                     </View>
 
-                    <Form style={{width:'50%',justifyContent:'center', alignSelf:'center'}}>
+                    <Form style={{width:'75%',justifyContent:'center', alignSelf:'center'}}>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Full Name</Text>
                             <TextInput style={styles.textInput}/>
                         </View>
 
-
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Name of current school</Text>
                             <TextInput style={styles.textInput}/>
                         </View>
 
-
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Male' value='Male' />
                                  <Picker.Item label='Female' value='Female' />
                                </Picker>
                         </View>
+
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Date of Birth</Text>
                             <DatePicker
@@ -108,27 +108,26 @@ class SchoolHeadTeacher extends Component {
                             />
                         </View>
 
-
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Phone Number</Text>
                             <TextInput style={styles.textInput}/>
                         </View>
 
-
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>State of Origin</Text>
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
                                         })} 
                             </Picker>
                         </View>
+
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>L.G.A</Text>
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -136,12 +135,10 @@ class SchoolHeadTeacher extends Component {
                             </Picker>
                         </View>
 
-
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Hometown</Text>
                             <TextInput style={styles.textInput}/>
                         </View>
-
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Male population</Text>
@@ -183,8 +180,6 @@ class SchoolHeadTeacher extends Component {
                             <Text style={styles.labelText}>Length of Stay in school</Text>
                             <TextInput style={styles.textInput}/>
                         </View>
-
-
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Number of years in position</Text>
@@ -248,6 +243,7 @@ class SchoolHeadTeacher extends Component {
                                 disabled={false}
                             />
                         </View>
+
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Number of Subjects Taught</Text>
                             <TextInput style={styles.textInput}/>
@@ -258,8 +254,7 @@ class SchoolHeadTeacher extends Component {
                             <TextInput style={styles.textInput}/>
                         </View>
 
-
-                        <View style={{flexDirection:'row'}}>
+                        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                             <View style={styles.buttonView}>
                                 <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Profile")}}>
                                         <Text style={styles.buttonText}>Previous</Text>
@@ -272,6 +267,7 @@ class SchoolHeadTeacher extends Component {
                                 </Button>
                             </View>
                         </View>
+
                     </Form>
                 </Content>
             </Container>
@@ -281,20 +277,26 @@ class SchoolHeadTeacher extends Component {
 export default SchoolHeadTeacher;
 
 const styles = StyleSheet.create({
-    container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
-    buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
-    button:{backgroundColor:'#098BD3'},
-    button2:{backgroundColor:'#E6DC82'},
-    buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
-    inputView: { width: '100%',alignItems: 'stretch'},
+    container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
     
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
+    inputView: { width: '100%', alignItems: 'stretch' },
+
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
         color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
-    }
+    },
+    selectInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+                color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });

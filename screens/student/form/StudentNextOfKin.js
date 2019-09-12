@@ -475,7 +475,7 @@ class StudentNextOfKin extends Component {
                             <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                                 <View style={styles.buttonView}>
                                     <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Biodata")}}>
-                                            <Text style={styles.buttonText}>Previous</Text>
+                                            <Text style={styles.button2Text}>Previous</Text>
                                     </Button>
                                 </View>
 

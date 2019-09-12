@@ -32,7 +32,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Are facilities shared with other schools?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -47,9 +47,9 @@ class SchoolFacility extends Component {
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Is there multi-grade teaching?</Text>
+                            <Text style={styles.labelText}>Is there multi-grade teaching in the school?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -74,7 +74,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is the school mixed or single sex?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Mixed' value='Mixed' />
                                  <Picker.Item label='Girls only' value='Girls only' />
@@ -102,7 +102,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Are there boarding facilities?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -117,7 +117,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of perimeter fencing</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes, in good condition' value='Yes, in good condition' />
                                  <Picker.Item label='Yes, needs minor repair' value='Yes, needs minor repair' />
@@ -130,7 +130,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of security personnel</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -140,7 +140,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Form of security</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Government employed' value='Government employed' />
                                  <Picker.Item label='PTA employed' value='PTA employed' />
@@ -153,12 +153,10 @@ class SchoolFacility extends Component {
                             <TextInput style={styles.textInput} />
                         </View>
 
-
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Does the school have land encroachment?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -168,7 +166,7 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Does the school have School Based Management Committee (SBMC)?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -178,24 +176,23 @@ class SchoolFacility extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Did the school prepare a School Improvement Plan (SIP) last year?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
                                </Picker>
                         </View>
 
-
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                             <View style={styles.buttonView}>
                                 <Button block style={styles.button2} onPress={() => { this.props.navigation.navigate("Profile") }}>
-                                    <Text style={styles.buttonText}>Previous</Text>
+                                    <Text style={styles.button2Text}>Previous</Text>
                                 </Button>
                             </View>
 
                             <View style={styles.buttonView}>
                                 <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Facility2") }}>
-                                    <Text style={styles.buttonText}>Submit</Text>
+                                    <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>
                         </View>
@@ -209,17 +206,29 @@ export default SchoolFacility;
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
-    buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
-    button: { backgroundColor: '#098BD3' },
+    // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+    // button: { backgroundColor: '#098BD3' },
+    // button2: { backgroundColor: '#E6DC82' },
+    // buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
     button2: { backgroundColor: '#E6DC82' },
-    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
     inputView: { width: '100%', alignItems: 'stretch' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
-    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+    // labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
+    textInput: {
+        width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+        borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
+        color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+    },
+    selectInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
                 borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
                 color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 
