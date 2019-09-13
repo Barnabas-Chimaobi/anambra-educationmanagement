@@ -30,12 +30,10 @@ class SchoolFacility3 extends Component {
                             <TextInput style={styles.textInput} />
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Toilet type</Text>
                             <TextInput style={styles.textInput} />
                         </View>
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Power Source</Text>
@@ -59,7 +57,6 @@ class SchoolFacility3 extends Component {
                                </Picker>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sports Facilities</Text>
                             <Picker 
@@ -70,13 +67,10 @@ class SchoolFacility3 extends Component {
                                </Picker>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Seating</Text>
                             <TextInput style={styles.textInput} />
                         </View>
-
-
 
                         <View style={{ margin: 15, alignSelf: 'flex-start' }}>
                             <Text style={styles.headerText}>Student/Teacher Book</Text>
@@ -97,7 +91,6 @@ to children provided by Governement</Text>
 available in the school provided by Government</Text>
                                 <TextInput style={styles.textInput} />
                             </View>
-
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelText}>Number of students by subjects</Text>

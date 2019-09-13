@@ -51,15 +51,15 @@ class SchoolIndex extends Component {
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
-
+{/* 
                         <View style={styles.buttonView}>
                             <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
                                 <Text style={styles.buttonText}>Update Existing</Text>
                             </Button>
-                        </View>
+                        </View> */}
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("ProfileView") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
