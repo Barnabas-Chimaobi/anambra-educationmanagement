@@ -42,6 +42,9 @@ class StudentNextOfKin extends Component {
             Vulnerability:'',
             DistanceFromSchool: 0,
             SchoolId: '',
+            PreviousSchool: '',
+            ReasonForLeaving: '',
+            Alergy:'',
             biodata: {}
         }
         this.setDate = this.setDate.bind(this);
@@ -208,9 +211,19 @@ class StudentNextOfKin extends Component {
             return;
         }
 
+
         if (!this.state.GuardianEmail){
-            this.setState({GuardianEmail:'-'});
+            this.setState({GuardianEmail: "-"})
             return;
+        }
+        else
+        {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+            if(reg.test(text) === false)
+            {
+                alert("Email is Not valid!");
+                return;
+            }
         }
 
         if (!this.state.GuardianANSSID){
@@ -374,24 +387,37 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Phone Number</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianPhone', text)} value={this.state.GuardianPhone} style={styles.textInput} />
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('GuardianPhone', text)} value={this.state.GuardianPhone} style={styles.textInput} />
                      </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianEmail', text)} value={this.state.GuardianEmail} style={styles.textInput} />
+                                <TextInput keyboardType="email-address" onChangeText={text => this.handleChangeText('GuardianEmail', text)} value={this.state.GuardianEmail} style={styles.textInput} />
                    </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
-                            <Text style={styles.Asterix}>*</Text>
+                                <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianANSSID', text)} value={this.state.GuardianANSSID} style={styles.textInput} />
-                    </View>
+                            </View>
+
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Occupation</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <TextInput onChangeText={text => this.handleChangeText('GuardianOccupation', text)} value={this.state.GuardianOccupation} style={styles.textInput} />
-                     </View>
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Previous School</Text>
+                                <Text style={styles.Asterix}>*</Text>
+                                <TextInput onChangeText={text => this.handleChangeText('PreviousSchool', text)} value={this.state.PreviousSchool} style={styles.textInput} />
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Reason for leaving Previous School</Text>
+                                <Text style={styles.Asterix}>*</Text>
+                                <TextInput onChangeText={text => this.handleChangeText('ReasonForLeaving', text)} value={this.state.ReasonForLeaving} style={styles.textInput} />
+                            </View>
 
                      <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Class</Text>
@@ -452,6 +478,12 @@ class StudentNextOfKin extends Component {
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                <Text style={styles.labelText}>Allergy</Text>
+                                <Text style={styles.Asterix}>*</Text>
+                                <TextInput onChangeText={text => this.handleChangeText('Alergy', text)} value={this.state.Alergy} style={styles.textInput} />
+                            </View>
+
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
@@ -496,18 +528,18 @@ export default StudentNextOfKin;
 
 const styles = StyleSheet.create({
     container: {flex: 1,justifyContent: "flex-start",backgroundColor:'#fff',alignItems: 'center'},
-    
+
     buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
     button: { backgroundColor: '#098BD3' },
     button2: { backgroundColor: '#E6DC82' },
     button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
-    
+
     // buttonView:{width:'30%', alignSelf:'flex-end', margin:'3%'},
     // button:{backgroundColor:'#098BD3'},
     // button2:{backgroundColor:'#E6DC82'},
     // buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
-    
+
     Asterix:{
         color:'red',
         fontSize:15,

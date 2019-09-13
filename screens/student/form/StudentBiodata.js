@@ -32,6 +32,7 @@ class StudentBiodata extends Component {
             Lga: '',
             Hometown: '',
             Residential: '',
+            PermanentAddress: '',
             liveIn: false,
             NextofKin: '',
             NextofKinPhone: '',
@@ -314,9 +315,16 @@ class StudentBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
-                            <Text style={styles.Asterix}>*</Text>
+                                    <Text style={styles.Asterix}>*</Text>
                                     <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential} style={styles.textInput} />
                                 </View>
+
+                                <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                    <Text style={styles.labelText}>Permanent Address</Text>
+                                    <Text style={styles.Asterix}>*</Text>
+                                    <TextInput onChangeText={text => this.handleChangeText('PermanentAddress', text)} value={this.state.PermanentAddress} style={styles.textInput} />
+                                </View>
+
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Do you live within the school ?</Text>
                                     <Switch onValueChange={this.toggleliveIn}
@@ -326,8 +334,8 @@ class StudentBiodata extends Component {
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
-                            <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
+                                    <Text style={styles.Asterix}>*</Text>
+                                    <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
                        </View>
 
 

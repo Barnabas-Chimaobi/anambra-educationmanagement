@@ -7,6 +7,7 @@
         "sexId": 1,
         "hometown": "Manchester",
         "address": "556 Holloway Road London",
+        "permanentAddress": "London",
         "phone": "447031568998",
         "email": "me@eche.com",
         "nextOfKin": {
@@ -25,10 +26,8 @@
         "schoolId": 1
     }],
     "previousEducations": [{
-        "schoolId": 1,
-        "reasonForLeaving": "string",
-        "startDate": "2019-09-09",
-        "endDate": "2019-09-09",
+        "school": "KYC School",
+        "reasonForLeaving": "Graduataed",
         "studentClassId": 1
     }],
     "studentSpecialNeeds": [{

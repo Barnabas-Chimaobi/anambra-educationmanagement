@@ -67,9 +67,9 @@ const TeacherStack = createStackNavigator({
 
 
 const StudentStack = createStackNavigator({
-  Student: StudentIndex,
-  Start: StudentStart,
-  Biodata: StudentBiodata,
+  // Student: StudentIndex,
+  // Start: StudentStart,
+  // Biodata: StudentBiodata,
   NextOfKin: StudentNextOfKin,
   BiodataPreview: StudentBiodataPreview,
   NextOfKinPreview: StudentNextOfKinPreview,
@@ -98,8 +98,8 @@ const StudentStack = createStackNavigator({
 );
 
 const SchoolStack = createStackNavigator({
-  School: SchoolIndex,
-  Start: SchoolStart,
+  // School: SchoolIndex,
+  // Start: SchoolStart,
   Profile: SchoolProfile,
   Facility: SchoolFacility,
   Facility2: SchoolFacility2,
@@ -160,7 +160,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Teacher',
+    initialRouteName: 'School',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

@@ -5,6 +5,7 @@
     "stateId": 1,
     "lgaId": 1,
     "sexId": 1,
+    "alergy":"N/A",
     "hometown": "Inglewood",
     "address": "Compton",
     "phone": "2347031568998",
@@ -28,6 +29,12 @@
     "teacherSpecialization": [
       {
         "subjectAreaId": 1
+      }
+    ],
+    "teacherInstitutions": [
+      {
+        "institution": "GSS Nsukka",
+        "date": "2019-09-13"
       }
     ],
     "specialization": "Teaching",

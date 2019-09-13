@@ -9,14 +9,15 @@ class SchoolProfile extends Component {
         super(props);
 
         this.state ={
-            Lgas: []
+            Lgas: [],
+            lga:''
         }
     }
 
     componentDidMount(){
         // lgas
         const lgas = new Logic()
-        lgas.Lgas('http://97.74.6.243/anambra/api/Lgas')
+        lgas.Lgas('http://97.74.6.243/anambra/state/4')
         .then((res) => {
             this.setState({Lgas: res.data})
             // console.warn('lgas',this.state)
@@ -25,17 +26,8 @@ class SchoolProfile extends Component {
 
       }
 
-      SchoolProfile = () => {
-        const schoolprofile = new Logic()
-        schoolprofile.Lgas('http://97.74.6.243/anambra/api/Lgas')
-        .then((res) => {
-            this.setState({Lgas: res.data})
-            // console.warn('lgas',this.state)
-        })
-        .catch((error) => console.warn(error))
-      }
-    
-    
+
+
 
     render() {
         return (
@@ -50,8 +42,8 @@ class SchoolProfile extends Component {
                         <Text style={styles.subText}>School Profile</Text>
                     </View>
 
-                        
-                    <Form onSubmit={this.SchoolProfile()} style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
+
+                    <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School Name</Text>
@@ -82,12 +74,11 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>L.G.A</Text>
-                                <Picker selectedValue={this.state.lgas}
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
+                                <Picker selectedValue={this.state.lgas} onValueChange={(lga) => {this.setState({ lga: lga })}}
+                                    style={styles.selectInput}>
                                 {this.state.Lgas.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.name} />
-                                        })} 
+                                            return <Picker.Item label={v.name} key={key} value={v.id} />
+                                        })}
                             </Picker>
                             </View>
 
@@ -150,7 +141,7 @@ class SchoolProfile extends Component {
                                </Button>
                             </View>
 
-                    
+
                     </Form>
                     </Content>
             </Container>
@@ -178,11 +169,11 @@ const styles = StyleSheet.create({
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
-    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
-                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+    textInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
                 color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center'},
 
-    selectInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
-                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+    selectInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
                 color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });
