@@ -18,8 +18,7 @@ class TeacherAcademic extends Component {
     render() {
         return (
 
-            <Container>
-                  
+            <Container> 
 
             <View style={{width: '100%',backgroundColor:'#E6DC82', padding :10}}>
                 <Text style={styles.headerText}>New Teacher Information</Text>

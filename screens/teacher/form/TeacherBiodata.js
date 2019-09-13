@@ -336,7 +336,7 @@ class TeacherBiodata extends Component {
 
 
                         <View style={styles.buttonView}>
-                            < Button style={
+                            < Button block style={
                                 styles.button
                             }
                                 onPress={
@@ -379,14 +379,20 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
     },
 
-    buttonView: { width: '50%', alignSelf: 'flex-end', margin: '3%' },
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
 
-    button: {
-        backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-        marginRight: 10,
-    },
+    // buttonView: { width: '50%', alignSelf: 'flex-end', margin: '3%' },
 
-    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    // button: {
+    //     backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
+    //     marginRight: 10,
+    // },
+
+    // buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

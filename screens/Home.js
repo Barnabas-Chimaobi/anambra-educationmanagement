@@ -22,38 +22,35 @@ class Home extends Component {
                         <Text style={styles.mainText}>Ministry of Basic Education</Text>
                         <Text style={styles.descriptionText}>Student, Teacher and School Infromation Base</Text>
                     </View>
-                    <View style={{width:'80%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
+                    <View style={{width:'60%', backgroundColor:'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10}}>
                         <View>
                             <Text style={styles.headerText}>Select Module</Text>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") }}>
                                 <Text style={styles.buttonText}>Teacher Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student") }}>
+                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student") }}>
                                 <Text style={styles.buttonText}>Student Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School") }}>
                                 <Text style={styles.buttonText}>School Information</Text>
                             </Button>
                         </View>
                     </View>
 
-                    <View style={styles.buttonViewOne}>
-                        <Button style={styles.buttonOne}>
-                            <Text style={styles.buttonTextOne} onPress={() => { this.props.navigation.navigate("Welcome") }}>Logout</Text>
+                    <View style={styles.button2View}>
+                        <Button block style={{backgroundColor:'#0884d2'}} onPress={() => { this.props.navigation.navigate("Welcome") }}>
+                            <Text style={styles.buttonTextOne}>Logout</Text>
                         </Button>
                     </View>
-
-
-
 
             </LinearGradient>
         );
@@ -78,9 +75,10 @@ const styles = StyleSheet.create({
               fontWeight:'bold', textTransform:'uppercase',alignSelf:'center'},
     descriptionText:{padding:'0.5%',fontSize:15, textAlign: 'center', lineHeight:29,fontFamily: 'Roboto',
                      textTransform:'capitalize', alignSelf:'center'},
-    buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
+    buttonView:{width:'100%', alignSelf:'center', marginBottom:'3%', alignContent: 'center'},
+    button2View:{width:'25%', alignSelf:'center', marginBottom:'3%', padding: '1%'},
     button:{backgroundColor:'#fff', padding: '10'},
-    buttonText:{fontSize:20, fontWeight: '600', color:'#000',alignSelf:'center'},
+    buttonText:{fontSize:20, color:'#000',alignSelf:'center'},
     inputView: {
         width: '100%',
         alignItems: 'stretch'
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
 
     buttonViewOne:{margin: '2%', width:'30%', alignSelf:'center'},
     buttonOne:{backgroundColor:'#0884d2', padding: 9, alignItems: 'center', textAlign: 'center'},
-    buttonTextOne:{fontSize:17, color:'#fff', paddingLeft: 20, alignSelf:'center', textAlign: 'center'}
+    buttonTextOne:{fontSize:17, color:'#fff', fontWeight: '600', paddingLeft: 20, alignContent: 'center'}
 
 
 });

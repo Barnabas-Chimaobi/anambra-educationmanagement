@@ -14,7 +14,7 @@ class SchoolFacility3 extends Component {
             <Container>
 
                 <View style={{ backgroundColor: '#E6DC82', padding: 10 }}>
-                    <Text style={styles.headerText}>New Student Information</Text>
+                    <Text style={styles.headerText}>New School Information</Text>
                 </View>
 
                 <Content style={{ width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10 }}>
@@ -22,8 +22,6 @@ class SchoolFacility3 extends Component {
                     <View style={{ width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin: 10, marginLeft: 30 }}>
                         <Text style={styles.subText}>Facilities &amp; Conditions - Part 3</Text>
                     </View>
-
-
 
                     <Form style={{ width: '75%', justifyContent: 'center', alignSelf: 'center' }}>
 
@@ -42,7 +40,7 @@ class SchoolFacility3 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Power Source</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='PHCN' value='PHCN' />
                                  <Picker.Item label='Solar' value='Solar' />
@@ -53,7 +51,7 @@ class SchoolFacility3 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Health Facility</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Health Clinic' value='Health Clinic' />
                                  <Picker.Item label='First Aid Kit' value='First Aid Kit' />
@@ -65,7 +63,7 @@ class SchoolFacility3 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sports Facilities</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -85,7 +83,7 @@ class SchoolFacility3 extends Component {
                             <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, alignSelf: 'stretch' }} />
                         </View>
 
-                        <View style={{ width: '50%', justifyContent: 'center', alignSelf: 'center' }}>
+                        <View style={{ width: '75%', justifyContent: 'flex-end', alignSelf: 'center' }}>
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelText}>Number of core subject textbooks available
@@ -106,20 +104,21 @@ available in the school provided by Government</Text>
                                 <TextInput style={styles.textInput} />
                             </View>
 
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={styles.buttonView}>
-                                    <Button block style={styles.button2} onPress={() => { this.props.navigation.navigate("Facility2") }}>
-                                        <Text style={styles.buttonText}>Previous</Text>
-                                    </Button>
-                                </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button2} onPress={() => { this.props.navigation.navigate("Facility2") }}>
+                                    <Text style={styles.button2Text}>Previous</Text>
+                                </Button>
+                            </View>
 
-                                <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("HeadTeacher") }}>
-                                        <Text style={styles.buttonText}>Submit</Text>
-                                    </Button>
-                                </View>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("HeadTeacher") }}>
+                                    <Text style={styles.buttonText}>Submit</Text>
+                                </Button>
                             </View>
                         </View>
+                            
                     </Form>
 
                 </Content>
@@ -132,14 +131,13 @@ export default SchoolFacility3;
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
-    buttonView: { width: '60%', alignSelf: 'flex-end', margin: '3%' },
-    button: { backgroundColor: '#098BD3',color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',flex: 1,
-    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,},
     
-    button2: { backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',flex: 1,
-    flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center', marginRight: 10, },
-    
-    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
     inputView: { width: '100%', alignItems: 'stretch' },
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

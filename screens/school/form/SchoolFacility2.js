@@ -65,20 +65,18 @@ class SchoolFacility2 extends Component {
                     <Text style={styles.headerText}>New School Information</Text>
                 </View>
 
-                <Content style={{ width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.34)', padding: 20, margin: 10 }}>
+                <Content>
 
                 <View style={{width: '85%', borderBottomColor: '#333', borderBottomWidth: 1, margin :10, marginLeft: 30}}>
                     <Text style={styles.subText}>Facilities &amp; Conditions - Part 2</Text>
                 </View>
-                
-                   
 
-                    <Form style={{ width: '50%', justifyContent: 'center', alignSelf: 'center' }}>
+                    <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is there a Parent Teacher Association (PTA)?</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Yes' value='Yes' />
                                  <Picker.Item label='No' value='No' />
@@ -113,7 +111,7 @@ class SchoolFacility2 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which authority conducted the last inspection?</Text>
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.InspectionAuthorities.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -126,7 +124,7 @@ class SchoolFacility2 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Has your school received grants in the last two academic sessions?</Text>
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.Grants.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -139,10 +137,11 @@ class SchoolFacility2 extends Component {
                             <Text style={styles.labelText}>If yes, what type of grants?</Text>
                             <TextInput style={styles.textInput} />
                         </View>
+
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which tier of Governement owns the school?</Text>
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.Ownerships.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -150,12 +149,11 @@ class SchoolFacility2 extends Component {
                             </Picker>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>How many children were enrolled with birth certificates by:</Text>
                            
                             <Picker selectedValue={this.state.lgas}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                 {this.state.BirthCertificates.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.name} />
@@ -191,7 +189,6 @@ class SchoolFacility2 extends Component {
                             <TextInput style={styles.textInput} />
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>How many staff are working at the school?</Text>
                             <TextInput style={styles.textInput} />
@@ -207,8 +204,6 @@ class SchoolFacility2 extends Component {
                             <TextInput style={styles.textInput} />
                         </View>
 
-
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Does the school have good whiteboards
                             in all classes?</Text>
@@ -218,7 +213,7 @@ class SchoolFacility2 extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Source of safe drinking water</Text>
                             <Picker 
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
+                                    style={styles.selectInput}
                                     onValueChange={()=>{}}>
                                  <Picker.Item label='Pipe-borne water' value='Pipe-borne water' />
                                  <Picker.Item label='Borehole' value='Borehole' />
@@ -228,16 +223,16 @@ class SchoolFacility2 extends Component {
                                </Picker>
                         </View>
 
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row',  justifyContent: 'space-between'}}>
                             <View style={styles.buttonView}>
                                 <Button block style={styles.button2} onPress={() => { this.props.navigation.navigate("Facility") }}>
-                                    <Text style={styles.buttonText}>Previous</Text>
+                                    <Text style={styles.button2Text}>Previous</Text>
                                 </Button>
                             </View>
 
                             <View style={styles.buttonView}>
                                 <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Facility3") }}>
-                                    <Text style={styles.buttonText}>Submit</Text>
+                                    <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>
                         </View>
@@ -252,19 +247,25 @@ export default SchoolFacility2;
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "flex-start", backgroundColor: '#fff', alignItems: 'center' },
-    buttonView: { width: '60%', alignSelf: 'flex-end', margin: '3%' },
-    button: { backgroundColor: '#098BD3' },
+    
+    buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' , alignContent: 'center'},
     button2: { backgroundColor: '#E6DC82' },
-    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+
     inputView: { width: '100%', alignItems: 'stretch' },
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
-    labelText: { maxWidth: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent:'flex-end', alignItems: 'flex-end', fontSize: 15},
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
         color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
-    }
+    },
+    selectInput: {width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15, 
+                borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7', 
+                color: '#000', flex: 1,flexDirection: 'row',justifyContent: 'flex-end',alignItems: 'center',}
 });

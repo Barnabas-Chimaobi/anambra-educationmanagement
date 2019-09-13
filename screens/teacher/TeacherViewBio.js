@@ -175,114 +175,86 @@ class ViewteacherBio extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Highest academic qualification</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.qualifications[0].courseName}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.qualifications[0].courseName}</Text>
                         </View>
-
-                        {/* <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Institutions attended, with date</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.qualifications}</Text>
-                        </View> */}
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subject area of specialization</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.specialization}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.specialization}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subjects taught</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.teacherSubjects[0].subject.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.teacherSubjects[0].subject.name}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of first appointment</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.firstAppointment.toString().substring(0,10)}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.firstAppointment.toString().substring(0,10)}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Date of present appointment</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.currentAppointment.toString().substring(0,10)}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.currentAppointment.toString().substring(0,10)}</Text>
                         </View>
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Expected date of retirement</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.retirement.toString().substring(0,10)}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.retirement.toString().substring(0,10)}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Years of experience</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.yearsOfExperience}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.yearsOfExperience}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Grade Level</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.gradeLevel.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.gradeLevel.name}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Rank</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.rank.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.rank.name}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Post held in school</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.postHeld}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.postHeld}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Year posted to school</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.datePosted.toString().substring(0,10)}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.datePosted.toString().substring(0,10)}</Text>
                         </View>
-
-                        {/* <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Posting history with date</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.qualifications.name}</Text>
-                        </View> */}
-
-
-                        {/* <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Type of Staff</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.qualifications.name}</Text>
-
-                        </View> */}
-
-
-                        {/* <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Number of subjects taught</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.qualifications.name}</Text>
-                        </View> */}
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of streams taught</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.streamsTaught}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.streamsTaught}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of trainings attended</Text>
-                            <Text style={styles.labelText}>{this.state.data.teacherRecord.trainingsAttended}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.trainingsAttended}</Text>
                         </View>
 
-                        <View style={styles.containerBtn}>
-                        <View style={styles.buttonContainer}>
-                            <Button style={styles.buttonOne} small primary onPress={() => { this.props.navigation.goBack() }}>
-                                <Text style={styles.buttonText}>Previous</Text>
-                            </Button>
+                        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button2} onPress={() => { this.props.navigation.goBack() }}>
+                                    <Text style={styles.button2Text}>Previous</Text>
+                                </Button>
                             </View>
 
-                            <View style={styles.buttonContainer}>
-                            <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Teacher") }}>
-                                <Text style={styles.buttonText}>Close</Text>
-                            </Button>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Teacher") }}>
+                                    <Text style={styles.buttonText}>Close</Text>
+                                </Button>
                             </View>
                         </View>
-
 
                     </Form>
                 </Content>
             </Container>
-
-
 
         );
     }
@@ -290,34 +262,32 @@ class ViewteacherBio extends Component {
 export default ViewteacherBio;
 
 const styles = StyleSheet.create({
-    // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },
-    // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
 
     containerBtn: {
         marginTop: 10,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
       },
       buttonContainer: {
         flex: 1,
       },
 
-    buttonOne: {
-        backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
-         alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
-    },
-    button: {
-        backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-      alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,
-    },
-    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
+    buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' },
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    
+    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', justifyContent: 'flex-end'},
+
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',

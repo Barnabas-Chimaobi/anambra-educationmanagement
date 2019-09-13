@@ -194,49 +194,49 @@ class StudentBio extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Current Class</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentRecords[0].class.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentRecords[0].class.name}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Current Stream</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentRecords[0].stream.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentRecords[0].stream.name}</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Lives in School ?</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentRecords[0].isBoarding}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentRecords[0].isBoarding}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Distance From School</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentRecords[0].distanceFromSchool}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentRecords[0].distanceFromSchool}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Special Need</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentSpecialNeeds[0].specialNeed.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentSpecialNeeds[0].specialNeed.name}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Vulnerability</Text>
-                            <Text style={styles.labelText}>{this.state.data.studentVulnerabilities[0].vulnerability.name}</Text>
+                            <Text style={styles.dataText}>{this.state.data.studentVulnerabilities[0].vulnerability.name}</Text>
                         </View>
 
-
-                        <View style={styles.containerBtn}>
-                        <View style={styles.buttonContainer}>
-                            <Button style={styles.buttonOne} small primary onPress={() => { this.props.navigation.goBack() }}>
-                                <Text style={styles.buttonText}>Previous</Text>
-                            </Button>
+                        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button2} onPress={() => { this.props.navigation.goBack() }}>
+                                    <Text style={styles.button2Text}>Previous</Text>
+                                </Button>
                             </View>
 
-                            <View style={styles.buttonContainer}>
-                            <Button style={styles.button} small primary onPress={() => { this.props.navigation.navigate("Student") }}>
-                                <Text style={styles.buttonText}>Close</Text>
-                            </Button>
+                            <View style={styles.buttonView}>
+                                <Button block style={styles.button} onPress={() => { this.props.navigation.navigate("Student") }}>
+                                    <Text style={styles.buttonText}>Close</Text>
+                                </Button>
                             </View>
                         </View>
+
 
 
                     </Form>
@@ -254,31 +254,39 @@ const styles = StyleSheet.create({
     // container: { flex: 1, backgroundColor: '#fff', alignItems: 'center' },
     // buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
 
-    containerBtn: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      buttonContainer: {
-        flex: 1,
-      },
+    // containerBtn: {
+    //     marginTop: 10,
+    //     flex: 1,
+    //     flexDirection: 'row',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //   },
+    //   buttonContainer: {
+    //     flex: 1,
+    //   },
 
-    buttonOne: {
-        backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
-         alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
-    },
-    button: {
-        backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-      alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,
-    },
-    buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
+    // buttonOne: {
+    //     backgroundColor: '#E6DC82', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '65%',
+    //      alignSelf: 'flex-start', alignItems: 'center', marginRight: 10,
+    // },
+    // button: {
+    //     backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
+    //   alignSelf: 'flex-end', alignItems: 'center', marginRight: 10,
+    // },
+    // buttonText: { fontSize: 15, color: '#fff', textAlign: 'center', alignContent: 'center', alignSelf: 'center' },
 
+    buttonView: { width: '30%', alignSelf: 'flex-end', margin: '3%' },
+    button: { backgroundColor: '#098BD3' },
+    button2: { backgroundColor: '#E6DC82' },
+    button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
+    buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', justifyContent: 'flex-end'},
+
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
