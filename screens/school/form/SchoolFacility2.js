@@ -103,11 +103,11 @@ class SchoolFacility2 extends Component {
                             />
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of Inspection Visits in the last academic year</Text>
                             <TextInput style={styles.textInput} />
                         </View>
+
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Which authority conducted the last inspection?</Text>
                             <Picker selectedValue={this.state.lgas}
