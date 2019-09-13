@@ -176,92 +176,70 @@ class SchoolProfileView extends Component {
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>School Name</Text>
-                            <Text style={styles.dataText}>School Name</Text>
+                            <Text style={styles.dataText}>CSS Awka</Text>
                         </View>
 
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Cordinates</Text>
-                            <Text style={styles.dataText}>Cordinates</Text>
+                            <Text style={styles.dataText}>23 . 12 . 234</Text>
                         </View>
 
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Contact Address</Text>
-                            <Text style={styles.dataText}>Contact Address</Text>
+                            <Text style={styles.dataText}>Awka North LGA, Anambra</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Village/Town</Text>
-                            <Text style={styles.dataText}>Village/Town</Text>
+                            <Text style={styles.dataText}>Aguleri</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Ward</Text>
-                            <Text style={styles.dataText}>Ward</Text>
+                            <Text style={styles.dataText}>Ward 4</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>L.G.A</Text>
-                            <Picker selectedValue={this.state.lgas}
-                                style={styles.selectInput}
-                                onValueChange={()=>{}}>
-                                    <Picker.Item label='LGA' value='LGA' />
-                            </Picker>
+                            <Text style={styles.dataText}>Awka North</Text>
                         </View>
-
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Email Address</Text>
-                            <Text style={styles.dataText}>Email Address</Text>
+                            <Text style={styles.dataText}>cssawka@gmail.com</Text>
                         </View>
-
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>School Phone Number</Text>
-                            <Text style={styles.dataText}>School Phone Number</Text>
+                            <Text style={styles.dataText}>09098765432</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Year of Establishment</Text>
-                            <Text style={styles.dataText}>Year of Establishment</Text>
+                            <Text style={styles.dataText}>2000</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Location</Text>
-                            <Picker selectedValue={this.state.lgas}
-                                style={styles.selectInput}
-                                onValueChange={()=>{}}>
-                                <Picker.Item label='Urban' value='Urban' />
-                                <Picker.Item label='Rural' value='Rural' />
-                            </Picker>
+                            <Text style={styles.dataText}>Awka North</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Levels of Education Offered</Text>
-                            <Text style={styles.dataText}>Levels of Education Offered</Text>
+                            <Text style={styles.dataText}>2</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Type of School</Text>
-                            <Picker selectedValue={this.state.lgas}
-                                style={styles.selectInput}
-                                onValueChange={()=>{}}>
-                                <Picker.Item label='Regular' value='Regular' />
-                                <Picker.Item label='Islamiya Integrated' value='Islamiya Integrated' />
-                            </Picker>
+                            <Text style={styles.dataText}>Government School</Text>
                         </View>
 
                         <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                             <Text style={styles.labelText}>Does School Operate Shift</Text>
-                            <Picker selectedValue={this.state.lgas}
-                                style={styles.selectInput}
-                                onValueChange={()=>{}}>
-                                <Picker.Item label='Yes' value='Yes' />
-                                <Picker.Item label='No' value='No' />
-                            </Picker>
+                            <Text style={styles.dataText}>No</Text>
                         </View>
-
 
 
                         <View style={styles.buttonView}>
@@ -304,7 +282,7 @@ const styles = StyleSheet.create({
 
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     
-    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', justifyContent: 'flex-end'},
+    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, fontWeight: '600', flexDirection: 'row', justifyContent: 'flex-end'},
 
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,

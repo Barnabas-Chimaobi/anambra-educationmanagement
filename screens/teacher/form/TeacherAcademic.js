@@ -578,7 +578,7 @@ class TeacherAcademic extends Component {
                             onRequestClose={() => {
                                 this.setStreamModalVisible(false);
                             }}>
-                            <View>
+                            <View style={{maxWidth: 600}}>
 
                               <MultiSelect data={this.state.Streams} onSelectedItem={this.onSelectedStreamItemsChange}  />
 
@@ -597,17 +597,20 @@ class TeacherAcademic extends Component {
                             }}>
                             <View>
                                 <View>
-                                    <Text>Add Institution</Text>
-                                    <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                        <Text style={styles.labelText}>Institution</Text>
+                                    <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: 40, }}>Add Institution</Text>
+
+                                    <View style={{paddingTop: 5,margin:5, marginTop: 10, flexDirection:'row' }}>
+                                        <Text style={styles.labelModalFormText}>Institution</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput onChangeText={text => this.handleChangeText('InstitutionName',text)} value={this.state.InstitutionName}  style={styles.textInput}/>
+                                        <TextInput onChangeText={text => this.handleChangeText('InstitutionName',text)} 
+                                            value={this.state.InstitutionName}  style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                        <Text style={styles.labelText}>Date</Text>
+                                        <Text style={styles.labelModalFormText}>Date</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('InstitutionDate',text)} value={this.state.InstitutionDate}  style={styles.textInput}/>
+                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('InstitutionDate',text)} 
+                                            value={this.state.InstitutionDate}  style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={styles.buttonView}>
@@ -618,15 +621,19 @@ class TeacherAcademic extends Component {
                                 </View>
 
                                 <View>
-                                    <Text>All Institutions</Text>
+                                    <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center',alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 30}}>All Institutions</Text>
                                     {
                                         this.state.InstitutionsAttended.map((v,key)=>{
                                             return (
-                                                <View key={key}>
-                                                    <Text>{v.name} - {v.date}</Text>
-                                                    <Button onPress={()=>{ this.removeInstitution(key) }}>
-                                                        <Text>Remove</Text>
-                                                    </Button>
+                                                <View>
+                                                    <View style={{backgroundColor: 'rgba(100, 100, 100, 0.34)', alignSelf: 'center', padding: 20, minWidth: 600, flexDirection: 'row'}} key={key}>
+                                                        <Text style={styles.labelModalText}>{v.name} - {v.date}</Text>
+                                                        
+                                                        <Button block style={styles.buttonModal1} onPress={()=>{ this.removeInstitution(key) }}>
+                                                            <Text style={styles.buttonModalText}>Remove</Text>
+                                                        </Button>
+                                                        
+                                                    </View>
                                                 </View>
                                             )
                                         })
@@ -634,7 +641,7 @@ class TeacherAcademic extends Component {
                                 </View>
 
                                <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setInstitutionModalVisible(!this.state.institutionModalVisible);}}>
-                                        <Text style={{alignSelf:'center', fontSize: 20}}>Save Records</Text>
+                                        <Text style={{alignSelf:'center', fontSize: 15, color: '#fff', fontWeight: 'bold',}}>Save Records</Text>
                                 </TouchableHighlight>
                             </View>
                         </Modal>
@@ -649,17 +656,19 @@ class TeacherAcademic extends Component {
                             }}>
                             <View>
                                 <View>
-                                    <Text>Add Posting History</Text>
+                                    <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: 40, }}>Add Posting History</Text>
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                        <Text style={styles.labelText}>Institution</Text>
+                                        <Text style={styles.labelModalFormText}>Institution</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput onChangeText={text => this.handleChangeText('PostingName',text)} value={this.state.PostingName}  style={styles.textInput}/>
+                                        <TextInput onChangeText={text => this.handleChangeText('PostingName',text)} 
+                                            value={this.state.PostingName}  style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                        <Text style={styles.labelText}>Date</Text>
+                                        <Text style={styles.labelModalFormText}>Date</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('PostingDate',text)} value={this.state.PostingDate}  style={styles.textInput}/>
+                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('PostingDate',text)} 
+                                            value={this.state.PostingDate} style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={styles.buttonView}>
@@ -670,14 +679,15 @@ class TeacherAcademic extends Component {
                                 </View>
 
                                 <View>
-                                    <Text>All Posting</Text>
+                                    <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center',alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 30}}>All Posting</Text>
                                     {
                                         this.state.PostingHistoryDate.map((v,key)=>{
                                             return (
-                                                <View key={key}>
-                                                    <Text>{v.name} - {v.date}</Text>
-                                                    <Button onPress={()=>{ this.removePostingHistory(key) }}>
-                                                        <Text>Remove</Text>
+                                                <View style={{backgroundColor: 'rgba(100, 100, 100, 0.34)', alignSelf: 'center', padding: 20, minWidth: 600, flexDirection: 'row'}} key={key}>
+
+                                                    <Text style={styles.labelModalText}>{v.name} - {v.date}</Text>
+                                                    <Button block style={styles.buttonModal1} onPress={()=>{ this.removePostingHistory(key) }}>
+                                                        <Text style={styles.buttonModalText}>Remove</Text>
                                                     </Button>
                                                 </View>
                                             )
@@ -686,7 +696,7 @@ class TeacherAcademic extends Component {
                                 </View>
 
                                <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setPostingModalVisible(!this.state.postingModalVisible);}}>
-                                        <Text style={{alignSelf:'center', fontSize: 20}}>Save Records</Text>
+                                        <Text style={{alignSelf:'center', fontSize: 15, color: '#fff', fontWeight: 'bold',}}>Save Records</Text>
                                 </TouchableHighlight>
                             </View>
                         </Modal>
@@ -710,15 +720,21 @@ const styles = StyleSheet.create({
     // buttonText:{fontSize:15, color:'#fff',alignSelf:'center'},
 
     buttonView: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+    buttonModalView: { width: '20%', alignSelf: 'center', margin: '5%' },
     button: { backgroundColor: '#098BD3' , alignContent: 'center'},
     button2: { backgroundColor: '#E6DC82' },
+    buttonModal1: { backgroundColor: 'red' , alignContent: 'center', alignSelf: 'center', padding: 3},
+    buttonModal2: { backgroundColor: 'green' , alignContent: 'center'},
     button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    buttonModalText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
+    buttonModalText2: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600', padding: 5, },
 
     Asterix:{
         color:'red',
         fontSize:15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        justifyContent: 'flex-start'
     },
 
 
@@ -727,10 +743,17 @@ const styles = StyleSheet.create({
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 18, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelModalFormText: { width: '45%', height: 35, lineHeight: 18, textAlign: 'center', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelModalText: { width: '45%', height: 35, lineHeight: 18, textAlign: 'center', fontSize: 15, fontWeight: 'bold', marginRight: 10, marginTop: 20, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
         borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
         color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center',
+    },
+    textModalInput: {
+        width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
+        borderColor: '#F7F7F7', borderWidth: 1, backgroundColor: '#F7F7F7',
+        color: '#000', flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start',
     }
 
 });
