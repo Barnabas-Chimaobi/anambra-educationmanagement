@@ -5,9 +5,9 @@ import Home  from "../screens/Home";
 import Main from './main';
 
 const  Screens = createSwitchNavigator({
-    Welcome,
-    Login,
-    Home,
+    // Welcome,
+    // Login,
+    // Home,
     Main,
 });
 

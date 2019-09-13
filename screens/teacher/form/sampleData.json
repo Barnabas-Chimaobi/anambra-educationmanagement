@@ -20,12 +20,16 @@
     "AcademicSessionId": 1,
     "schoolId": 1,
     "onPremises": true,
-    "qualifications": [{
-      "courseName": "BSC Education",
-      "startDate": "2016-09-08",
-      "endDate": "2016-09-08",
-      "grade": "Second Class"
-    }],
+    "teacherQualifications": [
+      {
+        "qualificationId": 1
+      }
+    ],
+    "teacherSpecialization": [
+      {
+        "subjectAreaId": 1
+      }
+    ],
     "specialization": "Teaching",
     "firstAppointment": "2016-09-08",
     "currentAppointment": "2016-09-08",

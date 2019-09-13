@@ -166,7 +166,6 @@ class TeacherBiodata extends Component {
             return;
         }
 
-
         if (!this.state.Email){
             this.setState({Email: "-"})
         }
@@ -384,16 +383,6 @@ const styles = StyleSheet.create({
     button2: { backgroundColor: '#E6DC82' },
     button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
-
-    // buttonView: { width: '50%', alignSelf: 'flex-end', margin: '3%' },
-
-    // button: {
-    //     backgroundColor: '#098BD3', color: '#fff', textAlign: 'center', paddingLeft: 15, width: '53%',
-    //     marginRight: 10,
-    // },
-
-    // buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center' },
-
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 

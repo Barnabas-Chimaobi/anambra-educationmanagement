@@ -31,10 +31,10 @@ import SchoolFacility3 from '../screens/school/form/SchoolFacility3';
 import SchoolHeadTeacher from '../screens/school/form/SchoolHeadTeacher';
 
 const TeacherStack = createStackNavigator({
-  Teacher: TeacherIndex,
-  Start: TeacherStart,
-  StartPreview: TeacherStartPreview,
-  Biodata:  TeacherBiodata,
+  // Teacher: TeacherIndex,
+  // Start: TeacherStart,
+  // StartPreview: TeacherStartPreview,
+  // Biodata:  TeacherBiodata,
   Academic: TeacherAcademic,
   View: Viewteacher,
   ViewBio: ViewteacherBio,
@@ -150,7 +150,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'Student',
+    initialRouteName: 'Teacher',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

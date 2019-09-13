@@ -184,6 +184,15 @@ class StudentBiodata extends Component {
             this.setState({Email: "-"})
             return;
         }
+        else
+        {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+            if(reg.test(text) === false)
+            {
+                alert("Email is Not valid!");
+                return;
+            }
+        }
 
         const bioData = {
             name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,

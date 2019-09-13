@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput,ScrollView, Picker, Alert} from "react-native";
+import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, Alert} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
 import Logic from '../../../logic';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { MultipleSelectPicker } from 'react-native-multi-select-picker'
 import MultiSelect from "../../../Components/MultiSelect";
+
 
 class TeacherAcademic extends Component {
 
@@ -27,7 +30,6 @@ class TeacherAcademic extends Component {
             Rank: '',
             PostHeld: '',
             PostHeldYear: '',
-            PostingHistoryDate: [],
             TypeOfStaff: '',
             ClassOfStaff: '',
             NoOfSubjects: '',
@@ -35,6 +37,20 @@ class TeacherAcademic extends Component {
             NoOfTraining: '',
             schoolId: '',
             SubjectsTaught:[],
+            Qualifications:[],
+            SubjectAreas:[],
+            StreamsTaught:[],
+            InstitutionsAttended:[],
+            InstitutionName: '',
+            InstitutionDate: '',
+            PostingHistoryDate: [],
+            PostingName: '',
+            PostingDate: '',
+            Streams:[],
+            modalVisible: false,
+            streamModalVisible: false,
+            institutionModalVisible: false,
+            postingModalVisible: false,
             biodata: {}
         }
     }
@@ -90,8 +106,32 @@ class TeacherAcademic extends Component {
             .then((res) => {
 
                 this.setState({Subjects: res.data})
-          })
-              .catch((error) => console.warn(error))
+            })
+            .catch((error) => console.warn(error))
+
+            const qualification = new Logic()
+            qualification.StaffClass('http://97.74.6.243/anambra/api/Qualifications')
+            .then((res) => {
+
+                  this.setState({Qualifications: res.data})
+            })
+            .catch((error) => console.warn(error))
+
+            const subjectArea = new Logic()
+            subjectArea.StaffClass('http://97.74.6.243/anambra/api/SubjectAreas')
+            .then((res) => {
+                this.setState({SubjectAreas: res.data})
+            })
+            .catch((error) => console.warn(error))
+
+            const stream = new Logic()
+            stream.StaffClass('http://97.74.6.243/anambra/api/Streams')
+            .then((res) => {
+                this.setState({Streams: res.data})
+            })
+            .catch((error) => console.warn(error))
+
+
 
     }
 
@@ -168,7 +208,57 @@ class TeacherAcademic extends Component {
 
     }
 
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
 
+    setStreamModalVisible(visible) {
+        this.setState({streamModalVisible: visible});
+    }
+
+    setInstitutionModalVisible(visible) {
+        this.setState({institutionModalVisible: visible});
+    }
+
+    setPostingModalVisible(visible) {
+        this.setState({postingModalVisible: visible});
+    }
+
+    addInstitution = () => {
+        if (this.state.InstitutionName && this.state.InstitutionDate){
+            data = {name:this.state.InstitutionName, date: this.state.InstitutionDate};
+            InstitutionsAttended = this.state.InstitutionsAttended;
+            InstitutionsAttended.push(data);
+            this.setState({InstitutionsAttended:InstitutionsAttended, InstitutionName: null,InstitutionDate:null});
+        }
+
+    }
+
+    removeInstitution = (index) => {
+
+        InstitutionsAttended = this.state.InstitutionsAttended;
+        InstitutionsAttended.splice(index,1);
+        this.setState({InstitutionsAttended:InstitutionsAttended});
+
+    }
+
+    addPostingHistory = () => {
+        if (this.state.PostingName && this.state.PostingDate){
+            data = {name:this.state.PostingName, date: this.state.PostingDate};
+            PostingHistoryDate = this.state.PostingHistoryDate;
+            PostingHistoryDate.push(data);
+            this.setState({PostingHistoryDate:PostingHistoryDate, PostingName: null,PostingDate:null});
+        }
+
+    }
+
+    removePostingHistory = (index) => {
+
+        PostingHistoryDate = this.state.PostingHistoryDate;
+        PostingHistoryDate.splice(index,1);
+        this.setState({PostingHistoryDate:PostingHistoryDate});
+
+    }
 
     setAppoitmentDate = (newDate) => {
         this.setState({ DateOfFirstApt: newDate.toISOString() });
@@ -189,9 +279,21 @@ class TeacherAcademic extends Component {
     handleChangeText = (inputName, text) => {
         this.setState({ [inputName]: text });
     }
+
+    onSelectedItemsChange = (subjectId,subjectName) => {
+        let SubjectsTaught = this.state.SubjectsTaught;
+        SubjectsTaught.push({id: subjectId, name: subjectName});
+        this.setState({ SubjectsTaught:SubjectsTaught });
+    };
+
+    onSelectedStreamItemsChange = (streamId,streamName) => {
+        let StreamsTaught = this.state.StreamsTaught;
+        StreamsTaught.push({id: streamId, name: streamName});
+        this.setState({ StreamsTaught:StreamsTaught });
+    };
+
+
     render() {
-
-
 
         return (
 
@@ -213,21 +315,35 @@ class TeacherAcademic extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Highest Qualification</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Qualification',text)} value={this.state.Qualification} style={styles.textInput}/>
+                                <Picker
+                                    selectedValue={this.state.Qualification} onValueChange={(QualificationId) => {this.setState({ Qualification: QualificationId })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
+                                        {this.state.Qualifications.map( (v,key)=>{
+                                            return <Picker.Item label={v.name} key={key}  value={v.id} />
+                                        })}
+                                </Picker>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Institution Attended</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Institutions',text)} value={this.state.Institutions} style={styles.textInput}/>
+                                <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setInstitutionModalVisible(true);}}>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.InstitutionsAttended.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.InstitutionsAttended.length > 0 ? " Selected": "Add Institutions"}</Text>
+                                </TouchableHighlight>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('SubjectArea',text)} value={this.state.SubjectArea} style={styles.textInput}/>
+                                <Picker
+                                    selectedValue={this.state.SubjectArea} onValueChange={(SubjectArea) => {this.setState({ SubjectArea: SubjectArea })}}
+                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
+                                        {this.state.SubjectAreas.map( (v,key)=>{
+                                            return <Picker.Item label={v.name} key={key}  value={v.id} />
+                                        })}
+                                </Picker>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
@@ -362,7 +478,9 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Posting History with date</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostingHistoryDate',text)} value={this.state.PostingHistoryDate} style={styles.textInput}/>
+                                <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setPostingModalVisible(true);}}>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.PostingHistoryDate.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.PostingHistoryDate.length > 0 ? " Selected": "Add Posting History"}</Text>
+                                </TouchableHighlight>
                             </View>
 
 
@@ -395,30 +513,22 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Subject taught</Text>
-                            <Text style={styles.Asterix}>*</Text>
-                                <Picker
-                                    selectedValue={this.state.SubjectTaught} onValueChange={(SubjectTaught) => {this.setState({ SubjectTaught: SubjectTaught })}}
-                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                        {this.state.Subjects.map( (v, key)=>{
-                                            return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
-                                </Picker>
+                                <Text style={styles.Asterix}>*</Text>
+                                <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setModalVisible(true);}}>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.SubjectsTaught.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.SubjectsTaught.length > 0 ? " Selected": "Select Subjects"}</Text>
+                                </TouchableHighlight>
+
                             </View>
-
-
-                            {/* <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Number of Subjects taught</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('NoOfSubjects',text)} value={this.state.NoOfSubjects}  style={styles.textInput}/>
-                            </View> */}
-
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Number of streams taught</Text>
-                            <Text style={styles.Asterix}>*</Text>
-                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('NoOfStreams',text)} value={this.state.NoOfStreams}  style={styles.textInput}/>
-                            </View>
+                                <Text style={styles.labelText}>Streams taught</Text>
+                                <Text style={styles.Asterix}>*</Text>
+                                <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setStreamModalVisible(true);}}>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.StreamsTaught.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.StreamsTaught.length > 0 ? " Selected": "Select Streams"}</Text>
+                                </TouchableHighlight>
 
+                            </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -443,6 +553,144 @@ class TeacherAcademic extends Component {
                             </View>
 
                         </Form>
+
+                        <Modal
+                            animationType="slide"
+                            transparent={false}
+                            visible={this.state.modalVisible}
+                            onRequestClose={() => {
+                                this.setModalVisible(false);
+                            }}>
+                            <View>
+
+                              <MultiSelect data={this.state.Subjects} onSelectedItem={this.onSelectedItemsChange}  />
+
+                                <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setModalVisible(!this.state.modalVisible);}}>
+                                        <Text style={{alignSelf:'center', fontSize: 20}}>Confirm Selection</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </Modal>
+
+                        <Modal
+                            animationType="slide"
+                            transparent={false}
+                            visible={this.state.streamModalVisible}
+                            onRequestClose={() => {
+                                this.setStreamModalVisible(false);
+                            }}>
+                            <View>
+
+                              <MultiSelect data={this.state.Streams} onSelectedItem={this.onSelectedStreamItemsChange}  />
+
+                                <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setStreamModalVisible(!this.state.streamModalVisible);}}>
+                                        <Text style={{alignSelf:'center', fontSize: 20}}>Confirm Selection</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </Modal>
+
+                        <Modal
+                            animationType="slide"
+                            transparent={false}
+                            visible={this.state.institutionModalVisible}
+                            onRequestClose={() => {
+                                this.setInstitutionModalVisible(false);
+                            }}>
+                            <View>
+                                <View>
+                                    <Text>Add Institution</Text>
+                                    <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                        <Text style={styles.labelText}>Institution</Text>
+                                        <Text style={styles.Asterix}>*</Text>
+                                        <TextInput onChangeText={text => this.handleChangeText('InstitutionName',text)} value={this.state.InstitutionName}  style={styles.textInput}/>
+                                    </View>
+
+                                    <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                        <Text style={styles.labelText}>Date</Text>
+                                        <Text style={styles.Asterix}>*</Text>
+                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('InstitutionDate',text)} value={this.state.InstitutionDate}  style={styles.textInput}/>
+                                    </View>
+
+                                    <View style={styles.buttonView}>
+                                        <Button block style={styles.button} onPress={()=>{ this.addInstitution() }}>
+                                                <Text style={styles.buttonText}>Add</Text>
+                                        </Button>
+                                    </View>
+                                </View>
+
+                                <View>
+                                    <Text>All Institutions</Text>
+                                    {
+                                        this.state.InstitutionsAttended.map((v,key)=>{
+                                            return (
+                                                <View key={key}>
+                                                    <Text>{v.name} - {v.date}</Text>
+                                                    <Button onPress={()=>{ this.removeInstitution(key) }}>
+                                                        <Text>Remove</Text>
+                                                    </Button>
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                </View>
+
+                               <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setInstitutionModalVisible(!this.state.institutionModalVisible);}}>
+                                        <Text style={{alignSelf:'center', fontSize: 20}}>Save Records</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </Modal>
+
+
+                        <Modal
+                            animationType="slide"
+                            transparent={false}
+                            visible={this.state.postingModalVisible}
+                            onRequestClose={() => {
+                                this.setPostingModalVisible(false);
+                            }}>
+                            <View>
+                                <View>
+                                    <Text>Add Posting History</Text>
+                                    <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                        <Text style={styles.labelText}>Institution</Text>
+                                        <Text style={styles.Asterix}>*</Text>
+                                        <TextInput onChangeText={text => this.handleChangeText('PostingName',text)} value={this.state.PostingName}  style={styles.textInput}/>
+                                    </View>
+
+                                    <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                        <Text style={styles.labelText}>Date</Text>
+                                        <Text style={styles.Asterix}>*</Text>
+                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('PostingDate',text)} value={this.state.PostingDate}  style={styles.textInput}/>
+                                    </View>
+
+                                    <View style={styles.buttonView}>
+                                        <Button block style={styles.button} onPress={()=>{ this.addPostingHistory() }}>
+                                                <Text style={styles.buttonText}>Add</Text>
+                                        </Button>
+                                    </View>
+                                </View>
+
+                                <View>
+                                    <Text>All Posting</Text>
+                                    {
+                                        this.state.PostingHistoryDate.map((v,key)=>{
+                                            return (
+                                                <View key={key}>
+                                                    <Text>{v.name} - {v.date}</Text>
+                                                    <Button onPress={()=>{ this.removePostingHistory(key) }}>
+                                                        <Text>Remove</Text>
+                                                    </Button>
+                                                </View>
+                                            )
+                                        })
+                                    }
+                                </View>
+
+                               <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setPostingModalVisible(!this.state.postingModalVisible);}}>
+                                        <Text style={{alignSelf:'center', fontSize: 20}}>Save Records</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </Modal>
+
                     </Content>
             </Container>
         );

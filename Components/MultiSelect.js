@@ -1,76 +1,69 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableHighlight} from 'react-native';
+import {
+  SafeAreaView,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Text,
+} from 'react-native';
+import Constants from 'expo-constants';
 
-var thisObj;
-
-export default class MultiSelect extends React.Component {
-    constructor(props) {
-      super(props);
-
-  this.state = {
-    selectedItems: {}
-  };
+function Item({ id, title, selected, onSelect }) {
+  return (
+    <TouchableOpacity
+      onPress={() => onSelect(id,title)}
+      style={[
+        styles.item,
+        { backgroundColor: selected ? '#E6DC82' : '#F7F7F7' },
+      ]}
+    >
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  );
 }
 
-onItemPressed(item) {
-    var oldSelectedItems = this.state.selectedItems;
-    var itemState = oldSelectedItems[item.key];
-    if(!itemState) {
-        oldSelectedItems[item.key] = true;
-    }
-    else {
-        var newState = itemState? false: true;
-        oldSelectedItems[item.key] = newState;
-    }
-    this.setState({
-        selectedItems: oldSelectedItems,
-    });
-}
+export default function MultiSelect(props) {
+  const [selected, setSelected] = React.useState(new Map());
 
-componentDidMount() {
-    thisObj = this;
-}
+  const onSelect = React.useCallback(
+    (id,title) => {
+      const newSelected = new Map(selected);
+      newSelected.set(id, !selected.get(id));
+      setSelected(newSelected);
+      props.onSelectedItem(id,title);
+    },
+    [selected],
+  );
 
-getStyle(item) {
-    try {
-        console.log(thisObj.state.selectedItems[item.key]);
-        return thisObj.state.selectedItems[item.key]? styles.itemTextSelected : styles.itemText;
-    } catch(e) {
-        return styles.itemText;
-    }
-}
-
-render() {
-    return (
-        <View style={styles.rootView}>
-            <FlatList style={styles.list}
-                extraData={this.state}
-                data={this.props.data}
-                  renderItem={({item}) =>
-                    <TouchableHighlight onPress={this.onItemPressed.bind(this, item)} underlayColor='#f00'>
-                        <Text style={this.getStyle(item)}>{item.key}</Text>
-                    </TouchableHighlight>
-                  }
-                />
-        </View>
-        );
-}
+  return (
+      <FlatList
+        data={props.data}
+        renderItem={({ item }) => (
+          <Item
+            id={item.id}
+            title={item.name}
+            selected={!!selected.get(item.id)}
+            onSelect={onSelect}
+          />
+        )}
+        keyExtractor={item => item.id}
+        extraData={selected}
+      />
+  );
 }
 
 const styles = StyleSheet.create({
-rootView : {
-
-},
-itemText: {
-    padding: 16,
-    color: "#fff"
-},
-itemTextSelected: {
-    padding: 16,
-    color: "#fff",
-    backgroundColor: '#f00'
-},
-list: {
-
-}
+  container: {
+    flex: 1,
+    marginTop: Constants.statusBarHeight,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 10,
+    marginVertical: 4,
+    marginHorizontal: 8,
+  },
+  title: {
+    fontSize: 15,
+  },
 });
