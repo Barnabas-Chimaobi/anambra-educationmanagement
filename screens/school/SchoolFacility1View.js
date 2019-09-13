@@ -175,156 +175,99 @@ class SchoolFacility1View extends Component {
                     <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Are facilities shared with other schools?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.labelTextLong}>Are facilities shared with other schools?</Text>
+                            <Text style={styles.dataText}>No</Text>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>If yes, how many schools share facilities?</Text>
-                            <Text style={styles.dataText}>If yes, how many schools share facilities?</Text>
+                            <Text style={styles.labelTextLong}>If yes, how many schools share facilities?</Text>
+                            <Text style={styles.dataText}></Text>
                         </View>
 
-
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Is there multi-grade teaching in the school?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.labelTextLong}>Is there multi-grade teaching in the school?</Text>
+                            <Text style={styles.dataText}>No</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Distance from catchment communities</Text>
-                            <Text style={styles.dataText}>Distance from catchment communities</Text>
+                            <Text style={styles.dataText}>20 kilometers</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Distance from L.G.A Headquarters</Text>
-                            <Text style={styles.dataText}>Distance from L.G.A Headquarters</Text>
+                            <Text style={styles.dataText}>10 kilometers</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Number of students living over 1km from the school?</Text>
-                            <Text style={styles.dataText}>Number of students living over 1km from the school?</Text>
+                            <Text style={styles.labelTextLong}>Number of students living over 1km from the school?</Text>
+                            <Text style={styles.dataText}>320</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Is the school mixed or single sex?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Mixed' value='Mixed' />
-                                 <Picker.Item label='Girls only' value='Girls only' />
-                                 <Picker.Item label='Boys only' value='Boys only' />
-                               </Picker>
+                            <Text style={styles.dataText}>Mixed</Text>
                         </View>
-
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>School population</Text>
-                            <Text style={styles.dataText}>School population</Text>
+                            <Text style={styles.dataText}>900</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Male population</Text>
-                            <Text style={styles.dataText}>Male population</Text>
+                            <Text style={styles.dataText}>499</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Female population</Text>
-                            <Text style={styles.dataText}>Female population</Text>
+                            <Text style={styles.dataText}>401</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Are there boarding facilities?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.dataText}>Yes</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>If yes, how many students board at the school?</Text>
-                            <Text style={styles.dataText}>If yes, how many students board at the school?</Text>
+                            <Text style={styles.labelTextLong}>If yes, how many students board at the school?</Text>
+                            <Text style={styles.dataText}>400</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of perimeter fencing</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes, in good condition' value='Yes, in good condition' />
-                                 <Picker.Item label='Yes, needs minor repair' value='Yes, needs minor repair' />
-                                 <Picker.Item label='Yes, needs major repair' value='Yes, needs major repair' />
-                                 <Picker.Item label='No fence or wall' value='No fence or wall' />
-                               </Picker>
+                            <Text style={styles.dataText}>Yes, in good condition</Text>
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Availability of security personnel</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.dataText}>Yes</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Form of security</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Government employed' value='Government employed' />
-                                 <Picker.Item label='PTA employed' value='PTA employed' />
-                                 <Picker.Item label='Philantropist' value='Philantropist' />
-                               </Picker>
+                            <Text style={styles.dataText}>PTA Employed</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Number of security personnel</Text>
-                            <Text style={styles.dataText}>Number of security personnel</Text>
+                            <Text style={styles.dataText}>20</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Does the school have land encroachment?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.labelTextLong}>Does the school have land encroachment?</Text>
+                            <Text style={styles.dataText}>Yes</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Does the school have School Based Management Committee (SBMC)?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.labelTextLong}>Does the school have School Based Management Committee (SBMC)?</Text>
+                            <Text style={styles.dataText}>Yes</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                            <Text style={styles.labelText}>Did the school prepare a School Improvement Plan (SIP) last year?</Text>
-                            <Picker 
-                                    style={styles.selectInput}
-                                    onValueChange={()=>{}}>
-                                 <Picker.Item label='Yes' value='Yes' />
-                                 <Picker.Item label='No' value='No' />
-                               </Picker>
+                            <Text style={styles.labelTextLong}>Did the school prepare a School Improvement Plan (SIP) last year?</Text>
+                            <Text style={styles.dataText}>Yes</Text>
                         </View>
 
 
@@ -375,8 +318,9 @@ const styles = StyleSheet.create({
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
+    labelTextLong: { width: '45%', minHeight: 35, lineHeight: 15, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     
-    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', justifyContent: 'flex-end'},
+    dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', fontWeight: '600', justifyContent: 'flex-end'},
 
     textInput: {
         width: '55%', height: 35, fontSize: 15, paddingLeft: 5, marginRight: 15,
