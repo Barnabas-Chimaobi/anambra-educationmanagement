@@ -13,279 +13,86 @@
     "phone": "7896546",
     "dateEstablished": "2019-09-13",
     "locationId": 1,
-    "record": {
-      "academicSession": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
-      "educationLevels": [
+    "schoolRecord": {
+      "academicSessionId": 1,
+      "schoolEducationLevels": [
         {
-          "name": "string",
-          "active": true,
-          "id": 0
+          "educationLevelId": 1
         }
       ],
-      "type": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
+      "schoolTypeId": 1,
       "operatesShiftSystem": true,
       "sharesFacilities": true,
       "sharedFacilitiesCount": 0,
       "hasMultigradeTeachers": true,
-      "distanceFromTown": 0,
-      "distanceFromLGA": 0,
+      "distanceFromTown": 7,
+      "distanceFromLGA": 2,
       "studentsOutside1km": 0,
-      "schoolMix": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
-      "population": 0,
-      "populationBoys": 0,
-      "populationGirls": 0,
+      "schoolMixId": 1,
+      "population": 20,
+      "populationBoys": 5,
+      "populationGirls": 15,
       "hasBoarding": true,
       "boardingBoys": 0,
       "boardingGirls": 0,
       "hasPerimeterFence": true,
-      "perimeterFenceNeedsRepair": true,
+      "perimeterFenceNeedsRepair": false,
       "hasSecurityPersonnel": true,
-      "securityPersonnelType": {
-        "name": "string",
-        "id": 0
-      },
-      "securityPersonnelCount": 0,
+      "securityPersonnelTypeId": 1,
+      "securityPersonnelCount": 1,
       "hasLandEncroachment": true,
       "hasSBMC": true,
       "hasSIP": true,
       "hasPlaygorund": true,
       "hasSportsFacillity": true,
-      "parentForum": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
-      "lastInspection": "2019-09-13T15:49:25.150Z",
-      "inspectionCount": 0,
+      "parentForumId": 1,
+      "lastInspection": "2018-09-13",
+      "inspectionCount": 1,
       "studentTextbooksProvided": 0,
       "teacherTextbooksProvided": 0,
-      "inspectionAuthority": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
-      "grants": [
+      "inspectionAuthorityId": 1,
+      "schoolGrant": [
         {
-          "name": "string",
-          "active": true,
-          "id": 0
+            "grantId": 1
         }
       ],
-      "ownership": {
-        "name": "string",
-        "active": true,
-        "id": 0
-      },
+      "ownershipId": 1,
       "enrollmentCertificates": [
         {
-          "certificate": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "count": 0,
-          "id": 0
+          "birthCertificateId": 1
         }
       ],
       "enrollment": [
         {
-          "studentClass": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "count": 0,
-          "id": 0
+          "studentClassId": 1,
+          "count": 10
         }
       ],
       "classRooms": [
         {
-          "studentClass": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "stream": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "deskCount": 0,
+         "streamId": 1,
+         "studentClassId": 1,
+          "deskCount": 10,
           "hasWhiteBoard": true,
-          "classHeldOutside": true,
-          "id": 0
+          "classHeldOutside": true
         }
       ],
-      "facilities": [
+      "schoolFacilities": [
         {
-          "name": "string",
-          "type": "string",
-          "active": true,
-          "id": 0
+          "facilityId": 1
         }
       ],
-      "powerSources": [
+      "schoolHealthFacilities": [
         {
-          "name": "string",
-          "active": true,
-          "id": 0
+            "healthFacilityId": 1
         }
       ],
-      "healthFacilities": [
+      "schoolPowerSources": [
         {
-          "name": "string",
-          "active": true,
-          "id": 0
+          "powerSourceId": 1
         }
       ],
-      "headTeacher": {
-        "personId": 0,
-        "person": {
-          "name": "string",
-          "dateOfBirth": "2019-09-13T15:49:25.150Z",
-          "stateId": 0,
-          "state": {
-            "id": 0,
-            "name": "string",
-            "active": true
-          },
-          "lgaId": 0,
-          "lga": {
-            "id": 0,
-            "state": {
-              "id": 0,
-              "name": "string",
-              "active": true
-            },
-            "name": "string",
-            "active": true
-          },
-          "sexId": 0,
-          "sex": {
-            "gender": "string",
-            "active": true,
-            "id": 0
-          },
-          "hometown": "string",
-          "address": "string",
-          "phone": "string",
-          "email": "string",
-          "nextOfKin": {
-            "name": "string",
-            "phone": "string",
-            "email": "string",
-            "address": "string",
-            "personId": 0,
-            "id": 0
-          },
-          "id": 0
-        },
-        "teacherRecordId": 0,
-        "teacherRecord": {
-          "academicSessionId": 0,
-          "academicSession": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "onPremises": true,
-          "teacherQualifications": [
-            {
-              "qualificationId": 0,
-              "qualification": {
-                "name": "string",
-                "active": true,
-                "id": 0
-              },
-              "teacherRecordId": 0,
-              "id": 0
-            }
-          ],
-          "teacherSubjects": [
-            {
-              "subjectId": 0,
-              "subject": {
-                "name": "string",
-                "active": true,
-                "id": 0
-              },
-              "teacherRecordId": 0,
-              "id": 0
-            }
-          ],
-          "teacherSpecialization": [
-            {
-              "subjectAreaId": 0,
-              "subject": {
-                "name": "string",
-                "active": true,
-                "id": 0
-              },
-              "teacherRecordId": 0,
-              "id": 0
-            }
-          ],
-          "firstAppointment": "2019-09-13T15:49:25.150Z",
-          "currentAppointment": "2019-09-13T15:49:25.150Z",
-          "retirement": "2019-09-13T15:49:25.150Z",
-          "yearsOfExperience": 0,
-          "trainingsAttended": 0,
-          "streamsTaught": 0,
-          "gradeLevelId": 0,
-          "gradeLevel": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "rankId": 0,
-          "rank": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "postHeld": "string",
-          "datePosted": "2019-09-13T15:49:25.150Z",
-          "postingHistories": [
-            {
-              "schoolId": 0,
-              "startDate": "2019-09-13T15:49:25.150Z",
-              "endDate": "2019-09-13T15:49:25.150Z",
-              "comments": "string",
-              "teacherRecordId": 0,
-              "id": 0
-            }
-          ],
-          "staffTypeId": 0,
-          "staffType": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "staffClassId": 0,
-          "staffClass": {
-            "name": "string",
-            "active": true,
-            "id": 0
-          },
-          "schoolId": 0,
-          "id": 0
-        },
-        "id": 0
-      },
-      "id": 0
+      "headTeacherId": 1
     },
-    "active": true,
-    "id": 0
+    "active": true
   }

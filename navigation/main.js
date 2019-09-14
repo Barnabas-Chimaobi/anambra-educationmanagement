@@ -36,10 +36,10 @@ import SchoolFacility3View from '../screens/school/SchoolFacility3View';
 import SchoolHeadView from '../screens/school/SchoolHeadView';
 
 const TeacherStack = createStackNavigator({
-  // Teacher: TeacherIndex,
-  // Start: TeacherStart,
-  // StartPreview: TeacherStartPreview,
-  // Biodata:  TeacherBiodata,
+  Teacher: TeacherIndex,
+  Start: TeacherStart,
+  StartPreview: TeacherStartPreview,
+  Biodata:  TeacherBiodata,
   Academic: TeacherAcademic,
   View: Viewteacher,
   ViewBio: ViewteacherBio,
@@ -67,9 +67,9 @@ const TeacherStack = createStackNavigator({
 
 
 const StudentStack = createStackNavigator({
-  // Student: StudentIndex,
-  // Start: StudentStart,
-  // Biodata: StudentBiodata,
+  Student: StudentIndex,
+  Start: StudentStart,
+  Biodata: StudentBiodata,
   NextOfKin: StudentNextOfKin,
   BiodataPreview: StudentBiodataPreview,
   NextOfKinPreview: StudentNextOfKinPreview,
@@ -160,7 +160,7 @@ export default createDrawerNavigator({
   School: SchoolStack,
   },
   {
-    initialRouteName: 'School',
+    initialRouteName: 'Home',
     contentComponent: CustomDrawerContentComponent ,
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',

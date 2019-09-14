@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, Alert} from "react-native";
+import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, KeyboardAvoidingView} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
 import Logic from '../../../logic';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
@@ -18,24 +18,6 @@ class TeacherAcademic extends Component {
             Schools:[],
             Subjects:[],
             TeacherClasses:[],
-            Qualification: '',
-            Institutions: '',
-            SubjectArea: '',
-            SubjectTaught: '',
-            DateOfFirstApt: '',
-            DateOfPresentApt: '',
-            ExpectedDateofRetirement: '',
-            YearsOfExperience: '',
-            GradeLevel: '',
-            Rank: '',
-            PostHeld: '',
-            PostHeldYear: '',
-            TypeOfStaff: '',
-            ClassOfStaff: '',
-            NoOfSubjects: '',
-            NoOfStreams: '',
-            NoOfTraining: '',
-            schoolId: '',
             SubjectsTaught:[],
             Qualifications:[],
             SubjectAreas:[],
@@ -47,20 +29,83 @@ class TeacherAcademic extends Component {
             PostingName: '',
             PostingDate: '',
             Streams:[],
+            SubjectNames: '',
+            StreamNames: '',
             modalVisible: false,
             streamModalVisible: false,
             institutionModalVisible: false,
             postingModalVisible: false,
-            biodata: {}
+            Biodata:{
+                "person": {
+                    "First_Name":"",
+                    "Last_Name":"",
+                    "Other_Name":"",
+                    "name": "",
+                    "dateOfBirth": "",
+                    "stateId": 1,
+                    "lgaId": 1,
+                    "sexId": 1,
+                    "alergy":"N/A",
+                    "hometown": "",
+                    "address": "",
+                    "phone": "",
+                    "email": "",
+                    "nextOfKin": {
+                      "name": "",
+                      "phone": "",
+                      "email": "",
+                      "address": ""
+                    }
+                  },
+                "teacherRecord": {
+                  "AcademicSessionId": 1,
+                  "schoolId": 1,
+                  "onPremises": true,
+                  "teacherQualifications": [
+                    {
+                      "qualificationId": 1
+                    }
+                  ],
+                  "teacherSubjects": [
+                  ],
+                "teacherStreams": [
+                ],
+                  "teacherSpecialization": [
+                    {
+                      "subjectAreaId": 1
+                    }
+                  ],
+                  "teacherInstitutions": [
+                  ],
+                  "specialization": "Teaching",
+                  "firstAppointment": "",
+                  "currentAppointment": "",
+                  "retirement": "",
+                  "yearsOfExperience": 0,
+                  "trainingsAttended": 0,
+                  "streamsTaught": 1,
+                  "gradeLevelId": 1,
+                  "rankId": 1,
+                  "postHeld": "Teacher",
+                  "datePosted": "",
+                  "postingHistories": [],
+                  "staffTypeId": 1,
+                  "StaffClassId": 1
+                }
+            }
         }
     }
 
+    static navigationOptions =  {
+        title: 'New Teacher',
+        headerLeft: null
+    }
 
     componentDidMount(){
 
-      const biodata = this.props.navigation.getParam('bioData', '');
-      if (biodata){
-          this.setState({biodata: biodata});
+      const Biodata = this.props.navigation.getParam('Biodata', '');
+      if (Biodata){
+          this.setState({Biodata: Biodata});
       }
       const gradelevels = new Logic()
       gradelevels.GradeLevels('http://97.74.6.243/anambra/api/GradeLevels')
@@ -134,77 +179,112 @@ class TeacherAcademic extends Component {
 
 
     }
+    updateQaulification = (Qualification) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.teacherQualifications[0].qualificationId = Qualification;
+        this.setState({ Biodata : Biodata})
+    }
 
+    updateSchool = (School) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.schoolId = School;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateGradeLevel = (GradeLevel) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.gradeLevelId = GradeLevel;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateStaffType = (staffType) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.staffTypeId = staffType;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateStaffClass = (staffClass) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.StaffClassId = staffClass;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateRank = (Rank) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.rankId = Rank;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateSubjectArea = (SubjectArea) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.teacherSpecialization[0].subjectAreaId = SubjectArea;
+        this.setState({ Biodata : Biodata})
+    }
+    goBack = () =>{
+
+        const {Biodata} = this.state;
+        this.props.navigation.navigate("Biodata", {Biodata});
+
+    }
     submitForm = () => {
         const saveTeacher = new Logic()
-        const formData = {
-            "person": {
-              "name": this.state.biodata.name,
-              "dateOfBirth": this.state.biodata.dateOfBirth,
-              "stateId" :this.state.biodata.StateOrigin,
-              "lgaId":this.state.biodata.Lga,
-              "sexId":this.state.biodata.sex,
-              "hometown": this.state.biodata.Hometown, //this.state.biodata.Hometown,
-              "address": this.state.biodata.Residential,
-              "phone": this.state.biodata.phone,
-              "email": this.state.biodata.Email,
-              "nextOfKin": {
-                "name": this.state.biodata.NextofKin,
-                "phone": this.state.biodata.NextofKinPhone,
-                "email": this.state.biodata.Email,
-                "address": this.state.biodata.Residential,
-              },
-            },
-            "teacherRecord": {
-              "AcademicSessionId": 1,
-              "schoolId": this.state.schoolId,
-              "onPremises": this.state.biodata.liveIn,
-              "qualifications": [
-                {
-                  "courseName": this.state.Qualification,
-                  "startDate": "2016-09-08", //this.state.biodata.Residential
-                  "endDate": "2016-09-08", //this.state.biodata.Residential
-                  "grade": "-", //this.state.biodata.Residential
-                }
-              ],
-              "specialization": this.state.SubjectArea,
-              "firstAppointment": this.state.DateOfFirstApt,
-              "currentAppointment": this.state.DateOfPresentApt,
-              "retirement": this.state.ExpectedDateofRetirement,
-              "yearsOfExperience": this.state.YearsOfExperience,
-              "trainingsAttended": this.state.NoOfTraining,
-              "streamsTaught": this.state.NoOfStreams,
-              "gradeLevelId": this.state.GradeLevel,
-              "rankId": this.state.Rank,
-              "postHeld": this.state.PostHeld,
-              "datePosted": this.state.PostHeldYear,
-              "postingHistories": [
-                {
+        const {Biodata} = this.state;
 
-                  "schoolId": this.state.schoolId,
-                  "startDate": this.state.PostHeldYear,
-                  "endDate": this.state.PostHeldYear,
-                  "comments": "-",
-                }
-                ],
-                "staffTypeId": this.state.TypeOfStaff,
-                "StaffClassId": this.state.ClassOfStaff,
-                "teacherSubjects":[
-                    {"subjectId": this.state.SubjectTaught},
-                ],
-            },
-          };
+        if(!Biodata.teacherRecord.teacherSubjects[0]){
+            alert("Add the subject taught by teacher!");
+            return;
+        }
 
-        console.log("Form Data",formData);
-        saveTeacher.TeacherBiodata("http://97.74.6.243/anambra/api/Teachers",formData)
+        if(!Biodata.teacherRecord.postingHistories[0]){
+            alert("Add the schools taught by teacher!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.teacherStreams[0]){
+            alert("Add the streams taught by teacher!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.teacherInstitutions[0]){
+            alert("Add the isntituions worked by teacher!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.firstAppointment){
+            alert("Select First Appointment Date!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.currentAppointment){
+            alert("Select Current Appointment Date!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.retirement){
+            alert("Select Retirement Date!");
+            return;
+        }
+
+        if(!Biodata.teacherRecord.datePosted){
+            alert("Select Date posted to current school!");
+            return;
+        }
+
+
+        saveTeacher.TeacherBiodata("http://97.74.6.243/anambra/api/Teachers",Biodata)
         .then((res) => {
-            console.log(res);
             if (res.status == 201){
                 alert("Record saved!");
             }
-            this.props.navigation.navigate("Home");
+            this.props.navigation.navigate("Biodata");
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => {
+            alert("Phone number already exists");
+        console.log("eRROR",error);
+            // if (error.response.status == 400){
+            //     alert(error.response.data);
+            // }
+        });
 
     }
 
@@ -224,79 +304,130 @@ class TeacherAcademic extends Component {
         this.setState({postingModalVisible: visible});
     }
 
+
     addInstitution = () => {
         if (this.state.InstitutionName && this.state.InstitutionDate){
-            data = {name:this.state.InstitutionName, date: this.state.InstitutionDate};
-            InstitutionsAttended = this.state.InstitutionsAttended;
-            InstitutionsAttended.push(data);
-            this.setState({InstitutionsAttended:InstitutionsAttended, InstitutionName: null,InstitutionDate:null});
+
+            data = {institution:this.state.InstitutionName, date:this.state.InstitutionDate.substring(0,10)};
+
+            const {Biodata} = this.state;
+            Biodata.teacherRecord.teacherInstitutions.push(data);
+            this.setState({ Biodata : Biodata,InstitutionName: null,InstitutionDate:null})
+
+            // console.log("Existing Instituion",Biodata.teacherRecord.teacherInstitutions);
         }
 
     }
 
     removeInstitution = (index) => {
 
-        InstitutionsAttended = this.state.InstitutionsAttended;
-        InstitutionsAttended.splice(index,1);
-        this.setState({InstitutionsAttended:InstitutionsAttended});
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.teacherInstitutions.splice(index,1);
+        this.setState({Biodata:Biodata});
 
     }
 
     addPostingHistory = () => {
         if (this.state.PostingName && this.state.PostingDate){
-            data = {name:this.state.PostingName, date: this.state.PostingDate};
-            PostingHistoryDate = this.state.PostingHistoryDate;
-            PostingHistoryDate.push(data);
-            this.setState({PostingHistoryDate:PostingHistoryDate, PostingName: null,PostingDate:null});
+
+            data = {institution:this.state.PostingName, date: this.state.PostingDate};
+
+            const {Biodata} = this.state;
+            Biodata.teacherRecord.postingHistories.push(data);
+            this.setState({ Biodata : Biodata,PostingName: null,PostingDate:null})
+
         }
 
     }
 
     removePostingHistory = (index) => {
 
-        PostingHistoryDate = this.state.PostingHistoryDate;
-        PostingHistoryDate.splice(index,1);
-        this.setState({PostingHistoryDate:PostingHistoryDate});
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.postingHistories.splice(index,1);
+        this.setState({Biodata:Biodata});
 
     }
 
     setAppoitmentDate = (newDate) => {
-        this.setState({ DateOfFirstApt: newDate.toISOString() });
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.firstAppointment = newDate.toISOString();
+        this.setState({ Biodata : Biodata})
+    }
+
+    setInstitutionDate = (newDate) => {
+        let {InstitutionDate} = this.state;
+        InstitutionDate = newDate.toISOString();
+        this.setState({ InstitutionDate : InstitutionDate})
+    }
+
+
+    setPostingDate = (newDate) => {
+        let {PostingDate} = this.state;
+        PostingDate = newDate.toISOString();
+        this.setState({ PostingDate : PostingDate})
     }
 
     setRetirementDate = (newDate) => {
-        this.setState({ ExpectedDateofRetirement: newDate.toISOString() });
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.retirement = newDate.toISOString();
+        this.setState({ Biodata : Biodata})
     }
 
     setPresentAppointmentDate = (newDate) => {
-        this.setState({ DateOfPresentApt: newDate.toISOString() });
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.currentAppointment = newDate.toISOString();
+        this.setState({ Biodata : Biodata})
     }
 
     setPostedDate = (newDate) => {
-        this.setState({ PostHeldYear: newDate.toISOString() });
+        const {Biodata} = this.state;
+        Biodata.teacherRecord.datePosted = newDate.toISOString();
+        this.setState({ Biodata : Biodata})
     }
 
     handleChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.teacherRecord[inputName] = text;
+        this.setState({Biodata:Biodata });
+    }
+
+    handleChangeOtherText = (inputName, text) => {
         this.setState({ [inputName]: text });
     }
 
     onSelectedItemsChange = (subjectId,subjectName) => {
-        let SubjectsTaught = this.state.SubjectsTaught;
+        let SubjectsTaught = [];
         SubjectsTaught.push({id: subjectId, name: subjectName});
-        this.setState({ SubjectsTaught:SubjectsTaught });
+
+        const {Biodata} = this.state;
+        let {SubjectNames} = this.state;
+        SubjectNames = SubjectNames + ',' + subjectName;
+
+
+        Biodata.teacherRecord.teacherSubjects.push({
+            "subjectId": subjectId
+          });
+        this.setState({ Biodata : Biodata,SubjectNames})
     };
 
     onSelectedStreamItemsChange = (streamId,streamName) => {
-        let StreamsTaught = this.state.StreamsTaught;
+        let StreamsTaught = [];
         StreamsTaught.push({id: streamId, name: streamName});
-        this.setState({ StreamsTaught:StreamsTaught });
+
+        const {Biodata} = this.state;
+        let {StreamNames} = this.state;
+        StreamNames = StreamNames + ',' + streamName;
+        Biodata.teacherRecord.teacherStreams.push({
+            "streamId": streamId
+          });
+        this.setState({ Biodata : Biodata,StreamNames:StreamNames})
     };
 
 
     render() {
 
         return (
-
+            <KeyboardAvoidingView style={{flex:1}} behavior="padding" enabled>
             <Container>
 
                     <View style={{backgroundColor:'#E6DC82', padding :10}}>
@@ -316,7 +447,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Highest Qualification</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.Qualification} onValueChange={(QualificationId) => {this.setState({ Qualification: QualificationId })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.teacherQualifications[0].qualificationId} onValueChange={(QualificationId) => {this.updateQaulification( QualificationId)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Qualifications.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
@@ -329,7 +460,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Institution Attended</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setInstitutionModalVisible(true);}}>
-                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.InstitutionsAttended.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.InstitutionsAttended.length > 0 ? " Selected": "Add Institutions"}</Text>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.Biodata.teacherRecord.teacherInstitutions.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.Biodata.teacherRecord.teacherInstitutions.length > 0 ? " Selected": "Add Institutions"}</Text>
                                 </TouchableHighlight>
                             </View>
 
@@ -338,7 +469,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Subject Area Specialisation</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.SubjectArea} onValueChange={(SubjectArea) => {this.setState({ SubjectArea: SubjectArea })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.teacherSpecialization[0].subjectAreaId} onValueChange={(SubjectArea) => {this.updateSubjectArea( SubjectArea)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.SubjectAreas.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
@@ -349,8 +480,8 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Date of First Appointment</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
+                                defaultDate={new Date(1960, 4, 4)}
+                                minimumDate={new Date(1960, 1, 1)}
                                 maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
@@ -369,8 +500,8 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Date of Present Appointment</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
+                                defaultDate={new Date(1960, 4, 4)}
+                                minimumDate={new Date(1960, 1, 1)}
                                 maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
@@ -409,14 +540,14 @@ class TeacherAcademic extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Years of Experience</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput  keyboardType="number-pad" onChangeText={text => this.handleChangeText('YearsOfExperience',text)} value={this.state.YearsOfExperience} style={styles.textInput}/>
+                                <TextInput  keyboardType="number-pad" onChangeText={text => this.handleChangeText('yearsOfExperience',text)} value={this.state.Biodata.teacherRecord.yearsOfExperience} style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.schoolId} onValueChange={(schoolId) => {this.setState({ schoolId: schoolId })}}
+                                    selectedValue={this.state.schoolId} onValueChange={(schoolId) => {this.updateSchool(schoolId)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Schools.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
@@ -428,7 +559,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Grade Level</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.GradeLevel} onValueChange={(level) => {this.setState({ GradeLevel: level })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.gradeLevelId} onValueChange={(level) => {this.updateGradeLevel(level)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Grades.map( (v,key)=>{
                                             return <Picker.Item label={v.name} key={key}  value={v.id} />
@@ -441,7 +572,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Rank</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.Rank} onValueChange={(Rank) => {this.setState({ Rank: Rank })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.rankId} onValueChange={(Rank) => {this.updateRank(Rank)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Ranks.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
@@ -453,14 +584,14 @@ class TeacherAcademic extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Post Held in School</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PostHeld',text)} value={this.state.PostHeld} style={styles.textInput}/>
+                                <TextInput onChangeText={text => this.handleChangeText('postHeld',text)} value={this.state.Biodata.teacherRecord.postHeld} style={styles.textInput}/>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Year Posted to School</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <DatePicker
-                                defaultDate={new Date(2018, 4, 4)}
-                                minimumDate={new Date(2018, 1, 1)}
+                                defaultDate={new Date(1960, 4, 4)}
+                                minimumDate={new Date(1960, 1, 1)}
                                 maximumDate={new Date()}
                                 locale={"en"}
                                 timeZoneOffsetInMinutes={undefined}
@@ -479,7 +610,7 @@ class TeacherAcademic extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Posting History with date</Text>
                                 <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setPostingModalVisible(true);}}>
-                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.PostingHistoryDate.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.PostingHistoryDate.length > 0 ? " Selected": "Add Posting History"}</Text>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.Biodata.teacherRecord.postingHistories.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.PostingHistoryDate.length > 0 ? " Selected": "Add Posting History"}</Text>
                                 </TouchableHighlight>
                             </View>
 
@@ -488,7 +619,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Type of Staff</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.TypeOfStaff} onValueChange={(TypeOfStaff) => {this.setState({ TypeOfStaff: TypeOfStaff })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.staffTypeId} onValueChange={(TypeOfStaff) => {this.updateStaffType( TypeOfStaff)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Types.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
@@ -501,7 +632,7 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Class of Staff</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                    selectedValue={this.state.ClassOfStaff} onValueChange={(ClassOfStaff) => {this.setState({ ClassOfStaff: ClassOfStaff })}}
+                                    selectedValue={this.state.Biodata.teacherRecord.StaffClassId} onValueChange={(ClassOfStaff) => {this.updateStaffClass(ClassOfStaff)}}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.TeacherClasses.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
@@ -515,9 +646,12 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Subject taught</Text>
                                 <Text style={styles.Asterix}>*</Text>
                                 <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setModalVisible(true);}}>
-                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.SubjectsTaught.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.SubjectsTaught.length > 0 ? " Selected": "Select Subjects"}</Text>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.Biodata.teacherRecord.teacherSubjects.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.SubjectsTaught.length > 0 ? " Selected": "Select Subjects"}</Text>
                                 </TouchableHighlight>
+                            </View>
 
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                 <Text style={styles.subText2}>{this.state.SubjectNames}</Text>
                             </View>
 
 
@@ -525,22 +659,25 @@ class TeacherAcademic extends Component {
                                 <Text style={styles.labelText}>Streams taught</Text>
                                 <Text style={styles.Asterix}>*</Text>
                                 <TouchableHighlight style={{backgroundColor: '#F7F7F7' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setStreamModalVisible(true);}}>
-                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.StreamsTaught.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.StreamsTaught.length > 0 ? " Selected": "Select Streams"}</Text>
+                                    <Text style={{alignSelf:'center', fontSize: 15, backgroundColor: this.state.Biodata.teacherRecord.teacherStreams.length > 0 ? '#E6DC82': '#F7F7F7'}}>{this.state.StreamsTaught.length > 0 ? " Selected": "Select Streams"}</Text>
                                 </TouchableHighlight>
+                            </View>
 
+                            <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
+                                 <Text style={styles.subText2}>{this.state.StreamNames}</Text>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Number of trainings attended</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('NoOfTraining',text)} value={this.state.NoOfTraining}  style={styles.textInput}/>
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('trainingsAttended',text)} value={this.state.Biodata.teacherRecord.trainingsAttended}  style={styles.textInput}/>
                             </View>
 
 
                             <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.goBack()}}>
+                                    <Button block style={styles.button2} onPress={()=>{this.goBack()}}>
                                             <Text style={styles.button2Text}>Previous</Text>
                                     </Button>
                                 </View>
@@ -563,7 +700,7 @@ class TeacherAcademic extends Component {
                             }}>
                             <View>
 
-                              <MultiSelect data={this.state.Subjects} onSelectedItem={this.onSelectedItemsChange}  />
+                              <MultiSelect data={this.state.SubjectAreas} onSelectedItem={this.onSelectedItemsChange}  />
 
                                 <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setModalVisible(!this.state.modalVisible);}}>
                                         <Text style={{alignSelf:'center', fontSize: 20}}>Confirm Selection</Text>
@@ -602,15 +739,28 @@ class TeacherAcademic extends Component {
                                     <View style={{paddingTop: 5,margin:5, marginTop: 10, flexDirection:'row' }}>
                                         <Text style={styles.labelModalFormText}>Institution</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput onChangeText={text => this.handleChangeText('InstitutionName',text)} 
+                                        <TextInput onChangeText={text => this.handleChangeOtherText('InstitutionName',text)}
                                             value={this.state.InstitutionName}  style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                         <Text style={styles.labelModalFormText}>Date</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('InstitutionDate',text)} 
-                                            value={this.state.InstitutionDate}  style={styles.textModalInput}/>
+                                        <DatePicker
+                                                defaultDate={new Date(2018, 4, 4)}
+                                                minimumDate={new Date(1960, 1, 1)}
+                                                maximumDate={new Date()}
+                                                locale={"en"}
+                                                timeZoneOffsetInMinutes={undefined}
+                                                modalTransparent={false}
+                                                animationType={"fade"}
+                                                androidMode={"default"}
+                                                placeHolderText="Select date"
+                                                textStyle={{ color: "green" }}
+                                                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                                onDateChange={this.setInstitutionDate}
+                                                disabled={false}
+                                            />
                                     </View>
 
                                     <View style={styles.buttonView}>
@@ -623,16 +773,16 @@ class TeacherAcademic extends Component {
                                 <View>
                                     <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center',alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 30}}>All Institutions</Text>
                                     {
-                                        this.state.InstitutionsAttended.map((v,key)=>{
+                                        this.state.Biodata.teacherRecord.teacherInstitutions.map((v,key)=>{
                                             return (
-                                                <View>
-                                                    <View style={{backgroundColor: 'rgba(100, 100, 100, 0.34)', alignSelf: 'center', padding: 20, minWidth: 600, flexDirection: 'row'}} key={key}>
-                                                        <Text style={styles.labelModalText}>{v.name} - {v.date}</Text>
-                                                        
+                                                <View key={key}>
+                                                    <View style={{backgroundColor: 'rgba(100, 100, 100, 0.34)', alignSelf: 'center', padding: 20, minWidth: 600, flexDirection: 'row'}} >
+                                                        <Text style={styles.labelModalText}>{v.institution} - {v.date}</Text>
+
                                                         <Button block style={styles.buttonModal1} onPress={()=>{ this.removeInstitution(key) }}>
                                                             <Text style={styles.buttonModalText}>Remove</Text>
                                                         </Button>
-                                                        
+
                                                     </View>
                                                 </View>
                                             )
@@ -660,15 +810,28 @@ class TeacherAcademic extends Component {
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                         <Text style={styles.labelModalFormText}>Institution</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput onChangeText={text => this.handleChangeText('PostingName',text)} 
+                                        <TextInput onChangeText={text => this.handleChangeOtherText('PostingName',text)}
                                             value={this.state.PostingName}  style={styles.textModalInput}/>
                                     </View>
 
                                     <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                         <Text style={styles.labelModalFormText}>Date</Text>
                                         <Text style={styles.Asterix}>*</Text>
-                                        <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('PostingDate',text)} 
-                                            value={this.state.PostingDate} style={styles.textModalInput}/>
+                                        <DatePicker
+                                            defaultDate={new Date(2018, 4, 4)}
+                                            minimumDate={new Date(1960, 1, 1)}
+                                            maximumDate={new Date()}
+                                            locale={"en"}
+                                            timeZoneOffsetInMinutes={undefined}
+                                            modalTransparent={false}
+                                            animationType={"fade"}
+                                            androidMode={"default"}
+                                            placeHolderText="Select date"
+                                            textStyle={{ color: "green" }}
+                                            placeHolderTextStyle={{ color: "#d3d3d3" }}
+                                            onDateChange={this.setPostingDate}
+                                            disabled={false}
+                                        />
                                     </View>
 
                                     <View style={styles.buttonView}>
@@ -681,11 +844,11 @@ class TeacherAcademic extends Component {
                                 <View>
                                     <Text style={{fontSize: 18, fontWeight: 'bold', textAlign: 'center',alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 30}}>All Posting</Text>
                                     {
-                                        this.state.PostingHistoryDate.map((v,key)=>{
+                                        this.state.Biodata.teacherRecord.postingHistories.map((v,key)=>{
                                             return (
                                                 <View style={{backgroundColor: 'rgba(100, 100, 100, 0.34)', alignSelf: 'center', padding: 20, minWidth: 600, flexDirection: 'row'}} key={key}>
 
-                                                    <Text style={styles.labelModalText}>{v.name} - {v.date}</Text>
+                                                    <Text style={styles.labelModalText}>{v.institution} - {v.date}</Text>
                                                     <Button block style={styles.buttonModal1} onPress={()=>{ this.removePostingHistory(key) }}>
                                                         <Text style={styles.buttonModalText}>Remove</Text>
                                                     </Button>
@@ -703,6 +866,7 @@ class TeacherAcademic extends Component {
 
                     </Content>
             </Container>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -741,6 +905,7 @@ const styles = StyleSheet.create({
     inputView: { width: '100%',alignItems: 'stretch'},
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
+    subText2: { fontSize: 15, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'center' },
 
     labelText: { width: '45%', height: 35, lineHeight: 18, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
     labelModalFormText: { width: '45%', height: 35, lineHeight: 18, textAlign: 'center', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },

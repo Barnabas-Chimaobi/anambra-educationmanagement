@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Dimensions,Alert } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, Dimensions,Alert } from "react-native";
 import { Container, Content, Form, Button,DatePicker,Switch} from 'native-base';
 import { CheckBox } from 'react-native-elements';
 import Logic from '../../../logic'
@@ -24,30 +24,106 @@ class StudentNextOfKin extends Component {
             SpecialNeeds:[],
             Relationships: [],
             Vulnerabilities: [],
-            NextOfkinName: '',
-            NextOfkinPhone: '',
-            NextOfkinAddress: '',
-            GuardianName: '',
-            GuardianState: '',
-            GuardianLga: '',
-            GuardianRelationship: '',
-            GuardianAddress: '',
-            GuardianPhone: '',
-            GuardianEmail: '',
-            GuardianANSSID: '',
-            GuardianOccupation: '',
-            StudentClass:'',
-            Stream:'',
-            SpecialNeed:'',
-            Vulnerability:'',
-            DistanceFromSchool: 0,
-            SchoolId: '',
-            PreviousSchool: '',
-            ReasonForLeaving: '',
-            Alergy:'',
-            biodata: {}
+            Biodata:{
+                "person": {
+                    "First_Name":"",
+                    "Last_Name":"",
+                    "Other_Name":"",
+                    "name": "Somadina Eche",
+                    "dateOfBirth": "1998-09-08",
+                    "stateId": 1,
+                    "lgaId": 1,
+                    "alergy": "N/A",
+                    "sexId": 1,
+                    "hometown": "Manchester",
+                    "address": "556 Holloway Road London",
+                    "permanentAddress": "London",
+                    "phone": "447031568998",
+                    "email": "me@eche.com",
+                    "nextOfKin": {
+                        "name": "Josh Eche",
+                        "phone": "565868638",
+                        "email": "dad@eche.com",
+                        "address": "Manchester"
+                    },
+                    "guardian": {
+                        "name": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "address": "string",
+                        "lgaId": 1,
+                        "stateId": 1,
+                        "anssidNumber": "string",
+                        "occupation": "string",
+                        "relationshipId": 1,
+                      },
+
+                },
+                "studentRecords": [{
+                    "academicSessionId": 1,
+                    "studentClassId": 1,
+                    "streamId": 1,
+                    "isBoarding": true,
+                    "distanceFromSchool": 0,
+                    "schoolId": 1
+                }],
+                "previousEducations": [{
+                    "school": "KYC School",
+                    "reasonForLeaving": "Graduataed",
+                    "studentClassId": 1
+                }],
+                "studentSpecialNeeds": [{
+                    "specialNeedId": 1
+                }],
+                "studentVulnerabilities": [{
+                    "vulnerabilityId": 1
+                }]
+            }
         }
         this.setDate = this.setDate.bind(this);
+    }
+
+
+    static navigationOptions =  {
+        title: 'New Student',
+        headerLeft: null
+    }
+
+    updateClass = (value) => {
+        const {Biodata} = this.state;
+        Biodata.studentRecords[0].studentClassId = value;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateStream = (value) => {
+        const {Biodata} = this.state;
+        Biodata.studentRecords[0].streamId = value;
+        this.setState({ Biodata : Biodata})
+    }
+
+
+    updateBording = (value) => {
+        const {Biodata} = this.state;
+        Biodata.studentRecords[0].isBoarding = value;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateSpecialNeed = (value) => {
+        const {Biodata} = this.state;
+        Biodata.studentSpecialNeeds[0].specialNeedId = value;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateVulnerability = (value) => {
+        const {Biodata} = this.state;
+        Biodata.studentVulnerabilities[0].vulnerabilityId = value;
+        this.setState({ Biodata : Biodata})
+    }
+
+    updateSchool = (School) => {
+        const {Biodata} = this.state;
+        Biodata.studentRecords[0].schoolId = School;
+        this.setState({ Biodata : Biodata})
     }
 
     onSelectedItemsChange = selectedItems => {
@@ -69,10 +145,9 @@ class StudentNextOfKin extends Component {
 
     componentDidMount(){
 
-        const biodata = this.props.navigation.getParam('bioData', '');
-        if (biodata){
-            console.log("Biodata",biodata)
-            this.setState({biodata: biodata});
+        const Biodata = this.props.navigation.getParam('Biodata', '');
+        if (Biodata){
+            this.setState({Biodata: Biodata});
         }
          // sex
         const sexes = new Logic()
@@ -156,167 +231,161 @@ class StudentNextOfKin extends Component {
     }
 
     getLgaForState = (stateId) => {
+        const {Biodata} = this.state;
+        Biodata.person.guardian.stateId = stateId;
+
         const lgas = new Logic()
         lgas.Lgas(`http://97.74.6.243/anambra/state/${stateId}`)
 
             .then((res) => {
-                this.setState({ Lgas: res.data,GuardianState: stateId })
+                this.setState({ Lgas: res.data,Biodata: Biodata })
             })
             .catch((error) => console.warn(error))
 
     }
 
     updateLga = (GuardianLga) => {
-        this.setState({ GuardianLga: GuardianLga })
+        const {Biodata} = this.state;
+        Biodata.person.guardian.lgaId= GuardianLga;
+        this.setState({Biodata:Biodata });
     }
 
-    updateRelationship = (GuardianRelationship) => {
-        this.setState({ GuardianRelationship: GuardianRelationship })
+    updateRelationship = (value) => {
+        const {Biodata} = this.state;
+        Biodata.person.guardian.relationshipId= value;
+        this.setState({Biodata:Biodata });
+    }
+
+    handleBiodataChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.person[inputName] = text;
+        this.setState({Biodata:Biodata });
+    }
+
+    handleBioChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.previousEducations[0][inputName] = text;
+        this.setState({Biodata:Biodata });
+    }
+
+    handleSchoolChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.studentRecords[0][inputName] = text;
+        this.setState({Biodata:Biodata });
+    }
+
+    handleGuardianChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.person.guardian[inputName] = text;
+        this.setState({Biodata:Biodata });
     }
 
     handleChangeText = (inputName, text) => {
-        this.setState({ [inputName]: text });
+        const {Biodata} = this.state;
+        Biodata.person.nextOfKin[inputName] = text;
+        this.setState({Biodata:Biodata });
     }
 
+    goBack = () =>{
+
+        const {Biodata} = this.state;
+        this.props.navigation.navigate("Biodata", {Biodata});
+
+    }
 
     submitForm = () => {
 
-        if (!this.state.GuardianName){
+        const {Biodata} = this.state;
+
+        if (!this.state.Biodata.person.guardian.name){
             alert("Guardian Name is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianState){
+        if (!this.state.Biodata.person.guardian.stateId){
             alert("Guardian State of Origin is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianLga){
+        if (!this.state.Biodata.person.guardian.lgaId){
             alert("Guardian Lga is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianRelationship){
+        if (!this.state.Biodata.person.guardian.relationshipId){
             alert("Guardian Relationship with pupil is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianAddress){
+        if (!this.state.Biodata.person.guardian.address){
             alert("Guardian Address is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianPhone){
+        if (!this.state.Biodata.person.guardian.phone){
             alert("Guardian Phone Number is compulsory!");
             return;
         }
 
 
-        if (!this.state.GuardianEmail){
-            this.setState({GuardianEmail: "-"})
-            return;
+        if (!this.state.Biodata.person.guardian.email){
+
         }
         else
         {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-            if(reg.test(text) === false)
+            if(reg.test(this.state.Biodata.person.guardian.email) === false)
             {
                 alert("Email is Not valid!");
                 return;
             }
         }
 
-        if (!this.state.GuardianANSSID){
+        if (!this.state.Biodata.person.guardian.anssidNumber){
             alert("Guardian ANSSID is compulsory!");
             return;
         }
 
-        if (!this.state.GuardianOccupation){
+        if (!this.state.Biodata.person.guardian.occupation){
             alert("Guardian Occupation is compulsory!");
             return;
         }
 
-        if (!this.state.StudentClass){
+        if (!this.state.Biodata.studentRecords[0].studentClassId){
             alert("Student Class is compulsory!");
             return;
         }
 
-        if (!this.state.Stream){
+        if (!this.state.Biodata.studentRecords[0].streamId){
             alert("Student Stream is compulsory!");
             return;
         }
 
-        if (!this.state.DistanceFromSchool){
+        if (!this.state.Biodata.studentRecords[0].distanceFromSchool){
             alert("Distance From School is compulsory!");
             return;
         }
 
         const saveStudent = new Logic()
-        const formData = {
-            "person": {
-                "name": this.state.biodata.name,
-                "dateOfBirth": this.state.biodata.dateOfBirth,
-                "stateId" :this.state.biodata.StateOrigin,
-                "lgaId":this.state.biodata.Lga,
-                "sexId":this.state.biodata.sex,
-                "hometown": this.state.biodata.Hometown,
-                "address": this.state.biodata.Residential,
-                "phone": this.state.biodata.phone,
-                "email": this.state.biodata.Email,
-                "nextOfKin": {
-                  "name": this.state.biodata.NextofKin,
-                  "phone": this.state.biodata.NextofKinPhone,
-                  "email": this.state.biodata.Email,
-                  "address": this.state.biodata.Residential,
-                },
-            },
-            "studentRecords": [
-              {
-                "academicSessionId": 1,
-                "studentClassId": this.state.StudentClass,
-                "streamId": this.state.Stream,
-                "isBoarding": this.state.isBoarding,
-                "distanceFromSchool": this.state.DistanceFromSchool,
-                "schoolId": this.state.SchoolId,
-              }
-            ],
-            "previousEducations": [
-              {
-                "schoolId":this.state.SchoolId,
-                "reasonForLeaving": "-",
-                "startDate": "2019-09-09",
-                "endDate": "2019-09-09",
-                "studentClassId": 1,
-              }
-            ],
-            "studentSpecialNeeds": [
-              {
-                "specialNeedId": this.state.SpecialNeed,
-              }
-            ],
-            "studentVulnerabilities": [
-              {
-                "vulnerabilityId": this.state.Vulnerability,
-              }
-            ],
-          };
 
-        console.log("Form Data",formData);
-        saveStudent.StudentBiodata("http://97.74.6.243/anambra/api/Students",formData)
+        saveStudent.StudentBiodata("http://97.74.6.243/anambra/api/Students",Biodata)
         .then((res) => {
             console.log(res);
             if (res.status == 201){
                 alert("Record saved!");
 
             }
-            this.props.navigation.navigate("Home");
+            this.props.navigation.navigate("Biodata");
         })
-        .catch((error) => console.warn(error));
+        .catch((error) => {
+            alert("Student Name & Next of Kin Phone number already exists");
+        });
 
     }
 
     render() {
         return (
+            <KeyboardAvoidingView style={{flex:1}} behavior="padding" enabled>
 
             <Container>
 
@@ -334,14 +403,14 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Names of Parents/ Guardians</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianName', text)} value={this.state.GuardianName} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleGuardianChangeText('name', text)} value={this.state.Biodata.person.guardian.name} style={styles.textInput} />
                         </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>State of Origin</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.GuardianState} onValueChange={this.updateStateOrigin}
+                                  selectedValue={this.state.Biodata.person.guardian.stateId} onValueChange={(stateId)=>this.updateStateOrigin(stateId)}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                 {this.state.States.map( (v, key)=>{
@@ -353,7 +422,7 @@ class StudentNextOfKin extends Component {
                                 <Text style={styles.labelText}>L.G.A</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                      selectedValue={this.state.GuardianLga} onValueChange={this.updateLga}
+                                      selectedValue={this.state.Biodata.person.guardian.lgaId} onValueChange={(lga)=>this.updateLga(lga)}
                                       style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                         {this.state.Lgas.map( (v, key)=>{
@@ -367,7 +436,7 @@ class StudentNextOfKin extends Component {
                                 <Text style={styles.labelText}>Realtionship with Pupil</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                     selectedValue={this.state.GuardianRelationship} onValueChange={this.updateRelationship}
+                                     selectedValue={this.state.Biodata.person.guardian.relationshipId} onValueChange={(relationship) => {this.updateRelationship(relationship)}}
                                      style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                         {this.state.Relationships.map( (v, key)=>{
@@ -380,50 +449,50 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Residential Address</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianAddress', text)} value={this.state.GuardianAddress} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleGuardianChangeText('address', text)} value={this.state.Biodata.person.guardian.address} style={styles.textInput} />
                         </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Phone Number</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('GuardianPhone', text)} value={this.state.GuardianPhone} style={styles.textInput} />
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleGuardianChangeText('phone', text)} value={this.state.Biodata.person.guardian.phone} style={styles.textInput} />
                      </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email</Text>
-                                <TextInput keyboardType="email-address" onChangeText={text => this.handleChangeText('GuardianEmail', text)} value={this.state.GuardianEmail} style={styles.textInput} />
+                                <TextInput keyboardType="email-address" onChangeText={text => this.handleGuardianChangeText('email', text)} value={this.state.Biodata.person.guardian.email} style={styles.textInput} />
                    </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianANSSID', text)} value={this.state.GuardianANSSID} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleGuardianChangeText('anssidNumber', text)} value={this.state.Biodata.person.guardian.anssidNumber} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Occupation</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('GuardianOccupation', text)} value={this.state.GuardianOccupation} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleGuardianChangeText('occupation', text)} value={this.state.Biodata.person.guardian.occupation} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Previous School</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('PreviousSchool', text)} value={this.state.PreviousSchool} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleBioChangeText('school', text)} value={this.state.Biodata.previousEducations[0].school} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Reason for leaving Previous School</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('ReasonForLeaving', text)} value={this.state.ReasonForLeaving} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleBioChangeText('reasonForLeaving', text)} value={this.state.Biodata.previousEducations[0].reasonForLeaving} style={styles.textInput} />
                             </View>
 
                      <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Class</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.StudentClass} onValueChange={(Studentclass) =>{this.setState({StudentClass:Studentclass})}}
+                                  selectedValue={this.state.Biodata.studentRecords[0].studentClassId} onValueChange={(Studentclass) =>{this.updateClass(Studentclass)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                 {this.state.Classes.map( (v, key)=>{
@@ -436,7 +505,7 @@ class StudentNextOfKin extends Component {
                                 <Text style={styles.labelText}>Stream</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.Stream} onValueChange={(StudentStream) =>{this.setState({Stream:StudentStream})}}
+                                  selectedValue={this.state.Biodata.studentRecords[0].streamId} onValueChange={(StudentStream) =>{this.updateStream(StudentStream)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                    >
                                 {this.state.Streams.map( (v, key)=>{
@@ -447,15 +516,15 @@ class StudentNextOfKin extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Is Boarding student ?</Text>
-                                    <Switch onValueChange={(boarding) => {this.setState({isBoarding:boarding})}}
-                                value={this.state.isBoarding} />
+                                    <Switch onValueChange={(boarding) => {this.updateBording(boarding)}}
+                                value={this.state.Biodata.studentRecords[0].isBoarding} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Special Need</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.SpecialNeed} onValueChange={(SpecialNeed) =>{this.setState({SpecialNeed:SpecialNeed})}}
+                                  selectedValue={this.state.Biodata.studentSpecialNeeds[0].specialNeedId} onValueChange={(SpecialNeed) =>{this.updateSpecialNeed(SpecialNeed)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                 {this.state.SpecialNeeds.map( (v, key)=>{
@@ -468,7 +537,7 @@ class StudentNextOfKin extends Component {
                                 <Text style={styles.labelText}>Vulnerability</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.Vulnerability} onValueChange={(StudentStream) =>{this.setState({Vulnerability:StudentStream})}}
+                                  selectedValue={this.state.Biodata.studentVulnerabilities[0].vulnerabilityId} onValueChange={(StudentStream) =>{this.updateVulnerability(StudentStream)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                 {this.state.Vulnerabilities.map( (v, key)=>{
@@ -480,14 +549,14 @@ class StudentNextOfKin extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Allergy</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleChangeText('Alergy', text)} value={this.state.Alergy} style={styles.textInput} />
+                                <TextInput onChangeText={text => this.handleBiodataChangeText('alergy', text)} value={this.state.Biodata.person.alergy} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School</Text>
                             <Text style={styles.Asterix}>*</Text>
                                 <Picker
-                                  selectedValue={this.state.SchoolId} onValueChange={(School) =>{this.setState({SchoolId:School})}}
+                                  selectedValue={this.state.SchoolId} onValueChange={(School) =>{this.updateSchool(School)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
                                 {this.state.Schools.map( (v, key)=>{
@@ -498,15 +567,15 @@ class StudentNextOfKin extends Component {
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
-                                <Text style={styles.labelText}>Distance From School</Text>
+                                <Text style={styles.labelText}>Distance From School (KM)</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('DistanceFromSchool', text)} value={this.state.DistanceFromSchool} style={styles.textInput} />
+                                <TextInput keyboardType="number-pad" onChangeText={text => this.handleSchoolChangeText('distanceFromSchool', text)} value={this.state.Biodata.studentRecords[0].distanceFromSchool} style={styles.textInput} />
                             </View>
 
 
                             <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button2} onPress={()=>{this.props.navigation.navigate("Biodata")}}>
+                                    <Button block style={styles.button2} onPress={()=>{this.goBack()}}>
                                             <Text style={styles.button2Text}>Previous</Text>
                                     </Button>
                                 </View>
@@ -521,6 +590,8 @@ class StudentNextOfKin extends Component {
                     </Form>
             </Content>
             </Container>
+
+            </KeyboardAvoidingView>
         );
     }
 }

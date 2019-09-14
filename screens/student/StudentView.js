@@ -150,6 +150,10 @@ class StudentView extends Component {
         this.data = {};
     }
 
+    static navigationOptions =  {
+      title: 'New Student',
+      headerLeft: null
+  }
 
     componentDidMount(){
         const data = this.props.navigation.getParam('data', '');
@@ -292,7 +296,7 @@ const styles = StyleSheet.create({
     button2: { backgroundColor: '#E6DC82' },
     button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
-    
+
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },

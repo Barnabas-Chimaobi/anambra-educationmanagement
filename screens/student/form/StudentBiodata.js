@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, Picker, Dimensions,Alert } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, Dimensions,Alert } from "react-native";
 import { Container, Content, Form, Button,DatePicker,Switch} from 'native-base';
 import { CheckBox } from 'react-native-elements';
 import Logic from '../../../logic'
@@ -23,35 +23,79 @@ class StudentBiodata extends Component {
             Sexes: [],
             States: [],
             Lgas: [],
-            First_Name: '',
-            Last_Name: '',
-            Other_Name: '',
-            Sex: '',
-            Dob: '',
-            StateOrigin: '',
-            Lga: '',
-            Hometown: '',
-            Residential: '',
-            PermanentAddress: '',
-            liveIn: false,
-            NextofKin: '',
-            NextofKinPhone: '',
-            NextofKinAddress: '',
-            Email: '',
-            Phone: ''
+            Biodata:{
+                "person": {
+                    "First_Name":"",
+                    "Last_Name":"",
+                    "Other_Name":"",
+                    "name": "",
+                    "dateOfBirth": "",
+                    "stateId": 1,
+                    "lgaId": 1,
+                    "alergy": "N/A",
+                    "sexId": 1,
+                    "hometown": "",
+                    "address": "",
+                    "permanentAddress": "",
+                    "phone": "",
+                    "email": "",
+                    "nextOfKin": {
+                        "name": "",
+                        "phone": "",
+                        "email": "",
+                        "address": ""
+                    },
+                    "guardian": {
+                        "name": "",
+                        "phone": "",
+                        "email": "",
+                        "address": "",
+                        "lgaId": 1,
+                        "stateId": 1,
+                        "anssidNumber": "",
+                        "occupation": "",
+                        "relationshipId": 1,
+                      },
+                },
+                "studentRecords": [{
+                    "academicSessionId": 1,
+                    "studentClassId": 1,
+                    "streamId": 1,
+                    "isBoarding": true,
+                    "distanceFromSchool": 0,
+                    "schoolId": 1
+                }],
+                "previousEducations": [{
+                    "school": "",
+                    "reasonForLeaving": "",
+                    "studentClassId": 1
+                }],
+                "studentSpecialNeeds": [{
+                    "specialNeedId": 1
+                }],
+                "studentVulnerabilities": [{
+                    "vulnerabilityId": 1
+                }]
+            }
+
         }
         this.setDate = this.setDate.bind(this);
 
     }
-
+    static navigationOptions =  {
+        title: 'New Student',
+        headerLeft: null
+    }
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       };
 
-      updateGender = (Sex) => {
-        this.setState({ Sex: Sex })
-    }
 
+    updateGender = (Sex) => {
+        const {Biodata} = this.state;
+        Biodata.person.sexId = Sex;
+        this.setState({ Biodata : Biodata})
+    }
 
     updateStateOrigin = (StateOrigin) => {
         //Call Method to load LGA for the selected state
@@ -59,28 +103,38 @@ class StudentBiodata extends Component {
     }
 
     getLgaForState = (stateId) => {
+        const {Biodata} = this.state;
+        Biodata.person.stateId = stateId;
+
         const lgas = new Logic()
         lgas.Lgas(`http://97.74.6.243/anambra/state/${stateId}`)
 
             .then((res) => {
-                this.setState({ Lgas: res.data,StateOrigin: stateId })
+                this.setState({ Lgas: res.data,Biodata: Biodata })
             })
             .catch((error) => console.warn(error))
+
 
     }
 
     updateLga = (Lga) => {
-        this.setState({ Lga: Lga })
+        const {Biodata} = this.state;
+        Biodata.person.lgaId = Lga;
+        this.setState({ Biodata : Biodata})
     }
 
 
     toggleliveIn = (value) => {
-        this.setState({ liveIn: value })
+        const {Biodata} = this.state;
+        Biodata.studentRecords.isBoarding = value;
+        this.setState({ Biodata : Biodata})
     }
 
 
     setDate(newDate) {
-        this.setState({ Dob: newDate });
+        const {Biodata} = this.state;
+        Biodata.person.dateOfBirth = newDate.toISOString();
+        this.setState({ Biodata : Biodata})
     }
 
     componentWillMount() {
@@ -93,6 +147,12 @@ class StudentBiodata extends Component {
       }
 
       componentDidMount(){
+
+        const Biodata = this.props.navigation.getParam('Biodata', '');
+        if (Biodata){
+            this.setState({Biodata: Biodata});
+        }
+
          // sex
         const sexes = new Logic()
         sexes.Sexes('http://97.74.6.243/anambra/api/Sexes')
@@ -123,100 +183,116 @@ class StudentBiodata extends Component {
       }
 
 
+      handleBioChangeText = (inputName, text) => {
+        const {Biodata} = this.state;
+        Biodata.person[inputName] = text;
+        this.setState({Biodata:Biodata });
+    }
+
     handleChangeText = (inputName, text) => {
-        this.setState({ [inputName]: text });
+        const {Biodata} = this.state;
+        Biodata.person.nextOfKin[inputName] = text;
+        this.setState({Biodata:Biodata });
     }
 
     checkInputFields = () => {
 
-        if (!this.state.First_Name && !this.state.Last_Name){
+        if (!this.state.Biodata.person.First_Name && !this.state.Biodata.person.Last_Name){
             alert("First and Last Names are compulsory!");
             return;
         }
 
-        if (!this.state.Dob){
+        const name = this.state.Biodata.person.First_Name + " " + this.state.Biodata.person.Last_Name+ " " + this.state.Biodata.person.Other_Name;
+        const Biodata2 = this.state.Biodata;
+        Biodata2.person.name = name;
+        Biodata2.person.nextOfKin.phone = Biodata2.person.phone;
+        this.setState({Biodata:Biodata2 });
+
+        if (!this.state.Biodata.person.dateOfBirth){
             alert("Date of Birth is compulsory!");
             return;
         }
 
-        if (!this.state.StateOrigin && !this.state.Lga){
+        if (!this.state.Biodata.person.stateId && !this.state.Biodata.person.lgaId){
             alert("State of Origin & local government are compulsory!");
             return;
         }
 
-        if (!this.state.Sex){
+        if (!this.state.Biodata.person.sexId){
             alert("sex is compulsory!");
             return;
         }
 
-        if (!this.state.Hometown){
+        if (!this.state.Biodata.person.hometown){
             alert("Hometown is compulsory!");
             return;
         }
 
-        if (!this.state.Residential){
+        if (!this.state.Biodata.person.address){
             alert("Residential Address is compulsory!");
             return;
         }
 
-        if (!this.state.Phone){
+        if (!this.state.Biodata.person.phone){
             alert("Phone number is compulsory!");
             return;
         }
 
-        if (!this.state.NextofKin){
-            alert("Next of Kin is compulsory!");
+        if (!this.state.Biodata.person.nextOfKin.name){
+            alert("Next of Kin Name is compulsory!");
             return;
         }
 
-        if (!this.state.NextofKinPhone){
+        if (!this.state.Biodata.person.nextOfKin.phone){
             alert("Next of Kin Phone Number is compulsory!");
             return;
         }
 
 
-        if (!this.state.NextofKinAddress){
+        if (!this.state.Biodata.person.nextOfKin.address){
             alert("Next of Kin Adress is compulsory!");
             return;
         }
 
+        if (!this.state.Biodata.person.email){
+            // const {Biodata} = this.state;
+            // Biodata.person.email = "-";
+            // this.setState({ Biodata : Biodata})
 
-        if (!this.state.Email){
-            this.setState({Email: "-"})
-            return;
         }
         else
         {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-            if(reg.test(text) === false)
+            if(reg.test(this.state.Biodata.person.email) === false)
             {
                 alert("Email is Not valid!");
                 return;
             }
         }
 
-        const bioData = {
-            name: `${this.state.First_Name} ${this.state.Other_Name} ${this.state.Last_Name}`,
-            dateOfBirth: this.state.Dob,
-            sex: this.state.Sex,
-            StateOrigin: this.state.StateOrigin,
-            Lga: this.state.Lga,
-            Hometown: this.state.Hometown,
-            Residential: this.state.Residential,
-            liveIn: this.state.liveIn,
-            phone: this.state.Phone,
-            NextofKin: this.state.NextofKin,
-            NextofKinPhone: this.state.NextofKinPhone,
-            NextofKinAddress: this.state.NextofKinAddress,
-            Email: this.state.Email
-        };
+        if (!this.state.Biodata.person.nextOfKin.email){
+            // const {Biodata} = this.state;
+            // Biodata.person.nextOfKin.email = "-";
+            // this.setState({ Biodata : Biodata})
 
-        this.props.navigation.navigate("NextOfKin", {bioData});
+        }
+        else
+        {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+            if(reg.test(this.state.Biodata.person.nextOfKin.email) === false)
+            {
+                alert("Email is Not valid!");
+                return;
+            }
+        }
+        const {Biodata} = this.state;
+        this.props.navigation.navigate("NextOfKin", {Biodata});
     }
 
 
     render() {
         return (
+<KeyboardAvoidingView style={{flex:1}} behavior="padding" enabled>
 
         <Container>
 
@@ -234,25 +310,25 @@ class StudentBiodata extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>First Name</Text>
                             <Text style={styles.Asterix}>*</Text>
-                            <TextInput  onChangeText={text => this.handleChangeText('First_Name', text)} value={this.state.First_Name} style={styles.textInput}/>
+                            <TextInput  onChangeText={text => this.handleBioChangeText('First_Name', text)} value={this.state.Biodata.person.First_Name} style={styles.textInput}/>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Last Name</Text>
                             <Text style={styles.Asterix}>*</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('Last_Name', text)} value={this.state.Last_Name} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleBioChangeText('Last_Name', text)} value={this.state.Biodata.person.Last_Name} style={styles.textInput} />
                      </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Other Name</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('Other_Name', text)} value={this.state.Other_Name} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleBioChangeText('Other_Name', text)} value={this.state.Biodata.person.Other_Name} style={styles.textInput} />
                      </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Sex</Text>
                             <Text style={styles.Asterix}>*</Text>
                             <Picker
-                                   selectedValue={this.state.Sex} onValueChange={this.updateGender}
+                                   selectedValue={this.state.Biodata.person.sexId} onValueChange={this.updateGender}
                                    style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Sexes.map((v, key)=>{
                                             return <Picker.Item label={v.gender} key={key} value={v.id} />
@@ -287,7 +363,7 @@ class StudentBiodata extends Component {
                                     <Text style={styles.labelText}>State of Origin</Text>
                             <Text style={styles.Asterix}>*</Text>
                                     <Picker
-                                     selectedValue={this.state.StateOrigin} onValueChange={this.updateStateOrigin}
+                                     selectedValue={this.state. Biodata.person.stateId} onValueChange={this.updateStateOrigin}
                                      style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                 {this.state.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
@@ -298,7 +374,7 @@ class StudentBiodata extends Component {
                                     <Text style={styles.labelText}>L.G.A</Text>
                             <Text style={styles.Asterix}>*</Text>
                                     <Picker
-                                    selectedValue={this.state.Lga} onValueChange={this.updateLga}
+                                    selectedValue={this.state. Biodata.person.lgaId} onValueChange={this.updateLga}
                                     style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
                                         {this.state.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
@@ -310,19 +386,19 @@ class StudentBiodata extends Component {
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
                             <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('Hometown', text)} value={this.state.Hometown} style={styles.textInput} />
+                                    <TextInput onChangeText={text => this.handleBioChangeText('hometown', text)} value={this.state.Biodata.person.hometown} style={styles.textInput} />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('Residential', text)} value={this.state.Residential} style={styles.textInput} />
+                                    <TextInput onChangeText={text => this.handleBioChangeText('address', text)} value={this.state.Biodata.person.address} style={styles.textInput} />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Permanent Address</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('PermanentAddress', text)} value={this.state.PermanentAddress} style={styles.textInput} />
+                                    <TextInput onChangeText={text => this.handleBioChangeText('permanentAddress', text)} value={this.state.Biodata.person.permanentAddress} style={styles.textInput} />
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -335,31 +411,31 @@ class StudentBiodata extends Component {
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput keyboardType="number-pad" onChangeText={text => this.handleChangeText('Phone', text)} value={this.state.Phone} style={styles.textInput} />
+                                    <TextInput keyboardType="number-pad" onChangeText={text => this.handleBioChangeText('phone', text)} value={this.state.Biodata.person.phone} style={styles.textInput} />
                        </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin</Text>
                             <Text style={styles.Asterix}>*</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('NextofKin', text)} value={this.state.NextofKin} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleChangeText('name', text)} value={this.state.Biodata.person.nextOfKin.name} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin Address</Text>
                             <Text style={styles.Asterix}>*</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('NextofKinAddress', text)} value={this.state.NextofKinAddress} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleChangeText('address', text)} value={this.state.Biodata.person.nextOfKin.address} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Next of Kin Phone Number</Text>
                             <Text style={styles.Asterix}>*</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('NextofKinPhone', text)} value={this.state.NextofKinPhone} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleChangeText('phone', text)} value={this.state.Biodata.person.nextOfKin.phone} style={styles.textInput} />
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Email</Text>
-                            <TextInput onChangeText={text => this.handleChangeText('Email', text)} value={this.state.Email} style={styles.textInput} />
+                            <TextInput onChangeText={text => this.handleChangeText('email', text)} value={this.state.Biodata.person.nextOfKin.email} style={styles.textInput} />
                         </View>
 
                         <View style={styles.buttonView}>
@@ -375,6 +451,7 @@ class StudentBiodata extends Component {
             </Container>
 
 
+            </KeyboardAvoidingView>
 
         );
     }

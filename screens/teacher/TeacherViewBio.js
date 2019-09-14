@@ -15,120 +15,147 @@ class ViewteacherBio extends Component {
             chosenDate: new Date(),
             checked: false,
             checkedYes: false,
-            data: {
-                "id": 1,
-                "person": {
-                  "address": "",
-                  "dateOfBirth": "",
-                  "email": "",
-                  "hometown": "",
+            data:{
+              "personId": 3,
+              "person": {
+                "name": "William Tanner ",
+                "dateOfBirth": "2016-09-08T00:00:00",
+                "stateId": 1,
+                "state": {
                   "id": 1,
-                  "lga": {
-                    "active": true,
-                    "id": 1,
-                    "name": "",
-                    "state": {
-                      "active": true,
-                      "id": 1,
-                      "name": "",
-                    },
-                  },
-                  "lgaId": 1,
-                  "name": "",
-                  "nextOfKin": {
-                    "address": "",
-                    "email": "",
-                    "id": 1,
-                    "name": "",
-                    "personId": 1,
-                    "phone": "",
-                  },
-                  "phone": "",
-                  "sex": {
-                    "active": false,
-                    "gender": "",
-                    "id": 1,
-                  },
-                  "sexId": 1,
+                  "name": "Abia State",
+                  "active": true
+                },
+                "lgaId": 1,
+                "lga": {
+                  "id": 1,
                   "state": {
-                    "active": true,
                     "id": 1,
-                    "name": "",
+                    "name": "Abia State",
+                    "active": true
                   },
-                  "stateId": 1,
+                  "name": "Aba North",
+                  "active": true
                 },
-                "personId": 1,
-                "teacherRecord": {
-                  "academicSession": {
-                    "active": true,
-                    "id": 1,
-                    "name": "",
-                  },
-                  "academicSessionId": 1,
-                  "currentAppointment": "2018-05-16T23:00:00",
-                  "datePosted": "2018-05-30T23:00:00",
-                  "firstAppointment": "2018-05-03T23:00:00",
-                  "gradeLevel": {
-                    "active": false,
-                    "id": 9,
-                    "name": "GL12",
-                  },
-                  "gradeLevelId": 9,
-                  "id": 1,
-                  "onPremises": false,
-                  "postHeld": "N",
-                  "postingHistories": [
-                   {
-                      "comments": "-",
-                      "endDate": "2018-05-30T23:00:00",
-                      "id": 1,
-                      "schoolId": 1,
-                      "startDate": "2018-05-30T23:00:00",
-                      "teacherRecordId": 1,
-                    },
-                  ],
-                  "qualifications": [
-                   {
-                      "courseName": "Msc",
-                      "endDate": "2016-09-08T00:00:00",
-                      "grade": "-",
-                      "id": 1,
-                      "startDate": "2016-09-08T00:00:00",
-                      "teacherRecordId": 1,
-                    },
-                  ],
-                  "rank": {
-                    "active": false,
-                    "id": 1,
-                    "name": "",
-                  },
-                  "rankId": 1,
-                  "retirement": "2067-05-03T23:00:00",
-
-                  "schoolId": 1,
-                  "specialization": "",
-                  "staffClass": null,
-                  "staffClassId": 2,
-                  "staffType": null,
-                  "staffTypeId": 2,
-                  "streamsTaught": 1,
-                  "teacherSubjects": [
-                   {
-                      "id": 1,
-                      "subject": {
-                        "active": true,
-                        "id": 14,
-                        "name": "",
-                      },
-                      "subjectId": 14,
-                      "teacherRecordId": 1,
-                    },
-                  ],
-                  "trainingsAttended": 0,
-                  "yearsOfExperience": 2,
+                "sexId": 1,
+                "sex": {
+                  "gender": "Female",
+                  "active": false,
+                  "id": 1
                 },
-                "teacherRecordId": 1,
-              }
+                "hometown": "Inglewood",
+                "address": "Compton",
+                "permanentAddress": "N/A",
+                "alergy": "N/A",
+                "phone": "2347031568998",
+                "email": "me@tanner.com",
+                "nextOfKin": {
+                  "name": "Kyle Xy",
+                  "phone": "565868638",
+                  "email": "dad@tanner.com",
+                  "address": "Compton",
+                  "personId": 3,
+                  "id": 3
+                },
+                "id": 3
+              },
+              "teacherRecordId": 3,
+              "teacherRecord": {
+                "academicSessionId": 1,
+                "academicSession": {
+                  "name": "2019",
+                  "active": true,
+                  "id": 1
+                },
+                "onPremises": true,
+                "teacherQualifications": [
+                  {
+                    "qualificationId": 1,
+                    "qualification": null,
+                    "teacherRecordId": 3,
+                    "id": 3
+                  }
+                ],
+                "teacherSubjects": [
+                  {
+                    "subjectId": 11,
+                    "subject": {
+                      "name": "Biology",
+                      "active": true,
+                      "id": 11
+                    },
+                    "teacherRecordId": 3,
+                    "id": 5
+                  }
+                ],
+                "teacherStreams": null,
+                "teacherSpecialization": null,
+                "teacherInstitutions": null,
+                "firstAppointment": "2018-05-03T23:00:00",
+                "currentAppointment": "2018-05-03T23:00:00",
+                "retirement": "2018-05-03T23:00:00",
+                "yearsOfExperience": 4,
+                "trainingsAttended": 3,
+                "streamsTaught": 2,
+                "gradeLevelId": 1,
+                "gradeLevel": {
+                  "name": "GL12",
+                  "active": false,
+                  "id": 1
+                },
+                "rankId": 1,
+                "rank": {
+                  "name": "Teacher",
+                  "active": false,
+                  "id": 1
+                },
+                "postHeld": "Head Teacher",
+                "datePosted": "2018-05-23T23:00:00",
+                "postingHistories": [
+                  {
+                    "institution": "ddd",
+                    "date": "2018-05-03T23:00:00",
+                    "teacherRecordId": 3,
+                    "id": 3
+                  }
+                ],
+                "staffTypeId": 1,
+                "staffType": null,
+                "staffClassId": 1,
+                "staffClass": null,
+                "schoolId": 1,
+                "school": {
+                  "name": "Test School",
+                  "coordinatesId": 1,
+                  "coordinates": null,
+                  "address": "Awka",
+                  "town": "Awka",
+                  "ward": "Awka North",
+                  "lgaId": 1,
+                  "lga": {
+                    "id": 1,
+                    "state": {
+                      "id": 1,
+                      "name": "Abia State",
+                      "active": true
+                    },
+                    "name": "Aba North",
+                    "active": true
+                  },
+                  "email": "test@school.com",
+                  "phone": "080",
+                  "dateEstablished": "2019-09-13T14:51:56.2596634",
+                  "locationId": 1,
+                  "location": null,
+                  "schoolRecordId": null,
+                  "schoolRecord": null,
+                  "active": true,
+                  "id": 1
+                },
+                "id": 3
+              },
+              "id": 3
+            }
         }
         this.setDate = this.setDate.bind(this);
     }
@@ -142,6 +169,10 @@ class ViewteacherBio extends Component {
         }
     }
 
+    static navigationOptions =  {
+      title: 'View Teacher',
+      headerLeft: null
+  }
     setDate(newDate) {
         this.setState({ chosenDate: newDate });
     }
@@ -175,12 +206,12 @@ class ViewteacherBio extends Component {
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Highest academic qualification</Text>
-                            <Text style={styles.dataText}>{this.state.data.teacherRecord.qualifications[0].courseName}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.teacherQualifications[0].qualification}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelText}>Subject area of specialization</Text>
-                            <Text style={styles.dataText}>{this.state.data.teacherRecord.specialization}</Text>
+                            <Text style={styles.dataText}>{this.state.data.teacherRecord.teacherSpecialization}</Text>
                         </View>
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -240,7 +271,7 @@ class ViewteacherBio extends Component {
 
                         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button2} onPress={() => { this.props.navigation.goBack() }}>
+                                <Button block style={styles.button2} onPress={() => { this.props.navigation.navigate("View") }}>
                                     <Text style={styles.button2Text}>Previous</Text>
                                 </Button>
                             </View>
@@ -279,13 +310,13 @@ const styles = StyleSheet.create({
     button2: { backgroundColor: '#E6DC82' },
     button2Text: { fontSize: 15, color: '#000', alignSelf: 'center', fontWeight: '600' },
     buttonText: { fontSize: 15, color: '#fff', alignSelf: 'center', fontWeight: '600' },
-    
+
 
     headerText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: '500', textTransform: 'capitalize', alignSelf: 'center' },
     subText: { fontSize: 18, fontFamily: 'Roboto', fontWeight: 'bold', textTransform: 'capitalize', alignSelf: 'flex-start' },
 
     labelText: { width: '45%', height: 35, lineHeight: 35, textAlign: 'right', marginRight: 10, justifyContent: 'flex-end', alignItems: 'flex-end', fontSize: 15 },
-    
+
     dataText: {height: 35, lineHeight: 35, paddingLeft: 5, flex: 1, flexDirection: 'row', justifyContent: 'flex-end'},
 
     textInput: {
