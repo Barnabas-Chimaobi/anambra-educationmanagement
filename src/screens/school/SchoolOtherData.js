@@ -71,6 +71,10 @@ class SchoolOtherData extends Component {
         this.props.addSchoolRecord(inputName,text);
     }
 
+    handleProfileChangeNumverText = (inputName, text) => {
+        this.props.addSchoolRecord(inputName,parseInt(text));
+    }
+
     updateSchoolMix = (value) => {
         this.props.addSchoolRecord("schoolMixId",value);
     }
@@ -240,7 +244,7 @@ class SchoolOtherData extends Component {
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelTextLong}>Number of security personnel</Text>
-                                    <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeText('securityPersonnelCount', text)} value={`${this.props.Profile.schoolRecord.securityPersonnelCount}`} style={styles.textInput} />
+                                    <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('securityPersonnelCount', text)} value={`${this.props.Profile.schoolRecord.securityPersonnelCount}`} style={styles.textInput} />
                                 </View>
 
 

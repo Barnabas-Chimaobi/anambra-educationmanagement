@@ -225,6 +225,10 @@ class TeacherOtherData extends Component {
         this.props.addTeacherRecorddata(inputName,text);
     }
 
+    handleIntegerValueChangeText = (inputName, value) => {
+        this.props.addTeacherRecorddata(inputName,parseInt(value));
+    }
+
 
     onSelectedItemsChange = (subjectId,subjectName) => {
 
@@ -378,7 +382,7 @@ class TeacherOtherData extends Component {
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Years of Experience</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                    <TextInput  keyboardType="numeric" onChangeText={text => this.handleChangeText('yearsOfExperience',text)} value={`${this.props.Biodata.teacherRecord.yearsOfExperience}`} style={styles.textInput}/>
+                                    <TextInput  keyboardType="numeric" onChangeText={text => this.handleIntegerValueChangeText('yearsOfExperience',text)} value={`${this.props.Biodata.teacherRecord.yearsOfExperience}`} style={styles.textInput}/>
                                 </View>
 
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -558,7 +562,7 @@ class TeacherOtherData extends Component {
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                     <Text style={styles.labelText}>Number of trainings attended</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                    <TextInput keyboardType="numeric" onChangeText={text => this.handleChangeText('trainingsAttended',text)} value={`${this.props.Biodata.teacherRecord.trainingsAttended}`}  style={styles.textInput}/>
+                                    <TextInput keyboardType="numeric" onChangeText={text => this.handleIntegerValueChangeText('trainingsAttended',text)} value={`${this.props.Biodata.teacherRecord.trainingsAttended}`}  style={styles.textInput}/>
                                 </View>
 
 
