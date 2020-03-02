@@ -34,6 +34,8 @@ import SchoolFacility1View from '../screens/school/SchoolFacility1View';
 import SchoolFacility2View from '../screens/school/SchoolFacility2View';
 import SchoolFacility3View from '../screens/school/SchoolFacility3View';
 import SchoolHeadView from '../screens/school/SchoolHeadView';
+import Enroll from '../screens/school/form/Enroll';
+import EnrollPreview from '../screens/school/EnrollPreview';
 
 const TeacherStack = createStackNavigator({
   Teacher: TeacherIndex,
@@ -98,18 +100,20 @@ const StudentStack = createStackNavigator({
 );
 
 const SchoolStack = createStackNavigator({
-  // School: SchoolIndex,
-  // Start: SchoolStart,
-  Profile: SchoolProfile,
-  Facility: SchoolFacility,
-  Facility2: SchoolFacility2,
-  Facility3: SchoolFacility3,
-  HeadTeacher: SchoolHeadTeacher,
-  ProfileView: SchoolProfileView,
-  Facility1View: SchoolFacility1View,
-  Facility2View: SchoolFacility2View,
-  Facility3View: SchoolFacility3View,
-  HeadView: SchoolHeadView,
+  School: SchoolIndex,
+  Start: SchoolStart,
+  Enroll: Enroll,
+  EnrollPreview: EnrollPreview,
+  // Profile: SchoolProfile,
+  // Facility: SchoolFacility,
+  // Facility2: SchoolFacility2,
+  // Facility3: SchoolFacility3,
+  // HeadTeacher: SchoolHeadTeacher,
+  // ProfileView: SchoolProfileView,
+  // Facility1View: SchoolFacility1View,
+  // Facility2View: SchoolFacility2View,
+  // Facility3View: SchoolFacility3View,
+  // HeadView: SchoolHeadView,
 },
   {
 

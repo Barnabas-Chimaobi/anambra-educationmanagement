@@ -1,0 +1,62 @@
+{
+  "guardian": {
+    "address": "d",
+    "anssidNumber": "123",
+    "email": "",
+    "lgaId": 1,
+    "name": "d",
+    "occupation": "d",
+    "phone": "d",
+    "relationshipId": 1,
+    "stateId": 1,
+  },
+  "person": {
+    "First_Name": "dd",
+    "Last_Name": "d",
+    "Other_Name": "",
+    "address": "d",
+    "alergy": "N/A",
+    "dateOfBirth": "2005-05-03T23:00:00.000Z",
+    "email": "",
+    "hometown": "d",
+    "lgaId": 1,
+    "name": "dd d ",
+    "nextOfKin": {
+      "address": "d",
+      "email": "",
+      "name": "d",
+      "phone": "2",
+    },
+    "permanentAddress": "d",
+    "phone": " ",
+    "sexId": 1,
+    "stateId": 1,
+  },
+  "previousEducations":[
+    {
+      "reasonForLeaving": "d",
+      "school": "d",
+      "studentClassId": 1,
+    },
+  ],
+  "studentRecords":[
+    {
+      "academicSessionId": 1,
+      "distanceFromSchool": "0",
+      "isBoarding": true,
+      "schoolId": 1,
+      "streamId": 1,
+      "studentClassId": 1,
+    },
+  ],
+  "studentSpecialNeeds":[
+    {
+      "specialNeedId": 1,
+    },
+  ],
+  "studentVulnerabilities":[
+    {
+      "vulnerabilityId": 1,
+    },
+  ],
+}
