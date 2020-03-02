@@ -16,6 +16,7 @@ import SchoolOtherData from '../screens/school/SchoolOtherData';
 import SchoolFacility from '../screens/school/SchoolFacility';
 import SchoolView from '../screens/school/view';
 import CameraTest from '../../screens/CameraTest';
+import code from '../screens/school/code';
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
@@ -36,7 +37,8 @@ const SchoolStack = createStackNavigator({
   SchoolProfile: SchoolProfile,
   SchoolOtherData: SchoolOtherData,
   SchoolFacility:SchoolFacility,
-  SchoolView:SchoolView
+  SchoolView:SchoolView,
+  CodeView: code
 });
 
 const HomeStack = createStackNavigator({
