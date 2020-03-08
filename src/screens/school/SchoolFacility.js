@@ -46,6 +46,69 @@ class SchoolFacility extends Component {
         this.props.fetchPowerSourcesList();
         this.props.fetchHealthFacilityList();
         this.props.fetchEducationLevelsList();
+        this.setLoadedData();
+    }
+
+    setLoadedData = () => {
+        if (this.props.Profile.schoolRecord.id > 0){
+
+            const sClasses = this.props.Profile.schoolRecord.schoolClasses.map((data) => {
+                return {
+                    id: data.studentClass.id,
+                    name: data.studentClass.name
+                };
+            });
+            this.setState({schoolClasses:sClasses})
+
+            const sStream = this.props.Profile.schoolRecord.schoolStreams.map((data) => {
+                return {
+                    id: data.stream.id,
+                    name: data.stream.name
+                };
+            });
+            this.setState({schoolStreams:sStream})
+
+            const sFacility = this.props.Profile.schoolRecord.schoolFacilities.map((data) => {
+                return {
+                    id: data.facility.id,
+                    name: data.facility.name
+                };
+            });
+            this.setState({schoolFacilities:sFacility})
+
+            const sPower = this.props.Profile.schoolRecord.schoolPowerSources.map((data) => {
+                return {
+                    id: data.powerSource.id,
+                    name: data.powerSource.name
+                };
+            });
+            this.setState({schoolPowerSources:sPower})
+
+            const sHealth = this.props.Profile.schoolRecord.schoolHealthFacilities.map((data) => {
+                return {
+                    id: data.healthFacility.id,
+                    name: data.healthFacility.name
+                };
+            });
+            this.setState({schoolHealthFacilities:sHealth})
+
+            const sGrant = this.props.Profile.schoolRecord.schoolGrant.map((data) => {
+                return {
+                    id: data.grant.id,
+                    name: data.grant.name
+                };
+            });
+            this.setState({schoolGrant:sGrant})
+
+            const sEduLevel = this.props.Profile.schoolRecord.schoolEducationLevels.map((data) => {
+                return {
+                    id: data.educationLevel.id,
+                    name: data.educationLevel.name
+                };
+            });
+            this.setState({schoolEducationLevels:sEduLevel})
+        }
+        
     }
 
     setClassModalVisible(visible) {
@@ -183,10 +246,16 @@ class SchoolFacility extends Component {
 
         if(this.props.Profile.id){
             alert("Record Updated!");
+            this.props.navigation.navigate("SchoolProfile");
         }else{
             this.props.savechoolDataAsync(this.props.Profile)
-            this.props.navigation.navigate("SchoolProfile");
-            alert("Record Saved!");
+            if (this.props.Profile.id > 0){
+                this.props.navigation.navigate("SchoolProfile");
+                alert("Record Saved!");
+            }else{
+                alert("Failed to save! Please try again!.")
+            }
+            
         }
     }
 

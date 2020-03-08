@@ -27,7 +27,7 @@ class SchoolView extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.Biodata.code !== this.state.number){
+        if (nextProps.Biodata.code.toLowerCase() !== this.state.number.toLowerCase()){
             alert("Unable to retrieve data!")
         }else{
             this.props.navigation.navigate("SchoolProfile");
@@ -61,7 +61,7 @@ class SchoolView extends Component {
                                 style={{borderColor:'#ffffff', borderWidth: 1,paddingTop: 5, marginTop: 5, backgroundColor:'#fff', color:'#000'}} />
                         </View>
 
-                        <View style={styles.buttonViewRight}>
+                        <View style={styles.buttonViewRightLarge}>
                             <Button block style={styles.button} onPress={() => {this.lookupNumber()  }}>
                                 <Text style={styles.buttonText}>Retrieve</Text>
                             </Button>

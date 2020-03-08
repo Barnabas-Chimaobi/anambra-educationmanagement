@@ -6,6 +6,7 @@ const bigFont = 20;
 
 const styles = StyleSheet.create({
   buttonViewRight: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
+  buttonViewRightLarge: { width: '40%', alignSelf: 'flex-end', margin: '3%' },
   buttonViewLeftt: { width: '20%', alignSelf: 'flex-end', margin: '3%' },
   button: { backgroundColor: colors.primary , alignContent: 'center'},
   button2: { backgroundColor: colors.secondary },

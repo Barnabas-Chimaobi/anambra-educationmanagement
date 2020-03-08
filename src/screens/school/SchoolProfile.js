@@ -24,6 +24,7 @@ class SchoolProfile extends Component {
 
   componentWillMount() {
     this._getLocationAsync();
+    console.log("Data",this.props.Profile.dateEstablished)
   }
 
   _getLocationAsync = async () => {
@@ -38,9 +39,12 @@ class SchoolProfile extends Component {
 
     let location = await Location.getCurrentPositionAsync({});
     if(location){
-        this.props.addSchoolCordinates("elevation",location.coords.altitude);
-        this.props.addSchoolCordinates("lattitudeNorth",location.coords.latitude);
-        this.props.addSchoolCordinates("lattidtudeEast",location.coords.longitude);
+        if (this.props.Profile.coordinates.elevation <= 0 && this.props.Profile.coordinates.lattitudeNorth <= 0 ){
+            this.props.addSchoolCordinates("elevation",location.coords.altitude);
+            this.props.addSchoolCordinates("lattitudeNorth",location.coords.latitude);
+            this.props.addSchoolCordinates("lattidtudeEast",location.coords.longitude);
+        }
+        
     }
     console.log(location);
   };
@@ -198,7 +202,7 @@ class SchoolProfile extends Component {
                                 modalTransparent={false}
                                 animationType={"fade"}
                                 androidMode={"default"}
-                                placeHolderText="Select date"
+                                placeHolderText={this.props.Profile.dateEstablished !== null ? this.props.Profile.dateEstablished: "Select Date"}
                                 textStyle={{ color: "green" }}
                                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                                 onDateChange={this.setEstablishedDate}

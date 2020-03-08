@@ -14,6 +14,10 @@ import { ADD_STUDENT_BIODATA,ADD_STUDENT_NOKDATA,FETCH_ERROR,FETCH_STATES,
  ADD_TEACHER_SUBJECT_DATA,SAVE_TEACHER_DATA,SAVE_SCHOOL_DATA,LOAD_STUDENT_DATA,LOAD_TEACHER_DATA,LOAD_SCHOOL_DATA
 } from "./actionTypes";
 
+
+const appURL = "http://2cb53bcb.ngrok.io/api"
+// const appURL = "http://asbemis.com/api"
+
 export const addStudentBiodata = (field,text) => ({
     type:ADD_STUDENT_BIODATA,
     field,
@@ -373,7 +377,7 @@ export const fetchHealthFacilitiesSuccess = (healthFacilities) => ({
 
 export const fetchStatesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/States')
+        fetch(`${appURL}/States`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -390,7 +394,7 @@ export const fetchStatesList = () => {
 
 export const fetchLgasList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Lgas')
+        fetch(`${appURL}/Lgas`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -408,7 +412,7 @@ export const fetchLgasList = () => {
 
 export const fetchStateLgasList = (stateId) => {
     return dispatch => {
-        fetch(`http://asbemis.com/state/${stateId}`)
+        fetch(`${appURL}/Lgas/state/${stateId}`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -425,7 +429,7 @@ export const fetchStateLgasList = (stateId) => {
 
 export const fetchGendersList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Sexes')
+        fetch(`${appURL}/Sexes`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -442,7 +446,7 @@ export const fetchGendersList = () => {
 
 export const fetchRelationshipsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Relationships')
+        fetch(`${appURL}/Relationships`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -459,7 +463,7 @@ export const fetchRelationshipsList = () => {
 
 export const fetchSchoolList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Schools')
+        fetch(`${appURL}/Schools`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -476,7 +480,7 @@ export const fetchSchoolList = () => {
 
 export const fetchStudentClassesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/StudentClasses')
+        fetch(`${appURL}/StudentClasses`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -493,7 +497,7 @@ export const fetchStudentClassesList = () => {
 
 export const fetchStudentStreamsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Streams')
+        fetch(`${appURL}/Streams`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -510,7 +514,7 @@ export const fetchStudentStreamsList = () => {
 
 export const fetchSpecialNeedsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/SpecialNeeds')
+        fetch(`${appURL}/SpecialNeeds`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -527,7 +531,7 @@ export const fetchSpecialNeedsList = () => {
 
 export const fetchVulnerabilityList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Vulnerabilities')
+        fetch(`${appURL}/Vulnerabilities`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -545,7 +549,7 @@ export const fetchVulnerabilityList = () => {
 
 export const fetchSubjectsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Subjects')
+        fetch(`${appURL}/Subjects`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -563,7 +567,7 @@ export const fetchSubjectsList = () => {
 
 export const fetchStaffClassesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/StaffClasses')
+        fetch(`${appURL}/StaffClasses`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -581,7 +585,7 @@ export const fetchStaffClassesList = () => {
 
 export const fetchStaffTypesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/StaffTypes')
+        fetch(`${appURL}/StaffTypes`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -599,7 +603,7 @@ export const fetchStaffTypesList = () => {
 
 export const fetchRankList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Ranks')
+        fetch(`${appURL}/Ranks`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -617,7 +621,7 @@ export const fetchRankList = () => {
 
 export const fetchQualificationList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Qualifications')
+        fetch(`${appURL}/Qualifications`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -635,7 +639,7 @@ export const fetchQualificationList = () => {
 
 export const fetchSubjectAreaList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/SubjectAreas')
+        fetch(`${appURL}/SubjectAreas`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -654,7 +658,7 @@ export const fetchSubjectAreaList = () => {
 
 export const fetchGradeLevelList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/GradeLevels')
+        fetch(`${appURL}/GradeLevels`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -672,7 +676,7 @@ export const fetchGradeLevelList = () => {
 
 export const fetchEducationLevelsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/EducationLevels')
+        fetch(`${appURL}/EducationLevels`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -689,7 +693,7 @@ export const fetchEducationLevelsList = () => {
 
 export const fetchLocationsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Locations')
+        fetch(`${appURL}/Locations`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -706,7 +710,7 @@ export const fetchLocationsList = () => {
 
 export const fetchSchoolTypesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/SchoolTypes')
+        fetch(`${appURL}/SchoolTypes`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -723,7 +727,7 @@ export const fetchSchoolTypesList = () => {
 
 export const fetchSchoolMixesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/SchoolMixes')
+        fetch(`${appURL}/SchoolMixes`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -740,7 +744,7 @@ export const fetchSchoolMixesList = () => {
 
 export const fetchSecurityPersonnelTypesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/SecurityPersonnelTypes')
+        fetch(`${appURL}/SecurityPersonnelTypes`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -757,7 +761,7 @@ export const fetchSecurityPersonnelTypesList = () => {
 
 export const fetchParentForumsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/ParentForums')
+        fetch(`${appURL}/ParentForums`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -774,7 +778,7 @@ export const fetchParentForumsList = () => {
 
 export const fetchInspectionAuthoritiesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/InspectionAuthorities')
+        fetch(`${appURL}/InspectionAuthorities`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -791,7 +795,7 @@ export const fetchInspectionAuthoritiesList = () => {
 
 export const fetchGrantsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Grants')
+        fetch(`${appURL}/Grants`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -808,7 +812,7 @@ export const fetchGrantsList = () => {
 
 export const fetchOwnershipsList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Ownerships')
+        fetch(`${appURL}/Ownerships`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -825,7 +829,7 @@ export const fetchOwnershipsList = () => {
 
 export const fetchFacilitiesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/Facilities')
+        fetch(`${appURL}/Facilities`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -842,7 +846,7 @@ export const fetchFacilitiesList = () => {
 
 export const fetchPowerSourcesList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/PowerSources')
+        fetch(`${appURL}/PowerSources`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -859,7 +863,7 @@ export const fetchPowerSourcesList = () => {
 
 export const fetchHealthFacilityList = () => {
     return dispatch => {
-        fetch('http://asbemis.com/api/HealthFacilities')
+        fetch(`${appURL}/HealthFacilities`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -887,7 +891,7 @@ export const saveStudentDataAsync = (data) => {
             body:JSON.stringify(data)
         };
         console.log(data)
-        fetch('http://asbemis.com/api/Students',object)
+        fetch(`${appURL}/Students`,object)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -919,7 +923,7 @@ export const saveTeacherDataAsync = (data) => {
             body:JSON.stringify(data)
         };
         console.log(data)
-        fetch('http://asbemis.com/api/Teachers',object)
+        fetch(`${appURL}/Teachers`,object)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -942,6 +946,7 @@ export const saveTeacherDataAsync = (data) => {
 
 export const savechoolDataAsync = (data) => {
     return dispatch => {
+        
         const object = {
             method: 'POST',
             headers: {
@@ -950,22 +955,28 @@ export const savechoolDataAsync = (data) => {
             },
             body:JSON.stringify(data)
         };
+
         console.log(data)
-        fetch('http://asbemis.com/api/Schools',object)
+
+        fetch(`${appURL}/Schools`,object)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
+              
                 console.log(res)
-              dispatch(fetchError(res.error));
-              return res;
+                dispatch(fetchError(res.error));
+                return res;
             }
 
             console.log(res)
-           dispatch(saveSchoolData(res));
+            res.dateEstablished = res.dateEstablished.substring(0,10)
+            res.schoolRecord.lastInspection = res.schoolRecord.lastInspection.substring(0,10)
+            
+            dispatch(saveSchoolData(res));
         })
-            .catch(error => {
-
-                console.log(error)
+        .catch(error => {
+            console.log(error)
+            alert("An error occured while saving your data!",error)
             dispatch(fetchError(error));
         })
     }
@@ -974,7 +985,7 @@ export const savechoolDataAsync = (data) => {
 
 export const loadStudentDataAsync = (code) => {
     return dispatch => {
-        fetch(`http://asbemis.com/api/Students/Code/${code}`)
+        fetch(`${appURL}/Students/Code/${code}`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -993,7 +1004,7 @@ export const loadStudentDataAsync = (code) => {
 
 export const loadTeacherDataAsync = (code) => {
     return dispatch => {
-        fetch(`http://asbemis.com/api/Teachers/code/${code}`)
+        fetch(`${appURL}/Teachers/code/${code}`)
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -1002,7 +1013,7 @@ export const loadTeacherDataAsync = (code) => {
               return res;
             }
 
-            console.log(res)
+            // console.log(res)
            dispatch(loadTeacherData(res));
         })
             .catch(error => {
@@ -1016,22 +1027,27 @@ export const loadTeacherDataAsync = (code) => {
 
 export const loadSchoolDataAsync = (code) => {
     return dispatch => {
-        fetch(`http://asbemis.com/api/Schools/code/${code}`)
+        fetch(`${appURL}/Schools/code/${code}`)
         .then(res => res.json())
         .then(res => {
+
             if(res.error) {
-                console.log(res)
+                // console.log(res)
               dispatch(fetchError(res.error));
               return res;
             }
 
-            console.log(res)
+        console.log("Response",res)
+        
+        res.dateEstablished = res.dateEstablished.substring(0,10)
+        res.schoolRecord.lastInspection = res.schoolRecord.lastInspection.substring(0,10)
+        
            dispatch(loadSchoolData(res));
         })
             .catch(error => {
 
-                console.log(error)
-            dispatch(fetchError(error));
+                console.log("ERROR:",error)
+                dispatch(fetchError(error));
         })
     }
 }

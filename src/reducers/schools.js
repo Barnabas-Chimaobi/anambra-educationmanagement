@@ -117,7 +117,7 @@ const schools = (state ={}, action) => {
                 sStateCopy.schoolRecord.schoolStreams.push(action.payload);
                 return sStateCopy
         case SAVE_SCHOOL_DATA:
-                return SchoolData
+                return action.payload
         case LOAD_SCHOOL_DATA:
                 return action.payload
         default:

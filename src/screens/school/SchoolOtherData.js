@@ -163,7 +163,7 @@ class SchoolOtherData extends Component {
                             ?
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelTextLong}>How many schools share facilities?</Text>
-                                <TextInput keyboardType="numeric" onChangeText={text => this.handleProfileChangeText('sharedFacilitiesCount', text)} value={`${this.props.Profile.schoolRecord.sharedFacilitiesCount}`} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('sharedFacilitiesCount', text)} value={`${this.props.Profile.schoolRecord.sharedFacilitiesCount}`} style={styles.textInput} />
                             </View>
                             :
                             null
@@ -176,13 +176,13 @@ class SchoolOtherData extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Distance from  communities (KM)</Text>
-                            <TextInput  keyboardType="numeric"  onChangeText={text => this.handleProfileChangeText('distanceFromTown', text)} value={`${this.props.Profile.schoolRecord.distanceFromTown}`} style={styles.textInput} />
+                            <TextInput  keyboardType="numeric"  onChangeText={text => this.handleProfileChangeNumverText('distanceFromTown', text)} value={`${this.props.Profile.schoolRecord.distanceFromTown}`} style={styles.textInput} />
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Distance from L.G.A Headquarters (KM)</Text>
-                            <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeText('distanceFromLGA', text)} value={`${this.props.Profile.schoolRecord.distanceFromLGA}`} style={styles.textInput} />
+                            <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('distanceFromLGA', text)} value={`${this.props.Profile.schoolRecord.distanceFromLGA}`} style={styles.textInput} />
                         </View>
 
 
@@ -314,8 +314,8 @@ class SchoolOtherData extends Component {
                         timeZoneOffsetInMinutes={undefined}
                         modalTransparent={false}
                         animationType={"fade"}
-                        androidMode={"default"}
-                        placeHolderText="Select date"
+                        androidMode={"default"}  
+                        placeHolderText={this.props.Profile.schoolRecord.lastInspection !== null ? this.props.Profile.schoolRecord.lastInspection: "Select Date"}
                         textStyle={{ color: "green" }}
                         placeHolderTextStyle={{ color: "#d3d3d3" }}
                         onDateChange={this.setInspectionDate}
