@@ -15,8 +15,8 @@ import { ADD_STUDENT_BIODATA,ADD_STUDENT_NOKDATA,FETCH_ERROR,FETCH_STATES,
 } from "./actionTypes";
 
 
-const appURL = "http://2cb53bcb.ngrok.io/api"
-// const appURL = "http://asbemis.com/api"
+// const appURL = "http://2cb53bcb.ngrok.io/api"
+const appURL = "http://asbemis.com/api"
 
 export const addStudentBiodata = (field,text) => ({
     type:ADD_STUDENT_BIODATA,
