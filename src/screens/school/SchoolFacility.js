@@ -249,14 +249,13 @@ class SchoolFacility extends Component {
             this.props.navigation.navigate("SchoolProfile");
         }else{
             this.props.savechoolDataAsync(this.props.Profile)
-            if (this.props.Profile.id > 0){
-                this.props.navigation.navigate("SchoolProfile");
-                alert("Record Saved!");
-            }else{
-                alert("Failed to save! Please try again!.")
-            }
-            
+            this.props.navigation.navigate("SchoolProfile");
+            alert("Record Saved!");
+             
         }
+    
+
+      
     }
 
 
