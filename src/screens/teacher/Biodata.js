@@ -1,3 +1,5 @@
+
+
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, TouchableOpacity } from "react-native";
 import { Container, Content, Form, Button, DatePicker, Switch } from 'native-base';
@@ -6,8 +8,11 @@ import { connect } from 'react-redux'
 import * as  biodataActions from "../../actions/index";
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
+import * as FileSystem from 'expo-file-system'
 
 class TeacherBiodata extends Component {
+ 
+    
 
     static navigationOptions = {
         header: null,
@@ -17,7 +22,11 @@ class TeacherBiodata extends Component {
         type: Camera.Constants.Type.back,
         isCameraVisible: false,
         photo: null,
+        latestImage: null,
+        base64URL: null
     };
+
+
 
     async componentDidMount() {
 
@@ -32,28 +41,45 @@ class TeacherBiodata extends Component {
 
             this.props.fetchLgasByState(this.props.Biodata.stateId);
         }
+      
+ 
 
     }
 
+    
     snap = async () => {
         if (this.camera) {
             const options = {
-                quality: 0.1,
-                base64: false
+                quality: 0.1, 
+                base64: true
             };
+            
             let photo = await this.camera.takePictureAsync(options)
             this.setState({ photo: photo });
 
             // construct
-            let formData = new FormData();
-            formData.append("UploadFile", photo);
+            // let formData = new FormData();
+            // formData.append("UploadFile", photo);
 
+            // const base64URL = photo.base64;
             this.setState({
                 latestImage: photo.uri, // preview the photo that was taken
-                isCameraVisible: false // close the camera UI after taking the photo
+                isCameraVisible: false, // close the camera UI after taking the photo
+                base64URL: photo.base64
             });
 
-            const personId = 1;
+            // const base64 = await FileSystem.readAsStringAsync(photo.uri, { encoding: "Base64"});
+                    
+             base64URL = photo.base64
+
+             base65 = `data:image/gif;base64,${base64URL}`
+            console.log("IMAGE URL: ",base64URL);
+            // console.log('IMAGE URL:', base64)
+           
+          
+
+            this.props.Biodata.person.imageUrl = base65;
+            // const personId = 1;
             // fetch(`http://asbemis.com/api/images/${personId}`, {
             //     method: "POST",
             //     headers: {
@@ -70,7 +96,8 @@ class TeacherBiodata extends Component {
             // });
 
         }
-    };
+    }; 
+     
 
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
@@ -191,9 +218,9 @@ class TeacherBiodata extends Component {
         }
 
         if (!this.props.Biodata.person.email) {
-            // const {Biodata} = this.props;
-            // Biodata.person.email = "-";
-            // this.setState({ Biodata : Biodata})
+            const {Biodata} = this.props;
+            Biodata.person.email = "-";
+            this.setState({ Biodata : Biodata})
 
         }
         else {
@@ -224,9 +251,11 @@ class TeacherBiodata extends Component {
 
 
     render() {
+     
+
         const { hasCameraPermission, isCameraVisible, photo } = this.state;
         if (hasCameraPermission === null) {
-            return <View />;
+            return <View/>;
         } else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
         } else {
@@ -255,8 +284,8 @@ class TeacherBiodata extends Component {
                                                 </Button>
                                             </View>
                                             :
-                                            <Camera style={{ flex: 1, height: 250 }} type={this.state.type} ref={(cam) => {
-                                                this.camera = cam;
+                                            <Camera style={{ height: 250, flex: 1 }} type={this.state.type} ref={(ref) => {
+                                                this.camera = ref;
                                             }}>
                                                 <View
                                                     style={{
@@ -285,14 +314,22 @@ class TeacherBiodata extends Component {
 
                                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                             <Image
-                                                style={{ height: 250 }}
-                                                source={{ uri: photo.uri }}
+                                                style={{ width: 600, height: 250 }}
+                                              source={{uri:`data:image/gif;base64,${this.state.base64URL}`}}
+                                                // formData={this.props.Biodata.person.imageUrl}
                                             />
                                         </View>
-                                        : null
+                                        : 
+                                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                                            <Image style={{ width: 400, height: 250 }} 
+                                            source={{uri: this.props.Biodata.person.imageUrl }}
+                                            />
+                                        </View>
 
                                 }
+                                 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                               
                                     <Text style={styles.labelText}>First Name</Text>
                                     <Text style={styles.Asterix}>*</Text>
                                     <TextInput onChangeText={text => this.handleBioChangeText('firstName', text)} value={this.props.Biodata.person.firstName} style={styles.textInput} />

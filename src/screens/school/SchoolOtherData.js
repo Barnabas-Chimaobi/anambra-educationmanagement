@@ -72,7 +72,7 @@ class SchoolOtherData extends Component {
     }
 
     handleProfileChangeNumverText = (inputName, text) => {
-        this.props.addSchoolRecord(inputName,parseInt(text));
+        this.props.addSchoolRecord(inputName,(text));
     }
 
     updateSchoolMix = (value) => {

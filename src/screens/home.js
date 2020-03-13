@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert} from "react-native";
 import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
 import { background } from "../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
@@ -11,6 +11,27 @@ class Home extends Component {
     static navigationOptions = {
         header: null,
     };
+
+    componentDidMount(){
+        CheckConnectivity = () => {
+            // For Android devices
+            if (Platform.OS === "android") {
+              NetInfo.isConnected.fetch().then(isConnected => {
+                if (isConnected) {
+                  Alert.alert("You are online!");
+                } else {
+                  Alert.alert("You are offline!");
+                }
+              });
+            } else {
+            //   // For iOS devices
+            //   NetInfo.isConnected.addEventListener(
+            //     "connectionChange",
+            //     this.handleFirstConnectivityChange
+            //   );
+            }
+          };
+    }
     render() {
         return (
             <LinearGradient colors={['#098BD3', '#469aa0', '#64a085','#8daa64','#b4b446','#fec608']}
@@ -30,19 +51,19 @@ class Home extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student") }}>
+                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student"), CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>Student Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") , CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>Teacher Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School"),  CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>School Information</Text>
                             </Button>
                         </View>
