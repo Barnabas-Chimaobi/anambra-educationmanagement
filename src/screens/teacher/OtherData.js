@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, KeyboardAvoidingView} from "react-native";
+import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, KeyboardAvoidingView, Platform, NetInfo, Alert} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
 import Logic from '../../../logic';
 import MultiSelect from "../../../Components/MultiSelect";
@@ -40,6 +40,25 @@ class TeacherOtherData extends Component {
         this.props.fetchSubjectsList();
         this.props.fetchStudentStreamsList();
         this.props.fetchQualificationList();
+
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
+        
     }
     updateQaulification = (Qualification) => {
 
@@ -574,7 +593,7 @@ class TeacherOtherData extends Component {
                                     </View>
 
                                     <View style={styles.buttonView}>
-                                        <Button block style={styles.button} onPress={()=>{ this.submitForm() }}>
+                                        <Button block style={styles.button} onPress={()=>{ this.submitForm(), CheckConnectivity() }}>
                                                 <Text style={styles.buttonText}>Save</Text>
                                         </Button>
                                     </View>

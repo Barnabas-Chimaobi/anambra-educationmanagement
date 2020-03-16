@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert} from "react-native";
 import { Button} from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,6 +12,26 @@ class StudentIndex extends Component {
     static navigationOptions = {
         header: null,
     };
+
+    componentDidMount(){
+        CheckConnectivity = () => {
+            // For Android devices
+            if (Platform.OS === "android") {
+              NetInfo.isConnected.fetch().then(isConnected => {
+                if (isConnected) {;
+                } else {
+                  Alert.alert("No internet connection");
+                }
+              });
+            } else {
+            //   // For iOS devices
+            //   NetInfo.isConnected.addEventListener(
+            //     "connectionChange",
+            //     this.handleFirstConnectivityChange
+            //   );
+            }
+          };
+    }
 
     render() {
         return (
@@ -32,7 +52,7 @@ class StudentIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("StudentBiodata") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("StudentBiodata"), CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
@@ -44,7 +64,7 @@ class StudentIndex extends Component {
                         </View> */}
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("StudentView") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("StudentView"), CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, KeyboardAvoidingView,TextInput,ScrollView, Picker} from "react-native";
+import {View,Text,StyleSheet, KeyboardAvoidingView,TextInput,ScrollView, Picker, Platform, NetInfo, Alert} from "react-native";
 import { Container, Content,DatePicker, Form, Button,Switch} from 'native-base';
 import { styles} from "../../constants/styles";
 import { connect} from 'react-redux'
@@ -21,6 +21,26 @@ class SchoolProfile extends Component {
     static navigationOptions = {
       header: null,
   };
+
+  componentDidMount(){
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
+}
 
   componentWillMount() {
     this._getLocationAsync();
@@ -247,7 +267,7 @@ class SchoolProfile extends Component {
                             <View style={styles.buttonViewRight}>
                                 <Button block style={styles.button}
                                     onPress={
-                                        () => { this.nextPage() }}>
+                                        () => { this.nextPage(), CheckConnectivity() }}>
                                     <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>

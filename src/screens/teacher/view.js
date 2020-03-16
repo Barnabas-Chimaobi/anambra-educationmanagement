@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,KeyboardAvoidingView, Image,TextInput} from "react-native";
+import {View,Text,KeyboardAvoidingView, Image,TextInput, Platform, NetInfo, Alert} from "react-native";
 import { Container, Header, Content, Button,Form, Item, Input, Label,Card, CardItem, Body } from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,6 +20,26 @@ class TeacherView extends Component {
     static navigationOptions = {
         header: null,
     };
+
+    componentDidMount(){
+        CheckConnectivity = () => {
+            // For Android devices
+            if (Platform.OS === "android") {
+              NetInfo.isConnected.fetch().then(isConnected => {
+                if (isConnected) {;
+                } else {
+                  Alert.alert("No internet connection");
+                }
+              });
+            } else {
+            //   // For iOS devices
+            //   NetInfo.isConnected.addEventListener(
+            //     "connectionChange",
+            //     this.handleFirstConnectivityChange
+            //   );
+            }
+          };
+    }
 
     lookupNumber = () =>{
 
@@ -62,7 +82,7 @@ class TeacherView extends Component {
                         </View>
 
                         <View style={styles.buttonViewRight}>
-                            <Button block style={styles.button} onPress={() => {this.lookupNumber()  }}>
+                            <Button block style={styles.button} onPress={() => {this.lookupNumber(), CheckConnectivity() }}>
                                 <Text style={styles.buttonText}>Retrieve</Text>
                             </Button>
                         </View>
