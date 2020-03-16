@@ -20,7 +20,7 @@
     "expo-location": "^7.0.0",
     "i": "^0.3.6",
     "native-base": "^2.13.8",
-    "npm": "^6.11.3",
+    "npm": "^6.13.4",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-losen": "^1.1.2",
