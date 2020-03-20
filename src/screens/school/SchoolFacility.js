@@ -482,14 +482,14 @@ class SchoolFacility extends Component {
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelTextLong} >Number teacher textbooks </Text>
-                                <TextInput onChangeText={text => this.props.addSchoolRecord('teacherTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.teacherTextbooksProvided}`} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.props.addSchoolRecord('teacherTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.teacherTextbooksProvided}`} style={styles.textInput} />
 
                             </View>
 
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong} >Number of student textbooks </Text>
-                            <TextInput onChangeText={text => this.props.addSchoolRecord('studentTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.studentTextbooksProvided}`} style={styles.textInput} />
+                            <TextInput keyboardType="numeric" onChangeText={text => this.props.addSchoolRecord('studentTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.studentTextbooksProvided}`} style={styles.textInput} />
 
                             </View>
 

@@ -202,13 +202,13 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Email Address</Text>
-                                <TextInput onChangeText={text => this.handleProfileChangeText('email', text)} value={this.props.Profile.email} style={styles.textInput}/>
+                                <TextInput  onChangeText={text => this.handleProfileChangeText('email', text)} value={this.props.Profile.email} style={styles.textInput}/>
                             </View>
 
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>School Phone Number</Text>
-                                <TextInput onChangeText={text => this.handleProfileChangeText('phone', text)} value={this.props.Profile.phone} style={styles.textInput}/>
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleProfileChangeText('phone', text)} value={this.props.Profile.phone} style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>

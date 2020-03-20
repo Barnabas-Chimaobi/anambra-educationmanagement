@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import rootReducer from '../reducers'
+import {RESET_ACTION} from "../actions/actionTypes"
+import {combineReducers} from "redux"
 
 const StudentBiodata  = {
     "person": {
@@ -214,6 +216,21 @@ const initialState = {
     "schools": SchoolData,
     "utility": utility,
 }
+
+// const rootReducer = combineReducers({
+//   SchoolData,
+//   utility,
+//   StudentBiodata,
+//   StaffBiodata
+// })
+//   const rootReducers = (state= initialState, action) => {
+//     if (action.type === RESET_ACTION) {
+//       state = undefined
+     
+//     }
+
+
+//   }
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
 

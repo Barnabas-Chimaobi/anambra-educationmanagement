@@ -284,7 +284,7 @@ class OtherData extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleGuardianChangeText('anssidNumber', text)} value={this.props.Biodata.guardian.anssidNumber} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleGuardianChangeText('anssidNumber', text)} value={this.props.Biodata.guardian.anssidNumber} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>

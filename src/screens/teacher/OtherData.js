@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import {View,Text,StyleSheet, TouchableHighlight,TextInput,Modal, Picker, KeyboardAvoidingView, Platform, NetInfo, Alert} from "react-native";
 import { Container, Content, Form, Button, DatePicker } from 'native-base';
@@ -96,8 +97,7 @@ class TeacherOtherData extends Component {
     }
 
     submitForm = () => {
-        const {Biodata} = this.props;
-
+       const {Biodata} = this.props;
         if(!Biodata.teacherRecord.teacherSubjects[0]){
             alert("Add the subject taught by teacher!");
             return;
@@ -245,7 +245,7 @@ class TeacherOtherData extends Component {
     }
 
     handleIntegerValueChangeText = (inputName, value) => {
-        this.props.addTeacherRecorddata(inputName,parseInt(value));
+        this.props.addTeacherRecorddata(inputName,(value));
     }
 
 

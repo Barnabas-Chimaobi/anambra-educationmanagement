@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert, AsyncStorage} from "react-native";
 import { Button} from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,6 +8,9 @@ class TeacherIndex extends Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            myName: "Barnabas"
+        }
     }
     static navigationOptions = {
         header: null,
@@ -30,7 +33,9 @@ class TeacherIndex extends Component {
             //     this.handleFirstConnectivityChange
             //   );
             }
-          };
+        };
+
+        UpdateAsyncStorageToFalse = async () => await AsyncStorage.setItem("EditMode", "false");
     }
 
     render() {
@@ -52,7 +57,8 @@ class TeacherIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("TeacherBiodata"), CheckConnectivity() }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("MainView", 
+                            ), CheckConnectivity() }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
