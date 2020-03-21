@@ -69,11 +69,7 @@ class Home extends Component {
 
                     </View>
 
-                    {/* <View style={styles.button2View}>
-                        <Button block style={{backgroundColor:'#0884d2'}} onPress={() => { this.props.navigation.navigate("Welcome") }}>
-                            <Text style={styles.buttonTextOne}>Logout</Text>
-                        </Button>
-                    </View> */}
+                  
 
             </LinearGradient>
         );

@@ -2011,10 +2011,7 @@ import {ADD_TEACHER_BIODATA,ADD_TEACHER_NOKDATA,ADD_TEACHER_RECORD_DATA,
             case LOAD_TEACHER_DATA:
                     return action.payload
             case RESET_DATA:
-                    // state = undefined 
-                    //StaffBiodata.clear();
-                    //return clearObjectValues(StaffBiodata)
-                    return StaffBiodataTwo;
+                    return state;
             default:
                 return state
         }

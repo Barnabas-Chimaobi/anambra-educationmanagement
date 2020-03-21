@@ -217,25 +217,6 @@ const initialState = {
     "utility": utility,
 }
 
-// const rootReducer = combineReducers({
-//   SchoolData,
-//   utility,
-//   StudentBiodata,
-//   StaffBiodata
-// })
-//   const rootReducers = (state= initialState, action) => {
-//     if (action.type === RESET_ACTION) {
-//       state = undefined
-     
-//     }
-
-
-//   }
 
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
-
-// store.dispatch(biodataActions.fetchStatesList())
-// store.dispatch(biodataActions.fetchLgasList())
-// store.dispatch(biodataActions.fetchGendersList())
-
 export default store;
