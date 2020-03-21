@@ -70,7 +70,7 @@ const SchoolData = {
         },
         "active": true
       }
-const schools = (state ={}, action) => {
+const schools = (state = SchoolData, action) => {
     switch (action.type) {
         case ADD_SCHOOL_DATA:
             const pStateCopy = { ...state };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, TouchableOpacity , Platform, NetInfo, Alert} from "react-native";
 import { Container, Content, Form, Button, DatePicker, Switch } from 'native-base';
 import { styles } from "../../constants/styles";
 import { connect } from 'react-redux'
@@ -35,6 +35,25 @@ class StudentBiodata extends Component {
         if (this.props.Biodata && this.props.Biodata.stateId > 0) {
             this.props.fetchLgasByState(this.props.Biodata.stateId);
         }
+
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
+        
     }
 
     snap = async () => {
@@ -425,7 +444,7 @@ class StudentBiodata extends Component {
                                 <View style={styles.buttonViewRight}>
                                     <Button block style={styles.button}
                                         onPress={
-                                            () => { this.checkInputFields() }}>
+                                            () => { this.checkInputFields() ,CheckConnectivity()}}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>

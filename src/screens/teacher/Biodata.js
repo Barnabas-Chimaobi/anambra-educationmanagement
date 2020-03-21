@@ -1,14 +1,17 @@
+
+
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, TouchableOpacity , Platform, NetInfo, Alert, AsyncStorage} from "react-native";
 import { Container, Content, Form, Button, DatePicker, Switch } from 'native-base';
 import { styles } from "../../constants/styles";
 import { connect } from 'react-redux'
 import * as  biodataActions from "../../actions/index";
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
+import * as FileSystem from 'expo-file-system'
 
 class TeacherBiodata extends Component {
-
+    
     static navigationOptions = {
         header: null,
     };
@@ -17,9 +20,31 @@ class TeacherBiodata extends Component {
         type: Camera.Constants.Type.back,
         isCameraVisible: false,
         photo: null,
+        latestImage: null,
+        base64URL: null,
+        firstName: "",
+        lastName: "",
+        otherName: "",
+        hometown:"",
+        address: "",
+        permanentAddress: "",
+        phone: "",
+        nextOfKinName:"",
+        nextOfKinAddress:"",
+        nextOfKinPhone: "",
+        email: ""
+
     };
 
+
+
+
+
     async componentDidMount() {
+        // console.log("ADMIT", await AsyncStorage.getItem("EditMode"));
+        // const editMode = await AsyncStorage.getItem("EditMode") || "none";
+        // Alert.alert("EDit Mode: ", editMode);
+        // console.log("EDit Mode: ", editMode);
 
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted' });
@@ -28,32 +53,70 @@ class TeacherBiodata extends Component {
         this.props.fetchGenders();
         this.props.fetchLgas();
 
+        //console.log({ Props: this.props} );
         if (this.props.Biodata && this.props.Biodata.stateId > 0) {
 
             this.props.fetchLgasByState(this.props.Biodata.stateId);
         }
+      
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
 
+         
+        //  if(this.props.Biodata.code != null){
+        //  return "yes"
+        //  }
     }
 
+  
     snap = async () => {
         if (this.camera) {
             const options = {
-                quality: 0.1,
-                base64: false
+                quality: 0.1, 
+                base64: true
             };
+            
             let photo = await this.camera.takePictureAsync(options)
             this.setState({ photo: photo });
 
             // construct
-            let formData = new FormData();
-            formData.append("UploadFile", photo);
+            // let formData = new FormData();
+            // formData.append("UploadFile", photo);
 
+            // const base64URL = photo.base64;
             this.setState({
                 latestImage: photo.uri, // preview the photo that was taken
-                isCameraVisible: false // close the camera UI after taking the photo
+                isCameraVisible: false, // close the camera UI after taking the photo
+                base64URL: photo.base64
             });
 
-            const personId = 1;
+            // const base64 = await FileSystem.readAsStringAsync(photo.uri, { encoding: "Base64"});
+                    
+             base64URL = photo.base64
+
+             base65 = `data:image/gif;base64,${base64URL}`
+            console.log("IMAGE URL: ",base64URL);
+            // console.log('IMAGE URL:', base64)
+           
+          
+
+            this.props.Biodata.person.imageUrl = base65;
+            // const personId = 1;
             // fetch(`http://asbemis.com/api/images/${personId}`, {
             //     method: "POST",
             //     headers: {
@@ -70,7 +133,8 @@ class TeacherBiodata extends Component {
             // });
 
         }
-    };
+    }; 
+     
 
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
@@ -104,9 +168,22 @@ class TeacherBiodata extends Component {
         this.props.updateBioDataField("dateOfBirth", newDate.toISOString());
     }
 
-    handleBioChangeText = (inputName, text) => {
-        this.props.updateBioDataField(inputName, text);
+    // handleBioChangeText = (inputName, text) => {
+    //     this.props.updateBioDataField(inputName, text);
+    // }
+    handleBioChangeText(name) {
+     return (text) => {
+        this.setState({[name]: text})
     }
+      }
+
+    //   handleBioChangeText = (e) => { 
+    //     this.setState({
+    //       firstName : e,
+         
+    //     });
+    //   }
+    
 
     handleChangeText = (inputName, text) => {
         this.props.updateNokDataField(inputName, text);
@@ -116,117 +193,121 @@ class TeacherBiodata extends Component {
     checkInputFields = () => {
 
 
-        if (!this.props.Biodata.person.firstName && !this.props.Biodata.person.surname) {
-            alert("First and Last Names are compulsory!");
-            return;
-        }
+        // if (!this.state.firstName && !this.props.Biodata.person.surname) {
+        //     alert("First and Last Names are compulsory!");
+        //     return;
+        // }
 
 
-        if (!this.props.Biodata.person.dateOfBirth) {
-            alert("Date of Birth is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.dateOfBirth) {
+        //     alert("Date of Birth is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.stateId && !this.props.Biodata.person.lgaId) {
-            alert("props of Origin & local government are compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.stateId && !this.props.Biodata.person.lgaId) {
+        //     alert("props of Origin & local government are compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.sexId) {
-            alert("sex is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.sexId) {
+        //     alert("sex is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.hometown) {
-            alert("Hometown is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.hometown) {
+        //     alert("Hometown is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.address) {
-            alert("Residential Address is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.address) {
+        //     alert("Residential Address is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.phone) {
-            alert("Phone number is compulsory!");
-            return;
-        }
-        else {
-            let reg = /^\d+$/;
-            if (!reg.test(this.props.Biodata.person.phone) || this.props.Biodata.person.phone === '') {
+        // if (!this.props.Biodata.person.phone) {
+        //     alert("Phone number is compulsory!");
+        //     return;
+        // }
+        // else {
+        //     let reg = /^\d+$/;
+        //     if (!reg.test(this.props.Biodata.person.phone) || this.props.Biodata.person.phone === '') {
 
-                const { Biodata } = this.props;
-                Biodata.person.phone = " ";
-                this.setState({ Biodata: Biodata })
-                alert("Phone number must be numeric");
-            }
-        }
+        //         const { Biodata } = this.props;
+        //         Biodata.person.phone = " ";
+        //         this.setState({ Biodata: Biodata })
+        //         alert("Phone number must be numeric");
+        //     }
+        // }
 
-        if (!this.props.Biodata.person.nextOfKin.name) {
-            alert("Next of Kin Name is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.nextOfKin.name) {
+        //     alert("Next of Kin Name is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.nextOfKin.phone) {
-            alert("Next of Kin Phone Number is compulsory!");
-            return;
-        }
-        else {
-            // let reg = /^\d+$/ ;
+        // if (!this.props.Biodata.person.nextOfKin.phone) {
+        //     alert("Next of Kin Phone Number is compulsory!");
+        //     return;
+        // }
+        // else {
+        //     // let reg = /^\d+$/ ;
 
-            // if (reg.test(this.props.Biodata.person.nextOfKin.phone) || this.props.Biodata.person.nextOfKin.phone === ''){
+        //     // if (reg.test(this.props.Biodata.person.nextOfKin.phone) || this.props.Biodata.person.nextOfKin.phone === ''){
 
-            //     const {Biodata} = this.props;
-            //     Biodata.person.nextOfKin.phone = " ";
-            //     this.setState({ Biodata : Biodata})
-            //     alert("Phone number must be numeric");
+        //     //     const {Biodata} = this.props;
+        //     //     Biodata.person.nextOfKin.phone = " ";
+        //     //     this.setState({ Biodata : Biodata})
+        //     //     alert("Phone number must be numeric");
 
-            // }
-        }
+        //     // }
+        // }
 
 
-        if (!this.props.Biodata.person.nextOfKin.address) {
-            alert("Next of Kin Adress is compulsory!");
-            return;
-        }
+        // if (!this.props.Biodata.person.nextOfKin.address) {
+        //     alert("Next of Kin Adress is compulsory!");
+        //     return;
+        // }
 
-        if (!this.props.Biodata.person.email) {
-            // const {Biodata} = this.props;
-            // Biodata.person.email = "-";
-            // this.setState({ Biodata : Biodata})
+        // if (!this.props.Biodata.person.email) {
+        //     const {Biodata} = this.props;
+        //     Biodata.person.email = "-";
+        //     this.setState({ Biodata : Biodata})
 
-        }
-        else {
-            // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-            // if(reg.test(this.props.Biodata.person.email) === false)
-            // {
-            //     alert("Email is Not valid!");
-            //     return;
-            // }
-        }
+        // }
+        // else {
+        //     // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        //     // if(reg.test(this.props.Biodata.person.email) === false)
+        //     // {
+        //     //     alert("Email is Not valid!");
+        //     //     return;
+        //     // }
+        // }
 
-        if (!this.props.Biodata.person.nextOfKin.email) {
-            // const {Biodata} = this.props;
-            // Biodata.person.nextOfKin.email = "-";
-            // this.setState({ Biodata : Biodata})
+        // if (!this.props.Biodata.person.nextOfKin.email) {
+        //     // const {Biodata} = this.props;
+        //     // Biodata.person.nextOfKin.email = "-";
+        //     // this.setState({ Biodata : Biodata})
 
-        }
-        else {
-            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (reg.test(this.props.Biodata.person.nextOfKin.email) === false) {
-                alert("Email is Not valid!");
-                return;
-            }
-        }
-        this.props.navigation.navigate("TeacherOtherData");
+        // }
+        // else {
+        //     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        //     if (reg.test(this.props.Biodata.person.nextOfKin.email) === false) {
+        //         alert("Email is Not valid!");
+        //         return;
+        //     }
+        // }
+      
+
+        this.props.navigation.navigate("TeacherOtherData", {
+            state: this.state
+        });
 
     }
 
-
     render() {
+        const { firstName, lastName,otherName, email, password } = this.state;
         const { hasCameraPermission, isCameraVisible, photo } = this.state;
         if (hasCameraPermission === null) {
-            return <View />;
+            return <View/>;
         } else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
         } else {
@@ -244,7 +325,7 @@ class TeacherBiodata extends Component {
                                 <Text style={styles.subText}>Personal Details</Text>
                             </View>
 
-                            <Form style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
+                            <Form id="data-form" style={{ width: '75%', marginBottom: 40, alignSelf: 'center' }}>
                                 {
                                     hasCameraPermission === false ? <Text>No access to camera</Text> :
 
@@ -255,8 +336,8 @@ class TeacherBiodata extends Component {
                                                 </Button>
                                             </View>
                                             :
-                                            <Camera style={{ flex: 1, height: 250 }} type={this.state.type} ref={(cam) => {
-                                                this.camera = cam;
+                                            <Camera style={{ height: 250, flex: 1 }} type={this.state.type} ref={(ref) => {
+                                                this.camera = ref;
                                             }}>
                                                 <View
                                                     style={{
@@ -285,29 +366,45 @@ class TeacherBiodata extends Component {
 
                                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                             <Image
-                                                style={{ height: 250 }}
-                                                source={{ uri: photo.uri }}
+                                                style={{ width: 600, height: 250 }}
+                                              source={{uri:`data:image/gif;base64,${this.state.base64URL}`}}
+                                                // formData={this.props.Biodata.person.imageUrl}
                                             />
                                         </View>
-                                        : null
+                                        : 
+                                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                                            <Image style={{ width: 400, height: 250 }} 
+                                            source={{uri: this.props.Biodata.person.imageUrl }}
+                                            />
+                                        </View>
 
                                 }
+                                 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                               
                                     <Text style={styles.labelText}>First Name</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('firstName', text)} value={this.props.Biodata.person.firstName} style={styles.textInput} />
+                                    <TextInput 
+                                         name="firstName"
+                                         value={this.state.firstName}
+                                         onChangeText={this.handleBioChangeText("firstName")}
+                                    style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Last Name</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('surname', text)} value={this.props.Biodata.person.surname} style={styles.textInput} />
+                                    <TextInput  
+                                    name="lastName"
+                                    onChangeText={this.handleBioChangeText("lastName")} value={this.state.lastName} style={styles.textInput} />
                                 </View>
 
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Other Name</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('otherName', text)} value={this.props.Biodata.person.otherName} style={styles.textInput} />
+                                    <TextInput 
+                                    name="otherName"
+                                    onChangeText={this.handleBioChangeText('otherName')} value={this.state.otherName} style={styles.textInput} />
                                 </View>
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Gender</Text>
@@ -370,19 +467,25 @@ class TeacherBiodata extends Component {
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Hometown</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('hometown', text)} value={this.props.Biodata.person.hometown} style={styles.textInput} />
+                                    <TextInput 
+                                    name="hometown"
+                                    onChangeText={this.handleBioChangeText('hometown')} value={this.state.hometown} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Residential Address</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('address', text)} value={this.props.Biodata.person.address} style={styles.textInput} />
+                                    <TextInput 
+                                    name="address"
+                                    onChangeText={this.handleBioChangeText('address')} value={this.state.address} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Permanent Address</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleBioChangeText('permanentAddress', text)} value={this.props.Biodata.person.permanentAddress} style={styles.textInput} />
+                                    <TextInput 
+                                    name="permanentAddress"
+                                    onChangeText={this.handleBioChangeText('permanentAddress')} value={this.state.permanentAddress} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -395,37 +498,47 @@ class TeacherBiodata extends Component {
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Phone Number</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput keyboardType="numeric" onChangeText={text => this.handleBioChangeText('phone', text)} value={this.props.Biodata.person.phone} style={styles.textInput} />
+                                    <TextInput 
+                                    name="phone"
+                                    keyboardType="numeric" onChangeText={this.handleBioChangeText('phone')} value={this.state.phone} style={styles.textInput} />
                                 </View>
 
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Next of Kin</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('name', text)} value={this.props.Biodata.person.nextOfKin.name} style={styles.textInput} />
+                                    <TextInput 
+                                    name="nextOfKinName"
+                                    onChangeText={this.handleBioChangeText("nextOfKinName")} value={this.state.nextOfKinName} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Next of Kin Address</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('address', text)} value={this.props.Biodata.person.nextOfKin.address} style={styles.textInput} />
+                                    <TextInput 
+                                    name="nextOfKinAddress"
+                                    onChangeText={this.handleBioChangeText('nextOfKinAddress')} value={this.state.nextOfKinAddress} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Next of Kin Phone Number</Text>
                                     <Text style={styles.Asterix}>*</Text>
-                                    <TextInput keyboardType="numeric" onChangeText={text => this.handleChangeText('phone', text)} value={this.props.Biodata.person.nextOfKin.phone} style={styles.textInput} />
+                                    <TextInput 
+                                    name="nextOfKinPhone"
+                                    keyboardType="numeric" onChangeText={this.handleBioChangeText('nextOfKinPhone')} value={this.state.nextOfKinPhone} style={styles.textInput} />
                                 </View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                     <Text style={styles.labelText}>Email</Text>
-                                    <TextInput onChangeText={text => this.handleChangeText('email', text)} value={this.props.Biodata.person.nextOfKin.email} style={styles.textInput} />
+                                    <TextInput 
+                                    name="email"
+                                    onChangeText={this.handleBioChangeText('email')} value={this.state.email} style={styles.textInput} />
                                 </View>
 
                                 <View style={styles.buttonViewRight}>
                                     <Button block style={styles.button}
                                         onPress={
-                                            () => { this.checkInputFields() }}>
+                                            () => { this.checkInputFields(), CheckConnectivity()}}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>

@@ -1,67 +1,120 @@
 import {ADD_TEACHER_BIODATA,ADD_TEACHER_NOKDATA,ADD_TEACHER_RECORD_DATA,
-ADD_TEACHER_QUALIFICATION_DATA,ADD_TEACHER_SUBJECT_DATA,ADD_TEACHER_STREAM_DATA,
-ADD_TEACHER_SPECIALISATION_DATA,ADD_TEACHER_INSTITUTION_DATA,ADD_TEACHER_POSTING_DATA
-,SAVE_TEACHER_DATA,LOAD_TEACHER_DATA} from "../actions/actionTypes";
-
-
+        ADD_TEACHER_QUALIFICATION_DATA,ADD_TEACHER_SUBJECT_DATA,ADD_TEACHER_STREAM_DATA,
+        ADD_TEACHER_SPECIALISATION_DATA,ADD_TEACHER_INSTITUTION_DATA,ADD_TEACHER_POSTING_DATA
+        ,SAVE_TEACHER_DATA,LOAD_TEACHER_DATA, RESET_DATA} from "../actions/actionTypes";
+        
+      
 const StaffBiodata = {
         "person": {
                 "FirstName": "",
                 "Surname": "",
                 "OtherName": "",
-            "dateOfBirth": "",
-            "stateId": 1,
-            "lgaId": 1,
-            "sexId": 1,
-            "alergy": "N/A",
-            "hometown": "d",
-            "address": "d",
-            "phone": "2",
-            "email": "",
-            "nextOfKin": {
-                "name": "d",
-                "phone": "d",
+                "dateOfBirth": "",
+                "stateId": 1,
+                "lgaId": 1,
+                "sexId": 1,
+                "alergy": "N/A",
+                "hometown": "",
+                "address": "",
+                "phone": "",
                 "email": "",
-                "address": "d"
-            }
+                "nextOfKin": {
+                "name": "",
+                "phone": "",
+                "email": "",
+                "address": ""
+                }
         },
         "teacherRecord": {
-            "AcademicSessionId": 1,
-            "schoolId": 1,
-            "onPremises": true,
-            "teacherQualifications": [
-            ],
-            "teacherSubjects": [
-            ],
-            "teacherStreams": [
-            ],
-            "teacherSpecialization": [
-            ],
-            "teacherInstitutions": [
-            ],
-            "specialization": "Teaching",
-            "firstAppointment": "",
-            "currentAppointment": "",
-            "retirement": "",
-            "yearsOfExperience": 0,
-            "trainingsAttended": 0,
-            "streamsTaught": 1,
-            "gradeLevelId": 1,
-            "rankId": 1,
-            "postHeld": "Teacher",
-            "datePosted": "",
-            "postingHistories": [{}],
-            "staffTypeId": 1,
-            "StaffClassId": 1
+                "AcademicSessionId": 1,
+                "schoolId": 1,
+                "onPremises": true,
+                "teacherQualifications": [
+                ],
+                "teacherSubjects": [
+                ],
+                "teacherStreams": [
+                ],
+                "teacherSpecialization": [
+                ],
+                "teacherInstitutions": [
+                ],
+                "specialization": "Teaching",
+                "firstAppointment": "",
+                "currentAppointment": "",
+                "retirement": "",
+                "yearsOfExperience": 0,
+                "trainingsAttended": 0,
+                "streamsTaught": 1,
+                "gradeLevelId": 1,
+                "rankId": 1,
+                "postHeld": "Teacher",
+                "datePosted": "",
+                "postingHistories": [{}],
+                "staffTypeId": 1,
+                "StaffClassId": 1
         }
-    };
-
-const teachers = (state ={}, action) => {
-    switch (action.type) {
+        };
+        
+const StaffBiodataTwo = {
+"person": {
+        "FirstName": "",
+        "Surname": "",
+        "OtherName": "",
+        "dateOfBirth": "",
+        "stateId": 1,
+        "lgaId": 1,
+        "sexId": 1,
+        "alergy": "N/A",
+        "hometown": "",
+        "address": "",
+        "phone": "",
+        "email": "",
+        "nextOfKin": {
+        "name": "",
+        "phone": "",
+        "email": "",
+        "address": ""
+        }
+},
+"teacherRecord": {
+        "AcademicSessionId": 1,
+        "schoolId": 1,
+        "onPremises": true,
+        "teacherQualifications": [
+        ],
+        "teacherSubjects": [
+        ],
+        "teacherStreams": [
+        ],
+        "teacherSpecialization": [
+        ],
+        "teacherInstitutions": [
+        ],
+        "specialization": "Teaching",
+        "firstAppointment": "",
+        "currentAppointment": "",
+        "retirement": "",
+        "yearsOfExperience": 0,
+        "trainingsAttended": 0,
+        "streamsTaught": 1,
+        "gradeLevelId": 1,
+        "rankId": 1,
+        "postHeld": "Teacher",
+        "datePosted": "",
+        "postingHistories": [{}],
+        "staffTypeId": 1,
+        "StaffClassId": 1
+}
+};
+            
+const teachers = (state = StaffBiodata, action ) => {
+        
+        switch (action.type) {
         case ADD_TEACHER_BIODATA:
-            const pStateCopy = { ...state };
-            pStateCopy.person[action.field] = action.text;
-            return pStateCopy
+                const pStateCopy = { ...state };
+                pStateCopy.person[action.field] = action.text;
+                return pStateCopy
         case ADD_TEACHER_NOKDATA:
                 const nStateCopy = { ...state };
                 nStateCopy.person.nextOfKin[action.field] = action.text;
@@ -100,8 +153,8 @@ const teachers = (state ={}, action) => {
         case LOAD_TEACHER_DATA:
                 return action.payload
         default:
-            return state
-    }
+                return state
+        }
 }
 
 export default teachers

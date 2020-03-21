@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Modal, TouchableHighlight, TextInput, KeyboardAvoidingView, Picker } from "react-native";
+import { View, Text, Modal, TouchableHighlight, TextInput, KeyboardAvoidingView, Picker ,Platform, NetInfo, Alert} from "react-native";
 import { Container, Content, Form, Switch,Button} from 'native-base';
 import { styles} from "../../constants/styles";
 import { connect} from 'react-redux'
@@ -47,6 +47,25 @@ class SchoolFacility extends Component {
         this.props.fetchHealthFacilityList();
         this.props.fetchEducationLevelsList();
         this.setLoadedData();
+
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
+        
     }
 
     setLoadedData = () => {
@@ -463,14 +482,14 @@ class SchoolFacility extends Component {
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelTextLong} >Number teacher textbooks </Text>
-                                <TextInput onChangeText={text => this.props.addSchoolRecord('teacherTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.teacherTextbooksProvided}`} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.props.addSchoolRecord('teacherTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.teacherTextbooksProvided}`} style={styles.textInput} />
 
                             </View>
 
 
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong} >Number of student textbooks </Text>
-                            <TextInput onChangeText={text => this.props.addSchoolRecord('studentTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.studentTextbooksProvided}`} style={styles.textInput} />
+                            <TextInput keyboardType="numeric" onChangeText={text => this.props.addSchoolRecord('studentTextbooksProvided', text)} value={`${this.props.Profile.schoolRecord.studentTextbooksProvided}`} style={styles.textInput} />
 
                             </View>
 
@@ -484,7 +503,7 @@ class SchoolFacility extends Component {
                             </View>
 
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button} onPress={() => { this.submit() }}>
+                                <Button block style={styles.button} onPress={() => { this.submit(), CheckConnectivity() }}>
                                     <Text style={styles.buttonText}>Submit</Text>
                                 </Button>
                             </View>

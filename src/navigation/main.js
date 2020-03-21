@@ -17,6 +17,7 @@ import SchoolFacility from '../screens/school/SchoolFacility';
 import SchoolView from '../screens/school/view';
 import CameraTest from '../../screens/CameraTest';
 import code from '../screens/school/code';
+import MainView from "../screens/teacher/mainView"
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
@@ -29,7 +30,9 @@ const TeacherStack = createStackNavigator({
   Teacher: TeacherIndex,
   TeacherBiodata: TeacherBiodata,
   TeacherOtherData: TeacherOtherData,
-  TeacherView: TeacherView
+  TeacherView: TeacherView,
+  MainView: MainView
+
 });
 
 const SchoolStack = createStackNavigator({

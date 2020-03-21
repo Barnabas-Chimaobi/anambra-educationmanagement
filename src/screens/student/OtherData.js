@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, Dimensions,Alert } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker, Dimensions,Alert, Platform, NetInfo } from "react-native";
 import { Container, Content, Form, Button,DatePicker,Switch} from 'native-base';
 import { styles} from "../../constants/styles";
 import { connect } from 'react-redux'
@@ -28,6 +28,25 @@ class OtherData extends Component {
         this.props.fetchStudentStreamsList();
         this.props.fetchSpecialNeedsList();
         this.props.fetchVulnerabilityList();
+
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
+        
     }
 
     updateClass = (value) => {
@@ -265,7 +284,7 @@ class OtherData extends Component {
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>ANSSID Number</Text>
                                 <Text style={styles.Asterix}>*</Text>
-                                <TextInput onChangeText={text => this.handleGuardianChangeText('anssidNumber', text)} value={this.props.Biodata.guardian.anssidNumber} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleGuardianChangeText('anssidNumber', text)} value={this.props.Biodata.guardian.anssidNumber} style={styles.textInput} />
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -381,7 +400,7 @@ class OtherData extends Component {
                                 </View>
 
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={()=>{ this.submitForm() }}>
+                                    <Button block style={styles.button} onPress={()=>{ this.submitForm(), CheckConnectivity()}}>
                                             <Text style={styles.buttonText}>Submit</Text>
                                     </Button>
                                 </View>

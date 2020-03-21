@@ -1,10 +1,30 @@
 import React, { Component } from "react";
-import {View,Text,StyleSheet, Image,TextInput} from "react-native";
+import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert} from "react-native";
 import { Button} from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
 
 class SchoolIndex extends Component {
+
+    componentDidMount(){
+        CheckConnectivity = () => {
+            // For Android devices
+            if (Platform.OS === "android") {
+              NetInfo.isConnected.fetch().then(isConnected => {
+                if (isConnected) {;
+                } else {
+                  Alert.alert("No internet connection");
+                }
+              });
+            } else {
+            //   // For iOS devices
+            //   NetInfo.isConnected.addEventListener(
+            //     "connectionChange",
+            //     this.handleFirstConnectivityChange
+            //   );
+            }
+          };
+    }
 
     constructor(props) {
         super(props);
@@ -44,13 +64,13 @@ class SchoolIndex extends Component {
                         </View> */}
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolView") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolView"), CheckConnectivity() }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("CodeView") }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("CodeView"), CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>View Codes</Text>
                             </Button>
                         </View>

@@ -54,7 +54,7 @@ const StudentBiodata  = {
             "vulnerabilityId": 1
         }]
     };
-const students = (state ={}, action) => {
+const students = (state =StudentBiodata, action) => {
     switch (action.type) {
         case ADD_STUDENT_BIODATA:
             const pStateCopy = { ...state };

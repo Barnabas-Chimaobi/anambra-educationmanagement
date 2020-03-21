@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Picker ,Platform, NetInfo, Alert} from "react-native";
 import { Container, Content, Form, Switch,Button,DatePicker} from 'native-base';
 import { styles} from "../../constants/styles";
 import { connect} from 'react-redux'
@@ -26,6 +26,25 @@ class SchoolOtherData extends Component {
         this.props.fetchInspectionAuthoritiesList();
         this.props.fetchOwnershipsList();
         this.props.fetchParentForumsList();
+
+            CheckConnectivity = () => {
+                // For Android devices
+                if (Platform.OS === "android") {
+                  NetInfo.isConnected.fetch().then(isConnected => {
+                    if (isConnected) {;
+                    } else {
+                      Alert.alert("No internet connection");
+                    }
+                  });
+                } else {
+                //   // For iOS devices
+                //   NetInfo.isConnected.addEventListener(
+                //     "connectionChange",
+                //     this.handleFirstConnectivityChange
+                //   );
+                }
+              };
+        
     }
     toggleLand = (value) => {
         this.props.addSchoolRecord("hasLandEncroachment",value);
@@ -72,7 +91,7 @@ class SchoolOtherData extends Component {
     }
 
     handleProfileChangeNumverText = (inputName, text) => {
-        this.props.addSchoolRecord(inputName,parseInt(text));
+        this.props.addSchoolRecord(inputName,(text));
     }
 
     updateSchoolMix = (value) => {
@@ -331,7 +350,7 @@ class SchoolOtherData extends Component {
                             </View>
 
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button} onPress={() => { this.nextPage() }}>
+                                <Button block style={styles.button} onPress={() => { this.nextPage(), CheckConnectivity() }}>
                                     <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>

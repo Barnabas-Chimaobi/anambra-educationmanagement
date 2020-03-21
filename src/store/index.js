@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import rootReducer from '../reducers'
+import {RESET_ACTION} from "../actions/actionTypes"
+import {combineReducers} from "redux"
 
 const StudentBiodata  = {
     "person": {
@@ -215,10 +217,6 @@ const initialState = {
     "utility": utility,
 }
 
+
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk))
-
-// store.dispatch(biodataActions.fetchStatesList())
-// store.dispatch(biodataActions.fetchLgasList())
-// store.dispatch(biodataActions.fetchGendersList())
-
 export default store;
