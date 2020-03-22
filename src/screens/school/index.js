@@ -3,27 +3,33 @@ import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert} from "r
 import { Button} from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
+import { connect} from 'react-redux'
+import * as  biodataActions from "../../actions/index";
 
 class SchoolIndex extends Component {
 
-    componentDidMount(){
-        CheckConnectivity = () => {
-            // For Android devices
-            if (Platform.OS === "android") {
-              NetInfo.isConnected.fetch().then(isConnected => {
-                if (isConnected) {;
-                } else {
-                  Alert.alert("No internet connection");
-                }
-              });
+   
+
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
             } else {
-            //   // For iOS devices
-            //   NetInfo.isConnected.addEventListener(
-            //     "connectionChange",
-            //     this.handleFirstConnectivityChange
-            //   );
+              Alert.alert("No internet connection");
             }
-          };
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
+
+      componentDidMount(){
+       this.CheckConnectivity();
     }
 
     constructor(props) {
@@ -52,7 +58,7 @@ class SchoolIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("SchoolProfile") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.resetForm(); this.props.navigation.navigate("SchoolProfile") }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
@@ -64,13 +70,13 @@ class SchoolIndex extends Component {
                         </View> */}
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolView"), CheckConnectivity() }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolView") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("CodeView"), CheckConnectivity()}}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("CodeView")}}>
                                 <Text style={styles.buttonText}>View Codes</Text>
                             </Button>
                         </View>
@@ -82,8 +88,19 @@ class SchoolIndex extends Component {
         );
     }
 }
-export default SchoolIndex;
 
+const mapStateToProps = state => ({
+    })
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      resetForm : () => dispatch(biodataActions.resetForm()),
+  
+    }
+  }
+  
+  export default connect(mapStateToProps,mapDispatchToProps)(SchoolIndex)
+  
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -17,24 +17,22 @@ class SchoolView extends Component {
         }
     }
 
-    componentDidMount(){
-        CheckConnectivity = () => {
-            // For Android devices
-            if (Platform.OS === "android") {
-              NetInfo.isConnected.fetch().then(isConnected => {
-                if (isConnected) {;
-                } else {
-                  Alert.alert("No internet connection");
-                }
-              });
+
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
             } else {
-            //   // For iOS devices
-            //   NetInfo.isConnected.addEventListener(
-            //     "connectionChange",
-            //     this.handleFirstConnectivityChange
-            //   );
+              Alert.alert("No internet connection");
             }
-          };
+          });
+        } else {
+        }
+    };
+
+    componentDidMount(){
+        this.CheckConnectivity();
     }
 
     static navigationOptions = {
@@ -42,12 +40,12 @@ class SchoolView extends Component {
     };
 
     lookupNumber = () =>{
-
+        this.CheckConnectivity();
         this.props.loadSchoolDataAsync(this.state.number);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.Biodata.code.toLowerCase() !== this.state.number.toLowerCase()){
+        if (nextProps.Biodata &&  nextProps.Biodata.code && nextProps.Biodata.code.toLowerCase() !== this.state.number.toLowerCase()){
             alert("Unable to retrieve data!")
         }else{
             this.props.navigation.navigate("SchoolProfile");
@@ -82,7 +80,7 @@ class SchoolView extends Component {
                         </View>
 
                         <View style={styles.buttonViewRightLarge}>
-                            <Button block style={styles.button} onPress={() => {this.lookupNumber(), CheckConnectivity()  }}>
+                            <Button block style={styles.button} onPress={() => {this.lookupNumber() }}>
                                 <Text style={styles.buttonText}>Retrieve</Text>
                             </Button>
                         </View>

@@ -37,7 +37,23 @@ class TeacherBiodata extends Component {
     };
 
 
-
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
 
 
     async componentDidMount() {
@@ -59,28 +75,6 @@ class TeacherBiodata extends Component {
             this.props.fetchLgasByState(this.props.Biodata.stateId);
         }
       
-            CheckConnectivity = () => {
-                // For Android devices
-                if (Platform.OS === "android") {
-                  NetInfo.isConnected.fetch().then(isConnected => {
-                    if (isConnected) {;
-                    } else {
-                      Alert.alert("No internet connection");
-                    }
-                  });
-                } else {
-                //   // For iOS devices
-                //   NetInfo.isConnected.addEventListener(
-                //     "connectionChange",
-                //     this.handleFirstConnectivityChange
-                //   );
-                }
-              };
-
-         
-        //  if(this.props.Biodata.code != null){
-        //  return "yes"
-        //  }
     }
 
   
@@ -412,9 +406,9 @@ class TeacherBiodata extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.sexId} onValueChange={this.updateGender}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.genders.map((v, key) => {
+                                        {tthis.props.genders && this.props.genders.length > 0 ? his.props.genders.map((v, key) => {
                                             return <Picker.Item label={v.gender} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                     </Picker>
                                 </View>
 
@@ -446,9 +440,9 @@ class TeacherBiodata extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.stateId} onValueChange={this.updateStateOrigin}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.States.map((v) => {
+                                        {this.props.genders && this.props.genders.length > 0 ? this.props.States.map((v) => {
                                             return <Picker.Item label={v.name} key={v.id} value={v.id} />
-                                        })}
+                                        }):null}
                                     </Picker>
                                 </View>
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -457,9 +451,9 @@ class TeacherBiodata extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.lgaId} onValueChange={this.updateLga}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.Lgas.map((v, key) => {
+                                        {this.props.Lgas && this.props.Lgas.length > 0 ? this.props.Lgas.map((v, key) => {
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                     </Picker>
                                 </View>
 
@@ -538,7 +532,7 @@ class TeacherBiodata extends Component {
                                 <View style={styles.buttonViewRight}>
                                     <Button block style={styles.button}
                                         onPress={
-                                            () => { this.checkInputFields(), CheckConnectivity()}}>
+                                            () => { this.checkInputFields()}}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>

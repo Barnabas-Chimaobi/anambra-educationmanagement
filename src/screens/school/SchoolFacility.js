@@ -265,10 +265,10 @@ class SchoolFacility extends Component {
 
         if(this.props.Profile.id){
             alert("Record Updated!");
-            this.props.navigation.navigate("SchoolProfile");
+            this.props.navigation.navigate("School");
         }else{
             this.props.savechoolDataAsync(this.props.Profile)
-            this.props.navigation.navigate("SchoolProfile");
+            this.props.navigation.navigate("School");
             alert("Record Saved!");
              
         }
@@ -280,6 +280,7 @@ class SchoolFacility extends Component {
 
     render() {
         return (
+            this.props.Profile.schoolRecord ? 
             <KeyboardAvoidingView style={{flex:1}} behavior="padding" enabled>
             <Container>
 
@@ -636,6 +637,7 @@ class SchoolFacility extends Component {
                 </Content>
             </Container>
             </KeyboardAvoidingView>
+       : null
         );
     }
 }
@@ -679,6 +681,7 @@ const mapStateToProps = state => ({
         fetchPowerSourcesList: () => dispatch(biodataActions.fetchPowerSourcesList()),
         fetchHealthFacilityList: () => dispatch(biodataActions.fetchHealthFacilityList()),
 
+        resetForm : () => dispatch(biodataActions.resetForm()),
 
     }
   }

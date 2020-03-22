@@ -37,32 +37,33 @@ class MainView extends Component {
         this.props.fetchStates();
         this.props.fetchGenders();
         this.props.fetchLgas();
-        this.props.resetFormer()
 
         if (this.props.Biodata && this.props.Biodata.stateId > 0) {
 
             this.props.fetchLgasByState(this.props.Biodata.stateId);
         }
-            CheckConnectivity = () => {
-                // For Android devices
-                if (Platform.OS === "android") {
-                  NetInfo.isConnected.fetch().then(isConnected => {
-                    if (isConnected) {;
-                    } else {
-                      Alert.alert("No internet connection");
-                    }
-                  });
-                } else {
-                //   // For iOS devices
-                //   NetInfo.isConnected.addEventListener(
-                //     "connectionChange",
-                //     this.handleFirstConnectivityChange
-                //   );
-                }
-     
-            };
+            
      
     }
+
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+
+    };
     
     snap = async () => {
         if (this.camera) {
@@ -115,13 +116,6 @@ class MainView extends Component {
         }
     }; 
      
-
-    componentWillUnmount(){
-        this.props.resetFormer()
-
-        console.log("i'm off")
-    }
-  
 
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
@@ -269,6 +263,7 @@ class MainView extends Component {
                 return;
             }
         }
+        this.CheckConnectivity();
         this.props.navigation.navigate("TeacherOtherData");
 
     }
@@ -381,9 +376,9 @@ class MainView extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.sexId} onValueChange={this.updateGender}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.genders.map((v, key) => {
+                                        {this.props.genders && this.props.genders.length > 0 ? this.props.genders.map((v, key) => {
                                             return <Picker.Item label={v.gender} key={key} value={v.id} />
-                                        })}
+                                        }): null}
                                     </Picker>
                                 </View>
 
@@ -415,9 +410,9 @@ class MainView extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.stateId} onValueChange={this.updateStateOrigin}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.States.map((v) => {
+                                        {this.props.States && this.props.States.length > 0 ? this.props.States.map((v) => {
                                             return <Picker.Item label={v.name} key={v.id} value={v.id} />
-                                        })}
+                                        }): null}
                                     </Picker>
                                 </View>
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -426,9 +421,9 @@ class MainView extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.person.lgaId} onValueChange={this.updateLga}
                                         style={{ height: 35, width: 150, backgroundColor: '#f2f2f2' }}>
-                                        {this.props.Lgas.map((v, key) => {
+                                        {this.props.Lgas && this.props.Lgas.length > 0 ? this.props.Lgas.map((v, key) => {
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):  null}
                                     </Picker>
                                 </View>
 
@@ -491,7 +486,7 @@ class MainView extends Component {
                                 <View style={styles.buttonViewRight}>
                                     <Button block style={styles.button}
                                         onPress={
-                                            () => { this.checkInputFields(), CheckConnectivity()}}>
+                                            () => { this.checkInputFields()}}>
                                         <Text style={styles.buttonText}>Next</Text>
                                     </Button>
                                 </View>

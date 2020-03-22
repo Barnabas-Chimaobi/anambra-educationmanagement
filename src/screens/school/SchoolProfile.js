@@ -22,29 +22,20 @@ class SchoolProfile extends Component {
       header: null,
   };
 
-  componentDidMount(){
-    CheckConnectivity = () => {
-        // For Android devices
-        if (Platform.OS === "android") {
-          NetInfo.isConnected.fetch().then(isConnected => {
-            if (isConnected) {;
-            } else {
-              Alert.alert("No internet connection");
-            }
-          });
+  CheckConnectivity = () => {
+    // For Android devices
+    if (Platform.OS === "android") {
+      NetInfo.isConnected.fetch().then(isConnected => {
+        if (isConnected) {;
         } else {
-        //   // For iOS devices
-        //   NetInfo.isConnected.addEventListener(
-        //     "connectionChange",
-        //     this.handleFirstConnectivityChange
-        //   );
+          Alert.alert("No internet connection");
         }
-      };
-}
-
+      });
+    } else {
+    }
+  };
   componentWillMount() {
     this._getLocationAsync();
-    console.log("Data",this.props.Profile.dateEstablished)
   }
 
   _getLocationAsync = async () => {
@@ -59,7 +50,7 @@ class SchoolProfile extends Component {
 
     let location = await Location.getCurrentPositionAsync({});
     if(location){
-        if (this.props.Profile.coordinates.elevation <= 0 && this.props.Profile.coordinates.lattitudeNorth <= 0 ){
+        if (this.props.Profile && this.props.Profile.coordinates && this.props.Profile.coordinates.elevation <= 0 && this.props.Profile.coordinates.lattitudeNorth <= 0 ){
             this.props.addSchoolCordinates("elevation",location.coords.altitude);
             this.props.addSchoolCordinates("lattitudeNorth",location.coords.latitude);
             this.props.addSchoolCordinates("lattidtudeEast",location.coords.longitude);
@@ -70,6 +61,13 @@ class SchoolProfile extends Component {
   };
 
   componentDidMount() {
+
+    // check if form was preloaded 
+    if (!this.props.Profile || this.props.Profile.id <= 0){
+        this.props.resetForm();
+    }
+    
+
     this._getLocationAsync();
     this.props.fetchLgasByState(4);
     this.props.fetchSchoolList();
@@ -78,6 +76,7 @@ class SchoolProfile extends Component {
     this.props.fetchStudentStreamsList();
     this.props.fetchLocationsList();
     this.props.fetchSchoolTypesList();
+
   }
 
     nextPage = () =>{
@@ -158,17 +157,17 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Cordinates Elevation</Text>
-                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('elevation', text)} value={`${this.props.Profile.coordinates.elevation}`} style={styles.textInput}/>
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('elevation', text)} value={`${this.props.Profile.coordinates ? this.props.Profile.coordinates.elevation : 0}`} style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Cordinates Lattidtude East</Text>
-                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('lattitudeNorth', text)} value={`${this.props.Profile.coordinates.lattitudeNorth}`} style={styles.textInput}/>
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('lattitudeNorth', text)} value={`${this.props.Profile.coordinates ? this.props.Profile.coordinates.lattitudeNorth: 0}`} style={styles.textInput}/>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Cordinates Lattitude North</Text>
-                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('lattidtudeEast', text)} value={`${this.props.Profile.coordinates.lattidtudeEast}`} style={styles.textInput}/>
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleCordChangeText('lattidtudeEast', text)} value={`${this.props.Profile.coordinates ? this.props.Profile.coordinates.lattidtudeEast: 0}`} style={styles.textInput}/>
                             </View>
 
 
@@ -193,9 +192,13 @@ class SchoolProfile extends Component {
                                 <Text style={styles.labelText}>L.G.A</Text>
                                 <Picker selectedValue={this.props.Profile.lgaId} onValueChange={(lga) => {this.updateLga(lga)}}
                                     style={styles.picker}>
-                                    {this.props.Lgas.map( (v, key)=>{
+                                    {this.props.Lgas && this.props.Lgas.length > 0 ?
+                                    this.props.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                    })}
+                                    })
+                                :
+                                null
+                                }
                             </Picker>
                             </View>
 
@@ -234,9 +237,9 @@ class SchoolProfile extends Component {
                                 <Text style={styles.labelText}>Location</Text>
                                 <Picker selectedValue={this.props.Profile.locationId} onValueChange={(lga) => {this.handleProfileChangeText("locationId",lga)}}
                                     style={styles.picker}>
-                                    {this.props.Locations.map( (v, key)=>{
+                                    {this.props.Locations && this.props.Locations.length > 0 ? this.props.Locations.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                    })}
+                                    }) : null}
                                 </Picker>
                             </View>
 
@@ -247,18 +250,18 @@ class SchoolProfile extends Component {
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Type of School</Text>
-                                <Picker selectedValue={this.props.Profile.schoolRecord.schoolTypeId} onValueChange={(lga) => {this.props.addSchoolRecord("schoolTypeId",lga)}}
+                                <Picker selectedValue={this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.schoolTypeId : null} onValueChange={(lga) => {this.props.addSchoolRecord("schoolTypeId",lga)}}
                                     style={styles.picker}>
-                                    {this.props.SchoolTypes.map( (v, key)=>{
+                                    {this.props.SchoolTypes && this.props.SchoolTypes.length > 0 ? this.props.SchoolTypes.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                    })}
+                                    }) : null}
                                 </Picker>
                             </View>
 
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
                                 <Text style={styles.labelText}>Does School Operate Shift</Text>
                                <Switch onValueChange={(value) => this.props.addSchoolRecord("operatesShiftSystem",value)}
-                                    value={this.props.Profile.schoolRecord.operatesShiftSystem} />
+                                    value={this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.operatesShiftSystem: false} />
 
                             </View>
 
@@ -267,7 +270,7 @@ class SchoolProfile extends Component {
                             <View style={styles.buttonViewRight}>
                                 <Button block style={styles.button}
                                     onPress={
-                                        () => { this.nextPage(), CheckConnectivity() }}>
+                                        () => { this.nextPage() }}>
                                     <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>
@@ -309,7 +312,7 @@ const mapDispatchToProps = (dispatch) => {
 
       fetchLocationsList: () => dispatch(biodataActions.fetchLocationsList()),
       fetchSchoolTypesList: () => dispatch(biodataActions.fetchSchoolTypesList()),
-
+      resetForm : () => dispatch(biodataActions.resetForm()),
 
   }
 }

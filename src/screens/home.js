@@ -12,24 +12,26 @@ class Home extends Component {
         header: null,
     };
 
-    componentDidMount(){
-        CheckConnectivity = () => {
-            // For Android devices
-            if (Platform.OS === "android") {
-              NetInfo.isConnected.fetch().then(isConnected => {
-                if (isConnected) {;
-                } else {
-                  Alert.alert("No internet connection");
-                }
-              });
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
             } else {
-            //   // For iOS devices
-            //   NetInfo.isConnected.addEventListener(
-            //     "connectionChange",
-            //     this.handleFirstConnectivityChange
-            //   );
+              Alert.alert("No internet connection");
             }
-          };
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
+
+    componentDidMount(){
+        this.CheckConnectivity();
     }
     render() {
         return (
@@ -50,19 +52,19 @@ class Home extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student"), CheckConnectivity()}}>
+                            <Button large block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Student"), this.CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>Student Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") , CheckConnectivity()}}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Teacher") , this.CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>Teacher Information</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School"),  CheckConnectivity()}}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)'}} onPress={() => { this.props.navigation.navigate("School"),  this.CheckConnectivity()}}>
                                 <Text style={styles.buttonText}>School Information</Text>
                             </Button>
                         </View>
