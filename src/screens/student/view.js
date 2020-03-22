@@ -47,7 +47,7 @@ class StudentView extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.Biodata.code !== this.state.number){
+        if (nextProps.Biodata.code.toLowerCase() !== this.state.number.toLowerCase()){
             alert("Unable to retrieve data!")
         }else{
             this.props.navigation.navigate("StudentBiodata");

@@ -31,6 +31,24 @@ class TeacherOtherData extends Component {
         header: null
     }
 
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+    };
+
     componentDidMount() {
         this.props.fetchSchoolList();
         this.props.fetchGradeLevelList();
@@ -42,23 +60,7 @@ class TeacherOtherData extends Component {
         this.props.fetchStudentStreamsList();
         this.props.fetchQualificationList();
 
-            CheckConnectivity = () => {
-                // For Android devices
-                if (Platform.OS === "android") {
-                  NetInfo.isConnected.fetch().then(isConnected => {
-                    if (isConnected) {;
-                    } else {
-                      Alert.alert("No internet connection");
-                    }
-                  });
-                } else {
-                //   // For iOS devices
-                //   NetInfo.isConnected.addEventListener(
-                //     "connectionChange",
-                //     this.handleFirstConnectivityChange
-                //   );
-                }
-              };
+           
         
     }
     updateQaulification = (Qualification) => {
@@ -144,7 +146,7 @@ class TeacherOtherData extends Component {
             alert("Record Updated!");
         }else{
             this.props.saveTeacherDataAsync(this.props.Biodata)
-            this.props.navigation.navigate("TeacherBiodata");
+            this.props.navigation.navigate("Teacher");
             alert("Record Saved!");
         }
 
@@ -292,9 +294,9 @@ class TeacherOtherData extends Component {
                                     <Picker  selectedValue={(this.props.Biodata.teacherRecord.teacherQualifications.length > 0) ? this.props.Biodata.teacherRecord.teacherQualifications[0].qualificationId: null}
                                          onValueChange={(QualificationId) => {this.updateQaulification( QualificationId)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.qualifications.map( (v,key)=>{
+                                            {this.props.qualifications && this.props.qualifications.length > 0 ? this.props.qualifications.map( (v,key)=>{
                                                 return <Picker.Item label={v.name} key={key}  value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 
@@ -332,9 +334,9 @@ class TeacherOtherData extends Component {
 
                                         onValueChange={(SubjectArea) => {this.updateSubjectArea( SubjectArea)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.subjectAreas.map( (v,key)=>{
+                                            {this.props.subjectAreas && this.props.subjectAreas.length > 0 ? this.props.subjectAreas.map( (v,key)=>{
                                                 return <Picker.Item label={v.name} key={key}  value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
                                 <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -411,9 +413,9 @@ class TeacherOtherData extends Component {
 
                                         selectedValue={this.props.Biodata.teacherRecord.schoolId} onValueChange={(schoolId) => {this.updateSchool(schoolId)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.schools.map( (v,key)=>{
+                                            {this.props.schools && this.props.schools.length > 0 ? this.props.schools.map( (v,key)=>{
                                                 return <Picker.Item label={v.name} key={key}  value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 
@@ -423,9 +425,9 @@ class TeacherOtherData extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.teacherRecord.gradeLevelId} onValueChange={(level) => {this.updateGradeLevel(level)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.gradeLevels.map( (v,key) => {
+                                            {this.props.gradeLevels && this.props.gradeLevels.length > 0 ? this.props.gradeLevels.map( (v,key) => {
                                                 return <Picker.Item label={v.name} key={key}  value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 
@@ -436,9 +438,9 @@ class TeacherOtherData extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.teacherRecord.rankId} onValueChange={(Rank) => {this.updateRank(Rank)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.ranks.map( (v, key)=>{
+                                            {this.props.ranks && this.props.ranks.length > 0 ? this.props.ranks.map( (v, key)=>{
                                                 return <Picker.Item label={v.name} key={key} value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 
@@ -499,9 +501,9 @@ class TeacherOtherData extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.teacherRecord.staffTypeId} onValueChange={(TypeOfStaff) => {this.updateStaffType( TypeOfStaff)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.staffTypes.map( (v, key)=>{
+                                            {this.props.staffTypes && this.props.staffTypes.length > 0 ? this.props.staffTypes.map( (v, key)=>{
                                                 return <Picker.Item label={v.name} key={key} value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 
@@ -512,9 +514,9 @@ class TeacherOtherData extends Component {
                                     <Picker
                                         selectedValue={this.props.Biodata.teacherRecord.StaffClassId} onValueChange={(ClassOfStaff) => {this.updateStaffClass(ClassOfStaff)}}
                                         style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}>
-                                            {this.props.staffClasses.map( (v, key)=>{
+                                            {this.props.staffClasses && this.props.staffClasses.length > 0 ? this.props.staffClasses.map( (v, key)=>{
                                                 return <Picker.Item label={v.name} key={key} value={v.id} />
-                                            })}
+                                            }):null}
                                     </Picker>
                                 </View>
 

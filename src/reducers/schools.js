@@ -3,74 +3,8 @@ import {ADD_SCHOOL_DATA,ADD_SCHOOL_RECORD_DATA, ADD_SCHOOL_CORDINATES,ADD_SCHOOL
     ADD_SCHOOL_HEALTH_FACILITIES,ADD_SCHOOL_CLASSES,ADD_SCHOOL_STREAMS,SAVE_SCHOOL_DATA
 ,LOAD_SCHOOL_DATA} from "../actions/actionTypes";
 
-const SchoolData = {
-        "name": "",
-        "code": "",
-        "coordinates": {
-          "elevation": 0,
-          "lattitudeNorth": 0,
-          "lattidtudeEast": 0,
-        },
-        "address": "",
-        "town": "",
-        "ward": "",
-        "lgaId": 0,
-        "email": "",
-        "phone": "",
-        "dateEstablished": "",
-        "locationId": 0,
-        "schoolRecord": {
-          "schoolTypeId": 0,
-          "operatesShiftSystem": true,
-          "sharesFacilities": true,
-          "sharedFacilitiesCount": 0,
-          "hasMultigradeTeachers": true,
-          "distanceFromTown": 0,
-          "distanceFromLGA": 0,
-          "schoolMixId": 0,
-          "hasBoarding": true,
-          "hasPerimeterFence": true,
-          "perimeterFenceNeedsRepair": true,
-          "hasSecurityPersonnel": true,
-          "securityPersonnelTypeId": 0,
-          "securityPersonnelCount": 0,
-          "hasLandEncroachment": true,
-          "hasSBMC": true,
-          "hasSIP": true,
-          "hasPlaygorund": true,
-          "hasDrinkingWater": true,
-          "hasSportsFacillity": true,
-          "parentForumId": 0,
-          "lastInspection": "",
-          "inspectionCount": 0,
-          "studentTextbooksProvided": 0,
-          "teacherTextbooksProvided": 0,
-          "inspectionAuthorityId": 0,
-          "ownershipId": 0,
-          "schoolEducationLevels": [
-          ],
-          "schoolGrant": [
-          ],
-          "enrollmentCertificates": [
-            {
-              "birthCertificateId": 1,
-              "count": 0,
-            }
-          ],
-          "schoolFacilities": [
-          ],
-          "schoolPowerSources": [
-          ],
-          "schoolHealthFacilities": [
-          ],
-          "schoolClasses": [
-          ],
-          "schoolStreams": [
-          ]
-        },
-        "active": true
-      }
-const schools = (state = SchoolData, action) => {
+
+const schools = (state = {}, action) => {
     switch (action.type) {
         case ADD_SCHOOL_DATA:
             const pStateCopy = { ...state };

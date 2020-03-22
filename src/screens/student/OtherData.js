@@ -29,25 +29,27 @@ class OtherData extends Component {
         this.props.fetchSpecialNeedsList();
         this.props.fetchVulnerabilityList();
 
-            CheckConnectivity = () => {
-                // For Android devices
-                if (Platform.OS === "android") {
-                  NetInfo.isConnected.fetch().then(isConnected => {
-                    if (isConnected) {;
-                    } else {
-                      Alert.alert("No internet connection");
-                    }
-                  });
-                } else {
-                //   // For iOS devices
-                //   NetInfo.isConnected.addEventListener(
-                //     "connectionChange",
-                //     this.handleFirstConnectivityChange
-                //   );
-                }
-              };
+           
         
     }
+
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
 
     updateClass = (value) => {
         this.props.addStudentRecdata("studentClassId", value);
@@ -189,11 +191,12 @@ class OtherData extends Component {
         //     return;
         // }
 
+        this.CheckConnectivity();
         if(this.props.Biodata.id){
             alert("Record Updated!");
         }else{
             this.props.saveStudentDataAsync(this.props.Biodata)
-            this.props.navigation.navigate("StudentBiodata");
+            this.props.navigation.navigate("Student");
             alert("Record Saved!");
         }
 
@@ -230,9 +233,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.guardian.stateId} onValueChange={(stateId)=>this.updateStateOrigin(stateId)}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                {this.props.States.map( (v, key)=>{
+                                {this.props.States && this.props.States.length > 0 ? this.props.States.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
                             <View style={{paddingTop: 5,margin:5, flexDirection:'row' }}>
@@ -242,9 +245,9 @@ class OtherData extends Component {
                                       selectedValue={this.props.Biodata.guardian.lgaId} onValueChange={(lga)=>this.updateLga(lga)}
                                       style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                        {this.props.Lgas.map( (v, key)=>{
+                                        {this.props.Lgas && this.props.Lgas.length > 0 ? this.props.Lgas.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
 
@@ -256,9 +259,9 @@ class OtherData extends Component {
                                      selectedValue={this.props.Biodata.guardian.relationshipId} onValueChange={(relationship) => {this.updateRelationship(relationship)}}
                                      style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                        {this.props.relationships.map( (v, key)=>{
+                                        {this.props.relationships && this.props.relationships.length > 0 ? this.props.relationships.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
 
@@ -312,9 +315,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.studentRecords[0].schoolId} onValueChange={(School) =>{this.updateSchool(School)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                {this.props.schools.map( (v, key)=>{
+                                {this.props.schools && this.props.schools.length > 0 ? this.props.schools.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }): null}
                                 </Picker>
                             </View>
 
@@ -332,9 +335,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.studentRecords[0].studentClassId} onValueChange={(Studentclass) =>{this.updateClass(Studentclass)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                {this.props.studentClasses.map( (v, key)=>{
+                                {this.props.studentClasses && this.props.studentClasses.length > 0 ? this.props.studentClasses.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }): null}
                                 </Picker>
                             </View>
 
@@ -345,9 +348,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.studentRecords[0].streamId} onValueChange={(StudentStream) =>{this.updateStream(StudentStream)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                    >
-                                {this.props.streams.map( (v, key)=>{
+                                {this.props.streams && this.props.streams.length > 0 ? this.props.streams.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
 
@@ -364,9 +367,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.studentSpecialNeeds[0].specialNeedId} onValueChange={(SpecialNeed) =>{this.updateSpecialNeed(SpecialNeed)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                {this.props.specialNeeds.map( (v, key)=>{
+                                {this.props.specialNeeds && this.props.specialNeeds.length > 0 ? this.props.specialNeeds.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
 
@@ -377,9 +380,9 @@ class OtherData extends Component {
                                   selectedValue={this.props.Biodata.studentVulnerabilities[0].vulnerabilityId} onValueChange={(StudentStream) =>{this.updateVulnerability(StudentStream)}}
                                   style={{height: 35, width: 150, backgroundColor: '#f2f2f2'}}
                                     >
-                                {this.props.vulnerabilities.map( (v, key)=>{
+                                {this.props.vulnerabilities && this.props.vulnerabilities.length > 0 ? this.props.vulnerabilities.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                        })}
+                                        }):null}
                                 </Picker>
                             </View>
 
@@ -400,7 +403,7 @@ class OtherData extends Component {
                                 </View>
 
                                 <View style={styles.buttonView}>
-                                    <Button block style={styles.button} onPress={()=>{ this.submitForm(), CheckConnectivity()}}>
+                                    <Button block style={styles.button} onPress={()=>{ this.submitForm()}}>
                                             <Text style={styles.buttonText}>Submit</Text>
                                     </Button>
                                 </View>

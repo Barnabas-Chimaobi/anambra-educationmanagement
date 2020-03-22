@@ -22,29 +22,26 @@ class TeacherView extends Component {
     };
 
     componentDidMount(){
-        this._isMounted = true;
-        CheckConnectivity = () => {
-            // For Android devices
-            if (Platform.OS === "android") {
-              NetInfo.isConnected.fetch().then(isConnected => {
-                if (isConnected) {;
-                } else {
-                  Alert.alert("No internet connection");
-                }
-              });
-            } else {
-            //   // For iOS devices
-            //   NetInfo.isConnected.addEventListener(
-            //     "connectionChange",
-            //     this.handleFirstConnectivityChange
-            //   );
-            }
-          };
-
-          UpdateAsyncStorageToTrue = async () => await AsyncStorage.setItem("EditMode", "true");
-
-            
+        this.CheckConnectivity();
     }
+
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+      };
 
     lookupNumber = () =>{
 
@@ -52,7 +49,7 @@ class TeacherView extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.Biodata.code !== this.state.number){
+        if (nextProps.Biodata && nextProps.Biodata.code && nextProps.Biodata.code.toLowerCase() !== this.state.number.toLowerCase()){
             alert("Unable to retrieve data!")
         }else{
             this.props.navigation.navigate("MainView") 
@@ -88,8 +85,7 @@ class TeacherView extends Component {
                         </View>
 
                         <View style={styles.buttonViewRight}>
-                            <Button block style={styles.button} onPress={() => {this.lookupNumber(), CheckConnectivity(), 
-                                UpdateAsyncStorageToTrue() }}>
+                            <Button block style={styles.button} onPress={() => {this.lookupNumber();}}>
                                 <Text style={styles.buttonText}>Retrieve</Text>
                             </Button>
                         </View>

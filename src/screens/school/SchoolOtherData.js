@@ -16,7 +16,24 @@ class SchoolOtherData extends Component {
         header: null,
     };
 
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
+            } else {
+              Alert.alert("No internet connection");
+            }
+          });
+        } else {
+        }
+      };
+
     componentDidMount() {
+
+        
+       
+
         // this.props.fetchStudentStreamsList();
         // this.props.fetchStudentClassesList();
         // this.props.fetchStudentStreamsList();
@@ -27,23 +44,7 @@ class SchoolOtherData extends Component {
         this.props.fetchOwnershipsList();
         this.props.fetchParentForumsList();
 
-            CheckConnectivity = () => {
-                // For Android devices
-                if (Platform.OS === "android") {
-                  NetInfo.isConnected.fetch().then(isConnected => {
-                    if (isConnected) {;
-                    } else {
-                      Alert.alert("No internet connection");
-                    }
-                  });
-                } else {
-                //   // For iOS devices
-                //   NetInfo.isConnected.addEventListener(
-                //     "connectionChange",
-                //     this.handleFirstConnectivityChange
-                //   );
-                }
-              };
+            
         
     }
     toggleLand = (value) => {
@@ -151,7 +152,7 @@ class SchoolOtherData extends Component {
 
     render() {
         return (
-
+            this.props.Profile.schoolRecord ?
 
 <KeyboardAvoidingView style={{flex:1}} behavior="padding" enabled>
 
@@ -174,15 +175,15 @@ class SchoolOtherData extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Are facilities shared with other schools?</Text>
                             <Switch onValueChange={this.togglesharesFacilities}
-                                value={this.props.Profile.schoolRecord.sharesFacilities} />
+                                value={this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.sharesFacilities: false} />
                         </View>
 
                         {
-                            this.props.Profile.schoolRecord.sharesFacilities
+                            this.props.Profile.schoolRecord && this.props.Profile.schoolRecord.sharesFacilities
                             ?
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelTextLong}>How many schools share facilities?</Text>
-                                <TextInput keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('sharedFacilitiesCount', text)} value={`${this.props.Profile.schoolRecord.sharedFacilitiesCount}`} style={styles.textInput} />
+                                <TextInput keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('sharedFacilitiesCount', text)} value={`${this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.sharedFacilitiesCount: 0}`} style={styles.textInput} />
                             </View>
                             :
                             null
@@ -195,23 +196,23 @@ class SchoolOtherData extends Component {
                         </View>
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Distance from  communities (KM)</Text>
-                            <TextInput  keyboardType="numeric"  onChangeText={text => this.handleProfileChangeNumverText('distanceFromTown', text)} value={`${this.props.Profile.schoolRecord.distanceFromTown}`} style={styles.textInput} />
+                            <TextInput  keyboardType="numeric"  onChangeText={text => this.handleProfileChangeNumverText('distanceFromTown', text)} value={`${this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.distanceFromTown: 0}`} style={styles.textInput} />
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Distance from L.G.A Headquarters (KM)</Text>
-                            <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('distanceFromLGA', text)} value={`${this.props.Profile.schoolRecord.distanceFromLGA}`} style={styles.textInput} />
+                            <TextInput  keyboardType="numeric" onChangeText={text => this.handleProfileChangeNumverText('distanceFromLGA', text)} value={`${this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.distanceFromLGA: 0}`} style={styles.textInput} />
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Is the school mixed or single sex?</Text>
-                            <Picker selectedValue={this.props.Profile.schoolRecord.schoolMixId} onValueChange={(mix) => {this.updateSchoolMix(mix)}}
+                            <Picker selectedValue={this.props.Profile.schoolRecord ? this.props.Profile.schoolRecord.schoolMixId:null} onValueChange={(mix) => {this.updateSchoolMix(mix)}}
                                     style={styles.picker}>
-                                    {this.props.schoolMixes.map( (v, key)=>{
+                                    {this.props.schoolMixes && this.props.schoolMixes.length > 0 ? this.props.schoolMixes.map( (v, key)=>{
                                             return <Picker.Item label={v.name} key={key} value={v.id} />
-                                    })}
+                                    }):null}
                             </Picker>
                         </View>
 
@@ -219,14 +220,14 @@ class SchoolOtherData extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Are there boarding facilities?</Text>
                             <Switch onValueChange={this.toggleBoarding}
-                                value={this.props.Profile.schoolRecord.hasBoarding} />
+                                value={this.props.Profile.schoolRecord  ? this.props.Profile.schoolRecord.hasBoarding: false} />
                         </View>
 
 
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Is there a fence around school ?</Text>
                             <Switch onValueChange={this.toggleFence}
-                                value={this.props.Profile.schoolRecord.hasPerimeterFence} />
+                                value={this.props.Profile.schoolRecord  ? this.props.Profile.schoolRecord.hasPerimeterFence: false} />
                         </View>
 
                         {
@@ -235,7 +236,7 @@ class SchoolOtherData extends Component {
                             <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                                 <Text style={styles.labelTextLong}>Does Fence Need Repair ?</Text>
                                 <Switch onValueChange={this.toggleFenceRepair}
-                                    value={this.props.Profile.schoolRecord.perimeterFenceNeedsRepair} />
+                                    value={this.props.Profile.schoolRecord  ? this.props.Profile.schoolRecord.perimeterFenceNeedsRepair: false} />
                             </View>
                             :
                             null
@@ -244,11 +245,11 @@ class SchoolOtherData extends Component {
                         <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
                             <Text style={styles.labelTextLong}>Availability of security personnel</Text>
                             <Switch onValueChange={this.toggleSecurity}
-                                value={this.props.Profile.schoolRecord.hasSecurityPersonnel} />
+                                value={this.props.Profile.schoolRecord  ? this.props.Profile.schoolRecord.hasSecurityPersonnel : false} />
                         </View>
 
                         {
-                            this.props.Profile.schoolRecord.hasSecurityPersonnel ?
+                            this.props.Profile.schoolRecord && this.props.Profile.schoolRecord.hasSecurityPersonnel ?
                             <View>
 
                                 <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
@@ -350,7 +351,7 @@ class SchoolOtherData extends Component {
                             </View>
 
                             <View style={styles.buttonView}>
-                                <Button block style={styles.button} onPress={() => { this.nextPage(), CheckConnectivity() }}>
+                                <Button block style={styles.button} onPress={() => { this.nextPage() }}>
                                     <Text style={styles.buttonText}>Next</Text>
                                 </Button>
                             </View>
@@ -359,6 +360,8 @@ class SchoolOtherData extends Component {
                 </Content>
             </Container>
 </KeyboardAvoidingView>
+
+        : null
         );
     }
 }
@@ -400,6 +403,7 @@ const mapStateToProps = state => ({
         fetchSecurityPersonnelTypesList: () => dispatch(biodataActions.fetchSecurityPersonnelTypesList()),
         fetchSchoolMixesList: () => dispatch(biodataActions.fetchSchoolMixesList()),
         fetchSchoolTypesList: () => dispatch(biodataActions.fetchSchoolTypesList()),
+        resetForm : () => dispatch(biodataActions.resetForm()),
 
 
     }

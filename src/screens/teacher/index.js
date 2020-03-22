@@ -3,6 +3,8 @@ import {View,Text,StyleSheet, Image,TextInput, Platform, NetInfo, Alert, AsyncSt
 import { Button} from 'native-base';
 import { background } from "../../constants/images";
 import { LinearGradient } from "expo-linear-gradient";
+import { connect} from 'react-redux'
+import * as  biodataActions from "../../actions/index";
 
 class TeacherIndex extends Component {
 
@@ -16,26 +18,27 @@ class TeacherIndex extends Component {
         header: null,
     };
    
-    componentDidMount(){
-        CheckConnectivity = () => {
-            // For Android devices
-            if (Platform.OS === "android") {
-              NetInfo.isConnected.fetch().then(isConnected => {
-                if (isConnected) {;
-                } else {
-                  Alert.alert("No internet connection");
-                }
-              });
+   
+    CheckConnectivity = () => {
+        // For Android devices
+        if (Platform.OS === "android") {
+          NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected) {;
             } else {
-            //   // For iOS devices
-            //   NetInfo.isConnected.addEventListener(
-            //     "connectionChange",
-            //     this.handleFirstConnectivityChange
-            //   );
+              Alert.alert("No internet connection");
             }
-        };
+          });
+        } else {
+        //   // For iOS devices
+        //   NetInfo.isConnected.addEventListener(
+        //     "connectionChange",
+        //     this.handleFirstConnectivityChange
+        //   );
+        }
+    };
 
-        UpdateAsyncStorageToFalse = async () => await AsyncStorage.setItem("EditMode", "false");
+      componentDidMount(){
+       this.CheckConnectivity();
     }
 
     render() {
@@ -57,14 +60,13 @@ class TeacherIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("MainView", 
-                            ), CheckConnectivity() }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.resetForm();this.props.navigation.navigate("MainView") }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("TeacherView"), CheckConnectivity() }}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("TeacherView") }}>
                                 <Text style={styles.buttonText}>View Data</Text>
                             </Button>
                         </View>
@@ -76,7 +78,18 @@ class TeacherIndex extends Component {
         );
     }
 }
-export default TeacherIndex;
+
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = (dispatch) => {
+return {
+  resetForm : () => dispatch(biodataActions.resetForm()),
+
+}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TeacherIndex)
 
 const styles = StyleSheet.create({
     container: {
