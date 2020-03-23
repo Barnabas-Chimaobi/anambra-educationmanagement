@@ -43,8 +43,8 @@ const StudentBiodata  = {
             "schoolId": 1
         }],
         "previousEducations": [{
-            "school": "-",
-            "reasonForLeaving": "-",
+            "school": "",
+            "reasonForLeaving": "",
             "studentClassId": 1
         }],
         "studentSpecialNeeds": [{

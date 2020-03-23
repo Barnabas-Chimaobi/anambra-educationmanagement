@@ -58,16 +58,10 @@ class SchoolIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.resetForm(); this.props.navigation.navigate("SchoolProfile") }}>
+                            <Button large block style={{backgroundColor:'rgba(56, 96, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("SchoolProfile") }}>
                                 <Text style={styles.buttonText}>Add New</Text>
                             </Button>
                         </View>
-
-                        {/* <View style={styles.buttonView}>
-                            <Button block style={{backgroundColor:'rgba(146, 56, 236, 0.35)'}} onPress={() => { this.props.navigation.navigate("Start") }}>
-                                <Text style={styles.buttonText}>Update Existing</Text>
-                            </Button>
-                        </View> */}
 
                         <View style={styles.buttonView}>
                             <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolView") }}>
@@ -76,7 +70,7 @@ class SchoolIndex extends Component {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("CodeView")}}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("SchoolCodeView")}}>
                                 <Text style={styles.buttonText}>View Codes</Text>
                             </Button>
                         </View>

@@ -10,30 +10,47 @@ import TeacherIndex from '../screens/teacher';
 import TeacherBiodata from '../screens/teacher/Biodata';
 import TeacherOtherData from '../screens/teacher/OtherData';
 import TeacherView from '../screens/teacher/view';
+import TeacherCode from "../screens/teacher/code";
+import MainTeacherCodeView from "../screens/teacher/mainCodeView";
 import SchoolIndex from '../screens/school';
 import SchoolProfile from '../screens/school/SchoolProfile';
 import SchoolOtherData from '../screens/school/SchoolOtherData';
 import SchoolFacility from '../screens/school/SchoolFacility';
 import SchoolView from '../screens/school/view';
 import CameraTest from '../../screens/CameraTest';
-import code from '../screens/school/code';
-import MainView from "../screens/teacher/mainView"
+import MainSchoolCodeView from '../screens/school/mainCode'
+import SchoolCodeView from "../screens/school/code";
+import MainView from "../screens/teacher/mainView";
+import StudentCodeView from "../screens/student/code"
+import MainStudentCodeView from "../screens/student/mainStudentCodeView"
 
 const StudentStack = createStackNavigator({
   Student: StudentIndex,
   StudentBiodata: StudentBiodata,
   OtherData: OtherData,
-  StudentView: StudentView
-});
+  StudentView: StudentView,
+  StudentCodeView: StudentCodeView,
+  MainStudentCodeView: MainStudentCodeView
+},
+{
+  headerMode: 'none'
+
+}
+);
 
 const TeacherStack = createStackNavigator({
   Teacher: TeacherIndex,
   TeacherBiodata: TeacherBiodata,
   TeacherOtherData: TeacherOtherData,
   TeacherView: TeacherView,
-  MainView: MainView
-
-});
+  MainView: MainView,
+  TeacherCode: TeacherCode,
+  MainTeacherCodeView: MainTeacherCodeView
+},
+{
+  headerMode: 'none'
+}
+);
 
 const SchoolStack = createStackNavigator({
   School: SchoolIndex,
@@ -41,8 +58,13 @@ const SchoolStack = createStackNavigator({
   SchoolOtherData: SchoolOtherData,
   SchoolFacility:SchoolFacility,
   SchoolView:SchoolView,
-  CodeView: code
-});
+  SchoolCodeView: SchoolCodeView,
+  MainSchoolCodeView: MainSchoolCodeView
+},
+{
+  headerMode: 'none'
+}
+);
 
 const HomeStack = createStackNavigator({
   Home: Home,

@@ -73,6 +73,12 @@ class StudentIndex extends Component {
                             </Button>
                         </View>
 
+                        <View style={styles.buttonView}>
+                            <Button large block style={{backgroundColor:'rgba(236, 56, 196, 0.35)', padding: 10,}} onPress={() => { this.props.navigation.navigate("StudentCodeView")}}>
+                                <Text style={styles.buttonText}>View Code</Text>
+                            </Button>
+                        </View>
+
                     </View>
 
 

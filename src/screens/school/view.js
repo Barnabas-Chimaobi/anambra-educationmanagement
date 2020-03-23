@@ -38,7 +38,7 @@ class SchoolView extends Component {
     static navigationOptions = {
         header: null,
     };
-
+   
     lookupNumber = () =>{
         this.CheckConnectivity();
         this.props.loadSchoolDataAsync(this.state.number);

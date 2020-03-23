@@ -30,14 +30,18 @@ class Code extends Component {
     //Extract values from TextInput
     if (this.state.email !== "" && this.state.password !== "") {
     fetch(
-      `http://asbemis.com/api/schools/GetSchoolByLga?email=${this.state.email}&password=${this.state.password}`
+        `http://www.asbemis.com/api/students?email=${this.state.email}&password=${this.state.password}`
       )
         .then(data => data.json())
         .then(reshapedData => {
           const mappedArray = reshapedData.map(reData => {
             return {
-                schoolId: reData.schoolId,
-                SchoolName: reData.name,
+                personId: reData.person.personId,
+                Surname: reData.person.surname,
+                Othername: reData.person.otherName,
+                firstname: reData.person.firstName,
+                fullname: reData.person.name,
+                lga: reData.person.lga,
                 code: reData.code
             }
             });
@@ -50,7 +54,7 @@ class Code extends Component {
 
             //console.log(mappedArray, ", ARRAY");
 
-            this.props.navigation.navigate("MainSchoolCodeView", { mappedArray: mappedArray });
+            this.props.navigation.navigate("MainStudentCodeView", { mappedArray: mappedArray });
   
         })
         .catch(err => {
@@ -112,8 +116,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.1,
     margin: 5,
     height: 30,
-    backgroundColor: "#f1f3f5",
-    width: 100
+    backgroundColor: "#f1f3f5"
   },
   input: {
     margin: 10

@@ -8,6 +8,7 @@ import { NavigationActions } from 'react-navigation';
 import { styles} from "../../constants/styles";
 import { connect } from 'react-redux'
 import * as  biodataActions from "../../actions/index";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 class TeacherOtherData extends Component {
@@ -59,12 +60,8 @@ class TeacherOtherData extends Component {
         this.props.fetchSubjectsList();
         this.props.fetchStudentStreamsList();
         this.props.fetchQualificationList();
-
-           
-        
     }
     updateQaulification = (Qualification) => {
-
        this.props.addTeacherQualificationdata({"qualificationId":Qualification});
     }
 
@@ -595,7 +592,7 @@ class TeacherOtherData extends Component {
                                     </View>
 
                                     <View style={styles.buttonView}>
-                                        <Button block style={styles.button} onPress={()=>{ this.submitForm(), CheckConnectivity() }}>
+                                        <Button block style={styles.button} onPress={()=>{ this.submitForm() }}>
                                                 <Text style={styles.buttonText}>Save</Text>
                                         </Button>
                                     </View>
@@ -612,12 +609,14 @@ class TeacherOtherData extends Component {
                                 }}>
                                 <View>
 
+                                <ScrollView>
                                 <MultiSelect data={this.props.subjectAreas} onSelectedItem={this.onSelectedItemsChange}  />
 
-                                    <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setSubjectAreaModalVisible(!this.state.SubjectAreaModalVisible);}}>
+                                <TouchableHighlight style={{backgroundColor: '#098BD3' , alignSelf:'center', margin: 5, padding: 10}} onPress={() => { this.setSubjectAreaModalVisible(!this.state.SubjectAreaModalVisible);}}>
                                             <Text style={{alignSelf:'center', fontSize: 20}}>Confirm Selection</Text>
                                     </TouchableHighlight>
-                                </View>
+                                </ScrollView>
+                               </View>
                             </Modal>
 
                             <Modal
