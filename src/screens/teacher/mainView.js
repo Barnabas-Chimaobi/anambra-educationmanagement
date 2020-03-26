@@ -343,12 +343,12 @@ class MainView extends Component {
                                                 // formData={this.props.Biodata.person.imageUrl}
                                             />
                                         </View>
-                                        :
-                                        <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
-                                            <Image style={{ width: 400, height: 250 }} 
-                                            source={{uri: this.props.Biodata.person.imageUrl }}
-                                            />
-                                        </View>
+                                        :null
+                                        // <View style={{ paddingTop: 5, margin: 5, flexDirection: 'row' }}>
+                                        //     <Image style={{ width: 400, height: 250 }} 
+                                        //     source={{uri: this.props.Biodata.person.imageUrl }}
+                                        //     />
+                                        // </View>
 
                                 }
                                  
