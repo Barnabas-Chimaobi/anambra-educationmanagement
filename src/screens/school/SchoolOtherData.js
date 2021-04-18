@@ -22,10 +22,14 @@ import { styles } from "../../constants/styles";
 import { connect } from "react-redux";
 import * as biodataActions from "../../actions/index";
 import NetInfo from "@react-native-community/netinfo";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 class SchoolOtherData extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedDate: "",
+    };
   }
 
   static navigationOptions = {
@@ -77,8 +81,11 @@ class SchoolOtherData extends Component {
     this.props.addSchoolRecord("perimeterFenceNeedsRepair", value);
   };
 
-  setInspectionDate = (newDate) => {
+  setInspectionDate = (event, newDate) => {
     this.props.addSchoolRecord("lastInspection", newDate.toISOString());
+    this.setState({
+      selectedDate: newDate.toLocaleDateString(),
+    });
   };
 
   toggleFence = (value) => {
@@ -447,24 +454,36 @@ class SchoolOtherData extends Component {
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>
                 <Text style={styles.labelTextLong}>Last Inspection</Text>
                 <DatePicker
-                  defaultDate={new Date(2005, 4, 4)}
-                  minimumDate={new Date(1960, 1, 1)}
-                  maximumDate={new Date()}
+                  defaultDate={new Date(2021, 4, 4)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
                   placeHolderText={
-                    this.props.Profile.schoolRecord.lastInspection !== null
-                      ? this.props.Profile.schoolRecord.lastInspection
+                    this.state.selectedDate !== ""
+                      ? this.state.selectedDate
                       : "Select Date"
                   }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setInspectionDate}
+                  onChange={this.setInspectionDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
+                {/* <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  // is24Hour={true}
+                  display="default"
+                  onChange={this.setInspectionDate}
+                /> */}
+                {/* <Text>{this.state.selectedDate}</Text> */}
               </View>
 
               <View

@@ -9,6 +9,7 @@ import {
   Picker,
   Platform,
   Alert,
+  TouchableWithoutFeedback,
 } from "react-native";
 import {
   Container,
@@ -25,13 +26,16 @@ import Constants from "expo-constants";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import NetInfo from "@react-native-community/netinfo";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 class SchoolProfile extends Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       location: null,
       errorMessage: null,
+      selectedDate: "",
+      show: false,
     };
   }
 
@@ -58,6 +62,12 @@ class SchoolProfile extends Component {
       }
     };
   }
+
+  date1 = () => {
+    this.setState({
+      show: true,
+    });
+  };
 
   componentWillMount() {
     this._getLocationAsync();
@@ -142,8 +152,13 @@ class SchoolProfile extends Component {
     this.props.addSchoolProfile("lgaId", Lga);
   };
 
-  setEstablishedDate = (newDate) => {
+  setEstablishedDate = (event, newDate) => {
+    // console.log(newDate, "consoleede");
     this.props.addSchoolProfile("dateEstablished", newDate.toISOString());
+    this.setState({
+      selectedDate: newDate.toLocaleDateString(),
+      show: false,
+    });
   };
 
   handleProfileChangeText = (inputName, text) => {
@@ -299,26 +314,53 @@ class SchoolProfile extends Component {
               </View>
 
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>
-                <Text style={styles.labelText}>Year of Establishment</Text>
+                <TouchableWithoutFeedback onPress={() => this.date1()}>
+                  <Text style={styles.labelText}>Year of Establishment</Text>
+                </TouchableWithoutFeedback>
                 <DatePicker
-                  defaultDate={new Date(2005, 4, 4)}
-                  minimumDate={new Date(1800, 1, 1)}
-                  maximumDate={new Date()}
+                  defaultDate={new Date(2021, 8, 8)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
                   placeHolderText={
-                    this.props.Profile.dateEstablished !== null
-                      ? this.props.Profile.dateEstablished
+                    this.state.selectedDate !== ""
+                      ? this.state.selectedDate
                       : "Select Date"
                   }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setEstablishedDate}
+                  onChange={this.setEstablishedDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
+                {/* <DateTimePicker
+                  testID="dateTimePicker"
+                  mode="time"
+                  // is24Hour={true}
+                  display="default"
+                /> */}
+                {/* 
+                {this.state.show && (
+                  <DateTimePicker
+                    // testID="dateTimePicker"
+                    value={new Date()}
+                    mode="date"
+                    is24Hour={true}
+                    display="calendar"
+                    onChange={(event, date) => {
+                      this.setEstablishedDate(event, date),
+                        this.setState({ show: false });
+                    }}
+                  />
+                )} */}
+
+                {/* <Text style={{ marginTop: 8 }}>{this.state.selectedDate}</Text> */}
               </View>
 
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>

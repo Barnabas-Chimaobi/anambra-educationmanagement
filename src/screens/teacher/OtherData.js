@@ -32,6 +32,13 @@ class TeacherOtherData extends Component {
       StreamsTaught: [],
       postingHistories: [],
       institutionHistories: [],
+      selectedDate: "",
+      selectedDate1: "",
+      selectedDate2: "",
+      selectedDate3: "",
+      selectedDate4: "",
+      PostingDate: "",
+      PostingName: "",
     };
   }
 
@@ -173,15 +180,18 @@ class TeacherOtherData extends Component {
     this.setState({ [inputName]: text });
   };
 
-  setInstitutionDate = (newDate) => {
+  setInstitutionDate = (event, newDate) => {
     // this.props.addTeacherRecorddata("InstitutionDate",newDate.toISOString());
-    this.setState({ InstitutionDate: newDate.toISOString() });
+    this.setState({
+      InstitutionDate: newDate.toISOString(),
+      selectedDate: newDate.toLocaleDateString(),
+    });
   };
 
   addInstitution = () => {
     let institutionHistories = this.state.institutionHistories;
     if (this.state.InstitutionName && this.state.InstitutionDate) {
-      data = {
+      let data = {
         institution: this.state.InstitutionName,
         date: this.state.InstitutionDate.substring(0, 10),
       };
@@ -199,10 +209,10 @@ class TeacherOtherData extends Component {
 
   addPostingHistory = () => {
     let postingHistories = this.state.postingHistories;
-    if (this.state.PostingName && this.state.PostingDate) {
-      data = {
+    if (this.state.PostingName && this.state.selectedDate) {
+      let data = {
         institution: this.state.PostingName,
-        date: this.state.PostingDate.substring(0, 10),
+        date: this.state.selectedDate.substring(0, 10),
       };
       postingHistories.push(data);
       this.setState({ postingHistories: postingHistories });
@@ -216,8 +226,11 @@ class TeacherOtherData extends Component {
     // this.setState({Biodata:Biodata});
   };
 
-  setAppoitmentDate = (newDate) => {
+  setAppoitmentDate = (event, newDate) => {
     this.props.addTeacherRecorddata("firstAppointment", newDate.toISOString());
+    this.setState({
+      selectedDate4: newDate.toLocaleDateString(),
+    });
   };
 
   setPostingDate = (newDate) => {
@@ -225,19 +238,28 @@ class TeacherOtherData extends Component {
     this.setState({ PostingDate: newDate.toISOString() });
   };
 
-  setRetirementDate = (newDate) => {
+  setRetirementDate = (event, newDate) => {
     this.props.addTeacherRecorddata("retirement", newDate.toISOString());
+    this.setState({
+      selectedDate2: newDate.toLocaleDateString(),
+    });
   };
 
-  setPresentAppointmentDate = (newDate) => {
+  setPresentAppointmentDate = (event, newDate) => {
     this.props.addTeacherRecorddata(
       "currentAppointment",
       newDate.toISOString()
     );
+    this.setState({
+      selectedDate3: newDate.toLocaleDateString(),
+    });
   };
 
-  setPostedDate = (newDate) => {
+  setPostedDate = (event, newDate) => {
     this.props.addTeacherRecorddata("datePosted", newDate.toISOString());
+    this.setState({
+      selectedDate1: newDate.toLocaleDateString(),
+    });
   };
 
   handleChangeText = (inputName, text) => {
@@ -384,20 +406,28 @@ class TeacherOtherData extends Component {
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>
                 <Text style={styles.labelText}>Date of First Appointment</Text>
                 <Text style={styles.Asterix}>*</Text>
+
                 <DatePicker
-                  defaultDate={new Date(1960, 4, 4)}
-                  minimumDate={new Date(1960, 1, 1)}
-                  maximumDate={new Date()}
+                  defaultDate={new Date(2021, 4, 4)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
-                  placeHolderText="Select date"
+                  placeHolderText={
+                    this.state.selectedDate4 !== ""
+                      ? this.state.selectedDate4
+                      : "Select Date"
+                  }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setAppoitmentDate}
+                  onChange={this.setAppoitmentDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
               </View>
 
@@ -406,40 +436,56 @@ class TeacherOtherData extends Component {
                   Date of Present Appointment
                 </Text>
                 <Text style={styles.Asterix}>*</Text>
+
                 <DatePicker
-                  defaultDate={new Date(1960, 4, 4)}
-                  minimumDate={new Date(1960, 1, 1)}
-                  maximumDate={new Date()}
+                  defaultDate={new Date(2021, 4, 4)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
-                  placeHolderText="Select date"
+                  placeHolderText={
+                    this.state.selectedDate3 !== ""
+                      ? this.state.selectedDate3
+                      : "Select Date"
+                  }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setPresentAppointmentDate}
+                  onChange={this.setPresentAppointmentDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
               </View>
 
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>
                 <Text style={styles.labelText}>Expected Retirement Date</Text>
                 <Text style={styles.Asterix}>*</Text>
+
                 <DatePicker
-                  defaultDate={new Date(2018, 4, 4)}
-                  minimumDate={new Date(2018, 1, 1)}
-                  maximumDate={new Date(2100, 1, 1)}
+                  defaultDate={new Date(2021, 4, 4)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
-                  placeHolderText="Select date"
+                  placeHolderText={
+                    this.state.selectedDate2 !== ""
+                      ? this.state.selectedDate2
+                      : "Select Date"
+                  }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setRetirementDate}
+                  onChange={this.setRetirementDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
               </View>
 
@@ -523,20 +569,28 @@ class TeacherOtherData extends Component {
               <View style={{ paddingTop: 5, margin: 5, flexDirection: "row" }}>
                 <Text style={styles.labelText}>Year Posted to School</Text>
                 <Text style={styles.Asterix}>*</Text>
+
                 <DatePicker
-                  defaultDate={new Date(1960, 4, 4)}
-                  minimumDate={new Date(1960, 1, 1)}
-                  maximumDate={new Date()}
+                  defaultDate={new Date(2021, 4, 4)}
+                  minimumDate={new Date(1914, 1, 1)}
+                  maximumDate={new Date(2030, 4, 4)}
                   locale={"en"}
                   timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType={"fade"}
+                  modalTransparent={true}
+                  // animationType={"fade"}
                   androidMode={"default"}
-                  placeHolderText="Select date"
+                  placeHolderText={
+                    this.state.selectedDate1 !== ""
+                      ? this.state.selectedDate1
+                      : "Select Date"
+                  }
                   textStyle={{ color: "green" }}
                   placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setPostedDate}
+                  onChange={this.setPostedDate}
                   disabled={false}
+                  value={new Date()}
+                  mode="date"
+                  chosenDate={new Date()}
                 />
               </View>
 
@@ -869,20 +923,28 @@ class TeacherOtherData extends Component {
                   >
                     <Text style={styles.labelText}>Date</Text>
                     <Text style={styles.Asterix}>*</Text>
+
                     <DatePicker
-                      defaultDate={new Date(2018, 4, 4)}
-                      minimumDate={new Date(1900, 1, 1)}
-                      maximumDate={new Date()}
+                      defaultDate={new Date(2021, 4, 4)}
+                      minimumDate={new Date(1914, 1, 1)}
+                      maximumDate={new Date(2030, 4, 4)}
                       locale={"en"}
                       timeZoneOffsetInMinutes={undefined}
-                      modalTransparent={false}
-                      animationType={"fade"}
+                      modalTransparent={true}
+                      // animationType={"fade"}
                       androidMode={"default"}
-                      placeHolderText="Select date"
+                      placeHolderText={
+                        this.state.selectedDate !== ""
+                          ? this.state.selectedDate
+                          : "Select Date"
+                      }
                       textStyle={{ color: "green" }}
                       placeHolderTextStyle={{ color: "#d3d3d3" }}
-                      onDateChange={this.setInstitutionDate}
+                      onChange={this.setInstitutionDate}
                       disabled={false}
+                      value={new Date()}
+                      mode="date"
+                      chosenDate={new Date()}
                     />
                   </View>
 
@@ -1004,9 +1066,10 @@ class TeacherOtherData extends Component {
                     <Text style={styles.labelText}>Institution</Text>
                     <Text style={styles.Asterix}>*</Text>
                     <TextInput
-                      onChangeText={(text) =>
-                        this.handleChangeOtherText("PostingName", text)
-                      }
+                      onChangeText={(text) => {
+                        this.handleChangeOtherText("PostingName", text);
+                        this.setState({ PostingName: text });
+                      }}
                       value={this.props.PostingName}
                       style={styles.textInput}
                     />
@@ -1022,20 +1085,28 @@ class TeacherOtherData extends Component {
                   >
                     <Text style={styles.labelText}>Date</Text>
                     <Text style={styles.Asterix}>*</Text>
+
                     <DatePicker
-                      defaultDate={new Date(2018, 4, 4)}
-                      minimumDate={new Date(1900, 1, 1)}
-                      maximumDate={new Date()}
+                      defaultDate={new Date(2021, 4, 4)}
+                      minimumDate={new Date(1914, 1, 1)}
+                      maximumDate={new Date(2030, 4, 4)}
                       locale={"en"}
                       timeZoneOffsetInMinutes={undefined}
-                      modalTransparent={false}
-                      animationType={"fade"}
+                      modalTransparent={true}
+                      // animationType={"fade"}
                       androidMode={"default"}
-                      placeHolderText="Select date"
+                      placeHolderText={
+                        this.state.selectedDate !== ""
+                          ? this.state.selectedDate
+                          : "Select Date"
+                      }
                       textStyle={{ color: "green" }}
                       placeHolderTextStyle={{ color: "#d3d3d3" }}
-                      onDateChange={this.setPostingDate}
+                      onChange={this.setInstitutionDate}
                       disabled={false}
+                      value={new Date()}
+                      mode="date"
+                      chosenDate={new Date()}
                     />
                   </View>
 

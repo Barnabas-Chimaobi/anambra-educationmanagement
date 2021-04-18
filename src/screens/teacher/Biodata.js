@@ -39,6 +39,7 @@ class TeacherBiodata extends Component {
     photo: null,
     latestImage: null,
     base64URL: null,
+    selectedDate: "",
   };
 
   async componentDidMount() {
@@ -146,8 +147,11 @@ class TeacherBiodata extends Component {
     this.props.addTeacherRecorddata("onPremises", value);
   };
 
-  setDate = (newDate) => {
+  setDate = (event, newDate) => {
     this.props.updateBioDataField("dateOfBirth", newDate.toISOString());
+    this.setState({
+      selectedDate: newDate.toLocaleDateString(),
+    });
   };
 
   handleBioChangeText = (inputName, text) => {
@@ -442,20 +446,28 @@ class TeacherBiodata extends Component {
                   <Text style={styles.labelText}>Date of Birth</Text>
                   <Text style={styles.Asterix}>*</Text>
                   <DatePicker
-                    defaultDate={new Date(2005, 4, 4)}
-                    minimumDate={new Date(1900, 1, 1)}
-                    maximumDate={new Date()}
+                    defaultDate={new Date(2021, 4, 4)}
+                    minimumDate={new Date(1914, 1, 1)}
+                    maximumDate={new Date(2030, 4, 4)}
                     locale={"en"}
                     timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={"fade"}
+                    modalTransparent={true}
+                    // animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText="Select date"
+                    placeHolderText={
+                      this.state.selectedDate !== ""
+                        ? this.state.selectedDate
+                        : "Select Date"
+                    }
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{ color: "#d3d3d3" }}
-                    onDateChange={this.setDate}
+                    onChange={this.setDate}
                     disabled={false}
+                    value={new Date()}
+                    mode="date"
+                    chosenDate={new Date()}
                   />
+                  {/* <Text>{this.state.selectedDate}</Text> */}
                 </View>
 
                 <View
